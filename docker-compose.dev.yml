@@ -13,6 +13,12 @@ services:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
 
   memcached:
     image: memcached:latest
@@ -22,8 +28,10 @@ services:
       context: .
       target: development
     depends_on:
-      - mysql
-      - memcached
+      mysql:
+        condition: service_healthy
+      memcached:
+        condition: service_started
     ports:
       - "8000:8000"
     volumes:

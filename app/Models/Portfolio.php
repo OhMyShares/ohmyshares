@@ -115,7 +115,7 @@ class Portfolio extends Model
     {
         Cache::forget('sharesCostTotal_' . $this->id);
         Cache::forget('portfolio_' . $this->id . '_growth');
-        Cache::tags('portfolios_index_' . $this->user_id)->flush();
+        Cache::forget('portfolios_index_' . $this->user_id);
         foreach ($this->items as $item) {
             $item->invalidateCache();
         }

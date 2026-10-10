@@ -23,10 +23,8 @@ follow when submitting changes.
     - Backend/API: `http://localhost:8000`
     - Frontend (with live reload): `http://localhost:4200`
     - API documentation: `http://localhost:8000/api/documentation`
-5. In another terminal, run migrations and seed default data (sectors)
-   ```
-   docker compose -f docker-compose.dev.yml exec app php artisan migrate --seed
-   ```
+
+Migrations and default data (sectors) are applied automatically when the `app` container starts.
 
 ## Queue and scheduler
 

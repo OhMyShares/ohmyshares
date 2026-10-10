@@ -13,7 +13,6 @@
         "cerbero/query-filters": "^1.4",
         "darkaonline/l5-swagger": "^9.0",
         "guzzlehttp/guzzle": "^7.5",
-        "icehouse-ventures/laravel-chartjs": "^4.1",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^4.5",

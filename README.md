@@ -8,6 +8,63 @@ Personal portfolio management.
 
 Official image: [ohmyshares/ohmyshares](https://hub.docker.com/r/ohmyshares/ohmyshares) (`linux/amd64`, `linux/arm64`).
 
+### Docker Compose
+
+create `.env` file from `.env.example` and fill required variables
+
+create docker-compose.yml:
+
+```yaml
+services:
+  mysql:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent" ]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+  # Optional: set CACHE_DRIVER=memcached and MEMCACHED_HOST=memcached in .env
+  # memcached:
+  #   image: memcached:latest
+  #   restart: unless-stopped
+
+  app:
+    image: ohmyshares/ohmyshares:latest
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+      # memcached:
+      #   condition: service_started
+    ports:
+      - "8000:8000"
+    env_file: .env
+    volumes:
+      - plugins:/var/www/oms/storage/plugins
+
+volumes:
+  db-data:
+  plugins:
+```
+
+run:
+
+```bash
+docker compose up -d
+```
+
+### Manual Build
+
 1. Clone repo to your server
 2. Copy `.env.example` to `.env` and fill variables
 3. Generate the application key and put it into `APP_KEY` in `.env`:
@@ -15,11 +72,11 @@ Official image: [ohmyshares/ohmyshares](https://hub.docker.com/r/ohmyshares/ohmy
    docker compose run --rm --no-deps app php artisan key:generate --show
    ```
 4. Run `docker compose up -d` (the image is pulled from Docker Hub)
-5. Run migrations and seed default data:
-   ```bash
-   docker compose exec app php artisan migrate --force --seed
-   ```
-6. Create the first user with `docker compose exec app php artisan user:create` (the first user is an admin by default)
+5. Create the first user with `docker compose exec app php artisan user:create` (the first user is an admin by default)
+
+Database migrations and default data are applied automatically on every container start.
+
+Application logs are written to the container output: `docker compose logs -f app`.
 
 Installed plugins are kept in the `plugins` volume.
 

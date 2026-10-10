@@ -59,6 +59,7 @@ LABEL org.opencontainers.image.title="OhMyShares" \
       org.opencontainers.image.description="Personal portfolio management" \
       org.opencontainers.image.licenses="AGPL-3.0-or-later"
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+ENV LOG_STACK=stderr
 
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --no-progress --prefer-dist --no-scripts --no-autoloader

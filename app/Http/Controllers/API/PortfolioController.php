@@ -43,7 +43,7 @@ class PortfolioController extends Controller
         /** @var User $user */
         $user = Auth::user();
         $key = 'portfolios_index_'.$user->id;
-        return Cache::tags($key)->remember($key, 60*60*48, function () use ($user): array {
+        return Cache::remember($key, 60*60*48, function () use ($user): array {
             $items = [];
             $portfolios = Portfolio::where('user_id', $user->id)->get();
             foreach ($portfolios as $p) {
@@ -93,7 +93,7 @@ class PortfolioController extends Controller
         //$validated = $request->validated();
         /** @var User $user */
         $user = Auth::user();
-        Cache::tags('portfolios_index_'.$user->id)->flush();
+        Cache::forget('portfolios_index_'.$user->id);
         $model = new Portfolio;
         $model->fill($request->all());
         $model->user_id = $user->id;
@@ -239,7 +239,7 @@ class PortfolioController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        Cache::tags('portfolios_index_'.$user->id)->flush();
+        Cache::forget('portfolios_index_'.$user->id);
         $model = $this->findModel($uid);
         $model->update(array_filter($request->all()));
         return $model;

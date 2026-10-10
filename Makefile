@@ -3,13 +3,11 @@ docker-build:
 
 up:
 	docker compose up -d
-	open http://localhost:8000
 
 dev:
 	docker compose -f docker-compose.dev.yml up -d
 	docker compose -f docker-compose.dev.yml exec -T app sh -c 'envsubst < /var/www/oms/frontend/src/assets/env.template.js > /var/www/oms/frontend/src/assets/env.js'
-	open http://localhost:4200
-	cd frontend && npm run start
+	cd frontend && npm run start -- --open
 
 build:
 	cd frontend && npm run build

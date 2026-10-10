@@ -180,6 +180,7 @@ class Trade extends Model
     public function invalidateCache(): void
     {
         Cache::forget('portfolio_'.$this->portfolio_id.'_growth');
+        Cache::forget('portfolio_'.$this->portfolio_id.'_income_by_years');
     }
 
     /**

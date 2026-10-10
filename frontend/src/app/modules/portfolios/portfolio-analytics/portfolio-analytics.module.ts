@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { PortfolioAnalyticsComponent } from './portfolio-analytics.component';
 import {RouterModule} from '@angular/router';
 import {ActionsModule} from '../../actions/actions.module';
-import {TuiAxesModule, TuiBarChartModule, TuiRingChartModule} from '@taiga-ui/addon-charts';
-import {TuiIslandModule} from '@taiga-ui/kit';
+import {TuiAxesModule, TuiBarChartModule, TuiLegendItemModule, TuiRingChartModule} from '@taiga-ui/addon-charts';
+import {TuiIslandModule, TuiProgressModule} from '@taiga-ui/kit';
 import {TuiMoneyModule} from '@taiga-ui/addon-commerce';
 import {TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule, TuiLinkModule} from '@taiga-ui/core';
 
@@ -34,6 +34,8 @@ import {TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule, TuiLinkModu
     TuiBarChartModule,
     TuiHostedDropdownModule,
     TuiDataListModule,
+    TuiLegendItemModule,
+    TuiProgressModule,
   ]
 })
 export class PortfolioAnalyticsModule { }

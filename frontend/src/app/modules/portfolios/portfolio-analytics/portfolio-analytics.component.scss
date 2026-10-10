@@ -1,4 +1,75 @@
+:host {
+  --tui-chart-0: var(--tui-primary);
+  --tui-chart-1: #526ed3;
+  --tui-chart-2: #f5a623;
+  --tui-chart-3: #e5554e;
+  --tui-chart-4: #9c6ade;
+  --tui-chart-5: #3dbae0;
+  --tui-chart-6: #f17fb1;
+  --tui-chart-7: #a0a0a0;
+}
+
 .axes__growth {
   height: 18rem;
   overflow: auto;
+}
+
+.axes__income {
+  height: 14rem;
+}
+
+.island_full {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.ring {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.ring__chart {
+  flex-shrink: 0;
+}
+
+.ring__label {
+  font-size: smaller;
+  text-align: center;
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ring__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.ring__legend-item {
+  max-width: 100%;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.summary__value {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.income__table {
+  overflow-x: auto;
+  margin-top: 1rem;
 }

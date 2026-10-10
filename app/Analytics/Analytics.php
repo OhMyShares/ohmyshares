@@ -4,6 +4,7 @@ namespace App\Analytics;
 
 use App\Components\ArrayUtils;
 use App\Models\Portfolio;
+use App\Models\PortfolioItem;
 use App\Models\Trade;
 use App\Services\CurrencyService;
 use Illuminate\Support\Arr;
@@ -24,7 +25,7 @@ class Analytics
     public function __construct(protected Portfolio $_portfolio, iterable|null $content = null)
     {
         if (!$content) {
-            $content = $this->_portfolio->content();
+            $content = $this->_portfolio->items;
         }
         $this->setContent($content);
     }
@@ -75,26 +76,10 @@ class Analytics
      */
     public function byAssetTypes(): array
     {
-        $content = $this->_content;
-        $data = [];
-        foreach ($content as $key => $item) {
-            $type_key = $item->asset.';'.$item->currency_code;
-            $data[$type_key]['label'] = __($item->assetLabel);
-            $data[$type_key]['currency_sign'] = $item->currencySign;
-            $current_cost = Arr::get($content[$key], 'current_cost', 0);
-            $part_percent = Arr::get($content[$key], 'part_percent', 0);
-            if (isset($data[$type_key]['total_cost'])) {
-                $data[$type_key]['total_cost'] += $current_cost;
-            } else {
-                $data[$type_key]['total_cost'] = $current_cost;
-            }
-            if (isset($data[$type_key]['part_percent'])) {
-                $data[$type_key]['part_percent'] += $part_percent;
-            } else {
-                $data[$type_key]['part_percent'] = $part_percent;
-            }
-        }
-        return array_values($data);
+        return $this->groupByCost(fn(PortfolioItem $item): array => [
+            (string)$item->asset,
+            __($item->assetLabel),
+        ]);
     }
 
     /**
@@ -102,42 +87,27 @@ class Analytics
      */
     public function bySectors(): array
     {
-        $content = $this->_content;
-        $data = [];
-        foreach ($content as $key => $item) {
-            $type_key = $item->asset.';'.$item->currency_code;
-            $sectorLabel = 'Other';
+        return $this->groupByCost(function (PortfolioItem $item): array {
             if ($item->asset == AssetType::Money->value) {
-                $sectorLabel = 'Money';
-            } else {
-                $ti = $item->tickerInfo();
-                if ($ti) {
-                    $sector = Cache::remember('sector_' . $ti->sector_id, 60, fn() => $ti->sector);
-                    if ($sector) {
-                        $sectorLabel = $sector->title;
-                        $type_key .= ';'.$ti->sector_id;
-                    }
-                }
+                return ['money', __('Money')];
             }
-
-            $data[$type_key]['label'] = __($sectorLabel);
-            $data[$type_key]['currency_sign'] = $item->currencySign;
-
-            $current_cost = Arr::get($content[$key], 'current_cost', 0);
-            $part_percent = Arr::get($content[$key], 'part_percent', 0);
-            if (isset($data[$type_key]['total_cost'])) {
-                $data[$type_key]['total_cost'] += $current_cost;
-            } else {
-                $data[$type_key]['total_cost'] = $current_cost;
+            $ti = $item->tickerInfo();
+            $sector = $ti && $ti->sector_id
+                ? Cache::remember('sector_' . $ti->sector_id, 60, fn() => $ti->sector)
+                : null;
+            if ($sector) {
+                return ['sector_' . $ti->sector_id, __($sector->title)];
             }
-            if (isset($data[$type_key]['part_percent'])) {
-                $data[$type_key]['part_percent'] += $part_percent;
-            } else {
-                $data[$type_key]['part_percent'] = $part_percent;
-            }
+            return ['other', __('Other')];
+        });
+    }
 
-        }
-        return array_values($data);
+    public function byCurrencies(): array
+    {
+        return $this->groupByCost(fn(PortfolioItem $item): array => [
+            $item->currency_code,
+            $item->currency_code,
+        ]);
     }
 
 
@@ -147,7 +117,7 @@ class Analytics
         $data = [];
         foreach ($content as $key => $item)
         {
-            $type_key = $item->asset.';'.$item->currency_code;
+            $type_key = $item->ticker.';'.$item->currency_code;
             if (!in_array($item->asset, [AssetType::Shares->value, AssetType::Bonds->value])) {
                 continue;
             }
@@ -156,14 +126,7 @@ class Analytics
                 continue;
             }
 
-            $sectorLabel = '';
-            $ti = $item->tickerInfo();
-            if ($ti) {
-                $sectorLabel = $ti->nameShort;
-                $type_key .= ';'.$sectorLabel;
-            }
-
-            $data[$type_key]['label'] = __($sectorLabel);
+            $data[$type_key]['label'] = $item->tickerInfo()?->nameShort ?: $item->ticker;
             $data[$type_key]['currency_sign'] = $item->currencySign;
             //$data[$type_key]['currency_sign_native'] = $item->currencySign;
 
@@ -172,7 +135,8 @@ class Analytics
             ArrayUtils::addToItem($data[$type_key], 'earnings_native', $item->earnings_native);
             //ArrayUtils::addToItem($data[$type_key], 'part_percent', $divs);
         }
-        return array_values($data);
+        usort($data, fn(array $a, array $b): int => $b['earnings'] <=> $a['earnings']);
+        return $data;
     }
 
     public function totalEarnings(): int|float
@@ -182,6 +146,136 @@ class Analytics
             $sum += $item->earnings;
         }
         return $sum;
+    }
+
+    public function summary(): array
+    {
+        $summary = [
+            'total_cost' => 0,
+            'cash' => 0,
+            'cost_basis' => 0,
+            'total_gain' => 0,
+            'unrealized_gain' => 0,
+            'unrealized_gain_percent' => 0,
+            'realized_gain' => 0,
+            'earnings' => 0,
+            'total_return' => 0,
+            'positions_count' => 0,
+            'profitable_count' => 0,
+            'losing_count' => 0,
+            'largest_part_percent' => 0,
+            'top5_part_percent' => 0,
+        ];
+        $open_costs = [];
+        foreach ($this->_content as $item) {
+            $summary['total_cost'] += $item->current_cost;
+            $summary['earnings'] += $item->earnings;
+            if ($item->asset == AssetType::Money->value) {
+                $summary['cash'] += $item->current_cost;
+                continue;
+            }
+            $realized = $this->toPortfolioCurrency((float)$item->realized_gain, $item->currency_code);
+            $summary['total_gain'] += $item->current_gain;
+            $summary['realized_gain'] += $realized;
+            if ($item->count == 0) {
+                continue;
+            }
+            $unrealized = $item->current_gain - $realized;
+            $summary['positions_count']++;
+            $summary['unrealized_gain'] += $unrealized;
+            $summary['cost_basis'] += $item->current_cost - $unrealized;
+            if ($unrealized > 0) {
+                $summary['profitable_count']++;
+            } elseif ($unrealized < 0) {
+                $summary['losing_count']++;
+            }
+            if ($item->current_cost > 0) {
+                $open_costs[] = $item->current_cost;
+            }
+        }
+        $summary['total_return'] = $summary['total_gain'] + $summary['earnings'];
+        if ($summary['cost_basis'] > 0) {
+            $summary['unrealized_gain_percent'] = $summary['unrealized_gain'] / $summary['cost_basis'] * 100;
+        }
+        $open_total = array_sum($open_costs);
+        if ($open_total > 0) {
+            rsort($open_costs);
+            $summary['largest_part_percent'] = $open_costs[0] / $open_total * 100;
+            $summary['top5_part_percent'] = array_sum(array_slice($open_costs, 0, 5)) / $open_total * 100;
+        }
+        return array_map(fn(int|float $value): int|float => is_float($value) ? round($value, 2) : $value, $summary);
+    }
+
+    public function incomeByYears(): array
+    {
+        return Cache::remember('portfolio_'.$this->_portfolio->id.'_income_by_years', 60*60, function (): array {
+            $fields = [
+                Trade::TYPE_DIVIDEND => 'dividends',
+                Trade::TYPE_COUPON => 'coupons',
+                Trade::TYPE_FEE => 'fees',
+                Trade::TYPE_TAXES => 'taxes',
+            ];
+            $rows = DB::table('trades')
+                ->select([
+                    DB::raw('YEAR(FROM_UNIXTIME(created_at)) as year'),
+                    'type',
+                    'currency_code',
+                    DB::raw('SUM(sum) as total'),
+                ])
+                ->where('portfolio_id', $this->_portfolio->id)
+                ->whereIn('type', array_keys($fields))
+                ->groupBy(['year', 'type', 'currency_code'])
+                ->orderBy('year')
+                ->get();
+            $data = [];
+            foreach ($rows as $row) {
+                $year = (int)$row->year;
+                $data[$year] ??= ['year' => $year] + array_fill_keys(array_values($fields), 0);
+                $data[$year][$fields[(int)$row->type]] += abs($this->toPortfolioCurrency((float)$row->total, $row->currency_code));
+            }
+            return array_map(
+                fn(array $row): array => array_map(fn(int|float $value): int|float => is_float($value) ? round($value, 2) : $value, $row),
+                array_values($data)
+            );
+        });
+    }
+
+    private function groupByCost(callable $resolve): array
+    {
+        $data = [];
+        $total = 0;
+        foreach ($this->_content as $item) {
+            $cost = (float)$item->current_cost;
+            if ($cost <= 0) {
+                continue;
+            }
+            [$key, $label] = $resolve($item);
+            $data[$key] ??= [
+                'label' => $label,
+                'currency_sign' => $this->_portfolio->currency_sign,
+                'total_cost' => 0,
+                'part_percent' => 0,
+            ];
+            $data[$key]['total_cost'] += $cost;
+            $total += $cost;
+        }
+        foreach ($data as &$row) {
+            $row['part_percent'] = round($row['total_cost'] / $total * 100, 2);
+            $row['total_cost'] = round($row['total_cost'], 2);
+        }
+        unset($row);
+        usort($data, fn(array $a, array $b): int => $b['total_cost'] <=> $a['total_cost']);
+        return $data;
+    }
+
+    private function toPortfolioCurrency(float $value, string $currency_code): float
+    {
+        if ($currency_code == $this->_portfolio->currency_code) {
+            return $value;
+        }
+        /** @var CurrencyService $currencyService */
+        $currencyService = App::make('currencyService');
+        return $currencyService->convert($value, $currency_code, $this->_portfolio->currency_code);
     }
 
     //public function totalTaxes()

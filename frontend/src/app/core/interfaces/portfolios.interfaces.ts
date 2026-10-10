@@ -39,11 +39,60 @@ export interface PortfolioContentSummary {
   total_gain_percent: number;
 }
 
+export interface AnalyticsBreakdownItem {
+  label: string;
+  currency_sign: string;
+  total_cost: number;
+  part_percent: number;
+}
+
+export interface AnalyticsEarningsItem {
+  label: string;
+  currency_sign: string;
+  earnings: number;
+  earnings_native: number;
+}
+
+export interface AnalyticsGrowthItem {
+  month: string;
+  total: number;
+  cumulative: number;
+}
+
+export interface AnalyticsIncomeByYear {
+  year: number;
+  dividends: number;
+  coupons: number;
+  fees: number;
+  taxes: number;
+}
+
+export interface AnalyticsSummary {
+  total_cost: number;
+  cash: number;
+  cost_basis: number;
+  total_gain: number;
+  unrealized_gain: number;
+  unrealized_gain_percent: number;
+  realized_gain: number;
+  earnings: number;
+  total_return: number;
+  positions_count: number;
+  profitable_count: number;
+  losing_count: number;
+  largest_part_percent: number;
+  top5_part_percent: number;
+}
+
 export interface PortfolioAnalyticsData {
-  asset_types: [];
-  sectors: [];
-  earnings: [];
-  growth: [];
+  asset_types: AnalyticsBreakdownItem[];
+  sectors: AnalyticsBreakdownItem[];
+  currencies: AnalyticsBreakdownItem[];
+  earnings: AnalyticsEarningsItem[];
+  growth: AnalyticsGrowthItem[];
+  income_by_years: AnalyticsIncomeByYear[];
+  summary: AnalyticsSummary;
+  total_earnings: number;
   goal_achievement_percent: number;
 }
 

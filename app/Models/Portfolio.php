@@ -115,6 +115,7 @@ class Portfolio extends Model
     {
         Cache::forget('sharesCostTotal_' . $this->id);
         Cache::forget('portfolio_' . $this->id . '_growth');
+        Cache::forget('portfolio_' . $this->id . '_income_by_years');
         Cache::forget('portfolios_index_' . $this->user_id);
         foreach ($this->items as $item) {
             $item->invalidateCache();
@@ -320,6 +321,8 @@ class Portfolio extends Model
             'asset_types' => $analytics->byAssetTypes(),
             'sectors' => $analytics->bySectors(),
             'earnings' => $analytics->byEarnings(),
+            'currencies' => $analytics->byCurrencies(),
+            'summary' => $analytics->summary(),
             //'profit_by_years' => $analytics->byProfitByYears(),
             'total_earnings' => $analytics->totalEarnings(),
             //'total_taxes' => $analytics->totalTaxes(),
@@ -330,6 +333,12 @@ class Portfolio extends Model
     {
         $analytics = new Analytics($this);
         return $analytics->growth();
+    }
+
+    public function calcIncomeByYears(): array
+    {
+        $analytics = new Analytics($this);
+        return $analytics->incomeByYears();
     }
 
     public function calcGoalAchievementPercent(): float|int

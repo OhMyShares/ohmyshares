@@ -1,15 +1,39 @@
 import {Component, OnInit} from '@angular/core';
-import {Portfolio, PortfolioAnalytics, PortfolioAnalyticsData, Position} from '../../../core/interfaces/portfolios.interfaces';
+import {
+  AnalyticsBreakdownItem,
+  AnalyticsEarningsItem,
+  AnalyticsIncomeByYear,
+  Portfolio,
+  PortfolioAnalytics,
+  PortfolioAnalyticsData,
+  Position
+} from '../../../core/interfaces/portfolios.interfaces';
 import { CommonService } from '../../../core/services/common.service';
 import {CURRENT_PORTFOLIO_KEY, PORTFOLIOS_LIST_KEY} from '../../../core/constants';
 import {ActivatedRoute} from '@angular/router';
 import {Common, REFERENCE, ReferencesService} from '../../../core/services/references.service';
 import {PortfoliosService} from '../../../core/services/portfolios.service';
-import {inflate} from 'zlib';
-import {tuiFormatNumber} from '@taiga-ui/core';
-import {TuiContextWithImplicit} from '@taiga-ui/cdk';
 import {catchError} from 'rxjs/operators';
 import {of} from 'rxjs';
+
+export interface RingChart {
+  labels: string[];
+  values: number[];
+  percents: number[];
+  total: number;
+  activeIndex: number;
+}
+
+export interface IncomeChart {
+  labelsX: string[];
+  labelsY: string[];
+  values: number[][];
+  max: number;
+}
+
+const MAX_RING_SEGMENTS = 8;
+const TOP_MOVERS_COUNT = 5;
+const MONEY_TICKER = '$$';
 
 @Component({
   selector: 'app-portfolio-analytics',
@@ -26,46 +50,17 @@ export class PortfolioAnalyticsComponent implements OnInit {
   public content: Position[];
 
   public chartGrowth: any;
-  public chartAssetTypes: any;
-  public chartAssetTypesIndex = NaN;
-  public chartSectors: any;
-  public chartSectorsIndex = NaN;
-  public chartEarnings: any;
-  public chartEmitents: any;
+  public chartAssetTypes: RingChart;
+  public chartSectors: RingChart;
+  public chartCurrencies: RingChart;
+  public chartEarnings: RingChart;
+  public chartEmitents: RingChart;
+  public chartIncome: IncomeChart;
+
+  public topGainers: Position[] = [];
+  public topLosers: Position[] = [];
 
   public skeletonVisible = true;
-
-  public legendOptions = {
-    position: 'bottom',
-    horizontalAlign: 'center',
-  };
-  public plotOptions = {
-    pie: {
-      donut: {
-        size: '60%',
-      }
-    }
-  };
-
-  public chartResponsiveSettings = [
-    {
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: 'bottom'
-        },
-        plotOptions: {
-          pie: {
-            donut: {
-              size: '35%',
-            }
-          }
-        }
-      },
-    }
-  ];
-
-  public earningsSum = 0;
 
   constructor(
     public commonService: CommonService,
@@ -87,10 +82,13 @@ export class PortfolioAnalyticsComponent implements OnInit {
         localStorage.setItem(CURRENT_PORTFOLIO_KEY, `${ this.portfolio.uid }`);
         this.portfolios = JSON.parse(localStorage.getItem(PORTFOLIOS_LIST_KEY));
         this.chartGrowth = this.processGrowthChart(this.analytics.growth);
-        this.chartAssetTypes = this.processAssetTypesChart(this.analytics.asset_types);
-        this.chartSectors = this.processSectorsChart(this.analytics.sectors);
+        this.chartAssetTypes = this.processBreakdownChart(this.analytics.asset_types);
+        this.chartSectors = this.processBreakdownChart(this.analytics.sectors);
+        this.chartCurrencies = this.processBreakdownChart(this.analytics.currencies);
         this.chartEarnings = this.processEarningsChart(this.analytics.earnings);
         this.chartEmitents = this.processEmitentsChart(this.content);
+        this.chartIncome = this.processIncomeChart(this.analytics.income_by_years);
+        this.processTopMovers(this.content);
         this.skeletonVisible = false;
       });
     this.referencesService.getReference<Common[]>(REFERENCE.ASSET).subscribe((assetTypes) => {
@@ -144,68 +142,85 @@ export class PortfolioAnalyticsComponent implements OnInit {
     };
   }
 
-  processAssetTypesChart(assetTypes: any[]) {
-    const values = assetTypes.map((item) => (item.part_percent));
-    const labels = assetTypes.map((item) => (item.label));
-    return {values, labels};
+  processBreakdownChart(items: AnalyticsBreakdownItem[] = []): RingChart {
+    return this.buildRingChart(items.map((item) => ({label: item.label, value: item.total_cost})));
   }
 
-  get assetTypesChartLabel(): string {
-    return isNaN(this.chartAssetTypesIndex) ? `Total` : this.chartAssetTypes.labels[this.chartAssetTypesIndex];
+  processEarningsChart(earnings: AnalyticsEarningsItem[] = []): RingChart {
+    return this.buildRingChart(earnings.map((item) => ({label: item.label, value: item.earnings})));
   }
 
-  get assetTypesChartValue(): number {
-    return isNaN(this.chartAssetTypesIndex) ? `Total` : this.chartAssetTypes.values[this.chartAssetTypesIndex];
+  processEmitentsChart(content: Position[] = []): RingChart {
+    return this.buildRingChart(content
+      .filter((item) => item.ticker !== MONEY_TICKER)
+      .map((item) => ({label: item.title ?? item.ticker, value: item.current_cost})));
   }
 
-  processSectorsChart(sectors: any[]) {
-    const values = sectors.map((item) => (item.part_percent));
-    const labels = sectors.map((item) => (item.label));
-    return {values, labels};
-  }
-
-  get sectorsChartLabel(): string {
-    return isNaN(this.chartSectorsIndex) ? `Total` : this.chartSectors.labels[this.chartSectorsIndex];
-  }
-
-  get sectorsChartValue(): number {
-    return isNaN(this.chartSectorsIndex) ? `Total` : this.chartSectors.values[this.chartSectorsIndex];
-  }
-
-  processEarningsChart(earnings: any[]) {
-    earnings.map((item) => {
-      this.earningsSum = this.earningsSum + item.earnings;
-    });
-    const values = earnings.map((item) => (item.earnings));
-    const captions = earnings.map((item) => (item.label));
+  processIncomeChart(rows: AnalyticsIncomeByYear[] = []): IncomeChart {
+    const income = rows.map((row) => +(row.dividends + row.coupons).toFixed());
+    const expenses = rows.map((row) => +(row.fees + row.taxes).toFixed());
+    const max = Math.max(1, ...income, ...expenses);
     return {
-      chart: {
-        type: 'donut',
-        height: '400px',
-      },
-      series: values,
-      labels: captions,
+      labelsX: rows.map((row) => `${row.year}`),
+      labelsY: ['', `${this.portfolio.currency_sign} ${max.toLocaleString()}`],
+      values: [income, expenses],
+      max,
     };
   }
 
-  processEmitentsChart(content: Position[]) {
-    const values = [];
-    const captions = [];
-    content.sort((a, b) => b.current_cost - a.current_cost);
-    content.forEach((item) => {
-      if (item.ticker !== '$$' && item.part_percent > 0) {
-        values.push(item.current_cost);
-        captions.push(item.title ?? item.ticker);
-      }
-    });
+  processTopMovers(content: Position[] = []) {
+    const open = content
+      .filter((item) => item.ticker !== MONEY_TICKER && item.count !== 0)
+      .sort((a, b) => b.current_gain_percent - a.current_gain_percent);
+    this.topGainers = open.filter((item) => item.current_gain_percent > 0).slice(0, TOP_MOVERS_COUNT);
+    this.topLosers = open.filter((item) => item.current_gain_percent < 0).reverse().slice(0, TOP_MOVERS_COUNT);
+  }
+
+  buildRingChart(items: {label: string, value: number}[]): RingChart {
+    const sorted = items
+      .filter((item) => item.value > 0)
+      .sort((a, b) => b.value - a.value);
+    const segments = sorted.length > MAX_RING_SEGMENTS
+      ? [
+        ...sorted.slice(0, MAX_RING_SEGMENTS - 1),
+        {
+          label: $localize`:@@analytics.other:Other`,
+          value: sorted.slice(MAX_RING_SEGMENTS - 1).reduce((sum, item) => sum + item.value, 0),
+        },
+      ]
+      : sorted;
+    const total = segments.reduce((sum, item) => sum + item.value, 0);
     return {
-      chart: {
-        type: 'donut',
-        height: '400px',
-      },
-      series: values,
-      labels: captions,
+      labels: segments.map((item) => item.label),
+      values: segments.map((item) => item.value),
+      percents: segments.map((item) => total ? item.value / total * 100 : 0),
+      total,
+      activeIndex: NaN,
     };
+  }
+
+  ringLabel(chart: RingChart): string {
+    return isNaN(chart.activeIndex) ? $localize`:@@analytics.total:Total` : chart.labels[chart.activeIndex];
+  }
+
+  ringValue(chart: RingChart): number {
+    return isNaN(chart.activeIndex) ? chart.total : chart.values[chart.activeIndex];
+  }
+
+  ringPercent(chart: RingChart): number | null {
+    return isNaN(chart.activeIndex) ? null : chart.percents[chart.activeIndex];
+  }
+
+  setActive(chart: RingChart, index: number = NaN) {
+    chart.activeIndex = index;
+  }
+
+  getColor(index: number): string {
+    return `var(--tui-chart-${index})`;
+  }
+
+  netIncome(row: AnalyticsIncomeByYear): number {
+    return row.dividends + row.coupons - row.fees - row.taxes;
   }
 
 }

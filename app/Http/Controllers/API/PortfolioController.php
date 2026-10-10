@@ -188,6 +188,7 @@ class PortfolioController extends Controller
         $content = $data['content'];
         $analytics = array_merge($data['analytics'], [
             'growth' => $portfolio->calcGrowth(),
+            'income_by_years' => $portfolio->calcIncomeByYears(),
             'goal_achievement_percent' => $portfolio->calcGoalAchievementPercent(),
         ]);
 

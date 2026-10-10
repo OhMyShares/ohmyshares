@@ -1,0 +1,35 @@
+<p>{{ data?.content }}</p>
+
+<button tuiButton
+        (click)="submit()"
+        appearance="secondary"
+        class="tui-space_bottom-3 tui-space_right-3">
+  {{data?.button?.action}}
+</button>
+
+<button tuiButton
+        (click)="close()"
+        appearance="primary"
+        class="tui-space_bottom-3 tui-space_right-3">
+  {{data?.button?.close}}
+</button>
+
+<!--<h1 mat-dialog-title *ngIf="data?.title">{{data.title}}</h1>-->
+<!--<div mat-dialog-content *ngIf="data?.content">-->
+<!--  <p>{{data.content}}</p>-->
+<!--</div>-->
+<!--<div mat-dialog-actions class="d-flex justify-content-center">-->
+<!--  <button mat-button-->
+<!--          (click)="dialogRef.close()"-->
+<!--          class="btn btn-default">-->
+<!--    <mat-icon>not_interested</mat-icon>-->
+<!--    {{data?.button?.close}}-->
+<!--  </button>-->
+<!--  <button mat-button-->
+<!--          (click)="dialogRef.close(true)"-->
+<!--          class="btn btn-default">-->
+<!--    <mat-icon>done</mat-icon>-->
+<!--    {{data?.button?.action}}-->
+<!--  </button>-->
+<!--</div>-->
+

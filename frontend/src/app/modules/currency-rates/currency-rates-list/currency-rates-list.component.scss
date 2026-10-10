@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.toolbar {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+
+  &__filter {
+    width: 14rem;
+  }
+}
+
+.table {
+  width: 100%;
+
+  &__number {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+}

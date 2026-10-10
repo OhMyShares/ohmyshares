@@ -1,0 +1,10 @@
+<div class="d-flex gap-1 tui-space_top-5">
+<!--  <app-back-button></app-back-button>-->
+  <app-save-button (save)="save.emit()"
+                   [isDisabled]="isSaveDisabled" [showLoader]="isSaveShowLoader"></app-save-button>
+
+  <app-remove-button (delete)="delete.emit()"
+                     [isDisabled]="isDeleteDisabled"
+                     [showLoader]="isDeleteShowLoader"
+                     [confirmTitle]="confirmTitle"></app-remove-button>
+</div>

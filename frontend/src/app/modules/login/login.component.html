@@ -1,0 +1,61 @@
+<div class="tui-container tui-container_adaptive">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-6 tui-col_xs-12">
+
+      <h1 class="tui-text_h3" i18n="@@form.login.title">Log In</h1>
+
+      <form [formGroup]="loginForm" (keyup.enter)="login()">
+        <div class="tui-form__row">
+          <tui-input formControlName="email">
+            <input tuiTextfield
+                   i18n-placeholder="@@form.login.field.email"
+                   placeholder="user@domain.com"
+                   type="email"
+                   inputmode="email"
+                   autocapitalize="off"
+                   name="email"
+                   (change)="keepTypedEmail($event)"
+                   required>
+            <span i18n="@@form.login.field.email">Email</span>
+          </tui-input>
+          <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+        </div>
+
+        <div class="tui-form__row">
+          <tui-input-password formControlName="password">
+            <input tuiTextfield
+                   #password
+                   i18n-placeholder="@@form.login.field.password"
+                   placeholder="Your password"
+                   type="password"
+                   name="password"
+                   required>
+            <span i18n="@@form.login.field.password">Password</span>
+          </tui-input-password>
+          <tui-error formControlName="password" [error]="[] | tuiFieldError | async"></tui-error>
+        </div>
+      </form>
+
+      <div class="tui-form__buttons tui-space_bottom-5">
+        <button tuiButton appearance="primary" class="tui-space_bottom-3"
+                [showLoader]="isLoading$ | async"
+                [disabled]="loginForm.invalid || isLoading"
+                (click)="login()">
+          <span i18n="@@action.login">Log In</span>
+        </button>
+        <a tuiButton appearance="secondary" routerLink="/signup"
+           *ngIf="environment.SIGNUP_ENABLED"
+           class="tui-space_bottom-3 ml-sm-3">
+          <span i18n="@@action.signUp">Sign Up</span>
+        </a>
+      </div>
+
+      <div class="text-center text-sm-left">
+        <a routerLink="/forgot">
+          <span i18n="@@action.passwordForgot">Reset password</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>

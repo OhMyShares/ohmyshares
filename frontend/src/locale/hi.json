@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "उपयोगकर्ता",
+    "create": "उपयोगकर्ता बनाएं",
+    "role": {
+      "user": "उपयोगकर्ता",
+      "admin": "व्यवस्थापक"
+    },
+    "badge": {
+      "test": "परीक्षण"
+    }
+  },
+  "common": {
+    "pcs": "टुकड़े",
+    "average_price": "औसत मूल्य",
+    "dividends": "लाभांश",
+    "coupons": "कूपन",
+    "fees": "कमीशन",
+    "taxes": "कर",
+    "import_processing": "आयात प्रसंस्करण...",
+    "search": "खोज",
+    "filter": "फ़िल्टर",
+    "part_portfolio": "पोर्टफोलियो का हिस्सा",
+    "current_cost": "वर्तमान लागत",
+    "quantity": "मात्रा"
+  },
+  "nav": {
+    "users": "उपयोगकर्ता",
+    "companies": "कंपनियां",
+    "portfolio": "पोर्टफोलियो",
+    "portfolios": "पोर्टफोलियो",
+    "allPortfolios": "सभी पोर्टफोलियो",
+    "portfoliosList": "पोर्टफोलियो सूची",
+    "trades": "लेनदेन",
+    "profile": "प्रोफ़ाइल",
+    "resetCache": "कैश रीसेट करें",
+    "resetCacheHint": "किसी भी समस्या में पहले कैश रीसेट करने का प्रयास करें",
+    "buyPro": "Pro खरीदें",
+    "learnMore": "और जानें",
+    "logout": "लॉगआउट",
+    "import": "आयात",
+    "importTrades": "लेनदेन आयात करें",
+    "customAssets": "कस्टम संपत्ति",
+    "content": "सामग्री",
+    "analytics": "विश्लेषण",
+    "other": "अन्य",
+    "plugins": "प्लगइन",
+    "currencyRates": "मुद्रा विनिमय दरें"
+  },
+  "action": {
+    "login": "लॉगिन",
+    "loginForExisting": "पंजीकृत उपयोगकर्ताओं के लिए लॉगिन",
+    "signUp": "साइन अप",
+    "passwordForgot": "पासवर्ड भूल गए?",
+    "passwordReset": "पासवर्ड रीसेट",
+    "sendResetLink": "रीसेट लिंक भेजें",
+    "view": "देखें",
+    "open": "खोलें",
+    "menu": "मेनू",
+    "back": "पीछे",
+    "add": "जोड़ें",
+    "portfolio": "पोर्टफोलियो",
+    "addPortfolio": "पोर्टफोलियो जोड़ें",
+    "addTrade": "लेनदेन जोड़ें",
+    "addIntoPortfolio": "पोर्टफोलियो में जोड़ें",
+    "addCustomAsset": "कस्टम संपत्ति जोड़ें",
+    "editCustomAsset": "कस्टम संपत्ति संपादित करें",
+    "addCustomAssetPrice": "मूल्य जोड़ें",
+    "removeFromPortfolio": "पोर्टफोलियो से हटाएं",
+    "filter": "फ़िल्टर",
+    "edit": "संपादित करें",
+    "editPortfolio": "पोर्टफोलियो संपादित करें",
+    "clone": "क्लोन",
+    "clonePortfolio": "पोर्टफोलियो क्लोन करें",
+    "save": "सहेजें",
+    "delete": "हटाएं",
+    "import": "आयात",
+    "more": "और",
+    "actions": "क्रियाएं",
+    "settings": "सेटिंग्स",
+    "send": "भेजें",
+    "changePassword": "पासवर्ड बदलें",
+    "confirmDialog": {
+      "yes": "हां",
+      "no": "नहीं"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "नाम",
+        "email": "ई-मेल",
+        "passwordEdit": "नया पासवर्ड (वर्तमान रखने के लिए खाली छोड़ें)",
+        "passwordCreate": "पासवर्ड (जनरेट करके ई-मेल करने के लिए खाली छोड़ें)",
+        "role": "भूमिका",
+        "isTest": "परीक्षण उपयोगकर्ता"
+      },
+      "confirmTitle": "क्या आप वाकई इस उपयोगकर्ता को हटाना चाहते हैं?"
+    },
+    "general": {
+      "error": {
+        "required": "मान खाली नहीं हो सकता"
+      }
+    },
+    "login": {
+      "title": "लॉगिन",
+      "field": {
+        "email": "ईमेल",
+        "password": "पासवर्ड"
+      },
+      "tooltip": {
+        "showPassword": "पासवर्ड दिखाएं",
+        "hidePassword": "पासवर्ड छुपाएं"
+      }
+    },
+    "forgot": {
+      "title": "पासवर्ड भूल गए?"
+    },
+    "passwordReset": {
+      "title": "पासवर्ड रीसेट",
+      "field": {
+        "email": "ईमेल",
+        "password": "नया पासवर्ड",
+        "password_confirmation": "नया पासवर्ड (फिर से)"
+      }
+    },
+    "changePassword": {
+      "title": "पासवर्ड बदलें",
+      "field": {
+        "email": "ईमेल",
+        "password": "वर्तमान पासवर्ड",
+        "password_new": "नया पासवर्ड"
+      },
+      "error": {
+        "minLength": "पासवर्ड की न्यूनतम लंबाई 6 अक्षर है"
+      }
+    },
+    "signUp": {
+      "title": "पंजीकरण",
+      "field": {
+        "name": "नाम",
+        "yourName": "आपका नाम",
+        "email": {
+          "main": "ईमेल",
+          "hint": "पासवर्ड ईमेल पर भेजा जाएगा"
+        },
+        "agree": {
+          "main": "मैं स्वीकार करता हूं",
+          "privacy": "गोपनीयता नीति",
+          "and": "और",
+          "agreement": "उपयोगकर्ता समझौता"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "सेटिंग्स",
+      "field": {
+        "name": "नाम",
+        "email": "ईमेल",
+        "plan": "योजना",
+        "daysLeft": "दिन शेष",
+        "daysLeft2": "दिन शेष",
+        "ignoreFunds": "लेनदेन जोड़ते समय धन की कमी को नजरअंदाज करें",
+        "language": "भाषा",
+        "theme": "थीम",
+        "darkTheme": "डार्क थीम"
+      }
+    },
+    "import": {
+      "title": "लेनदेन आयात",
+      "field": {
+        "broker": "ब्रोकर",
+        "file": {
+          "main": "फ़ाइल",
+          "hint": "एक्सेल फ़ाइल चुनें (XLS, XLSX)"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "नाम",
+        "currency": "मुद्रा",
+        "accountType": "खाता प्रकार",
+        "openedAt": "खोलने की तिथि",
+        "fee": "कमीशन",
+        "feePercent": "कमीशन, %",
+        "notes": "टिप्पणी",
+        "goal": "लक्ष्य"
+      },
+      "confirmTitle": "क्या आप वाकई इस पोर्टफोलियो को हटाना चाहते हैं?"
+    },
+    "trade": {
+      "new": "नया लेनदेन",
+      "field": {
+        "type": "ऑपरेशन प्रकार",
+        "portfolio": "पोर्टफोलियो",
+        "asset": "संपत्ति प्रकार",
+        "ticker": "टिकर",
+        "currency": "मुद्रा",
+        "cost": "मूल्य",
+        "sum": "राशि",
+        "isWoMoney": "धन में नहीं गिनें",
+        "isWoMoneyHint": "यदि सक्षम है, तो लेनदेन मौद्रिक ऑपरेशन इतिहास में प्रविष्टि नहीं बनाएगा",
+        "shares": "मात्रा",
+        "date": "लेनदेन तिथि",
+        "feeCurrency": "कमीशन मुद्रा",
+        "fee": "कमीशन",
+        "notes": "टिप्पणी"
+      },
+      "confirmTitle": "क्या आप वाकई इस लेनदेन को हटाना चाहते हैं?",
+      "loading": "लोड हो रहा है...",
+      "typeAtLeast": "कम से कम 1 अक्षर टाइप करें",
+      "calcFee": "कमीशन गणना करें"
+    },
+    "customAsset": {
+      "hint": "कस्टम संपत्ति आपको पोर्टफोलियो में अन्य संपत्तियों को जोड़ने और उनके मूल्य परिवर्तन को ट्रैक करने की अनुमति देती है, जैसे कि अचल संपत्ति।",
+      "confirmTitle": "क्या आप वाकई इस कस्टम संपत्ति को हटाना चाहते हैं?",
+      "priceHistory": "मूल्य इतिहास",
+      "graph": "ग्राफ़",
+      "field": {
+        "created": "तिथि",
+        "ticker": "टिकर",
+        "name": "नाम",
+        "currency": "मुद्रा",
+        "info": "जानकारी"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "क्या आप वाकई इस मूल्य को हटाना चाहते हैं?",
+      "field": {
+        "asset_id": "कस्टम संपत्ति",
+        "created": "तिथि",
+        "price": "मूल्य"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "नाम",
+        "email": "ई-मेल",
+        "created": "बनाया गया"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "प्रति पृष्ठ पंक्तियां:",
+        "nextPage": "अगला पृष्ठ",
+        "previousPage": "पिछला पृष्ठ",
+        "of": "का"
+      },
+      "clear": "साफ़ करें"
+    },
+    "companies": {
+      "column": {
+        "ticker": "टिकर",
+        "name": "नाम",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "जानकारी",
+      "dividends": "लाभांश",
+      "type": "प्रकार",
+      "ticker": "टिकर",
+      "currency": "मुद्रा",
+      "price": "मूल्य"
+    },
+    "portfolios": {
+      "allPortfolios": "सभी पोर्टफोलियो",
+      "chosen": "चयनित",
+      "column": {
+        "name": "नाम",
+        "currency": "मुद्रा",
+        "accountType": "खाता प्रकार",
+        "date": "तिथि",
+        "opened": "खोला गया"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "पोर्टफोलियो की लागत",
+      "totalGain": "पोर्टफोलियो की आय",
+      "column": {
+        "currency": "मुद्रा",
+        "sum": "राशि",
+        "ticker": "टिकर",
+        "count": "संख्या",
+        "currentPrice": "वर्तमान मूल्य",
+        "averagePrice": "औसत मूल्य",
+        "currentCost": "वर्तमान लागत",
+        "currentGain": "लाभ",
+        "currentGainPercent": "लाभ, %",
+        "partPercent": "हिस्सा, %"
+      },
+      "tooltip": {
+        "currency": "साधन मुद्रा में मूल्य"
+      },
+      "noContent": {
+        "main": "पोर्टफोलियो अभी खाली है",
+        "add": "जोड़ें",
+        "or": "या",
+        "import": "आयात करें",
+        "trades": "लेनदेन"
+      },
+      "filter": {
+        "year": "वर्ष"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "तिथि",
+        "ticker": "टिकर",
+        "name": "नाम",
+        "price": "मूल्य"
+      },
+      "noContent": {
+        "main": "आपने अभी तक कोई कस्टम संपत्ति नहीं जोड़ी है",
+        "add": "जोड़ें"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "आपने अभी तक कोई मूल्य नहीं जोड़ा है",
+        "add": "जोड़ें"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "पोर्टफोलियो",
+        "ticker": "टिकर",
+        "cost": "मूल्य",
+        "qty": "संख्या",
+        "sum": "राशि",
+        "fee": "कमीशन",
+        "date": "तिथि"
+      },
+      "filter": {
+        "title": "लेनदेन फ़िल्टर"
+      },
+      "filterField": {
+        "portfolio": "पोर्टफोलियो",
+        "type": "प्रकार",
+        "currency": "मुद्रा",
+        "ticker": "टिकर",
+        "dateRange": "तिथि सीमा",
+        "startDate": "प्रारंभ तिथि",
+        "endDate": "समाप्ति तिथि",
+        "closeBtn": "बंद करें"
+      },
+      "noContent": {
+        "main": "लेनदेन सूची अभी खाली है",
+        "add": "जोड़ें",
+        "or": "या",
+        "import": "आयात करें",
+        "trades": "लेनदेन"
+      },
+      "dateRanges": {
+        "today": "आज",
+        "yesterday": "कल",
+        "last7days": "पिछले 7 दिन",
+        "last30days": "पिछला महीना",
+        "thisMonth": "इस महीने",
+        "lastMonth": "पिछला महीना",
+        "last6months": "पिछले 6 महीने",
+        "lastYear": "पिछला साल",
+        "wholeTime": "पूरे समय में"
+      },
+      "itemRemoveConfirm": "क्या आप वाकई इस पोजीशन को पोर्टफोलियो से पूरी तरह हटाना चाहते हैं?"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "उपयोगकर्ता सफलतापूर्वक बनाया गया"
+      },
+      "update": {
+        "message": "उपयोगकर्ता सफलतापूर्वक अपडेट किया गया"
+      },
+      "delete": {
+        "message": "उपयोगकर्ता सफलतापूर्वक हटाया गया"
+      }
+    },
+    "connectionLost": {
+      "message": "लोड करने में त्रुटि। इंटरनेट कनेक्शन नहीं हो सकता है",
+      "action": "ताज़ा करें"
+    },
+    "auth": {
+      "signUp": {
+        "message": "आप सफलतापूर्वक पंजीकृत हो गए हैं। सेवा का पासवर्ड आपके ईमेल पर भेजा गया है"
+      },
+      "signUpError": {
+        "message": "पंजीकरण त्रुटि"
+      },
+      "changePassword": {
+        "message": "पासवर्ड सफलतापूर्वक बदल गया"
+      },
+      "login": {
+        "message": "गलत लॉगिन या पासवर्ड"
+      },
+      "updateMe": {
+        "message": "प्रोफ़ाइल सफलतापूर्वक अपडेट हो गई"
+      },
+      "forgot": {
+        "success": "पासवर्ड रीसेट करने के निर्देश सफलतापूर्वक ईमेल पर भेजे गए हैं"
+      },
+      "resetPassword": {
+        "success": "पासवर्ड सफलतापूर्वक बदल गया"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "संबंधित लेनदेन को संपादित करने के लिए मूल लेनदेन को बदलें"
+      },
+      "create": {
+        "message": "लेनदेन सफलतापूर्वक जोड़ा गया"
+      },
+      "update": {
+        "message": "लेनदेन सफलतापूर्वक अपडेट हो गया"
+      },
+      "delete": {
+        "message": "लेनदेन सफलतापूर्वक हटा दिया गया"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "आयात के लिए डेटा सफलतापूर्वक लोड हो गया"
+      },
+      "create": {
+        "message": "पोर्टफोलियो सफलतापूर्वक जोड़ा गया"
+      },
+      "update": {
+        "message": "पोर्टफोलियो सफलतापूर्वक अपडेट हो गया"
+      },
+      "delete": {
+        "message": "पोर्टफोलियो सफलतापूर्वक हटा दिया गया"
+      },
+      "clone": {
+        "message": "पोर्टफोलियो सफलतापूर्वक क्लोन हो गया"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "कस्टम संपत्ति सफलतापूर्वक जोड़ी गई"
+      },
+      "update": {
+        "message": "कस्टम संपत्ति सफलतापूर्वक अपडेट हो गई"
+      },
+      "delete": {
+        "message": "कस्टम संपत्ति सफलतापूर्वक हटा दी गई"
+      }
+    },
+    "plugins": {
+      "installed": "प्लगइन \"{$title}\" इंस्टॉल हो गया",
+      "uninstalled": "प्लगइन अनइंस्टॉल हो गया",
+      "upgraded": "प्लगइन संस्करण {$version} पर अपग्रेड हो गया",
+      "configSaved": "कॉन्फ़िगरेशन सहेजा गया"
+    },
+    "currencyRates": {
+      "updated": "सहेजी गई दरें: {$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "ताज़ा करने के लिए नीचे खींचें",
+    "end": "ताज़ा करने के लिए छोड़ें",
+    "refreshing": "ताज़ा कर रहा है..."
+  },
+  "theme": {
+    "light": "हल्का",
+    "dark": "गहरा"
+  },
+  "analytics": {
+    "portfolioGrowth": "पोर्टफोलियो वृद्धि",
+    "growth": "वृद्धि",
+    "delta": "परिवर्तन",
+    "byAssetTypes": "संपत्ति प्रकार के अनुसार",
+    "bySectors": "क्षेत्रों के अनुसार",
+    "byEarnings": "लाभांश और कूपन के अनुसार",
+    "byEmitents": "उत्सर्जकों के अनुसार",
+    "totalEarnings": "कुल लाभांश और कूपन प्राप्त हुए",
+    "totalEmitents": "कुल उत्सर्जकों की संख्या",
+    "stats": "सांख्यिकी",
+    "goal": "लक्ष्य",
+    "goalSet": "बदलें",
+    "goalAchievement": "लक्ष्य प्राप्ति"
+  },
+  "chart": {
+    "history": "इतिहास",
+    "trades": "लेनदेन"
+  },
+  "plugins": {
+    "title": "प्लगइन",
+    "tab": {
+      "installed": "इंस्टॉल किए गए",
+      "store": "स्टोर"
+    },
+    "manual": {
+      "title": "रिपॉज़िटरी से इंस्टॉल करें",
+      "hint": "git रिपॉज़िटरी का https URL पेस्ट करें (GitHub, GitLab, Gitea, ...)। संस्करण पिन करने के लिए {$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} या {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE} जोड़ें।",
+      "field": {
+        "url": "रिपॉज़िटरी URL"
+      }
+    },
+    "installed": {
+      "empty": "अभी तक कोई प्लगइन इंस्टॉल नहीं है। स्टोर से या रिपॉज़िटरी URL से इंस्टॉल करें।"
+    },
+    "store": {
+      "hint": "{$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} विषय वाली कोई भी सार्वजनिक GitHub रिपॉज़िटरी यहाँ स्वचालित रूप से दिखाई देती है।",
+      "empty": "कुछ नहीं मिला। GitHub तक नेटवर्क पहुँच जाँचें या अतिरिक्त रजिस्ट्रियाँ कॉन्फ़िगर करें।",
+      "installed": "इंस्टॉल किया गया"
+    },
+    "action": {
+      "install": "इंस्टॉल करें",
+      "manage": "प्रबंधित करें",
+      "refresh": "रिफ्रेश करें",
+      "upgrade": "अपग्रेड करें"
+    },
+    "confirm": {
+      "uninstall": "प्लगइन अनइंस्टॉल करें?"
+    },
+    "status": {
+      "enabled": "सक्षम",
+      "disabled": "अक्षम"
+    },
+    "field": {
+      "package": "पैकेज",
+      "version": "संस्करण",
+      "status": "स्थिति",
+      "remote": "स्रोत",
+      "installedAt": "इंस्टॉल तिथि"
+    },
+    "config": {
+      "title": "कॉन्फ़िगरेशन",
+      "rawHint": "यह प्लगइन कोई कॉन्फ़िगरेशन स्कीमा घोषित नहीं करता। इसकी सेटिंग्स JSON के रूप में संपादित करें।",
+      "invalidJson": "अमान्य JSON ऑब्जेक्ट"
+    }
+  },
+  "currencyRates": {
+    "title": "मुद्रा विनिमय दरें",
+    "noProviders": "कोई सक्षम प्लगइन मुद्रा दरें प्रदान नहीं करता।",
+    "installPlugin": "प्लगइन इंस्टॉल करें",
+    "providers": "स्रोत",
+    "empty": "कोई दर नहीं मिली।",
+    "filter": {
+      "currency": "मुद्रा कोड"
+    },
+    "action": {
+      "update": "अपडेट करें"
+    },
+    "field": {
+      "date": "तारीख",
+      "base": "आधार",
+      "currency": "मुद्रा",
+      "rate": "दर",
+      "source": "स्रोत",
+      "updatedAt": "अपडेट किया गया"
+    }
+  }
+}

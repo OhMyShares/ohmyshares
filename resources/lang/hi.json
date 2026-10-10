@@ -1,0 +1,49 @@
+{
+  "Shares": "शेयर",
+  "Bonds": "बॉन्ड",
+  "Money": "पैसा",
+  "Crypto": "क्रिप्टो",
+  "Custom": "कस्टम",
+
+  "Buy": "खरीद",
+  "Sell": "बिक्री",
+  "Dividend": "लाभांश",
+  "Coupon": "कूपन",
+  "Fee": "कमीशन",
+  "Taxes": "कर",
+  "Credit": "जमा",
+  "Debit": "निकासी",
+
+  "Stock": "शेयर",
+  "ETF": "ETF",
+  "Futures": "वायदा",
+  "Currency": "मुद्रा",
+  "Index": "सूचकांक",
+  "Mutual Fond": "म्यूचुअल फंड",
+  "Bond": "बॉन्ड",
+  "Cryptocurrency": "क्रिप्टोकरेंसी",
+
+  "My Portfolio": "मेरा पोर्टफोलियो",
+  "Broker": "ब्रोकर",
+  "Copy": "प्रति",
+
+  "Hello": "नमस्ते",
+  "Incorrect credentials": "गलत क्रेडेंशियल",
+  "Reset password": "पासवर्ड रीसेट करें",
+  "Please do not reply to this email": "कृपया इस ईमेल का उत्तर न दें",
+  "If you need to contact us please email us at": "यदि आपको हमसे संपर्क करना हो, तो हमें ईमेल करें",
+
+  "Other": "अन्य",
+
+  "Basic Materials": "बुनियादी सामग्री",
+  "Communication Services": "संचार सेवाएं",
+  "Consumer Cyclical": "चक्रीय उपभोक्ता वस्तुएं",
+  "Consumer Defensive": "रक्षात्मक उपभोक्ता वस्तुएं",
+  "Energy": "ऊर्जा",
+  "Financial Services": "वित्तीय सेवाएं",
+  "Healthcare": "स्वास्थ्य सेवा",
+  "Industrials": "औद्योगिक",
+  "Real Estate": "रियल एस्टेट",
+  "Technology": "प्रौद्योगिकी",
+  "Utilities": "यूटिलिटीज़"
+}

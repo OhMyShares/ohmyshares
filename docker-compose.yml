@@ -1,0 +1,34 @@
+services:
+  mysql:
+    image: mysql:8.4.11
+    restart: unless-stopped
+    user: 'mysql'
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
+  memcached:
+    image: memcached:latest
+    restart: unless-stopped
+
+  app:
+    image: ohmyshares/ohmyshares:latest
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - mysql
+      - memcached
+    ports:
+      - "8000:8000"
+    volumes:
+      - plugins:/var/www/oms/storage/plugins
+    env_file:
+      - .env
+
+volumes:
+  db-data:
+  plugins:

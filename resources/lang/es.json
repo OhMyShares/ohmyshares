@@ -1,0 +1,49 @@
+{
+  "Shares": "Acciones",
+  "Bonds": "Bonos",
+  "Money": "Dinero",
+  "Crypto": "Cripto",
+  "Custom": "Personalizado",
+
+  "Buy": "Compra",
+  "Sell": "Venta",
+  "Dividend": "Dividendo",
+  "Coupon": "Cupón",
+  "Fee": "Comisión",
+  "Taxes": "Impuestos",
+  "Credit": "Depósito",
+  "Debit": "Retiro",
+
+  "Stock": "Acción",
+  "ETF": "ETF",
+  "Futures": "Futuros",
+  "Currency": "Divisa",
+  "Index": "Índice",
+  "Mutual Fond": "Fondo de inversión",
+  "Bond": "Bono",
+  "Cryptocurrency": "Criptomoneda",
+
+  "My Portfolio": "Mi portafolio",
+  "Broker": "Bróker",
+  "Copy": "Copia",
+
+  "Hello": "Hola",
+  "Incorrect credentials": "Credenciales incorrectas",
+  "Reset password": "Restablecer contraseña",
+  "Please do not reply to this email": "Por favor, no responda a este correo",
+  "If you need to contact us please email us at": "Si necesita contactarnos, escríbanos a",
+
+  "Other": "Otro",
+
+  "Basic Materials": "Materiales Básicos",
+  "Communication Services": "Servicios de Comunicación",
+  "Consumer Cyclical": "Consumo Cíclico",
+  "Consumer Defensive": "Consumo Defensivo",
+  "Energy": "Energía",
+  "Financial Services": "Servicios Financieros",
+  "Healthcare": "Salud",
+  "Industrials": "Industria",
+  "Real Estate": "Bienes Raíces",
+  "Technology": "Tecnología",
+  "Utilities": "Servicios Públicos"
+}

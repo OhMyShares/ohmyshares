@@ -1,0 +1,49 @@
+{
+  "Shares": "Aktien",
+  "Bonds": "Anleihen",
+  "Money": "Geld",
+  "Crypto": "Krypto",
+  "Custom": "Benutzerdefiniert",
+
+  "Buy": "Kauf",
+  "Sell": "Verkauf",
+  "Dividend": "Dividende",
+  "Coupon": "Kupon",
+  "Fee": "Gebühr",
+  "Taxes": "Steuern",
+  "Credit": "Einzahlung",
+  "Debit": "Auszahlung",
+
+  "Stock": "Aktie",
+  "ETF": "ETF",
+  "Futures": "Futures",
+  "Currency": "Währung",
+  "Index": "Index",
+  "Mutual Fond": "Investmentfonds",
+  "Bond": "Anleihe",
+  "Cryptocurrency": "Kryptowährung",
+
+  "My Portfolio": "Mein Portfolio",
+  "Broker": "Broker",
+  "Copy": "Kopie",
+
+  "Hello": "Hallo",
+  "Incorrect credentials": "Ungültige Anmeldedaten",
+  "Reset password": "Passwort zurücksetzen",
+  "Please do not reply to this email": "Bitte antworten Sie nicht auf diese E-Mail",
+  "If you need to contact us please email us at": "Wenn Sie uns kontaktieren möchten, schreiben Sie uns an",
+
+  "Other": "Sonstiges",
+
+  "Basic Materials": "Grundstoffe",
+  "Communication Services": "Kommunikationsdienste",
+  "Consumer Cyclical": "Zyklische Konsumgüter",
+  "Consumer Defensive": "Nichtzyklische Konsumgüter",
+  "Energy": "Energie",
+  "Financial Services": "Finanzdienstleistungen",
+  "Healthcare": "Gesundheitswesen",
+  "Industrials": "Industrie",
+  "Real Estate": "Immobilien",
+  "Technology": "Technologie",
+  "Utilities": "Versorger"
+}

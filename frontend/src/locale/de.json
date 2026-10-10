@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "Benutzer",
+    "create": "Benutzer anlegen",
+    "role": {
+      "user": "Benutzer",
+      "admin": "Administrator"
+    },
+    "badge": {
+      "test": "Test"
+    }
+  },
+  "common": {
+    "pcs": "Stk.",
+    "average_price": "Durchschnittspreis",
+    "dividends": "Dividenden",
+    "coupons": "Kupons",
+    "fees": "Gebühren",
+    "taxes": "Steuern",
+    "import_processing": "Import wird verarbeitet...",
+    "search": "Suche",
+    "filter": "Filter",
+    "part_portfolio": "Anteil am Portfolio",
+    "current_cost": "Aktueller Wert",
+    "quantity": "Menge"
+  },
+  "nav": {
+    "users": "Benutzer",
+    "companies": "Unternehmen",
+    "portfolio": "Portfolio",
+    "portfolios": "Portfolios",
+    "allPortfolios": "Alle Portfolios",
+    "portfoliosList": "Portfolioliste",
+    "trades": "Trades",
+    "profile": "Profil",
+    "resetCache": "Cache zurücksetzen",
+    "resetCacheHint": "In jeder unklaren Situation versuchen Sie zuerst, den Cache zurückzusetzen",
+    "buyPro": "Pro kaufen",
+    "learnMore": "Mehr erfahren",
+    "logout": "Abmelden",
+    "import": "Import",
+    "importTrades": "Trades importieren",
+    "customAssets": "Benutzerdefinierte Assets",
+    "content": "Inhalt",
+    "analytics": "Analytik",
+    "other": "Sonstiges",
+    "plugins": "Plugins",
+    "currencyRates": "Wechselkurse"
+  },
+  "action": {
+    "login": "Anmelden",
+    "loginForExisting": "Anmeldung für registrierte Benutzer",
+    "signUp": "Registrieren",
+    "passwordForgot": "Passwort vergessen?",
+    "passwordReset": "Passwort zurücksetzen",
+    "sendResetLink": "Link zum Zurücksetzen senden",
+    "view": "Ansehen",
+    "open": "Öffnen",
+    "menu": "Menü",
+    "back": "Zurück",
+    "add": "Hinzufügen",
+    "portfolio": "Portfolio",
+    "addPortfolio": "Portfolio hinzufügen",
+    "addTrade": "Trade hinzufügen",
+    "addIntoPortfolio": "Zum Portfolio hinzufügen",
+    "addCustomAsset": "Benutzerdefiniertes Asset hinzufügen",
+    "editCustomAsset": "Benutzerdefiniertes Asset bearbeiten",
+    "addCustomAssetPrice": "Preis hinzufügen",
+    "removeFromPortfolio": "Aus Portfolio entfernen",
+    "filter": "Filter",
+    "edit": "Bearbeiten",
+    "editPortfolio": "Portfolio bearbeiten",
+    "clone": "Klonen",
+    "clonePortfolio": "Portfolio klonen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "import": "Importieren",
+    "more": "Mehr",
+    "actions": "Aktionen",
+    "settings": "Einstellungen",
+    "send": "Senden",
+    "changePassword": "Passwort ändern",
+    "confirmDialog": {
+      "yes": "Ja",
+      "no": "Nein"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "Name",
+        "email": "E-Mail",
+        "passwordEdit": "Neues Passwort (leer lassen, um das aktuelle beizubehalten)",
+        "passwordCreate": "Passwort (leer lassen, um es zu generieren und per E-Mail zu senden)",
+        "role": "Rolle",
+        "isTest": "Testbenutzer"
+      },
+      "confirmTitle": "Möchten Sie diesen Benutzer wirklich löschen?"
+    },
+    "general": {
+      "error": {
+        "required": "Wert darf nicht leer sein"
+      }
+    },
+    "login": {
+      "title": "Anmeldung",
+      "field": {
+        "email": "E-Mail",
+        "password": "Passwort"
+      },
+      "tooltip": {
+        "showPassword": "Passwort anzeigen",
+        "hidePassword": "Passwort verbergen"
+      }
+    },
+    "forgot": {
+      "title": "Passwort vergessen?"
+    },
+    "passwordReset": {
+      "title": "Passwort zurücksetzen",
+      "field": {
+        "email": "E-Mail",
+        "password": "Neues Passwort",
+        "password_confirmation": "Neues Passwort (nochmal)"
+      }
+    },
+    "changePassword": {
+      "title": "Passwort ändern",
+      "field": {
+        "email": "E-Mail",
+        "password": "Aktuelles Passwort",
+        "password_new": "Neues Passwort"
+      },
+      "error": {
+        "minLength": "Das Passwort muss mindestens 6 Zeichen lang sein"
+      }
+    },
+    "signUp": {
+      "title": "Registrierung",
+      "field": {
+        "name": "Name",
+        "yourName": "Ihr Name",
+        "email": {
+          "main": "E-Mail",
+          "hint": "Das Passwort wird an die E-Mail gesendet"
+        },
+        "agree": {
+          "main": "Ich akzeptiere",
+          "privacy": "Datenschutzrichtlinie",
+          "and": "und",
+          "agreement": "Nutzungsbedingungen"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "Einstellungen",
+      "field": {
+        "name": "Name",
+        "email": "E-Mail",
+        "plan": "Tarif",
+        "daysLeft": "Tage übrig",
+        "daysLeft2": "Tage übrig",
+        "ignoreFunds": "Fehlende Mittel beim Hinzufügen von Trades ignorieren",
+        "language": "Sprache",
+        "theme": "Design",
+        "darkTheme": "Dunkles Design"
+      }
+    },
+    "import": {
+      "title": "Trades importieren",
+      "field": {
+        "broker": "Broker",
+        "file": {
+          "main": "Datei",
+          "hint": "Wählen Sie eine Datei im Excel-Format (XLS, XLSX)"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "Name",
+        "currency": "Währung",
+        "accountType": "Kontotyp",
+        "openedAt": "Eröffnungsdatum",
+        "fee": "Gebühr",
+        "feePercent": "Gebühr, %",
+        "notes": "Kommentar",
+        "goal": "Ziel"
+      },
+      "confirmTitle": "Möchten Sie dieses Portfolio wirklich löschen?"
+    },
+    "trade": {
+      "new": "Neuer Trade",
+      "field": {
+        "type": "Operationstyp",
+        "portfolio": "Portfolio",
+        "asset": "Assettyp",
+        "ticker": "Ticker",
+        "currency": "Währung",
+        "cost": "Preis",
+        "sum": "Betrag",
+        "isWoMoney": "Nicht in Geld berücksichtigen",
+        "isWoMoneyHint": "Wenn aktiviert, erstellt der Trade keine Einträge in der Geldverlaufshistorie",
+        "shares": "Menge",
+        "date": "Handelsdatum",
+        "feeCurrency": "Gebührenwährung",
+        "fee": "Gebühr",
+        "notes": "Kommentar"
+      },
+      "confirmTitle": "Möchten Sie diesen Trade wirklich löschen?",
+      "loading": "Laden...",
+      "typeAtLeast": "Geben Sie mindestens 1 Zeichen ein",
+      "calcFee": "Gebühr berechnen"
+    },
+    "customAsset": {
+      "hint": "Benutzerdefinierte Assets ermöglichen es Ihnen, andere Assets wie Immobilien in Ihr Portfolio aufzunehmen und deren Preisänderungen zu verfolgen.",
+      "confirmTitle": "Möchten Sie dieses benutzerdefinierte Asset wirklich löschen?",
+      "priceHistory": "Preisverlauf",
+      "graph": "Diagramm",
+      "field": {
+        "created": "Datum",
+        "ticker": "Ticker",
+        "name": "Name",
+        "currency": "Währung",
+        "info": "Info"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "Möchten Sie diesen Preis wirklich löschen?",
+      "field": {
+        "asset_id": "Benutzerdefiniertes Asset",
+        "created": "Datum",
+        "price": "Preis"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "Name",
+        "email": "E-Mail",
+        "created": "Erstellt"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "Zeilen pro Seite:",
+        "nextPage": "Nächste Seite",
+        "previousPage": "Vorherige Seite",
+        "of": "von"
+      },
+      "clear": "Leeren"
+    },
+    "companies": {
+      "column": {
+        "ticker": "Ticker",
+        "name": "Name",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "Info",
+      "dividends": "Dividenden",
+      "type": "Typ",
+      "ticker": "Ticker",
+      "currency": "Währung",
+      "price": "Preis"
+    },
+    "portfolios": {
+      "allPortfolios": "Alle Portfolios",
+      "chosen": "ausgewählt",
+      "column": {
+        "name": "Name",
+        "currency": "Währung",
+        "accountType": "Kontotyp",
+        "date": "Datum",
+        "opened": "Geöffnet"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "Portfoliowert",
+      "totalGain": "Portfoliorendite",
+      "column": {
+        "currency": "Währung",
+        "sum": "Betrag",
+        "ticker": "Ticker",
+        "count": "Anzahl",
+        "currentPrice": "Aktueller Preis",
+        "averagePrice": "Durchschnittspreis",
+        "currentCost": "Aktueller Wert",
+        "currentGain": "Gewinn",
+        "currentGainPercent": "Gewinn, %",
+        "partPercent": "Anteil, %"
+      },
+      "tooltip": {
+        "currency": "Wert in der Währung des Instruments"
+      },
+      "noContent": {
+        "main": "Das Portfolio ist noch leer",
+        "add": "fügen Sie",
+        "or": "oder",
+        "import": "importieren Sie",
+        "trades": "Trades"
+      },
+      "filter": {
+        "year": "Jahr"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "Datum",
+        "ticker": "Ticker",
+        "name": "Name",
+        "price": "Preis"
+      },
+      "noContent": {
+        "main": "Sie haben noch keine benutzerdefinierten Assets hinzugefügt",
+        "add": "Hinzufügen"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "Sie haben noch keine Preise hinzugefügt",
+        "add": "Hinzufügen"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "Portfolio",
+        "ticker": "Ticker",
+        "cost": "Preis",
+        "qty": "Anzahl",
+        "sum": "Betrag",
+        "fee": "Gebühr",
+        "date": "Datum"
+      },
+      "filter": {
+        "title": "Trade-Filter"
+      },
+      "filterField": {
+        "portfolio": "Portfolio",
+        "type": "Typ",
+        "currency": "Währung",
+        "ticker": "Ticker",
+        "dateRange": "Datumsbereich",
+        "startDate": "Startdatum",
+        "endDate": "Enddatum",
+        "closeBtn": "Schließen"
+      },
+      "noContent": {
+        "main": "Die Tradeliste ist noch leer",
+        "add": "fügen Sie",
+        "or": "oder",
+        "import": "importieren Sie",
+        "trades": "Trades"
+      },
+      "dateRanges": {
+        "today": "Heute",
+        "yesterday": "Gestern",
+        "last7days": "Letzte 7 Tage",
+        "last30days": "Letzter Monat",
+        "thisMonth": "Dieser Monat",
+        "lastMonth": "Letzter Monat",
+        "last6months": "Letzte 6 Monate",
+        "lastYear": "Letztes Jahr",
+        "wholeTime": "Gesamte Zeit"
+      },
+      "itemRemoveConfirm": "Sind Sie sicher, dass Sie diese Position vollständig aus dem Portfolio entfernen möchten?"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "Benutzer wurde erfolgreich angelegt"
+      },
+      "update": {
+        "message": "Benutzer wurde erfolgreich aktualisiert"
+      },
+      "delete": {
+        "message": "Benutzer wurde erfolgreich gelöscht"
+      }
+    },
+    "connectionLost": {
+      "message": "Fehler beim Laden. Möglicherweise besteht keine Internetverbindung",
+      "action": "Aktualisieren"
+    },
+    "auth": {
+      "signUp": {
+        "message": "Sie haben sich erfolgreich registriert. Das Passwort für den Dienst wurde an Ihre E-Mail gesendet"
+      },
+      "signUpError": {
+        "message": "Registrierungsfehler"
+      },
+      "changePassword": {
+        "message": "Passwort erfolgreich geändert"
+      },
+      "login": {
+        "message": "Falscher Benutzername oder Passwort"
+      },
+      "updateMe": {
+        "message": "Profil erfolgreich aktualisiert"
+      },
+      "forgot": {
+        "success": "Anweisungen zum Zurücksetzen des Passworts wurden erfolgreich an Ihre E-Mail gesendet"
+      },
+      "resetPassword": {
+        "success": "Passwort erfolgreich geändert"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "Um einen verknüpften Trade zu bearbeiten, ändern Sie den übergeordneten Trade"
+      },
+      "create": {
+        "message": "Trade erfolgreich hinzugefügt"
+      },
+      "update": {
+        "message": "Trade erfolgreich aktualisiert"
+      },
+      "delete": {
+        "message": "Trade erfolgreich gelöscht"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "Daten für den Import wurden erfolgreich geladen"
+      },
+      "create": {
+        "message": "Portfolio erfolgreich hinzugefügt"
+      },
+      "update": {
+        "message": "Portfolio erfolgreich aktualisiert"
+      },
+      "delete": {
+        "message": "Portfolio erfolgreich gelöscht"
+      },
+      "clone": {
+        "message": "Portfolio erfolgreich geklont"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "Benutzerdefiniertes Asset erfolgreich hinzugefügt"
+      },
+      "update": {
+        "message": "Benutzerdefiniertes Asset erfolgreich aktualisiert"
+      },
+      "delete": {
+        "message": "Benutzerdefiniertes Asset erfolgreich gelöscht"
+      }
+    },
+    "plugins": {
+      "installed": "Plugin \"{$title}\" installiert",
+      "uninstalled": "Plugin deinstalliert",
+      "upgraded": "Plugin auf Version {$version} aktualisiert",
+      "configSaved": "Konfiguration gespeichert"
+    },
+    "currencyRates": {
+      "updated": "Gespeicherte Kurse: {$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "Zum Aktualisieren nach unten ziehen",
+    "end": "Zum Aktualisieren loslassen",
+    "refreshing": "Aktualisieren..."
+  },
+  "theme": {
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "analytics": {
+    "portfolioGrowth": "Portfoliowachstum",
+    "growth": "Wachstum",
+    "delta": "Änderung",
+    "byAssetTypes": "Nach Assettypen",
+    "bySectors": "Nach Sektoren",
+    "byEarnings": "Nach Dividenden und Kupons",
+    "byEmitents": "Nach Emittenten",
+    "totalEarnings": "Insgesamt erhaltene Dividenden und Kupons",
+    "totalEmitents": "Gesamtzahl der Emittenten",
+    "stats": "Statistiken",
+    "goal": "Ziel",
+    "goalSet": "Ändern",
+    "goalAchievement": "Zielerreichung"
+  },
+  "chart": {
+    "history": "Verlauf",
+    "trades": "Trades"
+  },
+  "plugins": {
+    "title": "Plugins",
+    "tab": {
+      "installed": "Installiert",
+      "store": "Store"
+    },
+    "manual": {
+      "title": "Aus Repository installieren",
+      "hint": "Fügen Sie eine https-URL eines Git-Repositorys ein (GitHub, GitLab, Gitea, ...). Fügen Sie {$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} oder {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE} hinzu, um eine Version festzulegen.",
+      "field": {
+        "url": "Repository-URL"
+      }
+    },
+    "installed": {
+      "empty": "Noch keine Plugins installiert. Installieren Sie eins aus dem Store oder per Repository-URL."
+    },
+    "store": {
+      "hint": "Jedes öffentliche GitHub-Repository mit dem Thema {$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} erscheint hier automatisch.",
+      "empty": "Nichts gefunden. Prüfen Sie den Netzwerkzugriff auf GitHub oder konfigurieren Sie zusätzliche Registries.",
+      "installed": "Installiert"
+    },
+    "action": {
+      "install": "Installieren",
+      "manage": "Verwalten",
+      "refresh": "Aktualisieren",
+      "upgrade": "Upgrade"
+    },
+    "confirm": {
+      "uninstall": "Plugin deinstallieren?"
+    },
+    "status": {
+      "enabled": "Aktiviert",
+      "disabled": "Deaktiviert"
+    },
+    "field": {
+      "package": "Paket",
+      "version": "Version",
+      "status": "Status",
+      "remote": "Quelle",
+      "installedAt": "Installiert"
+    },
+    "config": {
+      "title": "Konfiguration",
+      "rawHint": "Dieses Plugin deklariert kein Konfigurationsschema. Bearbeiten Sie die Einstellungen als JSON.",
+      "invalidJson": "Ungültiges JSON-Objekt"
+    }
+  },
+  "currencyRates": {
+    "title": "Wechselkurse",
+    "noProviders": "Keine aktivierten Plugins liefern Wechselkurse.",
+    "installPlugin": "Plugin installieren",
+    "providers": "Quellen",
+    "empty": "Keine Kurse gefunden.",
+    "filter": {
+      "currency": "Währungscode"
+    },
+    "action": {
+      "update": "Aktualisieren"
+    },
+    "field": {
+      "date": "Datum",
+      "base": "Basis",
+      "currency": "Währung",
+      "rate": "Kurs",
+      "source": "Quelle",
+      "updatedAt": "Aktualisiert"
+    }
+  }
+}

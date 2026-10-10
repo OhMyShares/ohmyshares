@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "Пользователи",
+    "create": "Создать пользователя",
+    "role": {
+      "user": "Пользователь",
+      "admin": "Администратор"
+    },
+    "badge": {
+      "test": "Тест"
+    }
+  },
+  "common": {
+    "pcs": "шт.",
+    "average_price": "Средняя цена",
+    "dividends": "Дивиденды",
+    "coupons": "Купоны",
+    "fees": "Комиссии",
+    "taxes": "Налоги",
+    "import_processing": "Обработка импорта...",
+    "search": "Поиск",
+    "filter": "Фильтр",
+    "part_portfolio": "Доля от портфеля",
+    "current_cost": "Текущая стоимость",
+    "quantity": "Количество"
+  },
+  "nav": {
+    "companies": "Компании",
+    "portfolio": "Портфель",
+    "portfolios": "Портфели",
+    "allPortfolios": "Все портфели",
+    "portfoliosList": "Список портфелей",
+    "trades": "Сделки",
+    "profile": "Профиль",
+    "resetCache": "Сбросить кеш",
+    "resetCacheHint": "В любой непонятной ситуации сначала попробуйте сбросить кеш",
+    "buyPro": "Купить Pro",
+    "learnMore": "Узнать больше",
+    "logout": "Выйти",
+    "import": "Импорт",
+    "importTrades": "Импортировать сделки",
+    "customAssets": "Произвольные активы",
+    "content": "Состав",
+    "analytics": "Аналитика",
+    "other": "Прочее",
+    "users": "Пользователи",
+    "plugins": "Плагины",
+    "currencyRates": "Курсы валют"
+  },
+  "action": {
+    "login": "Войти",
+    "loginForExisting": "Вход для зарегистрированных пользователей",
+    "signUp": "Зарегистрироваться",
+    "passwordForgot": "Забыли пароль?",
+    "passwordReset": "Сбросить пароль",
+    "sendResetLink": "Отправить ссылку для сброса",
+    "view": "Просмотреть",
+    "open": "Открыть",
+    "menu": "Меню",
+    "back": "Назад",
+    "add": "Добавить",
+    "portfolio": "Портфель",
+    "addPortfolio": "Добавить портфель",
+    "addTrade": "Добавить сделку",
+    "addIntoPortfolio": "Добавить в портфель",
+    "addCustomAsset": "Добавить произвольный актив",
+    "editCustomAsset": "Редактировать произвольный актив",
+    "addCustomAssetPrice": "Добавить цену",
+    "removeFromPortfolio": "Удалить из портфеля",
+    "filter": "Фильтр",
+    "edit": "Редактировать",
+    "editPortfolio": "Редактировать портфель",
+    "clone": "Клонировать",
+    "clonePortfolio": "Клонировать портфель",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "import": "Импортировать",
+    "more": "Еще",
+    "actions": "Действия",
+    "settings": "Настройки",
+    "send": "Отправить",
+    "changePassword": "Сменить пароль",
+    "confirmDialog": {
+      "yes": "Да",
+      "no": "Нет"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "Имя",
+        "email": "E-mail",
+        "passwordEdit": "Новый пароль (оставьте пустым, чтобы не менять)",
+        "passwordCreate": "Пароль (оставьте пустым, чтобы сгенерировать и отправить на e-mail)",
+        "role": "Роль",
+        "isTest": "Тестовый пользователь"
+      },
+      "confirmTitle": "Вы действительно хотите удалить этого пользователя?"
+    },
+    "general": {
+      "error": {
+        "required": "Значение не может быть пустым"
+      }
+    },
+    "login": {
+      "title": "Вход",
+      "field": {
+        "email": "E-mail",
+        "password": "Пароль"
+      },
+      "tooltip": {
+        "showPassword": "Показать пароль",
+        "hidePassword": "Скрыть пароль"
+      }
+    },
+    "forgot": {
+      "title": "Забыли пароль?"
+    },
+    "passwordReset": {
+      "title": "Сброс пароля",
+      "field": {
+        "email": "E-mail",
+        "password": "Новый пароль",
+        "password_confirmation": "Новый пароль (еще раз)"
+      }
+    },
+    "changePassword": {
+      "title": "Сменить пароль",
+      "field": {
+        "email": "E-mail",
+        "password": "Текущий пароль",
+        "password_new": "Новый пароль"
+      },
+      "error": {
+        "minLength": "Минимальная длина пароля 6 символов"
+      }
+    },
+    "signUp": {
+      "title": "Регистрация",
+      "field": {
+        "name": "Имя",
+        "yourName": "Ваше Имя",
+        "email": {
+          "main": "E-mail",
+          "hint": "Пароль будет отправлен на E-mail"
+        },
+        "agree": {
+          "main": "Я принимаю",
+          "privacy": "Политику конфиденциальности",
+          "and": "и",
+          "agreement": "Пользовательское соглашение"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "Настройки",
+      "field": {
+        "name": "Имя",
+        "email": "E-mail",
+        "plan": "Тариф",
+        "daysLeft": "Дней осталось",
+        "daysLeft2": "дней осталось",
+        "ignoreFunds": "Игнорировать недостаток средств при добавлении сделок",
+        "language": "Язык",
+        "theme": "Тема оформления",
+        "darkTheme": "Темная тема"
+      }
+    },
+    "import": {
+      "title": "Импорт сделок",
+      "field": {
+        "broker": "Брокер",
+        "file": {
+          "main": "Файл",
+          "hint": "Выберите файл в формате Excel (XLS, XLSX)"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "Имя",
+        "currency": "Валюта",
+        "accountType": "Тип аккаунта",
+        "openedAt": "Дата открытия",
+        "fee": "Комиссия",
+        "feePercent": "Комиссия, %",
+        "notes": "Комментарий",
+        "goal": "Цель"
+      },
+      "confirmTitle": "Вы действительно хотите удалить этот портфель?"
+    },
+    "trade": {
+      "new": "Новая сделка",
+      "field": {
+        "type": "Тип операции",
+        "portfolio": "Портфель",
+        "asset": "Тип актива",
+        "ticker": "Тикер",
+        "currency": "Валюта",
+        "cost": "Цена",
+        "sum": "Сумма",
+        "isWoMoney": "Не учитывать в деньгах",
+        "isWoMoneyHint": "Если включено, сделка не создаст записей в истории денежных операций",
+        "shares": "Количество",
+        "date": "Дата сделки",
+        "feeCurrency": "Валюта комиссии",
+        "fee": "Комиссия",
+        "notes": "Комментарий"
+      },
+      "confirmTitle": "Вы действительно хотите удалить эту сделку?",
+      "loading": "Загрузка...",
+      "typeAtLeast": "Введите хотя бы 1 символ",
+      "calcFee": "Рассчитать комиссию"
+    },
+    "customAsset": {
+      "hint": "Произвольные активы позволяют добавлять в портфель и отслеживать изменение цены на другие ваши активы, например недвижимость.",
+      "confirmTitle": "Вы действительно хотите удалить этот произвольный актив?",
+      "priceHistory": "История цен",
+      "graph": "График",
+      "field": {
+        "created": "Дата",
+        "ticker": "Тикер",
+        "name": "Название",
+        "currency": "Валюта",
+        "info": "Инфо"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "Вы действительно хотите удалить эту цену?",
+      "field": {
+        "asset_id": "Произвольный актив",
+        "created": "Дата",
+        "price": "Цена"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "Имя",
+        "email": "E-mail",
+        "created": "Создан"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "Строк на странице:",
+        "nextPage": "Следующая страница",
+        "previousPage": "Предыдущая страница",
+        "of": "из"
+      },
+      "clear": "Очистить"
+    },
+    "companies": {
+      "column": {
+        "ticker": "Тикер",
+        "name": "Имя",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "Инфо",
+      "dividends": "Дивиденды",
+      "type": "Тип",
+      "ticker": "Тикер",
+      "currency": "Валюта",
+      "price": "Цена"
+    },
+    "portfolios": {
+      "allPortfolios": "Все портфели",
+      "chosen": "выбранный",
+      "column": {
+        "name": "Имя",
+        "currency": "Валюта",
+        "accountType": "Тип аккаунта",
+        "date": "Дата",
+        "opened": "Открыт"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "Стоимость портфеля",
+      "totalGain": "Доходность портфеля",
+      "column": {
+        "currency": "Валюта",
+        "sum": "Сумма",
+        "ticker": "Тикер",
+        "count": "Кол-во",
+        "currentPrice": "Текущая цена",
+        "averagePrice": "Средняя цена",
+        "currentCost": "Текущая стоимость",
+        "currentGain": "Прибыль",
+        "currentGainPercent": "Прибыль, %",
+        "partPercent": "Доля, %"
+      },
+      "tooltip": {
+        "currency": "Значение в валюте инструмента"
+      },
+      "noContent": {
+        "main": "Портфель пока пуст",
+        "add": "добавьте",
+        "or": "или",
+        "import": "импортируйте",
+        "trades": "сделки"
+      },
+      "filter": {
+        "year": "Год"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "Дата",
+        "ticker": "Тикер",
+        "name": "Название",
+        "price": "Цена"
+      },
+      "noContent": {
+        "main": "Вы пока не добавили произвольные активы",
+        "add": "Добавить"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "Вы пока не добавили цены",
+        "add": "Добавить"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "Портфель",
+        "ticker": "Тикер",
+        "cost": "Цена",
+        "qty": "Кол-во",
+        "sum": "Сумма",
+        "fee": "Комиссия",
+        "date": "Дата"
+      },
+      "filter": {
+        "title": "Фильтр сделок"
+      },
+      "filterField": {
+        "portfolio": "Портфель",
+        "type": "Тип",
+        "currency": "Валюта",
+        "ticker": "Тикер",
+        "dateRange": "Диапазон дат",
+        "startDate": "Начальная дата",
+        "endDate": "Конечная дата",
+        "closeBtn": "Закрыть"
+      },
+      "noContent": {
+        "main": "Список сделок пока пуст",
+        "add": "добавьте",
+        "or": "или",
+        "import": "импортируйте",
+        "trades": "сделки"
+      },
+      "dateRanges": {
+        "today": "Сегодня",
+        "yesterday": "Вчера",
+        "last7days": "Последние 7 дней",
+        "last30days": "Последний месяц",
+        "thisMonth": "Этот месяц",
+        "lastMonth": "Прошлый месяц",
+        "last6months": "Последние полгода",
+        "lastYear": "Последний год",
+        "wholeTime": "За все время"
+      },
+      "itemRemoveConfirm": "Вы уверены что хотите полностью удалить эту позицию из портфеля?"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "Пользователь успешно создан"
+      },
+      "update": {
+        "message": "Пользователь успешно обновлен"
+      },
+      "delete": {
+        "message": "Пользователь успешно удален"
+      }
+    },
+    "connectionLost": {
+      "message": "Ошибка загрузки. Возможно отсутствует соединение с интернетом",
+      "action": "Обновить"
+    },
+    "auth": {
+      "signUp": {
+        "message": "Вы успешно зарегистрированы. Пароль от сервиса был выслан на Вашу почту"
+      },
+      "signUpError": {
+        "message": "Ошибка регистрации"
+      },
+      "changePassword": {
+        "message": "Пароль успешно изменен"
+      },
+      "login": {
+        "message": "Неверный логин или пароль"
+      },
+      "updateMe": {
+        "message": "Профиль успешно обновлен"
+      },
+      "forgot": {
+        "success": "Инструкции для сброса пароля успешно отправлены на почту"
+      },
+      "resetPassword": {
+        "success": "Пароль успешно изменен"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "Для редактирования связанной сделки измените родительскую сделку"
+      },
+      "create": {
+        "message": "Сделка успешно добавлена"
+      },
+      "update": {
+        "message": "Сделка успешно обновлена"
+      },
+      "delete": {
+        "message": "Сделка успешно удалена"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "Данные для импорта успешно загружены"
+      },
+      "create": {
+        "message": "Портфель успешно добавлен"
+      },
+      "update": {
+        "message": "Портфель успешно обновлен"
+      },
+      "delete": {
+        "message": "Портфель успешно удален"
+      },
+      "clone": {
+        "message": "Портфель успешно клонирован"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "Произвольный актив успешно добавлен"
+      },
+      "update": {
+        "message": "Произвольный актив успешно обновлен"
+      },
+      "delete": {
+        "message": "Произвольный актив успешно удален"
+      }
+    },
+    "plugins": {
+      "installed": "Плагин \"{$title}\" установлен",
+      "uninstalled": "Плагин удалён",
+      "upgraded": "Плагин обновлён до версии {$version}",
+      "configSaved": "Конфигурация сохранена"
+    },
+    "currencyRates": {
+      "updated": "Сохранено курсов: {$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "Потяните вниз для обновления",
+    "end": "Отпустите для обновления",
+    "refreshing": "Обновление..."
+  },
+  "theme": {
+    "light": "Светлая",
+    "dark": "Темная"
+  },
+  "analytics": {
+    "portfolioGrowth": "Рост портфеля",
+    "growth": "Рост",
+    "delta": "Изменение",
+    "byAssetTypes": "По типам активов",
+    "bySectors": "По секторам",
+    "byEarnings": "По дивидендам и купонам",
+    "byEmitents": "По эмитентам",
+    "totalEarnings": "Всего получено дивидендов и купонов",
+    "totalEmitents": "Общее количество эмитентов",
+    "stats": "Статистика",
+    "goal": "Цель",
+    "goalSet": "Изменить",
+    "goalAchievement": "Достижение цели"
+  },
+  "chart": {
+    "history": "История",
+    "trades": "Сделки"
+  },
+  "plugins": {
+    "title": "Плагины",
+    "tab": {
+      "installed": "Установленные",
+      "store": "Каталог"
+    },
+    "manual": {
+      "title": "Установка из репозитория",
+      "hint": "Вставьте https URL git-репозитория (GitHub, GitLab, Gitea, ...). Добавьте {$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} или {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE}, чтобы зафиксировать версию.",
+      "field": {
+        "url": "URL репозитория"
+      }
+    },
+    "installed": {
+      "empty": "Плагины пока не установлены. Установите один из каталога или по URL репозитория."
+    },
+    "store": {
+      "hint": "Любой публичный GitHub-репозиторий с тегом {$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} автоматически появляется здесь.",
+      "empty": "Ничего не найдено. Проверьте доступ к GitHub или настройте дополнительные реестры.",
+      "installed": "Установлен"
+    },
+    "action": {
+      "install": "Установить",
+      "manage": "Управление",
+      "refresh": "Обновить",
+      "upgrade": "Обновить версию"
+    },
+    "confirm": {
+      "uninstall": "Удалить плагин?"
+    },
+    "status": {
+      "enabled": "Включён",
+      "disabled": "Выключен"
+    },
+    "field": {
+      "package": "Пакет",
+      "version": "Версия",
+      "status": "Статус",
+      "remote": "Источник",
+      "installedAt": "Установлен"
+    },
+    "config": {
+      "title": "Конфигурация",
+      "rawHint": "Плагин не объявляет схему конфигурации. Отредактируйте настройки в формате JSON.",
+      "invalidJson": "Некорректный JSON-объект"
+    }
+  },
+  "currencyRates": {
+    "title": "Курсы валют",
+    "noProviders": "Нет включённых плагинов, предоставляющих курсы валют.",
+    "installPlugin": "Установить плагин",
+    "providers": "Источники",
+    "empty": "Курсы не найдены.",
+    "filter": {
+      "currency": "Код валюты"
+    },
+    "action": {
+      "update": "Обновить"
+    },
+    "field": {
+      "date": "Дата",
+      "base": "База",
+      "currency": "Валюта",
+      "rate": "Курс",
+      "source": "Источник",
+      "updatedAt": "Обновлено"
+    }
+  }
+}

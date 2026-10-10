@@ -1,0 +1,13 @@
+.table {
+  width: 100%;
+}
+
+//tr:nth-child(even) td {
+//  background: var(--tui-base-02);
+//}
+
+.total-gain {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

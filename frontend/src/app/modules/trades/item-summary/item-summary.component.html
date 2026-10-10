@@ -1,0 +1,71 @@
+<div class="tui-container tui-container_adaptive" *ngIf="item && item.ticker != '$$'">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3">
+      <tui-island>
+        <span i18n="@@common.quantity" class="tui-island__category">Quantity</span>
+        <div class="">{{ item.count | number:'1.0-10' }} <span i18n="@@common.pcs">pcs.</span></div>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3">
+      <tui-island>
+        <span i18n="@@common.average_price" class="tui-island__category">Average Price</span>
+        <div>{{ item.currency_sign }}&thinsp;{{ item.average_price }}</div>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3">
+      <tui-island>
+        <span i18n="@@common.current_cost" class="tui-island__category">Current cost</span>
+        <div *ngIf="item.current_cost === item.current_cost_native">
+          {{ item.portfolio.currency_sign }}&thinsp;{{ item.current_cost }}&nbsp;
+          <span class="">
+            {{ item.currency_sign }}&thinsp;<span [innerHTML]="item.current_gain | numberColored"></span>
+          </span>&nbsp;
+          <span class="">
+            <span [innerHTML]="item.current_gain_percent | numberColored"></span>&thinsp;%
+          </span>
+        </div>
+
+        <div *ngIf="item.current_cost !== item.current_cost_native">
+          <span>{{ item.portfolio.currency_sign }}&thinsp;{{ item.current_cost }}</span>&nbsp;
+          <span class="text-muted">{{ item.currency_sign }}&nbsp;{{ item.current_cost_native }}</span>&nbsp;
+          <span class="">
+            {{ item.currency_sign }}&thinsp;<span [innerHTML]="item.current_gain_native | numberColored"></span>
+          </span>&nbsp;
+          <span class="">
+            <span [innerHTML]="item.current_gain_percent | numberColored"></span>&nbsp;%
+          </span>
+        </div>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3" *ngIf="item.earned_dividends">
+      <tui-island>
+        <span i18n="@@common.dividends" class="tui-island__category">Dividends</span>
+        <div>{{ item.currency_sign }}&thinsp;{{ item.earned_dividends }}</div>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3" *ngIf="item.earned_coupons">
+      <tui-island>
+        <span i18n="@@common.coupons" class="tui-island__category">Coupons</span>
+        <div>{{ item.currency_sign }}&thinsp;{{ item.earned_coupons }}</div>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3" *ngIf="item.paid_fees">
+      <tui-island>
+        <span i18n="@@common.fees" class="tui-island__category">Fees</span>
+        <div>{{ item.currency_sign }}&thinsp;{{ item.paid_fees }}</div>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3" *ngIf="item.paid_taxes">
+      <tui-island>
+        <span i18n="@@common.taxes" class="tui-island__category">Taxes</span>
+        <div>{{ item.currency_sign }}&thinsp;{{ item.paid_taxes }}</div>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3" *ngIf="item.part_percent">
+      <tui-island>
+        <span i18n="@@common.part_portfolio" class="tui-island__category">Part of portfolio</span>
+        <div>{{ item.part_percent }}&thinsp;%</div>
+      </tui-island>
+    </div>
+  </div>
+</div>

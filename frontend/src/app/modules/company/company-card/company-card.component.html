@@ -1,0 +1,74 @@
+<app-actions [isFormActions]="true">
+  <a tuiButton
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     icon="tuiIconChevronLeft"
+     routerLinkActive="active"
+     [routerLink]="['/companies']">
+    <span i18n="@@nav.companies">Companies</span>
+  </a>
+  <a tuiButton
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     icon="tuiIconPlus"
+     routerLinkActive="active"
+     *ngIf="info"
+     [routerLink]="['/trades', 'new']" [queryParams]="{ticker: info.ticker}" >
+    <span i18n="@@action.addIntoPortfolio">Add in to portfolio</span>
+  </a>
+</app-actions>
+
+<div class="tui-container tui-container_adaptive" [class.tui-skeleton]="!info">
+  <div class="tui-row tui-row_adaptive tui-space_bottom-1">
+    <div class="tui-col_md-12 tui-col_xs-12">
+      <h1 class="tui-space_top-0" *ngIf="info">
+        {{ info.name }}
+      </h1>
+    </div>
+  </div>
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-3">
+      <tui-island *ngIf="info">
+        <h1 class="tui-island__title" i18n="@@table.company.info">Info</h1>
+        <table class="tui-table tui-table_font-size_s">
+          <tbody>
+          <tr class="tui-table__tr">
+            <td class="tui-table__td"><span i18n="@@table.company.ticker">Ticker</span></td>
+            <td class="tui-table__td">{{ info.ticker }}</td>
+          </tr>
+          <tr class="tui-table__tr">
+            <td class="tui-table__td"><span i18n="@@table.company.currency">Currency</span></td>
+            <td class="tui-table__td">{{ info.currency_sign }} {{ info.currency_code }}</td>
+          </tr>
+          <tr class="tui-table__tr">
+            <td class="tui-table__td"><span>ISIN</span></td>
+            <td class="tui-table__td">{{ info.isin }}</td>
+          </tr>
+          <tr class="tui-table__tr">
+            <td class="tui-table__td"><span i18n="@@table.company.type">Type</span></td>
+            <td class="tui-table__td">{{ info.type_label }}</td>
+          </tr>
+          <tr class="tui-table__tr tui-table__tr_border_none" *ngIf="info.price">
+            <td class="tui-table__td"><span i18n="@@table.company.price">Price</span></td>
+            <td class="tui-table__td">{{ info.currency_sign }} {{ info.price | tuiFormatNumber:{decimalLimit: 0, decimalSeparator: '.'} }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-6 tui-col_xs-12">
+      <tui-island *ngIf="chartData">
+        <h1 class="tui-island__title" i18n="@@table.company.dividends">Dividends</h1>
+        <tui-axes class="axes" [axisXLabels]="labelsX" [axisYLabels]="labelsY">
+          <tui-bar-chart
+            [max]="chartMax"
+            [value]="chartData"
+            [collapsed]="true"
+          ></tui-bar-chart>
+        </tui-axes>
+      </tui-island>
+    </div>
+  </div>
+</div>

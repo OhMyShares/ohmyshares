@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "用户",
+    "create": "创建用户",
+    "role": {
+      "user": "用户",
+      "admin": "管理员"
+    },
+    "badge": {
+      "test": "测试"
+    }
+  },
+  "common": {
+    "pcs": "件",
+    "average_price": "平均价格",
+    "dividends": "股息",
+    "coupons": "优惠券",
+    "fees": "费用",
+    "taxes": "税收",
+    "import_processing": "正在处理导入...",
+    "search": "搜索",
+    "filter": "筛选",
+    "part_portfolio": "投资组合份额",
+    "current_cost": "当前成本",
+    "quantity": "数量"
+  },
+  "nav": {
+    "users": "用户",
+    "companies": "公司",
+    "portfolio": "投资组合",
+    "portfolios": "投资组合",
+    "allPortfolios": "所有投资组合",
+    "portfoliosList": "投资组合列表",
+    "trades": "交易",
+    "profile": "个人资料",
+    "resetCache": "重置缓存",
+    "resetCacheHint": "在任何不确定的情况下，首先尝试重置缓存",
+    "buyPro": "购买Pro",
+    "learnMore": "了解更多",
+    "logout": "退出",
+    "import": "导入",
+    "importTrades": "导入交易",
+    "customAssets": "自定义资产",
+    "content": "内容",
+    "analytics": "分析",
+    "other": "其他",
+    "plugins": "插件",
+    "currencyRates": "汇率"
+  },
+  "action": {
+    "login": "登录",
+    "loginForExisting": "现有用户登录",
+    "signUp": "注册",
+    "passwordForgot": "忘记密码？",
+    "passwordReset": "重置密码",
+    "sendResetLink": "发送重置链接",
+    "view": "查看",
+    "open": "打开",
+    "menu": "菜单",
+    "back": "返回",
+    "add": "添加",
+    "portfolio": "投资组合",
+    "addPortfolio": "添加投资组合",
+    "addTrade": "添加交易",
+    "addIntoPortfolio": "添加到投资组合",
+    "addCustomAsset": "添加自定义资产",
+    "editCustomAsset": "编辑自定义资产",
+    "addCustomAssetPrice": "添加价格",
+    "removeFromPortfolio": "从投资组合中删除",
+    "filter": "筛选",
+    "edit": "编辑",
+    "editPortfolio": "编辑投资组合",
+    "clone": "克隆",
+    "clonePortfolio": "克隆投资组合",
+    "save": "保存",
+    "delete": "删除",
+    "import": "导入",
+    "more": "更多",
+    "actions": "操作",
+    "settings": "设置",
+    "send": "发送",
+    "changePassword": "更改密码",
+    "confirmDialog": {
+      "yes": "是",
+      "no": "否"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "姓名",
+        "email": "电子邮件",
+        "passwordEdit": "新密码（留空则保持不变）",
+        "passwordCreate": "密码（留空则自动生成并通过电子邮件发送）",
+        "role": "角色",
+        "isTest": "测试用户"
+      },
+      "confirmTitle": "确定要删除该用户吗？"
+    },
+    "general": {
+      "error": {
+        "required": "值不能为空"
+      }
+    },
+    "login": {
+      "title": "登录",
+      "field": {
+        "email": "电子邮件",
+        "password": "密码"
+      },
+      "tooltip": {
+        "showPassword": "显示密码",
+        "hidePassword": "隐藏密码"
+      }
+    },
+    "forgot": {
+      "title": "忘记密码？"
+    },
+    "passwordReset": {
+      "title": "重置密码",
+      "field": {
+        "email": "电子邮件",
+        "password": "新密码",
+        "password_confirmation": "新密码（再次输入）"
+      }
+    },
+    "changePassword": {
+      "title": "更改密码",
+      "field": {
+        "email": "电子邮件",
+        "password": "当前密码",
+        "password_new": "新密码"
+      },
+      "error": {
+        "minLength": "密码长度至少为6个字符"
+      }
+    },
+    "signUp": {
+      "title": "注册",
+      "field": {
+        "name": "姓名",
+        "yourName": "您的姓名",
+        "email": {
+          "main": "电子邮件",
+          "hint": "密码将发送到电子邮件"
+        },
+        "agree": {
+          "main": "我接受",
+          "privacy": "隐私政策",
+          "and": "和",
+          "agreement": "用户协议"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "设置",
+      "field": {
+        "name": "姓名",
+        "email": "电子邮件",
+        "plan": "计划",
+        "daysLeft": "剩余天数",
+        "daysLeft2": "剩余天数",
+        "ignoreFunds": "在添加交易时忽略资金不足",
+        "language": "语言",
+        "theme": "主题",
+        "darkTheme": "深色主题"
+      }
+    },
+    "import": {
+      "title": "导入交易",
+      "field": {
+        "broker": "经纪人",
+        "file": {
+          "main": "文件",
+          "hint": "选择Excel文件（XLS，XLSX）"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "姓名",
+        "currency": "货币",
+        "accountType": "账户类型",
+        "openedAt": "开户日期",
+        "fee": "费用",
+        "feePercent": "费用，%",
+        "notes": "备注",
+        "goal": "目标"
+      },
+      "confirmTitle": "您确定要删除此投资组合吗？"
+    },
+    "trade": {
+      "new": "新交易",
+      "field": {
+        "type": "操作类型",
+        "portfolio": "投资组合",
+        "asset": "资产类型",
+        "ticker": "代码",
+        "currency": "货币",
+        "cost": "价格",
+        "sum": "金额",
+        "isWoMoney": "不计入资金",
+        "isWoMoneyHint": "如果启用，交易不会在资金操作历史中创建记录",
+        "shares": "数量",
+        "date": "交易日期",
+        "feeCurrency": "费用货币",
+        "fee": "费用",
+        "notes": "备注"
+      },
+      "confirmTitle": "您确定要删除此交易吗？",
+      "loading": "加载中...",
+      "typeAtLeast": "至少输入1个字符",
+      "calcFee": "计算费用"
+    },
+    "customAsset": {
+      "hint": "自定义资产允许您将其他资产（如房地产）添加到投资组合中并跟踪其价格变化。",
+      "confirmTitle": "您确定要删除此自定义资产吗？",
+      "priceHistory": "价格历史",
+      "graph": "图表",
+      "field": {
+        "created": "日期",
+        "ticker": "代码",
+        "name": "名称",
+        "currency": "货币",
+        "info": "信息"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "您确定要删除此价格吗？",
+      "field": {
+        "asset_id": "自定义资产",
+        "created": "日期",
+        "price": "价格"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "姓名",
+        "email": "电子邮件",
+        "created": "创建时间"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "每页行数：",
+        "nextPage": "下一页",
+        "previousPage": "上一页",
+        "of": "共"
+      },
+      "clear": "清除"
+    },
+    "companies": {
+      "column": {
+        "ticker": "代码",
+        "name": "名称",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "信息",
+      "dividends": "股息",
+      "type": "类型",
+      "ticker": "代码",
+      "currency": "货币",
+      "price": "价格"
+    },
+    "portfolios": {
+      "allPortfolios": "所有投资组合",
+      "chosen": "已选择",
+      "column": {
+        "name": "名称",
+        "currency": "货币",
+        "accountType": "账户类型",
+        "date": "日期",
+        "opened": "已打开"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "投资组合总成本",
+      "totalGain": "投资组合收益",
+      "column": {
+        "currency": "货币",
+        "sum": "金额",
+        "ticker": "代码",
+        "count": "数量",
+        "currentPrice": "当前价格",
+        "averagePrice": "平均价格",
+        "currentCost": "当前成本",
+        "currentGain": "利润",
+        "currentGainPercent": "利润，%",
+        "partPercent": "份额，%"
+      },
+      "tooltip": {
+        "currency": "以工具货币表示的值"
+      },
+      "noContent": {
+        "main": "投资组合目前为空",
+        "add": "添加",
+        "or": "或",
+        "import": "导入",
+        "trades": "交易"
+      },
+      "filter": {
+        "year": "年份"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "日期",
+        "ticker": "代码",
+        "name": "名称",
+        "price": "价格"
+      },
+      "noContent": {
+        "main": "您尚未添加自定义资产",
+        "add": "添加"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "您尚未添加价格",
+        "add": "添加"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "投资组合",
+        "ticker": "代码",
+        "cost": "价格",
+        "qty": "数量",
+        "sum": "金额",
+        "fee": "费用",
+        "date": "日期"
+      },
+      "filter": {
+        "title": "交易筛选"
+      },
+      "filterField": {
+        "portfolio": "投资组合",
+        "type": "类型",
+        "currency": "货币",
+        "ticker": "代码",
+        "dateRange": "日期范围",
+        "startDate": "开始日期",
+        "endDate": "结束日期",
+        "closeBtn": "关闭"
+      },
+      "noContent": {
+        "main": "交易列表目前为空",
+        "add": "添加",
+        "or": "或",
+        "import": "导入",
+        "trades": "交易"
+      },
+      "dateRanges": {
+        "today": "今天",
+        "yesterday": "昨天",
+        "last7days": "最近7天",
+        "last30days": "最近30天",
+        "thisMonth": "本月",
+        "lastMonth": "上月",
+        "last6months": "最近6个月",
+        "lastYear": "去年",
+        "wholeTime": "所有时间"
+      },
+      "itemRemoveConfirm": "您确定要完全删除此头寸吗？"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "用户已成功创建"
+      },
+      "update": {
+        "message": "用户已成功更新"
+      },
+      "delete": {
+        "message": "用户已成功删除"
+      }
+    },
+    "connectionLost": {
+      "message": "加载错误。可能没有互联网连接",
+      "action": "刷新"
+    },
+    "auth": {
+      "signUp": {
+        "message": "您已成功注册。服务密码已发送到您的电子邮件"
+      },
+      "signUpError": {
+        "message": "注册错误"
+      },
+      "changePassword": {
+        "message": "密码已成功更改"
+      },
+      "login": {
+        "message": "错误的用户名或密码"
+      },
+      "updateMe": {
+        "message": "个人资料已成功更新"
+      },
+      "forgot": {
+        "success": "密码重置说明已成功发送到您的电子邮件"
+      },
+      "resetPassword": {
+        "success": "密码已成功更改"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "要编辑相关交易，请更改父交易"
+      },
+      "create": {
+        "message": "交易已成功添加"
+      },
+      "update": {
+        "message": "交易已成功更新"
+      },
+      "delete": {
+        "message": "交易已成功删除"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "导入数据已成功加载"
+      },
+      "create": {
+        "message": "投资组合已成功添加"
+      },
+      "update": {
+        "message": "投资组合已成功更新"
+      },
+      "delete": {
+        "message": "投资组合已成功删除"
+      },
+      "clone": {
+        "message": "投资组合已成功克隆"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "自定义资产已成功添加"
+      },
+      "update": {
+        "message": "自定义资产已成功更新"
+      },
+      "delete": {
+        "message": "自定义资产已成功删除"
+      }
+    },
+    "plugins": {
+      "installed": "插件 \"{$title}\" 已安装",
+      "uninstalled": "插件已卸载",
+      "upgraded": "插件已升级到版本 {$version}",
+      "configSaved": "配置已保存"
+    },
+    "currencyRates": {
+      "updated": "已保存汇率：{$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "下拉刷新",
+    "end": "释放刷新",
+    "refreshing": "刷新中..."
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色"
+  },
+  "analytics": {
+    "portfolioGrowth": "投资组合增长",
+    "growth": "增长",
+    "delta": "变化",
+    "byAssetTypes": "按资产类型",
+    "bySectors": "按行业",
+    "byEarnings": "按股息和优惠券",
+    "byEmitents": "按发行人",
+    "totalEarnings": "总股息和优惠券收入",
+    "totalEmitents": "发行人总数",
+    "stats": "统计",
+    "goal": "目标",
+    "goalSet": "设置",
+    "goalAchievement": "目标达成"
+  },
+  "chart": {
+    "history": "历史",
+    "trades": "交易"
+  },
+  "plugins": {
+    "title": "插件",
+    "tab": {
+      "installed": "已安装",
+      "store": "商店"
+    },
+    "manual": {
+      "title": "从仓库安装",
+      "hint": "粘贴 git 仓库的 https URL（GitHub、GitLab、Gitea 等）。添加 {$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} 或 {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE} 以固定版本。",
+      "field": {
+        "url": "仓库 URL"
+      }
+    },
+    "installed": {
+      "empty": "尚未安装任何插件。可从商店或通过仓库 URL 安装。"
+    },
+    "store": {
+      "hint": "任何带有 {$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} 主题的公开 GitHub 仓库都会自动显示在这里。",
+      "empty": "未找到任何内容。请检查与 GitHub 的网络连接或配置其他注册表。",
+      "installed": "已安装"
+    },
+    "action": {
+      "install": "安装",
+      "manage": "管理",
+      "refresh": "刷新",
+      "upgrade": "升级"
+    },
+    "confirm": {
+      "uninstall": "卸载插件？"
+    },
+    "status": {
+      "enabled": "已启用",
+      "disabled": "已禁用"
+    },
+    "field": {
+      "package": "包",
+      "version": "版本",
+      "status": "状态",
+      "remote": "来源",
+      "installedAt": "安装时间"
+    },
+    "config": {
+      "title": "配置",
+      "rawHint": "此插件未声明配置模式。请以 JSON 格式编辑其设置。",
+      "invalidJson": "无效的 JSON 对象"
+    }
+  },
+  "currencyRates": {
+    "title": "汇率",
+    "noProviders": "没有已启用的插件提供汇率。",
+    "installPlugin": "安装插件",
+    "providers": "来源",
+    "empty": "未找到汇率。",
+    "filter": {
+      "currency": "货币代码"
+    },
+    "action": {
+      "update": "更新"
+    },
+    "field": {
+      "date": "日期",
+      "base": "基准货币",
+      "currency": "货币",
+      "rate": "汇率",
+      "source": "来源",
+      "updatedAt": "更新时间"
+    }
+  }
+}

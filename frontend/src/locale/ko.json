@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "사용자",
+    "create": "사용자 생성",
+    "role": {
+      "user": "사용자",
+      "admin": "관리자"
+    },
+    "badge": {
+      "test": "테스트"
+    }
+  },
+  "common": {
+    "pcs": "개",
+    "average_price": "평균 가격",
+    "dividends": "배당금",
+    "coupons": "쿠폰",
+    "fees": "수수료",
+    "taxes": "세금",
+    "import_processing": "가져오기 처리 중...",
+    "search": "검색",
+    "filter": "필터",
+    "part_portfolio": "포트폴리오 비중",
+    "current_cost": "현재 가치",
+    "quantity": "수량"
+  },
+  "nav": {
+    "users": "사용자",
+    "companies": "회사",
+    "portfolio": "포트폴리오",
+    "portfolios": "포트폴리오",
+    "allPortfolios": "모든 포트폴리오",
+    "portfoliosList": "포트폴리오 목록",
+    "trades": "거래",
+    "profile": "프로필",
+    "resetCache": "캐시 초기화",
+    "resetCacheHint": "어려운 상황이 발생하면 먼저 캐시를 초기화해 보세요",
+    "buyPro": "Pro 구매",
+    "learnMore": "더 알아보기",
+    "logout": "로그아웃",
+    "import": "가져오기",
+    "importTrades": "거래 가져오기",
+    "customAssets": "사용자 정의 자산",
+    "content": "구성",
+    "analytics": "분석",
+    "other": "기타",
+    "plugins": "플러그인",
+    "currencyRates": "환율"
+  },
+  "action": {
+    "login": "로그인",
+    "loginForExisting": "기존 사용자 로그인",
+    "signUp": "회원가입",
+    "passwordForgot": "비밀번호를 잊으셨나요?",
+    "passwordReset": "비밀번호 재설정",
+    "sendResetLink": "재설정 링크 보내기",
+    "view": "보기",
+    "open": "열기",
+    "menu": "메뉴",
+    "back": "뒤로",
+    "add": "추가",
+    "portfolio": "포트폴리오",
+    "addPortfolio": "포트폴리오 추가",
+    "addTrade": "거래 추가",
+    "addIntoPortfolio": "포트폴리오에 추가",
+    "addCustomAsset": "사용자 정의 자산 추가",
+    "editCustomAsset": "사용자 정의 자산 수정",
+    "addCustomAssetPrice": "가격 추가",
+    "removeFromPortfolio": "포트폴리오에서 제거",
+    "filter": "필터",
+    "edit": "수정",
+    "editPortfolio": "포트폴리오 수정",
+    "clone": "복제",
+    "clonePortfolio": "포트폴리오 복제",
+    "save": "저장",
+    "delete": "삭제",
+    "import": "가져오기",
+    "more": "더보기",
+    "actions": "작업",
+    "settings": "설정",
+    "send": "보내기",
+    "changePassword": "비밀번호 변경",
+    "confirmDialog": {
+      "yes": "예",
+      "no": "아니오"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "이름",
+        "email": "이메일",
+        "passwordEdit": "새 비밀번호 (현재 비밀번호를 유지하려면 비워 두세요)",
+        "passwordCreate": "비밀번호 (비워 두면 자동 생성되어 이메일로 전송됩니다)",
+        "role": "역할",
+        "isTest": "테스트 사용자"
+      },
+      "confirmTitle": "이 사용자를 삭제하시겠습니까?"
+    },
+    "general": {
+      "error": {
+        "required": "값은 비워둘 수 없습니다"
+      }
+    },
+    "login": {
+      "title": "로그인",
+      "field": {
+        "email": "이메일",
+        "password": "비밀번호"
+      },
+      "tooltip": {
+        "showPassword": "비밀번호 표시",
+        "hidePassword": "비밀번호 숨기기"
+      }
+    },
+    "forgot": {
+      "title": "비밀번호를 잊으셨나요?"
+    },
+    "passwordReset": {
+      "title": "비밀번호 재설정",
+      "field": {
+        "email": "이메일",
+        "password": "새 비밀번호",
+        "password_confirmation": "새 비밀번호 (확인)"
+      }
+    },
+    "changePassword": {
+      "title": "비밀번호 변경",
+      "field": {
+        "email": "이메일",
+        "password": "현재 비밀번호",
+        "password_new": "새 비밀번호"
+      },
+      "error": {
+        "minLength": "비밀번호는 최소 6자 이상이어야 합니다"
+      }
+    },
+    "signUp": {
+      "title": "회원가입",
+      "field": {
+        "name": "이름",
+        "yourName": "당신의 이름",
+        "email": {
+          "main": "이메일",
+          "hint": "비밀번호가 이메일로 전송됩니다"
+        },
+        "agree": {
+          "main": "동의합니다",
+          "privacy": "개인정보 보호정책",
+          "and": "및",
+          "agreement": "이용약관"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "설정",
+      "field": {
+        "name": "이름",
+        "email": "이메일",
+        "plan": "요금제",
+        "daysLeft": "남은 일수",
+        "daysLeft2": "일 남음",
+        "ignoreFunds": "거래 추가 시 자금 부족 무시",
+        "language": "언어",
+        "theme": "테마",
+        "darkTheme": "다크 테마"
+      }
+    },
+    "import": {
+      "title": "거래 가져오기",
+      "field": {
+        "broker": "브로커",
+        "file": {
+          "main": "파일",
+          "hint": "엑셀 파일 (XLS, XLSX)을 선택하세요"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "이름",
+        "currency": "통화",
+        "accountType": "계정 유형",
+        "openedAt": "개설일",
+        "fee": "수수료",
+        "feePercent": "수수료, %",
+        "notes": "메모",
+        "goal": "목표"
+      },
+      "confirmTitle": "이 포트폴리오를 정말 삭제하시겠습니까?"
+    },
+    "trade": {
+      "new": "새 거래",
+      "field": {
+        "type": "거래 유형",
+        "portfolio": "포트폴리오",
+        "asset": "자산 유형",
+        "ticker": "티커",
+        "currency": "통화",
+        "cost": "가격",
+        "sum": "금액",
+        "isWoMoney": "금액에서 제외",
+        "isWoMoneyHint": "활성화하면 거래가 금액 기록에 포함되지 않습니다",
+        "shares": "수량",
+        "date": "거래일",
+        "feeCurrency": "수수료 통화",
+        "fee": "수수료",
+        "notes": "메모"
+      },
+      "confirmTitle": "이 거래를 정말 삭제하시겠습니까?",
+      "loading": "로딩 중...",
+      "typeAtLeast": "최소 1자 입력",
+      "calcFee": "수수료 계산"
+    },
+    "customAsset": {
+      "hint": "사용자 정의 자산을 통해 포트폴리오에 다른 자산(예: 부동산)을 추가하고 가격 변동을 추적할 수 있습니다.",
+      "confirmTitle": "이 사용자 정의 자산을 정말 삭제하시겠습니까?",
+      "priceHistory": "가격 기록",
+      "graph": "그래프",
+      "field": {
+        "created": "날짜",
+        "ticker": "티커",
+        "name": "이름",
+        "currency": "통화",
+        "info": "정보"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "이 가격을 정말 삭제하시겠습니까?",
+      "field": {
+        "asset_id": "사용자 정의 자산",
+        "created": "날짜",
+        "price": "가격"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "이름",
+        "email": "이메일",
+        "created": "생성일"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "페이지당 행 수:",
+        "nextPage": "다음 페이지",
+        "previousPage": "이전 페이지",
+        "of": "중"
+      },
+      "clear": "지우기"
+    },
+    "companies": {
+      "column": {
+        "ticker": "티커",
+        "name": "이름",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "정보",
+      "dividends": "배당금",
+      "type": "유형",
+      "ticker": "티커",
+      "currency": "통화",
+      "price": "가격"
+    },
+    "portfolios": {
+      "allPortfolios": "모든 포트폴리오",
+      "chosen": "선택됨",
+      "column": {
+        "name": "이름",
+        "currency": "통화",
+        "accountType": "계정 유형",
+        "date": "날짜",
+        "opened": "개설됨"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "포트폴리오 가치",
+      "totalGain": "포트폴리오 수익률",
+      "column": {
+        "currency": "통화",
+        "sum": "금액",
+        "ticker": "티커",
+        "count": "수량",
+        "currentPrice": "현재 가격",
+        "averagePrice": "평균 가격",
+        "currentCost": "현재 가치",
+        "currentGain": "수익",
+        "currentGainPercent": "수익률, %",
+        "partPercent": "비중, %"
+      },
+      "tooltip": {
+        "currency": "자산 통화 기준 값"
+      },
+      "noContent": {
+        "main": "포트폴리오가 비어 있습니다",
+        "add": "추가",
+        "or": "또는",
+        "import": "가져오기",
+        "trades": "거래"
+      },
+      "filter": {
+        "year": "년도"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "날짜",
+        "ticker": "티커",
+        "name": "이름",
+        "price": "가격"
+      },
+      "noContent": {
+        "main": "아직 사용자 정의 자산을 추가하지 않았습니다",
+        "add": "추가"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "아직 가격을 추가하지 않았습니다",
+        "add": "추가"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "포트폴리오",
+        "ticker": "티커",
+        "cost": "가격",
+        "qty": "수량",
+        "sum": "금액",
+        "fee": "수수료",
+        "date": "날짜"
+      },
+      "filter": {
+        "title": "거래 필터"
+      },
+      "filterField": {
+        "portfolio": "포트폴리오",
+        "type": "유형",
+        "currency": "통화",
+        "ticker": "티커",
+        "dateRange": "날짜 범위",
+        "startDate": "시작 날짜",
+        "endDate": "종료 날짜",
+        "closeBtn": "닫기"
+      },
+      "noContent": {
+        "main": "거래 목록이 비어 있습니다",
+        "add": "추가",
+        "or": "또는",
+        "import": "가져오기",
+        "trades": "거래"
+      },
+      "dateRanges": {
+        "today": "오늘",
+        "yesterday": "어제",
+        "last7days": "지난 7일",
+        "last30days": "지난 30일",
+        "thisMonth": "이번 달",
+        "lastMonth": "지난 달",
+        "last6months": "지난 6개월",
+        "lastYear": "지난 1년",
+        "wholeTime": "전체 기간"
+      },
+      "itemRemoveConfirm": "이 포지션을 포트폴리오에서 완전히 삭제하시겠습니까?"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "사용자가 생성되었습니다"
+      },
+      "update": {
+        "message": "사용자가 업데이트되었습니다"
+      },
+      "delete": {
+        "message": "사용자가 삭제되었습니다"
+      }
+    },
+    "connectionLost": {
+      "message": "로드 오류. 인터넷 연결이 없을 수 있습니다",
+      "action": "새로 고침"
+    },
+    "auth": {
+      "signUp": {
+        "message": "성공적으로 등록되었습니다. 서비스 비밀번호가 이메일로 전송되었습니다"
+      },
+      "signUpError": {
+        "message": "등록 오류"
+      },
+      "changePassword": {
+        "message": "비밀번호가 성공적으로 변경되었습니다"
+      },
+      "login": {
+        "message": "잘못된 이메일 또는 비밀번호"
+      },
+      "updateMe": {
+        "message": "프로필이 성공적으로 업데이트되었습니다"
+      },
+      "forgot": {
+        "success": "비밀번호 재설정 지침이 이메일로 전송되었습니다"
+      },
+      "resetPassword": {
+        "success": "비밀번호가 성공적으로 변경되었습니다"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "연결된 거래를 수정하려면 상위 거래를 수정하세요"
+      },
+      "create": {
+        "message": "거래가 성공적으로 추가되었습니다"
+      },
+      "update": {
+        "message": "거래가 성공적으로 업데이트되었습니다"
+      },
+      "delete": {
+        "message": "거래가 성공적으로 삭제되었습니다"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "가져오기 데이터가 성공적으로 로드되었습니다"
+      },
+      "create": {
+        "message": "포트폴리오가 성공적으로 추가되었습니다"
+      },
+      "update": {
+        "message": "포트폴리오가 성공적으로 업데이트되었습니다"
+      },
+      "delete": {
+        "message": "포트폴리오가 성공적으로 삭제되었습니다"
+      },
+      "clone": {
+        "message": "포트폴리오가 성공적으로 복제되었습니다"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "사용자 정의 자산이 성공적으로 추가되었습니다"
+      },
+      "update": {
+        "message": "사용자 정의 자산이 성공적으로 업데이트되었습니다"
+      },
+      "delete": {
+        "message": "사용자 정의 자산이 성공적으로 삭제되었습니다"
+      }
+    },
+    "plugins": {
+      "installed": "플러그인 \"{$title}\"이(가) 설치되었습니다",
+      "uninstalled": "플러그인이 제거되었습니다",
+      "upgraded": "플러그인이 버전 {$version}(으)로 업그레이드되었습니다",
+      "configSaved": "구성이 저장되었습니다"
+    },
+    "currencyRates": {
+      "updated": "저장된 환율: {$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "새로 고침하려면 아래로 당기세요",
+    "end": "새로 고침하려면 놓으세요",
+    "refreshing": "새로 고침 중..."
+  },
+  "theme": {
+    "light": "라이트",
+    "dark": "다크"
+  },
+  "analytics": {
+    "portfolioGrowth": "포트폴리오 성장",
+    "growth": "성장",
+    "delta": "변화",
+    "byAssetTypes": "자산 유형별",
+    "bySectors": "섹터별",
+    "byEarnings": "배당금 및 쿠폰별",
+    "byEmitents": "발행자별",
+    "totalEarnings": "총 배당금 및 쿠폰",
+    "totalEmitents": "총 발행자 수",
+    "stats": "통계",
+    "goal": "목표",
+    "goalSet": "설정",
+    "goalAchievement": "목표 달성"
+  },
+  "chart": {
+    "history": "역사",
+    "trades": "거래"
+  },
+  "plugins": {
+    "title": "플러그인",
+    "tab": {
+      "installed": "설치됨",
+      "store": "스토어"
+    },
+    "manual": {
+      "title": "저장소에서 설치",
+      "hint": "git 저장소의 https URL을 붙여넣으세요(GitHub, GitLab, Gitea 등). {$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} 또는 {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE}를 추가하여 버전을 고정할 수 있습니다.",
+      "field": {
+        "url": "저장소 URL"
+      }
+    },
+    "installed": {
+      "empty": "아직 설치된 플러그인이 없습니다. 스토어에서 또는 저장소 URL로 설치하세요."
+    },
+    "store": {
+      "hint": "{$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} 주제가 태그된 모든 공개 GitHub 저장소가 여기에 자동으로 표시됩니다.",
+      "empty": "아무것도 찾지 못했습니다. GitHub에 대한 네트워크 연결을 확인하거나 추가 레지스트리를 구성하세요.",
+      "installed": "설치됨"
+    },
+    "action": {
+      "install": "설치",
+      "manage": "관리",
+      "refresh": "새로고침",
+      "upgrade": "업그레이드"
+    },
+    "confirm": {
+      "uninstall": "플러그인을 제거하시겠습니까?"
+    },
+    "status": {
+      "enabled": "활성화됨",
+      "disabled": "비활성화됨"
+    },
+    "field": {
+      "package": "패키지",
+      "version": "버전",
+      "status": "상태",
+      "remote": "소스",
+      "installedAt": "설치일"
+    },
+    "config": {
+      "title": "구성",
+      "rawHint": "이 플러그인은 구성 스키마를 선언하지 않습니다. JSON으로 설정을 편집하세요.",
+      "invalidJson": "잘못된 JSON 객체입니다"
+    }
+  },
+  "currencyRates": {
+    "title": "환율",
+    "noProviders": "환율을 제공하는 활성화된 플러그인이 없습니다.",
+    "installPlugin": "플러그인 설치",
+    "providers": "출처",
+    "empty": "환율이 없습니다.",
+    "filter": {
+      "currency": "통화 코드"
+    },
+    "action": {
+      "update": "업데이트"
+    },
+    "field": {
+      "date": "날짜",
+      "base": "기준 통화",
+      "currency": "통화",
+      "rate": "환율",
+      "source": "출처",
+      "updatedAt": "업데이트됨"
+    }
+  }
+}

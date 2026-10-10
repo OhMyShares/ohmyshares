@@ -1,0 +1,48 @@
+{
+  "Shares": "Акции",
+  "Bonds": "Облигации",
+  "Money": "Деньги",
+  "Crypto": "Криптовалюта",
+  "Custom": "Произвольные активы",
+
+  "Buy": "Покупка",
+  "Sell": "Продажа",
+  "Dividend": "Дивиденд",
+  "Coupon": "Купон",
+  "Fee": "Комиссия",
+  "Taxes": "Налоги",
+  "Credit": "Пополнение",
+  "Debit": "Списание",
+
+  "Stock": "Акция",
+  "ETF": "ETF",
+  "Futures": "Фьючерсы",
+  "Currency": "Валюта",
+  "Index": "Индекс",
+  "Mutual Fond": "Паевой фонд",
+  "Bond": "Облигация",
+  "Cryptocurrency": "Криптовалюта",
+
+  "My Portfolio": "Мой портфель",
+  "Broker": "Брокерский",
+  "Copy": "Копия",
+
+  "Hello": "Здравствуйте",
+  "Incorrect credentials": "Неверные учетные данные",
+  "Reset password": "Сбросить пароль",
+  "Please do not reply to this email": "Пожалуйста, не отвечайте на это письмо",
+  "If you need to contact us please email us at": "Если вам нужно связаться с нами, напишите нам на",
+
+  "Other": "Прочее",
+  "Basic Materials": "Сырье",
+  "Communication Services": "Коммуникации",
+  "Consumer Cyclical": "Товары вторичной необходимости",
+  "Consumer Defensive": "Товары первой необходимости",
+  "Energy": "Энергетика",
+  "Financial Services": "Финансы",
+  "Healthcare": "Здравоохранение",
+  "Industrials": "Промышленность",
+  "Real Estate": "Недвижимость",
+  "Technology": "Технологии",
+  "Utilities": "Коммунальные услуги"
+}

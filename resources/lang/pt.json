@@ -1,0 +1,49 @@
+{
+  "Shares": "Ações",
+  "Bonds": "Títulos",
+  "Money": "Dinheiro",
+  "Crypto": "Cripto",
+  "Custom": "Personalizado",
+
+  "Buy": "Compra",
+  "Sell": "Venda",
+  "Dividend": "Dividendo",
+  "Coupon": "Cupom",
+  "Fee": "Taxa",
+  "Taxes": "Impostos",
+  "Credit": "Depósito",
+  "Debit": "Saque",
+
+  "Stock": "Ação",
+  "ETF": "ETF",
+  "Futures": "Futuros",
+  "Currency": "Moeda",
+  "Index": "Índice",
+  "Mutual Fond": "Fundo de investimento",
+  "Bond": "Título",
+  "Cryptocurrency": "Criptomoeda",
+
+  "My Portfolio": "Meu portfólio",
+  "Broker": "Corretora",
+  "Copy": "Cópia",
+
+  "Hello": "Olá",
+  "Incorrect credentials": "Credenciais incorretas",
+  "Reset password": "Redefinir senha",
+  "Please do not reply to this email": "Por favor, não responda a este e-mail",
+  "If you need to contact us please email us at": "Se precisar entrar em contato conosco, envie um e-mail para",
+
+  "Other": "Outro",
+
+  "Basic Materials": "Materiais Básicos",
+  "Communication Services": "Serviços de Comunicação",
+  "Consumer Cyclical": "Consumo Cíclico",
+  "Consumer Defensive": "Consumo Não Cíclico",
+  "Energy": "Energia",
+  "Financial Services": "Serviços Financeiros",
+  "Healthcare": "Saúde",
+  "Industrials": "Indústria",
+  "Real Estate": "Imóveis",
+  "Technology": "Tecnologia",
+  "Utilities": "Utilidades Públicas"
+}

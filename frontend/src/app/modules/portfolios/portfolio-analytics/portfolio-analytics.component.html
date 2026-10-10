@@ -1,0 +1,211 @@
+<app-actions class="mt-3">
+  <a tuiButton
+     *ngIf="portfolio"
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     icon="tuiIconChevronLeft"
+     routerLinkActive="active"
+     [routerLink]="['/portfolios', portfolio.uid, 'content']">
+    <span i18n="@@nav.portfolio">Portfolio</span>
+  </a>
+  <tui-hosted-dropdown
+    *ngIf="portfolios"
+    tuiDropdownAlign="left"
+    [content]="dropdownPortfolios">
+    <button tuiButton
+            type="button"
+            appearance="secondary"
+            class="tui-space_bottom-3 tui-space_right-3"
+            icon="tuiIconBriefcase"
+            iconRight="tuiIconSortDown"
+            size="s">
+      <span>{{portfolio?.name}}</span>
+    </button>
+  </tui-hosted-dropdown>
+  <tui-hosted-dropdown
+    *ngIf="portfolios"
+    tuiDropdownAlign="left"
+    [content]="dropdownCurrencies">
+    <button tuiButton
+            type="button"
+            appearance="secondary"
+            class="tui-space_bottom-3 tui-space_right-3"
+            iconRight="tuiIconSortDown"
+            size="s">
+      <span>{{portfolio?.currency_code}}</span>
+    </button>
+  </tui-hosted-dropdown>
+</app-actions>
+
+<ng-template #dropdownPortfolios>
+  <tui-data-list>
+    <tui-opt-group>
+      <button tuiOption [routerLink]="['/portfolios', p.uid, 'analytics']" *ngFor="let p of portfolios">
+        <span>{{ p.name }}</span>
+      </button>
+    </tui-opt-group>
+    <tui-opt-group>
+      <button tuiOption [routerLink]="['/portfolios']">
+        <span i18n="@@nav.allPortfolios">All Portfolios</span>
+      </button>
+    </tui-opt-group>
+  </tui-data-list>
+</ng-template>
+
+<ng-template #dropdownCurrencies>
+  <tui-data-list>
+    <tui-opt-group>
+      <button tuiOption (click)="changeCurrency('USD')">
+        <span>USD</span>
+      </button>
+      <button tuiOption (click)="changeCurrency('RUB')">
+        <span>RUB</span>
+      </button>
+      <button tuiOption (click)="changeCurrency('EUR')">
+        <span>EUR</span>
+      </button>
+    </tui-opt-group>
+  </tui-data-list>
+</ng-template>
+
+<div class="tui-container tui-container_adaptive">
+  <div class="tui-row tui-row_adaptive">
+
+    <div class="tui-col_md-4 tui-col_xs-12 tui-space_bottom-5">
+      <tui-island [class.tui-skeleton]="skeletonVisible">
+        <div class="tui-island__title text-bold" *ngIf="portfolio">
+          {{portfolio?.name}}
+        </div>
+        <div class="" *ngIf="portfolio">
+          <table class="table">
+            <tr>
+              <td i18n="@@analytics.goal">Goal</td>
+              <td>
+                {{ portfolio.currency_sign }}&thinsp;{{ portfolio.goal.toLocaleString() }}
+                <a tuiLink [routerLink]="['/portfolios', portfolio.uid]"
+                   icon="tuiIconEdit" iconAlign="left"
+                   i18n="@@analytics.setGoal"></a>
+              </td>
+            </tr>
+            <tr *ngIf="portfolio.goal">
+              <td i18n="@@analytics.goalAchievement">Goal achievement</td>
+              <td>{{ analytics.goal_achievement_percent }}&thinsp;%</td>
+            </tr>
+          </table>
+        </div>
+      </tui-island>
+    </div>
+
+    <div class="tui-col_md-8 tui-col_xs-12 tui-space_bottom-5">
+      <tui-island [class.tui-skeleton]="skeletonVisible">
+        <div class="tui-island__title">
+          <span i18n="@@analytics.portfolioGrowth" class="text-bold">Portfolio Growth</span>
+        </div>
+        <tui-axes *ngIf="chartGrowth"
+          class="axes__growth"
+          [axisXLabels]="chartGrowth.labelsX"
+          [axisYLabels]="chartGrowth.labelsY"
+        >
+          <tui-bar-chart
+            [max]="chartGrowth.max"
+            [value]="chartGrowth.values"
+          ></tui-bar-chart>
+        </tui-axes>
+      </tui-island>
+    </div>
+
+    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+      <tui-island [class.tui-skeleton]="skeletonVisible">
+        <div class="tui-island__title">
+          <div i18n="@@analytics.byAssetTypes" class="text-bold">By asset types</div>
+        </div>
+        <div class="card-body">
+          <!--<apx-chart [series]="chartAssetTypes.series"-->
+          <!--           [chart]="chartAssetTypes.chart"-->
+          <!--           [labels]="chartAssetTypes.labels"-->
+          <!--           [responsive]="chartResponsiveSettings"-->
+          <!--           [plotOptions]="plotOptions"-->
+          <!--           [legend]="legendOptions"-->
+          <!--&gt;</apx-chart>-->
+          <tui-ring-chart *ngIf="chartAssetTypes"
+                          [value]="chartAssetTypes.values"
+                          [(activeItemIndex)]="chartAssetTypesIndex">
+            <tui-money [value]="assetTypesChartValue"></tui-money>
+            <div>{{ assetTypesChartLabel }}</div>
+          </tui-ring-chart>
+        </div>
+      </tui-island>
+    </div>
+
+    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+      <tui-island [class.tui-skeleton]="skeletonVisible">
+        <div class="tui-island__title">
+          <div i18n="@@analytics.bySectors" class="text-bold">By sectors</div>
+        </div>
+        <div class="card-body">
+          <!--<apx-chart [series]="chartSectors.series"-->
+          <!--           [chart]="chartSectors.chart"-->
+          <!--           [labels]="chartSectors.labels"-->
+          <!--           [responsive]="chartResponsiveSettings"-->
+          <!--           [plotOptions]="plotOptions"-->
+          <!--           [legend]="legendOptions"-->
+          <!--&gt;</apx-chart>-->
+          <tui-ring-chart *ngIf="chartSectors"
+                          [value]="chartSectors.values"
+                          [(activeItemIndex)]="chartSectorsIndex">
+            <tui-money [value]="sectorsChartValue"></tui-money>
+            <div>{{ sectorsChartLabel }}</div>
+          </tui-ring-chart>
+        </div>
+      </tui-island>
+    </div>
+
+    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+      <tui-island [class.tui-skeleton]="skeletonVisible">
+        <div *ngIf="chartEarnings">
+          <div class="tui-island__title">
+            <div i18n="@@analytics.byEarnings" class="text-bold">By Earnings</div>
+          </div>
+          <div class="card-body">
+            <!--<apx-chart [series]="chartEarnings.series"-->
+            <!--           [chart]="chartEarnings.chart"-->
+            <!--           [labels]="chartEarnings.labels"-->
+            <!--           [responsive]="chartResponsiveSettings"-->
+            <!--           [plotOptions]="plotOptions"-->
+            <!--           [legend]="legendOptions"-->
+            <!--&gt;</apx-chart>-->
+          </div>
+          <div class="card-footer">
+            <span i18n="@@analytics.totalEarnings">Total earned dividends and coupons</span>:
+            {{ portfolio.currency_sign }}&thinsp;{{ earningsSum.toFixed(2) }}
+          </div>
+        </div>
+
+      </tui-island>
+    </div>
+
+    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+      <tui-island [class.tui-skeleton]="skeletonVisible">
+        <div *ngIf="chartEmitents">
+          <div class="tui-island__title">
+            <div i18n="@@analytics.byEmitents" class="text-bold">By Emitents</div>
+          </div>
+          <div class="card-body">
+            <!--<apx-chart [series]="chartEmitents.series"-->
+            <!--           [chart]="chartEmitents.chart"-->
+            <!--           [labels]="chartEmitents.labels"-->
+            <!--           [responsive]="chartResponsiveSettings"-->
+            <!--           [plotOptions]="plotOptions"-->
+            <!--           [legend]="legendOptions"-->
+            <!--&gt;</apx-chart>-->
+          </div>
+          <div class="card-footer">
+            <span i18n="@@analytics.totalEmitents">Total count of emitents</span>:
+            {{ content.length }} <span i18n="@@common.pcs">pcs</span>
+          </div>
+        </div>
+      </tui-island>
+    </div>
+  </div>
+</div>

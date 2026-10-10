@@ -1,0 +1,47 @@
+<app-actions>
+  <app-back-button appearance="secondary" size="s"></app-back-button>
+</app-actions>
+
+<div *ngIf="customAssetPrice">
+  <div class="tui-container tui-container_adaptive">
+    <div class="tui-row tui-row_adaptive">
+      <div class="tui-col_md-6 tui-col_xs-12">
+        <tui-island>
+          <h1 class="tui-island__title">
+            Custom asset price
+          </h1>
+          <form [formGroup]="editForm" (keyup.enter)="save()" class="tui-space_bottom-2">
+            <div class="tui-form__row">
+              <tui-input formControlName="price">
+                <input tuiTextfield
+                       placeholder="Price"
+                       i18n-placeholder="@@form.customAssetPrice.field.price"
+                       required>
+                <span i18n="@@form.customAssetPrice.field.name">Price</span>
+              </tui-input>
+              <tui-error formControlName="price" [error]="[] | tuiFieldError | async"></tui-error>
+            </div>
+
+            <div class="tui-form__row tui-form__row_multi-fields">
+              <div class="tui-form__multi-field">
+                <tui-input-date formControlName="created_at"
+                                tuiUnfinishedValidator="Finish filling the field">
+                  <span i18n="@@form.customAssetPrice.field.created">Created At</span>
+                </tui-input-date>
+                <tui-error formControlName="created_at" [error]="[] | tuiFieldError | async"></tui-error>
+              </div>
+            </div>
+          </form>
+          <app-form-actions (save)="save()" [isSaveShowLoader]="showLoader"
+                            (delete)="delete()"
+                            i18n-confirmTitle="@@form.customAssetPrice.confirmTitle"
+                            confirmTitle="Are you sure you want to delete this custom asset price?"
+                            *ngIf="customAssetPrice && editForm"
+                            [isSaveDisabled]="editForm.invalid"
+                            [isDeleteDisabled]="!customAssetPrice.id">
+          </app-form-actions>
+        </tui-island>
+      </div>
+    </div>
+  </div>
+</div>

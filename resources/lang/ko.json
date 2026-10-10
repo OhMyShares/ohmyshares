@@ -1,0 +1,49 @@
+{
+  "Shares": "주식",
+  "Bonds": "채권",
+  "Money": "현금",
+  "Crypto": "암호화폐",
+  "Custom": "사용자 정의",
+
+  "Buy": "매수",
+  "Sell": "매도",
+  "Dividend": "배당금",
+  "Coupon": "쿠폰",
+  "Fee": "수수료",
+  "Taxes": "세금",
+  "Credit": "입금",
+  "Debit": "출금",
+
+  "Stock": "주식",
+  "ETF": "ETF",
+  "Futures": "선물",
+  "Currency": "통화",
+  "Index": "지수",
+  "Mutual Fond": "뮤추얼 펀드",
+  "Bond": "채권",
+  "Cryptocurrency": "암호화폐",
+
+  "My Portfolio": "내 포트폴리오",
+  "Broker": "증권 계좌",
+  "Copy": "사본",
+
+  "Hello": "안녕하세요",
+  "Incorrect credentials": "잘못된 인증 정보",
+  "Reset password": "비밀번호 재설정",
+  "Please do not reply to this email": "이 이메일에 회신하지 마십시오",
+  "If you need to contact us please email us at": "문의 사항이 있으시면 다음 주소로 이메일을 보내주세요",
+
+  "Other": "기타",
+
+  "Basic Materials": "기초 소재",
+  "Communication Services": "통신 서비스",
+  "Consumer Cyclical": "경기소비재",
+  "Consumer Defensive": "필수소비재",
+  "Energy": "에너지",
+  "Financial Services": "금융 서비스",
+  "Healthcare": "헬스케어",
+  "Industrials": "산업재",
+  "Real Estate": "부동산",
+  "Technology": "기술",
+  "Utilities": "유틸리티"
+}

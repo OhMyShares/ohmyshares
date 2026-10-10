@@ -1,0 +1,49 @@
+{
+  "Shares": "أسهم",
+  "Bonds": "سندات",
+  "Money": "نقود",
+  "Crypto": "عملات مشفرة",
+  "Custom": "مخصص",
+
+  "Buy": "شراء",
+  "Sell": "بيع",
+  "Dividend": "توزيعات أرباح",
+  "Coupon": "كوبون",
+  "Fee": "عمولة",
+  "Taxes": "ضرائب",
+  "Credit": "إيداع",
+  "Debit": "سحب",
+
+  "Stock": "سهم",
+  "ETF": "صندوق متداول",
+  "Futures": "عقود آجلة",
+  "Currency": "عملة",
+  "Index": "مؤشر",
+  "Mutual Fond": "صندوق استثمار مشترك",
+  "Bond": "سند",
+  "Cryptocurrency": "عملة مشفرة",
+
+  "My Portfolio": "محفظتي",
+  "Broker": "وساطة",
+  "Copy": "نسخة",
+
+  "Hello": "مرحبًا",
+  "Incorrect credentials": "بيانات اعتماد غير صحيحة",
+  "Reset password": "إعادة تعيين كلمة المرور",
+  "Please do not reply to this email": "يرجى عدم الرد على هذه الرسالة",
+  "If you need to contact us please email us at": "إذا كنت بحاجة إلى التواصل معنا، يرجى مراسلتنا على",
+
+  "Other": "أخرى",
+
+  "Basic Materials": "المواد الأساسية",
+  "Communication Services": "خدمات الاتصالات",
+  "Consumer Cyclical": "السلع الاستهلاكية الدورية",
+  "Consumer Defensive": "السلع الاستهلاكية الأساسية",
+  "Energy": "الطاقة",
+  "Financial Services": "الخدمات المالية",
+  "Healthcare": "الرعاية الصحية",
+  "Industrials": "الصناعات",
+  "Real Estate": "العقارات",
+  "Technology": "التكنولوجيا",
+  "Utilities": "المرافق العامة"
+}

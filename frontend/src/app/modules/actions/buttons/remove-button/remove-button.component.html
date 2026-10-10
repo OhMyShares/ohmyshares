@@ -1,0 +1,14 @@
+<button tuiButton *ngIf="!isMenuButton"
+        size="m"
+        (click)="remove()"
+        [showLoader]="showLoader"
+        [disabled]="isDisabled" class="">
+  <span i18n="@@action.delete">Delete</span>
+</button>
+
+<button tuiOption *ngIf="isMenuButton"
+        size="m"
+        (click)="remove()"
+        [disabled]="isDisabled" class="tui-space_right-3 tui-space_top-3">
+  <span i18n="@@action.delete">Delete</span>
+</button>

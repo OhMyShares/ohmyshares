@@ -1,0 +1,207 @@
+<div class="tui-container tui-container_adaptive">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_lg-6 tui-col_md-8 tui-col_sm-10 tui-col_xs-12">
+      <tui-island [class.tui-skeleton]="showSkeleton">
+        <div *ngIf="trade">
+          <h1 class="tui-island__title" i18n="@@form.trade.new">
+            {{ trade.ticker || editForm.value.ticker || 'New trade' }}
+          </h1>
+          <form [formGroup]="editForm" (keyup.enter)="save()" class="tui-space_bottom-2">
+
+            <div class="tui-form__row">
+              <tui-select formControlName="portfolio_uid" *tuiLet="portfolios as items"
+                          [valueContent]="stringifyPortfolios(items)">
+                <input tuiTextfield
+                       placeholder="Portfolio"
+                       i18n-placeholder="@@form.trade.field.portfolio"
+                       required>
+                <span i18n="@@form.trade.field.portfolio">Portfolio</span>
+                <ng-template tuiDataList>
+                  <tui-data-list *ngIf="portfolios">
+                    <button *ngFor="let item of portfolios" tuiOption [value]="item.uid">
+                      {{ item.name }} ({{ item.currency_code }})
+                    </button>
+                  </tui-data-list>
+                </ng-template>
+              </tui-select>
+            </div>
+
+            <div class="tui-form__row tui-form__row_multi-fields">
+              <div class="tui-form__multi-field">
+                <tui-radio-labeled formControlName="asset" class="tui-space_bottom-2"
+                                   [item]="assetType.id" (change)="assetTypeChanged()"
+                                   *ngFor="let assetType of assetTypes">
+                  {{ assetType.code }} {{ assetType.name }}
+                </tui-radio-labeled>
+              </div>
+              <div class="tui-form__multi-field">
+                <tui-radio-labeled formControlName="type" class="tui-space_bottom-2"
+                                   [item]="tradeType.id" (change)="tradeTypeChanged()"
+                                   *ngFor="let tradeType of tradeTypesFiltered">
+                  {{ tradeType.code }} {{ tradeType.name }}
+                </tui-radio-labeled>
+              </div>
+            </div>
+
+            <div class="tui-form__row" *ngIf="!editForm.controls.ticker.disabled && editForm.controls.asset.value">
+              <tui-combo-box formControlName="ticker"
+                             (change)="tickerSelected()"
+                             (searchChange)="searchTicker$.next($event)"
+              >
+                <span i18n="@@form.trade.field.ticker" *ngIf="!isLoading">Ticker</span>
+                <span i18n="@@form.trade.loading" *ngIf="isLoading">Loading...</span>
+                <input
+                  tuiTextfield
+                  placeholder="Ticker"
+                  i18n-placeholder="@@form.trade.field.ticker"
+                />
+                <ng-template tuiDataList>
+                  <tui-data-list *ngIf="tickers; else tickerEmptyTemplate">
+                    <button
+                      *ngFor="let ticker of tickers"
+                      tuiOption
+                      [value]="ticker.symbol"
+                      (click)="tickerSelected()"
+                    >
+                      <span>
+                        <span class="tui-space_right-2">{{ ticker.symbol }}</span>
+                        <span class="text-muted">{{ ticker.name }}</span>
+                      </span>
+                    </button>
+                  </tui-data-list>
+                </ng-template>
+                <ng-template #tickerEmptyTemplate>
+                  <div class="tui-space_vertical-3 tui-space_horizontal-3" i18n="@@form.trade.typeAtLeast">
+                    Type at least 1 character
+                  </div>
+                </ng-template>
+              </tui-combo-box>
+              <tui-error formControlName="ticker" [error]="[] | tuiFieldError | async"></tui-error>
+            </div>
+
+            <div class="tui-form__row tui-form__row_multi-fields">
+              <div class="tui-form__multi-field" *ngIf="!editForm.controls.cost.disabled">
+                <tui-input-number
+                  formControlName="cost"
+                  [prefix]="editForm.value.currency_code | tuiCurrency"
+                >
+                  <span i18n="@@form.trade.field.cost">
+                      Cost {{isLoadingCost ? ' is loading...' : ''}}
+                  </span>
+                </tui-input-number>
+                <tui-error formControlName="cost" [error]="[] | tuiFieldError | async"></tui-error>
+              </div>
+              <div class="tui-form__multi-field" *ngIf="!editForm.controls.shares.disabled">
+                <tui-input formControlName="shares">
+                  <input tuiTextfield
+                         placeholder="Qty"
+                         i18n-placeholder="@@form.trade.field.shares"
+                         pattern="[0-9]+"
+                         inputmode="numeric"
+                         required>
+                  <span i18n="@@form.trade.field.shares">Shares</span>
+                </tui-input>
+                <tui-error formControlName="shares" [error]="[] | tuiFieldError | async"></tui-error>
+              </div>
+              <div class="tui-form__multi-field" *ngIf="!editForm.controls.sum.disabled">
+                <tui-input-number formControlName="sum">
+                  <input tuiTextfield
+                         placeholder="Sum"
+                         i18n-placeholder="@@form.trade.field.sum"
+                         inputmode="decimal"
+                         required>
+                  <span i18n="@@form.trade.field.sum">Sum</span>
+                </tui-input-number>
+                <tui-error formControlName="sum" [error]="[] | tuiFieldError | async"></tui-error>
+              </div>
+              <div class="tui-form__multi-field">
+                <tui-combo-box formControlName="currency_code"
+                               [stringify]="referencesService.stringifyCurrencySearch(currencies)">
+                  <input tuiTextfield
+                         placeholder="Currency"
+                         i18n-placeholder="@@form.trade.field.currency"
+                         required>
+                  <span i18n="@@form.trade.field.currency">Currency</span>
+                  <tui-data-list-wrapper
+                    *tuiDataList
+                    [itemContent]="currencyItem"
+                    [items]="currencyCodes | tuiFilterByInput">
+                  </tui-data-list-wrapper>
+                </tui-combo-box>
+                <ng-template #currencyItem let-item>
+                  {{ referencesService.stringifyCurrencySearch(currencies)(item) }}
+                </ng-template>
+                <tui-error formControlName="currency_code" [error]="[] | tuiFieldError | async"></tui-error>
+              </div>
+            </div>
+
+            <div class="tui-form__row tui-form__row_multi-fields"
+                 *ngIf="!editForm.controls.fee.disabled && !editForm.controls.fee_currency_code.disabled">
+              <div class="tui-form__multi-field" *ngIf="!editForm.controls.fee.disabled">
+                <tui-input-number
+                  formControlName="fee"
+                  [prefix]="editForm.value.fee_currency_code | tuiCurrency">
+                  <input tuiTextfield
+                         placeholder="Fee"
+                         i18n-placeholder="@@form.trade.field.fee"
+                         required>
+                  <span i18n="@@form.trade.field.fee">Fee</span>
+                </tui-input-number>
+                <div class="tui-text_body-s" *ngIf="findPortfolio()">
+                  <a tuiLink (click)="calcFee()"
+                     i18n="@@form.trade.calcFee">Calc Fee</a>
+                </div>
+                <tui-error formControlName="fee" [error]="[] | tuiFieldError | async"></tui-error>
+              </div>
+              <div class="tui-form__multi-field" *ngIf="!editForm.controls.fee_currency_code.disabled">
+                <tui-combo-box formControlName="fee_currency_code"
+                               [stringify]="referencesService.stringifyCurrencySearch(currencies)">
+                  <input tuiTextfield
+                         placeholder="Fee Currency"
+                         i18n-placeholder="@@form.trade.field.feeCurrency"
+                         inputmode="decimal"
+                         required>
+                  <span i18n="@@form.trade.field.feeCurrency">Fee Currency</span>
+                  <tui-data-list-wrapper
+                    *tuiDataList
+                    [itemContent]="currencyItem"
+                    [items]="currencyCodes | tuiFilterByInput">
+                  </tui-data-list-wrapper>
+                </tui-combo-box>
+                <tui-error formControlName="fee_currency_code" [error]="[] | tuiFieldError | async"></tui-error>
+              </div>
+            </div>
+
+            <div class="tui-form__row">
+              <tui-input-date formControlName="created_at"
+                              tuiUnfinishedValidator="Finish filling the field">
+                <span i18n="@@form.trade.field.date">Created At</span>
+              </tui-input-date>
+              <tui-error formControlName="created_at" [error]="[] | tuiFieldError | async"></tui-error>
+            </div>
+
+            <div class="tui-form__row">
+              <tui-checkbox-labeled formControlName="is_wo_money">
+                <span i18n="@@form.trade.field.isWoMoney">Do not take into account in money</span>
+                <div i18n="@@form.trade.field.isWoMoneyHint" class="text-muted">
+                  If set, this trade will not affect on money account
+                </div>
+              </tui-checkbox-labeled>
+            </div>
+          </form>
+
+          <app-form-actions (save)="save()"
+                            (delete)="delete()"
+                            [isSaveShowLoader]="isSaving"
+                            [isDeleteShowLoader]="isDeleting"
+                            [isSaveDisabled]="editForm.invalid || (isLoading$ | async)"
+                            [isDeleteDisabled]="!trade.id || (isLoading$ | async)"
+                            *ngIf="trade && editForm"
+                            i18n-confirmTitle="@@form.trade.confirmTitle"
+                            confirmTitle="Are you sure you want to delete this trade?"
+          ></app-form-actions>
+        </div>
+      </tui-island>
+    </div>
+  </div>
+</div>

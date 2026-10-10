@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "المستخدمون",
+    "create": "إنشاء مستخدم",
+    "role": {
+      "user": "مستخدم",
+      "admin": "مسؤول"
+    },
+    "badge": {
+      "test": "تجريبي"
+    }
+  },
+  "common": {
+    "pcs": "قطعة",
+    "average_price": "متوسط السعر",
+    "dividends": "أرباح الأسهم",
+    "coupons": "كوبونات",
+    "fees": "العمولات",
+    "taxes": "الضرائب",
+    "import_processing": "جارٍ معالجة الاستيراد...",
+    "search": "بحث",
+    "filter": "تصفية",
+    "part_portfolio": "حصة من المحفظة",
+    "current_cost": "التكلفة الحالية",
+    "quantity": "الكمية"
+  },
+  "nav": {
+    "users": "المستخدمون",
+    "companies": "الشركات",
+    "portfolio": "المحفظة",
+    "portfolios": "المحافظ",
+    "allPortfolios": "جميع المحافظ",
+    "portfoliosList": "قائمة المحافظ",
+    "trades": "الصفقات",
+    "profile": "الملف الشخصي",
+    "resetCache": "إعادة تعيين الذاكرة المؤقتة",
+    "resetCacheHint": "في أي حالة غير واضحة، حاول أولاً إعادة تعيين الذاكرة المؤقتة",
+    "buyPro": "شراء Pro",
+    "learnMore": "معرفة المزيد",
+    "logout": "تسجيل الخروج",
+    "import": "استيراد",
+    "importTrades": "استيراد الصفقات",
+    "customAssets": "الأصول المخصصة",
+    "content": "المحتوى",
+    "analytics": "التحليلات",
+    "other": "أخرى",
+    "plugins": "الإضافات",
+    "currencyRates": "أسعار صرف العملات"
+  },
+  "action": {
+    "login": "تسجيل الدخول",
+    "loginForExisting": "تسجيل الدخول للمستخدمين المسجلين",
+    "signUp": "التسجيل",
+    "passwordForgot": "نسيت كلمة المرور؟",
+    "passwordReset": "إعادة تعيين كلمة المرور",
+    "sendResetLink": "إرسال رابط إعادة التعيين",
+    "view": "عرض",
+    "open": "فتح",
+    "menu": "القائمة",
+    "back": "عودة",
+    "add": "إضافة",
+    "portfolio": "المحفظة",
+    "addPortfolio": "إضافة محفظة",
+    "addTrade": "إضافة صفقة",
+    "addIntoPortfolio": "إضافة إلى المحفظة",
+    "addCustomAsset": "إضافة أصل مخصص",
+    "editCustomAsset": "تعديل الأصل المخصص",
+    "addCustomAssetPrice": "إضافة سعر",
+    "removeFromPortfolio": "إزالة من المحفظة",
+    "filter": "تصفية",
+    "edit": "تعديل",
+    "editPortfolio": "تعديل المحفظة",
+    "clone": "استنساخ",
+    "clonePortfolio": "استنساخ المحفظة",
+    "save": "حفظ",
+    "delete": "حذف",
+    "import": "استيراد",
+    "more": "المزيد",
+    "actions": "الإجراءات",
+    "settings": "الإعدادات",
+    "send": "إرسال",
+    "changePassword": "تغيير كلمة المرور",
+    "confirmDialog": {
+      "yes": "نعم",
+      "no": "لا"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "passwordEdit": "كلمة مرور جديدة (اتركها فارغة للإبقاء على الحالية)",
+        "passwordCreate": "كلمة المرور (اتركها فارغة لتوليدها وإرسالها بالبريد الإلكتروني)",
+        "role": "الدور",
+        "isTest": "مستخدم تجريبي"
+      },
+      "confirmTitle": "هل أنت متأكد أنك تريد حذف هذا المستخدم؟"
+    },
+    "general": {
+      "error": {
+        "required": "القيمة لا يمكن أن تكون فارغة"
+      }
+    },
+    "login": {
+      "title": "تسجيل الدخول",
+      "field": {
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور"
+      },
+      "tooltip": {
+        "showPassword": "إظهار كلمة المرور",
+        "hidePassword": "إخفاء كلمة المرور"
+      }
+    },
+    "forgot": {
+      "title": "نسيت كلمة المرور؟"
+    },
+    "passwordReset": {
+      "title": "إعادة تعيين كلمة المرور",
+      "field": {
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور الجديدة",
+        "password_confirmation": "كلمة المرور الجديدة (مرة أخرى)"
+      }
+    },
+    "changePassword": {
+      "title": "تغيير كلمة المرور",
+      "field": {
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور الحالية",
+        "password_new": "كلمة المرور الجديدة"
+      },
+      "error": {
+        "minLength": "الحد الأدنى لطول كلمة المرور هو 6 أحرف"
+      }
+    },
+    "signUp": {
+      "title": "التسجيل",
+      "field": {
+        "name": "الاسم",
+        "yourName": "اسمك",
+        "email": {
+          "main": "البريد الإلكتروني",
+          "hint": "سيتم إرسال كلمة المرور إلى البريد الإلكتروني"
+        },
+        "agree": {
+          "main": "أوافق على",
+          "privacy": "سياسة الخصوصية",
+          "and": "و",
+          "agreement": "اتفاقية المستخدم"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "الإعدادات",
+      "field": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "plan": "الخطة",
+        "daysLeft": "الأيام المتبقية",
+        "daysLeft2": "أيام متبقية",
+        "ignoreFunds": "تجاهل نقص الأموال عند إضافة الصفقات",
+        "language": "اللغة",
+        "theme": "سمة التصميم",
+        "darkTheme": "السمة الداكنة"
+      }
+    },
+    "import": {
+      "title": "استيراد الصفقات",
+      "field": {
+        "broker": "الوسيط",
+        "file": {
+          "main": "الملف",
+          "hint": "اختر ملفًا بتنسيق Excel (XLS, XLSX)"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "الاسم",
+        "currency": "العملة",
+        "accountType": "نوع الحساب",
+        "openedAt": "تاريخ الفتح",
+        "fee": "العمولة",
+        "feePercent": "العمولة، %",
+        "notes": "تعليق",
+        "goal": "الهدف"
+      },
+      "confirmTitle": "هل تريد حقًا حذف هذه المحفظة؟"
+    },
+    "trade": {
+      "new": "صفقة جديدة",
+      "field": {
+        "type": "نوع العملية",
+        "portfolio": "المحفظة",
+        "asset": "نوع الأصل",
+        "ticker": "الرمز",
+        "currency": "العملة",
+        "cost": "السعر",
+        "sum": "المبلغ",
+        "isWoMoney": "عدم احتساب في الأموال",
+        "isWoMoneyHint": "إذا تم تفعيله، لن تنشئ الصفقة سجلات في تاريخ العمليات المالية",
+        "shares": "الكمية",
+        "date": "تاريخ الصفقة",
+        "feeCurrency": "عملة العمولة",
+        "fee": "العمولة",
+        "notes": "تعليق"
+      },
+      "confirmTitle": "هل تريد حقًا حذف هذه الصفقة؟",
+      "loading": "جارٍ التحميل...",
+      "typeAtLeast": "أدخل حرفًا واحدًا على الأقل",
+      "calcFee": "حساب العمولة"
+    },
+    "customAsset": {
+      "hint": "تسمح الأصول المخصصة بإضافة أصول أخرى إلى المحفظة وتتبع تغيرات أسعارها، مثل العقارات.",
+      "confirmTitle": "هل تريد حقًا حذف هذا الأصل المخصص؟",
+      "priceHistory": "تاريخ الأسعار",
+      "graph": "الرسم البياني",
+      "field": {
+        "created": "التاريخ",
+        "ticker": "الرمز",
+        "name": "الاسم",
+        "currency": "العملة",
+        "info": "معلومات"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "هل تريد حقًا حذف هذا السعر؟",
+      "field": {
+        "asset_id": "الأصل المخصص",
+        "created": "التاريخ",
+        "price": "السعر"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "الاسم",
+        "email": "البريد الإلكتروني",
+        "created": "تاريخ الإنشاء"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "الصفوف في الصفحة:",
+        "nextPage": "الصفحة التالية",
+        "previousPage": "الصفحة السابقة",
+        "of": "من"
+      },
+      "clear": "مسح"
+    },
+    "companies": {
+      "column": {
+        "ticker": "الرمز",
+        "name": "الاسم",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "معلومات",
+      "dividends": "أرباح الأسهم",
+      "type": "النوع",
+      "ticker": "الرمز",
+      "currency": "العملة",
+      "price": "السعر"
+    },
+    "portfolios": {
+      "allPortfolios": "جميع المحافظ",
+      "chosen": "المحدد",
+      "column": {
+        "name": "الاسم",
+        "currency": "العملة",
+        "accountType": "نوع الحساب",
+        "date": "التاريخ",
+        "opened": "مفتوح"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "تكلفة المحفظة",
+      "totalGain": "عائد المحفظة",
+      "column": {
+        "currency": "العملة",
+        "sum": "المبلغ",
+        "ticker": "الرمز",
+        "count": "العدد",
+        "currentPrice": "السعر الحالي",
+        "averagePrice": "متوسط السعر",
+        "currentCost": "التكلفة الحالية",
+        "currentGain": "الربح",
+        "currentGainPercent": "الربح، %",
+        "partPercent": "الحصة، %"
+      },
+      "tooltip": {
+        "currency": "القيمة بعملة الأداة"
+      },
+      "noContent": {
+        "main": "المحفظة فارغة حاليًا",
+        "add": "أضف",
+        "or": "أو",
+        "import": "استورد",
+        "trades": "الصفقات"
+      },
+      "filter": {
+        "year": "السنة"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "التاريخ",
+        "ticker": "الرمز",
+        "name": "الاسم",
+        "price": "السعر"
+      },
+      "noContent": {
+        "main": "لم تقم بإضافة أصول مخصصة بعد",
+        "add": "إضافة"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "لم تقم بإضافة أسعار بعد",
+        "add": "إضافة"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "المحفظة",
+        "ticker": "الرمز",
+        "cost": "السعر",
+        "qty": "الكمية",
+        "sum": "المبلغ",
+        "fee": "العمولة",
+        "date": "التاريخ"
+      },
+      "filter": {
+        "title": "تصفية الصفقات"
+      },
+      "filterField": {
+        "portfolio": "المحفظة",
+        "type": "النوع",
+        "currency": "العملة",
+        "ticker": "الرمز",
+        "dateRange": "نطاق التاريخ",
+        "startDate": "تاريخ البدء",
+        "endDate": "تاريخ الانتهاء",
+        "closeBtn": "إغلاق"
+      },
+      "noContent": {
+        "main": "قائمة الصفقات فارغة حاليًا",
+        "add": "أضف",
+        "or": "أو",
+        "import": "استورد",
+        "trades": "الصفقات"
+      },
+      "dateRanges": {
+        "today": "اليوم",
+        "yesterday": "أمس",
+        "last7days": "آخر 7 أيام",
+        "last30days": "الشهر الماضي",
+        "thisMonth": "هذا الشهر",
+        "lastMonth": "الشهر السابق",
+        "last6months": "آخر 6 أشهر",
+        "lastYear": "العام الماضي",
+        "wholeTime": "طوال الوقت"
+      },
+      "itemRemoveConfirm": "هل أنت متأكد أنك تريد حذف هذا العنصر تمامًا من المحفظة؟"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "تم إنشاء المستخدم بنجاح"
+      },
+      "update": {
+        "message": "تم تحديث المستخدم بنجاح"
+      },
+      "delete": {
+        "message": "تم حذف المستخدم بنجاح"
+      }
+    },
+    "connectionLost": {
+      "message": "خطأ في التحميل. قد يكون هناك فقدان للاتصال بالإنترنت",
+      "action": "تحديث"
+    },
+    "auth": {
+      "signUp": {
+        "message": "تم تسجيلك بنجاح. تم إرسال كلمة المرور إلى بريدك الإلكتروني"
+      },
+      "signUpError": {
+        "message": "خطأ في التسجيل"
+      },
+      "changePassword": {
+        "message": "تم تغيير كلمة المرور بنجاح"
+      },
+      "login": {
+        "message": "اسم المستخدم أو كلمة المرور غير صحيحة"
+      },
+      "updateMe": {
+        "message": "تم تحديث الملف الشخصي بنجاح"
+      },
+      "forgot": {
+        "success": "تم إرسال تعليمات إعادة تعيين كلمة المرور إلى بريدك الإلكتروني"
+      },
+      "resetPassword": {
+        "success": "تم تغيير كلمة المرور بنجاح"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "لتحرير الصفقة المرتبطة، قم بتعديل الصفقة الأصلية"
+      },
+      "create": {
+        "message": "تمت إضافة الصفقة بنجاح"
+      },
+      "update": {
+        "message": "تم تحديث الصفقة بنجاح"
+      },
+      "delete": {
+        "message": "تم حذف الصفقة بنجاح"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "تم تحميل بيانات الاستيراد بنجاح"
+      },
+      "create": {
+        "message": "تمت إضافة المحفظة بنجاح"
+      },
+      "update": {
+        "message": "تم تحديث المحفظة بنجاح"
+      },
+      "delete": {
+        "message": "تم حذف المحفظة بنجاح"
+      },
+      "clone": {
+        "message": "تم استنساخ المحفظة بنجاح"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "تمت إضافة الأصل المخصص بنجاح"
+      },
+      "update": {
+        "message": "تم تحديث الأصل المخصص بنجاح"
+      },
+      "delete": {
+        "message": "تم حذف الأصل المخصص بنجاح"
+      }
+    },
+    "plugins": {
+      "installed": "تم تثبيت الإضافة \"{$title}\"",
+      "uninstalled": "تم إلغاء تثبيت الإضافة",
+      "upgraded": "تمت ترقية الإضافة إلى الإصدار {$version}",
+      "configSaved": "تم حفظ الإعدادات"
+    },
+    "currencyRates": {
+      "updated": "الأسعار المحفوظة: {$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "اسحب لأسفل للتحديث",
+    "end": "حرر للتحديث",
+    "refreshing": "جارٍ التحديث..."
+  },
+  "theme": {
+    "light": "فاتح",
+    "dark": "داكن"
+  },
+  "analytics": {
+    "portfolioGrowth": "نمو المحفظة",
+    "growth": "النمو",
+    "delta": "التغيير",
+    "byAssetTypes": "حسب أنواع الأصول",
+    "bySectors": "حسب القطاعات",
+    "byEarnings": "حسب الأرباح والكوبونات",
+    "byEmitents": "حسب المصدرين",
+    "totalEarnings": "إجمالي الأرباح والكوبونات المستلمة",
+    "totalEmitents": "إجمالي عدد المصدرين",
+    "stats": "الإحصائيات",
+    "goal": "الهدف",
+    "goalSet": "تغيير",
+    "goalAchievement": "تحقيق الهدف"
+  },
+  "chart": {
+    "history": "التاريخ",
+    "trades": "الصفقات"
+  },
+  "plugins": {
+    "title": "الإضافات",
+    "tab": {
+      "installed": "المثبتة",
+      "store": "المتجر"
+    },
+    "manual": {
+      "title": "التثبيت من مستودع",
+      "hint": "الصق عنوان https لمستودع git (GitHub، GitLab، Gitea، ...). أضف {$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} أو {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE} لتثبيت إصدار معين.",
+      "field": {
+        "url": "عنوان URL للمستودع"
+      }
+    },
+    "installed": {
+      "empty": "لا توجد إضافات مثبتة بعد. قم بتثبيت واحدة من المتجر أو عبر عنوان URL للمستودع."
+    },
+    "store": {
+      "hint": "أي مستودع GitHub عام موسوم بالموضوع {$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} يظهر هنا تلقائيًا.",
+      "empty": "لم يتم العثور على شيء. تحقق من الوصول إلى شبكة GitHub أو قم بتكوين سجلات إضافية.",
+      "installed": "مثبتة"
+    },
+    "action": {
+      "install": "تثبيت",
+      "manage": "إدارة",
+      "refresh": "تحديث",
+      "upgrade": "ترقية"
+    },
+    "confirm": {
+      "uninstall": "هل تريد إلغاء تثبيت الإضافة؟"
+    },
+    "status": {
+      "enabled": "مفعّلة",
+      "disabled": "معطّلة"
+    },
+    "field": {
+      "package": "الحزمة",
+      "version": "الإصدار",
+      "status": "الحالة",
+      "remote": "المصدر",
+      "installedAt": "تاريخ التثبيت"
+    },
+    "config": {
+      "title": "الإعدادات",
+      "rawHint": "هذه الإضافة لا تعلن عن مخطط إعدادات. حرر إعداداتها بتنسيق JSON.",
+      "invalidJson": "كائن JSON غير صالح"
+    }
+  },
+  "currencyRates": {
+    "title": "أسعار صرف العملات",
+    "noProviders": "لا توجد إضافات مفعّلة توفر أسعار الصرف.",
+    "installPlugin": "تثبيت إضافة",
+    "providers": "المصادر",
+    "empty": "لم يتم العثور على أسعار.",
+    "filter": {
+      "currency": "رمز العملة"
+    },
+    "action": {
+      "update": "تحديث"
+    },
+    "field": {
+      "date": "التاريخ",
+      "base": "الأساس",
+      "currency": "العملة",
+      "rate": "السعر",
+      "source": "المصدر",
+      "updatedAt": "تاريخ التحديث"
+    }
+  }
+}

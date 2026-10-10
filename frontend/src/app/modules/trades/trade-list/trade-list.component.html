@@ -1,0 +1,142 @@
+<app-actions>
+  <a tuiButton
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     icon="tuiIconChevronLeft"
+     *ngIf="portfolioUid"
+     routerLinkActive="active"
+     [routerLink]="['/portfolios', portfolioUid, 'content']">
+    <span i18n="@@nav.portfolio">Portfolio</span>
+  </a>
+  <a tuiButton
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     icon="tuiIconPlus"
+     [routerLink]="['new']" [queryParams]="{ticker: summary ? summary.ticker : null}">
+    <span i18n="@@action.add">Add</span>
+  </a>
+  <a tuiButton
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     icon="tuiIconFilter"
+     (click)="openFilterDialog()">
+    <span i18n="@@action.filter">Filter</span>
+  </a>
+  <tui-hosted-dropdown *ngIf="summary && summary.ticker != '$$'"
+    tuiDropdownAlign="left"
+    [(open)]="isActionsOpen"
+    [content]="dropdown">
+    <button tuiButton
+            type="button"
+            appearance="secondary"
+            class="tui-space_bottom-3 tui-space_right-3"
+            icon="tuiIconSettings"
+            iconRight="tuiIconSortDown"
+            size="s">
+      <span i18n="@@action.actions">Actions</span>
+    </button>
+  </tui-hosted-dropdown>
+
+  <ng-template #dropdown>
+    <tui-data-list>
+      <button tuiOption [routerLink]="['/companies', summary ? summary.ticker : '']">
+        <span i18n="@@action.view">View</span>&nbsp;{{ summary ? summary.ticker : '' }}
+      </button>
+      <button tuiOption (click)="openChangeTickerDialog()">
+        <span i18n="@@action.changeTicker">Change ticker</span>
+      </button>
+      <app-remove-button [isMenuButton]="true" [isDisabled]="false" (delete)="deleteItem()"
+                         confirmTitle="Are you sure you want to completely remove this item from portfolio?"
+                         i18n-confirmTitle="@@table.trades.itemRemoveConfirm"></app-remove-button>
+    </tui-data-list>
+  </ng-template>
+</app-actions>
+
+<div class="tui-container tui-container_adaptive">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-12 tui-col_xs-12">
+      <h1 class="tui-space_top-0" i18n="@@nav.trades">
+        Trades
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="tui-space_bottom-4" *ngIf="chartOptions && summary && summary.ticker != '$$'">
+  <div class="tui-container tui-container_adaptive">
+    <div class="tui-row tui-row_adaptive">
+      <div class="tui-col_md-12 tui-col_xs-12">
+        <tui-island>
+          <apx-chart class="w-100"
+                     [series]="chartOptions.series"
+                     [chart]="chartOptions.chart"
+                     [xaxis]="chartOptions.xaxis"
+                     [yaxis]="chartOptions.yaxis"
+                     [title]="chartOptions.title"
+                     [stroke]="chartOptions.stroke"
+                     [markers]="chartOptions.markers"
+                     [annotations]="chartOptions.annotations"
+          ></apx-chart>
+        </tui-island>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-item-summary [item]="summary" class=""></app-item-summary>
+
+<div class="tui-container tui-container_adaptive">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-12 tui-col_xs-12">
+      <tui-scrollbar waIntersectionRoot class="scrollbar" [hidden]="true">
+        <tui-table-pagination (pageChange)="pageChanged($event)" class="tui-space_bottom-3" *ngIf="total > 1"
+                              [total]="total" [(page)]="pageIndex" [(size)]="pageSize"></tui-table-pagination>
+        <table tuiTable class="table" [columns]="displayedColumns" [class.tui-skeleton]="showSkeleton">
+          <thead>
+          <tr tuiThGroup>
+            <th tuiTh i18n="@@table.trades.column.ticker">Ticker</th>
+            <th tuiTh i18n="@@table.trades.column.cost">Cost</th>
+            <th tuiTh i18n="@@table.trades.column.qty">Qty</th>
+            <th tuiTh i18n="@@table.trades.column.sum">Sum</th>
+            <th tuiTh i18n="@@table.trades.column.fee">Fee</th>
+            <th tuiTh i18n="@@table.trades.column.date">Date</th>
+          </tr>
+          </thead>
+          <tbody tuiTbody [data]="data" *ngIf="data">
+          <tr tuiTr *tuiRow="let item of data" class="tui-table__tr_cursor_pointer"
+              (click)="openTradeCard(item)"
+              [class.opacity-50]="item.related_trade_id"
+              [class.tui-table__tr_hover_disabled]="item.related_trade_id">
+            <td *tuiCell="'ticker'" tuiTd>
+              <div class="ticker-column">
+                <span class="{{ getTradeTypeCssClass(item.type) }}">{{ item.ticker }}</span>&nbsp;
+                <span *ngIf="item" class="text-muted">{{ getTradeTypeName(item) }}</span>
+              </div>
+            </td>
+            <td *tuiCell="'cost'" tuiTd>
+              {{ item.currency_sign }}&thinsp;{{ item.cost | number }}
+            </td>
+            <td *tuiCell="'shares'" tuiTd>
+              {{ item.shares | number:'1.0-10' }}
+            </td>
+            <td *tuiCell="'sum'" tuiTd>
+              {{ item.currency_sign }}&thinsp;{{ item.sum | number }}
+            </td>
+            <td *tuiCell="'fee'" tuiTd>
+              {{ item.fee_currency_sign }}&thinsp;{{ item.fee | number }}
+            </td>
+            <td *tuiCell="'created_at'" tuiTd>
+              {{ 1000 * item.created_at | date }}
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <tui-table-pagination (pageChange)="pageChanged($event)" class="tui-space_top-3" *ngIf="total > 1"
+                              [total]="total" [(page)]="pageIndex" [(size)]="pageSize"></tui-table-pagination>
+      </tui-scrollbar>
+    </div>
+  </div>
+</div>

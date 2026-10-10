@@ -1,0 +1,22 @@
+<form [formGroup]="data.opener.searchForm" class="tui-space_bottom-2">
+  <div class="tui-form__row tui-form__row_multi-fields">
+    <div class="tui-form__multi-field">
+      <tui-radio-labeled formControlName="asset"
+                         class="tui-space_bottom-2"
+                         [item]="assetType.id"
+                         (change)="assetTypeFilterChanged(assetType)"
+                         *ngFor="let assetType of data.opener.assetTypes">
+        {{ assetType.name }}
+      </tui-radio-labeled>
+    </div>
+    <div class="tui-form__multi-field">
+      <tui-radio-labeled formControlName="type"
+                         class="tui-space_bottom-2"
+                         [item]="tradeType.id"
+                         (change)="tradeTypeFilterChanged(tradeType)"
+                         *ngFor="let tradeType of tradeTypesFiltered">
+        {{ tradeType.name }}
+      </tui-radio-labeled>
+    </div>
+  </div>
+</form>

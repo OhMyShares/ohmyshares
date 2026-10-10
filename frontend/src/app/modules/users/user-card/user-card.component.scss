@@ -1,0 +1,35 @@
+.user-card {
+  margin-bottom: 1rem;
+  width: 100%;
+  
+  .user-card-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .user-info {
+    flex: 1;
+  }
+  
+  .user-name {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+  
+  .user-email {
+    margin: 0 0 0.25rem;
+    color: var(--tui-text-02);
+  }
+  
+  .user-created {
+    margin: 0;
+    color: var(--tui-text-03);
+  }
+  
+  .user-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+}

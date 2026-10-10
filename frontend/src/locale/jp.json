@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "ユーザー",
+    "create": "ユーザーを作成",
+    "role": {
+      "user": "ユーザー",
+      "admin": "管理者"
+    },
+    "badge": {
+      "test": "テスト"
+    }
+  },
+  "common": {
+    "pcs": "個",
+    "average_price": "平均価格",
+    "dividends": "配当",
+    "coupons": "クーポン",
+    "fees": "手数料",
+    "taxes": "税金",
+    "import_processing": "インポート処理中...",
+    "search": "検索",
+    "filter": "フィルター",
+    "part_portfolio": "ポートフォリオの割合",
+    "current_cost": "現在の価値",
+    "quantity": "数量"
+  },
+  "nav": {
+    "users": "ユーザー",
+    "companies": "企業",
+    "portfolio": "ポートフォリオ",
+    "portfolios": "ポートフォリオ",
+    "allPortfolios": "すべてのポートフォリオ",
+    "portfoliosList": "ポートフォリオ一覧",
+    "trades": "取引",
+    "profile": "プロフィール",
+    "resetCache": "キャッシュをリセット",
+    "resetCacheHint": "わからない状況では、まずキャッシュをリセットしてみてください",
+    "buyPro": "Proを購入",
+    "learnMore": "詳細を見る",
+    "logout": "ログアウト",
+    "import": "インポート",
+    "importTrades": "取引をインポート",
+    "customAssets": "カスタム資産",
+    "content": "構成",
+    "analytics": "分析",
+    "other": "その他",
+    "plugins": "プラグイン",
+    "currencyRates": "為替レート"
+  },
+  "action": {
+    "login": "ログイン",
+    "loginForExisting": "登録済みユーザーのログイン",
+    "signUp": "登録",
+    "passwordForgot": "パスワードを忘れた場合",
+    "passwordReset": "パスワードをリセット",
+    "sendResetLink": "リセットリンクを送信",
+    "view": "表示",
+    "open": "開く",
+    "menu": "メニュー",
+    "back": "戻る",
+    "add": "追加",
+    "portfolio": "ポートフォリオ",
+    "addPortfolio": "ポートフォリオを追加",
+    "addTrade": "取引を追加",
+    "addIntoPortfolio": "ポートフォリオに追加",
+    "addCustomAsset": "カスタム資産を追加",
+    "editCustomAsset": "カスタム資産を編集",
+    "addCustomAssetPrice": "価格を追加",
+    "removeFromPortfolio": "ポートフォリオから削除",
+    "filter": "フィルター",
+    "edit": "編集",
+    "editPortfolio": "ポートフォリオを編集",
+    "clone": "クローン",
+    "clonePortfolio": "ポートフォリオをクローン",
+    "save": "保存",
+    "delete": "削除",
+    "import": "インポート",
+    "more": "もっと",
+    "actions": "アクション",
+    "settings": "設定",
+    "send": "送信",
+    "changePassword": "パスワードを変更",
+    "confirmDialog": {
+      "yes": "はい",
+      "no": "いいえ"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "名前",
+        "email": "メールアドレス",
+        "passwordEdit": "新しいパスワード（現在のパスワードを維持する場合は空欄）",
+        "passwordCreate": "パスワード（空欄の場合は自動生成してメールで送信）",
+        "role": "ロール",
+        "isTest": "テストユーザー"
+      },
+      "confirmTitle": "このユーザーを削除してもよろしいですか？"
+    },
+    "general": {
+      "error": {
+        "required": "値を入力してください"
+      }
+    },
+    "login": {
+      "title": "ログイン",
+      "field": {
+        "email": "Eメール",
+        "password": "パスワード"
+      },
+      "tooltip": {
+        "showPassword": "パスワードを表示",
+        "hidePassword": "パスワードを非表示"
+      }
+    },
+    "forgot": {
+      "title": "パスワードを忘れた場合"
+    },
+    "passwordReset": {
+      "title": "パスワードリセット",
+      "field": {
+        "email": "Eメール",
+        "password": "新しいパスワード",
+        "password_confirmation": "新しいパスワード（再入力）"
+      }
+    },
+    "changePassword": {
+      "title": "パスワードを変更",
+      "field": {
+        "email": "Eメール",
+        "password": "現在のパスワード",
+        "password_new": "新しいパスワード"
+      },
+      "error": {
+        "minLength": "パスワードは最低6文字必要です"
+      }
+    },
+    "signUp": {
+      "title": "登録",
+      "field": {
+        "name": "名前",
+        "yourName": "あなたの名前",
+        "email": {
+          "main": "Eメール",
+          "hint": "パスワードはEメールに送信されます"
+        },
+        "agree": {
+          "main": "同意します",
+          "privacy": "プライバシーポリシー",
+          "and": "および",
+          "agreement": "利用規約"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "設定",
+      "field": {
+        "name": "名前",
+        "email": "Eメール",
+        "plan": "プラン",
+        "daysLeft": "残り日数",
+        "daysLeft2": "日残り",
+        "ignoreFunds": "取引追加時に資金不足を無視",
+        "language": "言語",
+        "theme": "テーマ",
+        "darkTheme": "ダークテーマ"
+      }
+    },
+    "import": {
+      "title": "取引をインポート",
+      "field": {
+        "broker": "ブローカー",
+        "file": {
+          "main": "ファイル",
+          "hint": "Excelファイル（XLS、XLSX）を選択してください"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "名前",
+        "currency": "通貨",
+        "accountType": "アカウントタイプ",
+        "openedAt": "開設日",
+        "fee": "手数料",
+        "feePercent": "手数料（％）",
+        "notes": "コメント",
+        "goal": "目標"
+      },
+      "confirmTitle": "このポートフォリオを削除しますか？"
+    },
+    "trade": {
+      "new": "新しい取引",
+      "field": {
+        "type": "操作タイプ",
+        "portfolio": "ポートフォリオ",
+        "asset": "資産タイプ",
+        "ticker": "ティッカー",
+        "currency": "通貨",
+        "cost": "価格",
+        "sum": "合計",
+        "isWoMoney": "資金に含めない",
+        "isWoMoneyHint": "有効にすると、取引は資金操作履歴に記録されません",
+        "shares": "数量",
+        "date": "取引日",
+        "feeCurrency": "手数料通貨",
+        "fee": "手数料",
+        "notes": "コメント"
+      },
+      "confirmTitle": "この取引を削除しますか？",
+      "loading": "読み込み中...",
+      "typeAtLeast": "少なくとも1文字入力してください",
+      "calcFee": "手数料を計算"
+    },
+    "customAsset": {
+      "hint": "カスタム資産を使用すると、不動産などの他の資産をポートフォリオに追加し、価格の変動を追跡できます。",
+      "confirmTitle": "このカスタム資産を削除しますか？",
+      "priceHistory": "価格履歴",
+      "graph": "グラフ",
+      "field": {
+        "created": "日付",
+        "ticker": "ティッカー",
+        "name": "名前",
+        "currency": "通貨",
+        "info": "情報"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "この価格を削除しますか？",
+      "field": {
+        "asset_id": "カスタム資産",
+        "created": "日付",
+        "price": "価格"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "名前",
+        "email": "メールアドレス",
+        "created": "作成日"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "ページあたりの行数：",
+        "nextPage": "次のページ",
+        "previousPage": "前のページ",
+        "of": "の"
+      },
+      "clear": "クリア"
+    },
+    "companies": {
+      "column": {
+        "ticker": "ティッカー",
+        "name": "名前",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "情報",
+      "dividends": "配当",
+      "type": "タイプ",
+      "ticker": "ティッカー",
+      "currency": "通貨",
+      "price": "価格"
+    },
+    "portfolios": {
+      "allPortfolios": "すべてのポートフォリオ",
+      "chosen": "選択済み",
+      "column": {
+        "name": "名前",
+        "currency": "通貨",
+        "accountType": "アカウントタイプ",
+        "date": "日付",
+        "opened": "開設済み"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "ポートフォリオの総価値",
+      "totalGain": "ポートフォリオの収益",
+      "column": {
+        "currency": "通貨",
+        "sum": "合計",
+        "ticker": "ティッカー",
+        "count": "数量",
+        "currentPrice": "現在の価格",
+        "averagePrice": "平均価格",
+        "currentCost": "現在の価値",
+        "currentGain": "利益",
+        "currentGainPercent": "利益（％）",
+        "partPercent": "割合（％）"
+      },
+      "tooltip": {
+        "currency": "資産通貨での値"
+      },
+      "noContent": {
+        "main": "ポートフォリオは空です",
+        "add": "追加",
+        "or": "または",
+        "import": "インポート",
+        "trades": "取引"
+      },
+      "filter": {
+        "year": "年"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "日付",
+        "ticker": "ティッカー",
+        "name": "名前",
+        "price": "価格"
+      },
+      "noContent": {
+        "main": "カスタム資産がまだ追加されていません",
+        "add": "追加"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "価格がまだ追加されていません",
+        "add": "追加"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "ポートフォリオ",
+        "ticker": "ティッカー",
+        "cost": "価格",
+        "qty": "数量",
+        "sum": "合計",
+        "fee": "手数料",
+        "date": "日付"
+      },
+      "filter": {
+        "title": "取引フィルター"
+      },
+      "filterField": {
+        "portfolio": "ポートフォリオ",
+        "type": "タイプ",
+        "currency": "通貨",
+        "ticker": "ティッカー",
+        "dateRange": "日付範囲",
+        "startDate": "開始日",
+        "endDate": "終了日",
+        "closeBtn": "閉じる"
+      },
+      "noContent": {
+        "main": "取引リストは空です",
+        "add": "追加",
+        "or": "または",
+        "import": "インポート",
+        "trades": "取引"
+      },
+      "dateRanges": {
+        "today": "今日",
+        "yesterday": "昨日",
+        "last7days": "過去7日間",
+        "last30days": "過去1ヶ月",
+        "thisMonth": "今月",
+        "lastMonth": "先月",
+        "last6months": "過去6ヶ月",
+        "lastYear": "過去1年",
+        "wholeTime": "全期間"
+      },
+      "itemRemoveConfirm": "このポジションをポートフォリオから完全に削除しますか？"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "ユーザーを作成しました"
+      },
+      "update": {
+        "message": "ユーザーを更新しました"
+      },
+      "delete": {
+        "message": "ユーザーを削除しました"
+      }
+    },
+    "connectionLost": {
+      "message": "読み込みエラー。インターネット接続がない可能性があります",
+      "action": "更新"
+    },
+    "auth": {
+      "signUp": {
+        "message": "登録が完了しました。パスワードはメールで送信されました"
+      },
+      "signUpError": {
+        "message": "登録エラー"
+      },
+      "changePassword": {
+        "message": "パスワードが変更されました"
+      },
+      "login": {
+        "message": "ログインまたはパスワードが間違っています"
+      },
+      "updateMe": {
+        "message": "プロフィールが更新されました"
+      },
+      "forgot": {
+        "success": "パスワードリセットの手順がメールで送信されました"
+      },
+      "resetPassword": {
+        "success": "パスワードがリセットされました"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "関連する取引を編集するには、親取引を変更してください"
+      },
+      "create": {
+        "message": "取引が追加されました"
+      },
+      "update": {
+        "message": "取引が更新されました"
+      },
+      "delete": {
+        "message": "取引が削除されました"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "インポートデータが読み込まれました"
+      },
+      "create": {
+        "message": "ポートフォリオが追加されました"
+      },
+      "update": {
+        "message": "ポートフォリオが更新されました"
+      },
+      "delete": {
+        "message": "ポートフォリオが削除されました"
+      },
+      "clone": {
+        "message": "ポートフォリオがクローンされました"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "カスタム資産が追加されました"
+      },
+      "update": {
+        "message": "カスタム資産が更新されました"
+      },
+      "delete": {
+        "message": "カスタム資産が削除されました"
+      }
+    },
+    "plugins": {
+      "installed": "プラグイン「{$title}」をインストールしました",
+      "uninstalled": "プラグインをアンインストールしました",
+      "upgraded": "プラグインをバージョン {$version} にアップグレードしました",
+      "configSaved": "設定を保存しました"
+    },
+    "currencyRates": {
+      "updated": "保存されたレート: {$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "引っ張って更新",
+    "end": "離して更新",
+    "refreshing": "更新中..."
+  },
+  "theme": {
+    "light": "ライト",
+    "dark": "ダーク"
+  },
+  "analytics": {
+    "portfolioGrowth": "ポートフォリオの成長",
+    "growth": "成長",
+    "delta": "変化",
+    "byAssetTypes": "資産タイプ別",
+    "bySectors": "セクター別",
+    "byEarnings": "配当とクーポン別",
+    "byEmitents": "発行者別",
+    "totalEarnings": "配当とクーポンの総額",
+    "totalEmitents": "発行者の総数",
+    "stats": "統計",
+    "goal": "目標",
+    "goalSet": "設定",
+    "goalAchievement": "目標達成"
+  },
+  "chart": {
+    "history": "履歴",
+    "trades": "取引"
+  },
+  "plugins": {
+    "title": "プラグイン",
+    "tab": {
+      "installed": "インストール済み",
+      "store": "ストア"
+    },
+    "manual": {
+      "title": "リポジトリからインストール",
+      "hint": "git リポジトリの https URL を貼り付けてください（GitHub、GitLab、Gitea など）。{$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} または {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE} を追加してバージョンを固定できます。",
+      "field": {
+        "url": "リポジトリ URL"
+      }
+    },
+    "installed": {
+      "empty": "まだプラグインがインストールされていません。ストアから、またはリポジトリ URL でインストールしてください。"
+    },
+    "store": {
+      "hint": "{$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} トピックが付いた公開 GitHub リポジトリは自動的にここに表示されます。",
+      "empty": "見つかりませんでした。GitHub へのネットワーク接続を確認するか、追加のレジストリを設定してください。",
+      "installed": "インストール済み"
+    },
+    "action": {
+      "install": "インストール",
+      "manage": "管理",
+      "refresh": "更新",
+      "upgrade": "アップグレード"
+    },
+    "confirm": {
+      "uninstall": "プラグインをアンインストールしますか？"
+    },
+    "status": {
+      "enabled": "有効",
+      "disabled": "無効"
+    },
+    "field": {
+      "package": "パッケージ",
+      "version": "バージョン",
+      "status": "ステータス",
+      "remote": "ソース",
+      "installedAt": "インストール日時"
+    },
+    "config": {
+      "title": "設定",
+      "rawHint": "このプラグインは設定スキーマを宣言していません。JSON で設定を編集してください。",
+      "invalidJson": "無効な JSON オブジェクト"
+    }
+  },
+  "currencyRates": {
+    "title": "為替レート",
+    "noProviders": "為替レートを提供する有効なプラグインがありません。",
+    "installPlugin": "プラグインをインストール",
+    "providers": "ソース",
+    "empty": "レートが見つかりません。",
+    "filter": {
+      "currency": "通貨コード"
+    },
+    "action": {
+      "update": "更新"
+    },
+    "field": {
+      "date": "日付",
+      "base": "基準通貨",
+      "currency": "通貨",
+      "rate": "レート",
+      "source": "ソース",
+      "updatedAt": "更新日時"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "Shares": "株式",
+  "Bonds": "債券",
+  "Money": "お金",
+  "Crypto": "暗号資産",
+  "Custom": "カスタム",
+
+  "Buy": "買い",
+  "Sell": "売り",
+  "Dividend": "配当",
+  "Coupon": "利息",
+  "Fee": "手数料",
+  "Taxes": "税金",
+  "Credit": "入金",
+  "Debit": "出金",
+
+  "Stock": "株式",
+  "ETF": "ETF",
+  "Futures": "先物",
+  "Currency": "通貨",
+  "Index": "指数",
+  "Mutual Fond": "投資信託",
+  "Bond": "債券",
+  "Cryptocurrency": "暗号資産",
+
+  "My Portfolio": "マイポートフォリオ",
+  "Broker": "証券口座",
+  "Copy": "コピー",
+
+  "Hello": "こんにちは",
+  "Incorrect credentials": "認証情報が正しくありません",
+  "Reset password": "パスワードをリセット",
+  "Please do not reply to this email": "このメールには返信しないでください",
+  "If you need to contact us please email us at": "お問い合わせは次のアドレスまでメールでご連絡ください",
+
+  "Other": "その他",
+
+  "Basic Materials": "素材",
+  "Communication Services": "通信サービス",
+  "Consumer Cyclical": "一般消費財",
+  "Consumer Defensive": "生活必需品",
+  "Energy": "エネルギー",
+  "Financial Services": "金融サービス",
+  "Healthcare": "ヘルスケア",
+  "Industrials": "資本財",
+  "Real Estate": "不動産",
+  "Technology": "テクノロジー",
+  "Utilities": "公益事業"
+}

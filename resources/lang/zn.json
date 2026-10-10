@@ -1,0 +1,49 @@
+{
+  "Shares": "股票",
+  "Bonds": "债券",
+  "Money": "现金",
+  "Crypto": "加密货币",
+  "Custom": "自定义",
+
+  "Buy": "买入",
+  "Sell": "卖出",
+  "Dividend": "股息",
+  "Coupon": "票息",
+  "Fee": "手续费",
+  "Taxes": "税费",
+  "Credit": "入金",
+  "Debit": "出金",
+
+  "Stock": "股票",
+  "ETF": "ETF",
+  "Futures": "期货",
+  "Currency": "货币",
+  "Index": "指数",
+  "Mutual Fond": "共同基金",
+  "Bond": "债券",
+  "Cryptocurrency": "加密货币",
+
+  "My Portfolio": "我的投资组合",
+  "Broker": "经纪账户",
+  "Copy": "副本",
+
+  "Hello": "您好",
+  "Incorrect credentials": "凭据不正确",
+  "Reset password": "重置密码",
+  "Please do not reply to this email": "请勿回复此邮件",
+  "If you need to contact us please email us at": "如需联系我们，请发送邮件至",
+
+  "Other": "其他",
+
+  "Basic Materials": "基础材料",
+  "Communication Services": "通讯服务",
+  "Consumer Cyclical": "非必需消费品",
+  "Consumer Defensive": "必需消费品",
+  "Energy": "能源",
+  "Financial Services": "金融服务",
+  "Healthcare": "医疗保健",
+  "Industrials": "工业",
+  "Real Estate": "房地产",
+  "Technology": "科技",
+  "Utilities": "公用事业"
+}

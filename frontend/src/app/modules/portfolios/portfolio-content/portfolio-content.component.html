@@ -1,0 +1,197 @@
+<!--<mat-form-field class="search-field mt-3 ml-3" appearance="fill">-->
+<!--  <mat-label i18n="@@common.search">Search</mat-label>-->
+<!--  <input matInput type="text" [formControl]="searchField" autocomplete="off">-->
+<!--  <button *ngIf="searchField.value" matSuffix mat-icon-button aria-label="Clear" (click)="searchField.setValue('')">-->
+<!--    <mat-icon>close</mat-icon>-->
+<!--  </button>-->
+<!--</mat-form-field>-->
+
+<app-actions>
+  <a tuiButton
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     icon="tuiIconChartBar"
+     [routerLink]="['../analytics']">
+    <span i18n="@@nav.analytics">Analytics</span>
+  </a>
+  <a tuiButton
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     icon="tuiIconPlus"
+     [routerLink]="['/trades/new']">
+    <span i18n="@@action.addTrade">Add Trade</span>
+  </a>
+
+  <tui-hosted-dropdown
+    tuiDropdownAlign="left"
+    [content]="dropdown">
+    <button tuiButton
+            type="button"
+            appearance="secondary"
+            class="tui-space_bottom-3 tui-space_right-3"
+            icon="tuiIconSettings"
+            iconRight="tuiIconSortDown"
+            size="s">
+      <span i18n="@@action.settings">Settings</span>
+    </button>
+  </tui-hosted-dropdown>
+
+  <ng-template #dropdown>
+    <tui-data-list>
+      <button tuiOption [routerLink]="['../']">
+        <span i18n="@@action.edit">Edit</span>
+      </button>
+      <button tuiOption [routerLink]="['../import']">
+        <span i18n="@@action.import">Import</span>
+      </button>
+      <button tuiOption (click)="clone()">
+        <span i18n="@@action.clone">Clone</span>
+      </button>
+      <button tuiOption [routerLink]="['/custom-assets']">
+        <span i18n="@@nav.customAssets">Custom Assets</span>
+      </button>
+    </tui-data-list>
+  </ng-template>
+
+  <a tuiButton
+     appearance="secondary"
+     size="s"
+     class="tui-space_bottom-3 tui-space_right-3"
+     [routerLink]="['/portfolios']">
+    <span i18n="@@nav.allPortfolios">All Portfolios</span>
+  </a>
+</app-actions>
+
+
+<div class="tui-container tui-container_adaptive" *ngIf="portfolio">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-12 tui-col_xs-12">
+      <h1 class="tui-space_top-0">
+        {{ portfolio.name }}
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="tui-container tui-container_adaptive" *ngIf="portfolio">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3">
+      <tui-island>
+        <span i18n="@@table.portfolioContent.totalCost" class="tui-island__category">Portfolio Cost</span>
+        <div class="">{{ portfolio.currency_sign }}&thinsp;{{ summary.total_cost | number }}</div>
+      </tui-island>
+    </div>
+    <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3">
+      <tui-island>
+        <span i18n="@@table.portfolioContent.totalGain" class="tui-island__category">Portfolio Gain</span>
+        <div class="total-gain">
+          <div>{{ portfolio.currency_sign }}&thinsp;<span [innerHTML]="summary.total_gain | numberColored"></span></div>
+          <div><span [innerHTML]="summary.total_gain_percent | numberColored"></span>&thinsp;%</div>
+        </div>
+      </tui-island>
+    </div>
+  </div>
+</div>
+
+<div class="tui-container tui-container_adaptive">
+  <div *ngIf="portfolio?.is_locked" class="mb-3">
+    <tui-island>
+      <span i18n="@@common.import_processing" class="tui-island__category">Import processing...</span>
+      <progress max="100" tuiProgressBar></progress>
+    </tui-island>
+  </div>
+  <div *ngIf="!portfolio?.is_locked">
+    <div class="tui-row tui-row_adaptive">
+      <div class="tui-col_md-3 tui-col_xs-12">
+        <tui-input [formControl]="searchField" [tuiTextfieldCleaner]="true"
+                   [class.tui-skeleton]="skeletonVisible"
+                   class="tui-space_bottom-3">
+          <span i18n="@@common.search">Search</span>
+          <input tuiTextfield type="text">
+        </tui-input>
+      </div>
+    </div>
+    <div class="tui-row tui-row_adaptive">
+      <div class="tui-col_md-12 tui-col_xs-12">
+        <tui-scrollbar waIntersectionRoot
+                       class="scrollbar tui-space_bottom-5"
+                       [hidden]="true">
+          <table tuiTable class="table" [columns]="displayedColumns" [class.tui-skeleton]="skeletonVisible">
+            <thead>
+            <tr tuiThGroup>
+              <th tuiTh i18n="@@table.portfolioContent.column.ticker">Ticker</th>
+              <th tuiTh i18n="@@table.portfolioContent.column.currentPrice">Price Current</th>
+              <th tuiTh i18n="@@table.portfolioContent.column.averagePrice">Price Average</th>
+              <th tuiTh i18n="@@table.portfolioContent.column.currentCost">Cost Current</th>
+              <th tuiTh i18n="@@table.portfolioContent.column.partPercent">Part Percent, %</th>
+              <th tuiTh i18n="@@table.portfolioContent.column.currentGain">Gain</th>
+              <th tuiTh i18n="@@table.portfolioContent.column.currentGainPercent">Gain, %</th>
+            </tr>
+            </thead>
+            <ng-template ngFor let-group [ngForOf]="groupedData | keyvalue">
+              <tbody tuiTbody [data]="group.value" *ngIf="group.value" heading="{{ getAssetType(+group.key).name }}">
+              <tr tuiTr *tuiRow="let item of group.value"
+                  [class.opacity-50]="item.count == 0 && item.ticker !== '$$'"
+                  [routerLink]="['/trades']"
+                  [queryParams]="{portfolio_uid: portfolio.uid, ticker: item.ticker, uid: item.uid}"
+                  class="tui-table__tr_cursor_pointer">
+                <td *tuiCell="'ticker'" tuiTd>
+                  <div *ngIf="item.ticker === '$$'">
+                    {{item.currency_sign}} {{item.currency_code}}
+                  </div>
+                  <div *ngIf="item.ticker !== '$$'">
+                    <div *ngIf="item.count != 0">
+                      <b>{{item.ticker}}</b>&nbsp;<span>({{ item.count | number:'1.0-10' }})</span>
+                      <div class="small text-muted" *ngIf="item.title">{{ item.title }}</div>
+                    </div>
+                    <div *ngIf="item.count == 0">
+                      <del class="text-bold">{{ item.ticker }}</del>
+                      <div class="small text-muted" *ngIf="item.title">{{ item.title }}</div>
+                    </div>
+                  </div>
+                </td>
+                <td *tuiCell="'current_price'" tuiTd>
+                  {{ item.currency_sign }}&thinsp;{{ item.current_price | number }}
+                </td>
+                <td *tuiCell="'average_price'" tuiTd>
+                  {{ item.currency_sign }}&thinsp;{{ item.average_price | number }}
+                </td>
+                <td *tuiCell="'current_cost'" tuiTd>
+                  <div *ngIf="item.current_cost === item.current_cost_native">
+                    {{ item.currency_sign }}&thinsp;{{ item.current_cost | number:'1.0-10' }}
+                  </div>
+                  <div *ngIf="item.current_cost !== item.current_cost_native">
+                    {{ portfolio.currency_sign }}&thinsp;{{ item.current_cost | number:'1.0-10' }}
+                    <div class="small text-muted">
+                      {{ item.currency_sign }}&thinsp;{{ item.current_cost_native | number:'1.0-10' }}
+                    </div>
+                  </div>
+                </td>
+                <td *tuiCell="'part_percent'" tuiTd>
+                  {{item.part_percent | number}}&thinsp;%
+                </td>
+                <td *tuiCell="'current_gain'" tuiTd>
+                  <div *ngIf="item.current_gain === item.current_gain_native">
+                    {{ item.currency_sign }}&thinsp;<span [innerHTML]="item.current_gain | numberColored"></span>
+                  </div>
+                  <div *ngIf="item.current_gain !== item.current_gain_native">
+                    {{ portfolio.currency_sign }}&thinsp;<span [innerHTML]="item.current_gain | numberColored"></span>
+                    <div class="small text-muted">
+                      {{ item.currency_sign }}&thinsp;{{ item.current_gain_native | number }}
+                    </div>
+                  </div>
+                </td>
+                <td *tuiCell="'current_gain_percent'" tuiTd>
+                  <span [innerHTML]="item.current_gain_percent | numberColored"></span>&thinsp;%
+                </td>
+              </tr>
+              </tbody>
+            </ng-template>
+          </table>
+        </tui-scrollbar>
+      </div>
+    </div>
+  </div>
+</div>

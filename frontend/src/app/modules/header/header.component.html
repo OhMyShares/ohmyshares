@@ -1,0 +1,13 @@
+<div class="tui-container tui-container_adaptive">
+  <tui-tabs>
+    <ng-container *ngFor="let item of items">
+      <a *ngIf="item.visible"
+         tuiTab
+         routerLinkActive="active"
+         [routerLink]="[item.route()]">
+        <tui-svg src="{{item.icon}}"></tui-svg>
+        <span>{{item.label}}</span>
+      </a>
+    </ng-container>
+  </tui-tabs>
+</div>

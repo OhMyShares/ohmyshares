@@ -1,0 +1,37 @@
+services:
+  mysql:
+    image: mysql:8.4.11
+    restart: always
+    user: 'mysql'
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
+  memcached:
+    image: memcached:latest
+
+  app:
+    build:
+      context: .
+      target: development
+    depends_on:
+      - mysql
+      - memcached
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./:/var/www/oms
+      - /var/www/oms/frontend/public
+    env_file:
+      - .env
+
+volumes:
+  db-data:

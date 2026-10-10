@@ -1,0 +1,11 @@
+{
+  "name": "OhMyShares",
+  "short_name": "OhMyShares",
+  "description": "OhMyShares - investments accounting",
+  "categories": ["finance", "lifestyle", "productivity", "utilities"],
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#2B2B2B",
+  "theme_color": "#36BA94",
+  "orientation": "portrait-primary"
+}

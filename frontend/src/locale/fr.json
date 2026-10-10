@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "Utilisateurs",
+    "create": "Créer un utilisateur",
+    "role": {
+      "user": "Utilisateur",
+      "admin": "Administrateur"
+    },
+    "badge": {
+      "test": "Test"
+    }
+  },
+  "common": {
+    "pcs": "pcs.",
+    "average_price": "Prix moyen",
+    "dividends": "Dividendes",
+    "coupons": "Coupons",
+    "fees": "Frais",
+    "taxes": "Impôts",
+    "import_processing": "Traitement de l'importation...",
+    "search": "Recherche",
+    "filter": "Filtre",
+    "part_portfolio": "Part du portefeuille",
+    "current_cost": "Coût actuel",
+    "quantity": "Quantité"
+  },
+  "nav": {
+    "users": "Utilisateurs",
+    "companies": "Entreprises",
+    "portfolio": "Portefeuille",
+    "portfolios": "Portefeuilles",
+    "allPortfolios": "Tous les portefeuilles",
+    "portfoliosList": "Liste des portefeuilles",
+    "trades": "Transactions",
+    "profile": "Profil",
+    "resetCache": "Réinitialiser le cache",
+    "resetCacheHint": "En cas de doute, essayez d'abord de réinitialiser le cache",
+    "buyPro": "Acheter Pro",
+    "learnMore": "En savoir plus",
+    "logout": "Déconnexion",
+    "import": "Importer",
+    "importTrades": "Importer des transactions",
+    "customAssets": "Actifs personnalisés",
+    "content": "Contenu",
+    "analytics": "Analytique",
+    "other": "Autre",
+    "plugins": "Plugins",
+    "currencyRates": "Taux de change"
+  },
+  "action": {
+    "login": "Connexion",
+    "loginForExisting": "Connexion pour les utilisateurs enregistrés",
+    "signUp": "S'inscrire",
+    "passwordForgot": "Mot de passe oublié ?",
+    "passwordReset": "Réinitialiser le mot de passe",
+    "sendResetLink": "Envoyer le lien de réinitialisation",
+    "view": "Voir",
+    "open": "Ouvrir",
+    "menu": "Menu",
+    "back": "Retour",
+    "add": "Ajouter",
+    "portfolio": "Portefeuille",
+    "addPortfolio": "Ajouter un portefeuille",
+    "addTrade": "Ajouter une transaction",
+    "addIntoPortfolio": "Ajouter au portefeuille",
+    "addCustomAsset": "Ajouter un actif personnalisé",
+    "editCustomAsset": "Modifier un actif personnalisé",
+    "addCustomAssetPrice": "Ajouter un prix",
+    "removeFromPortfolio": "Retirer du portefeuille",
+    "filter": "Filtre",
+    "edit": "Modifier",
+    "editPortfolio": "Modifier le portefeuille",
+    "clone": "Cloner",
+    "clonePortfolio": "Cloner le portefeuille",
+    "save": "Sauvegarder",
+    "delete": "Supprimer",
+    "import": "Importer",
+    "more": "Plus",
+    "actions": "Actions",
+    "settings": "Paramètres",
+    "send": "Envoyer",
+    "changePassword": "Changer le mot de passe",
+    "confirmDialog": {
+      "yes": "Oui",
+      "no": "Non"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "Nom",
+        "email": "E-mail",
+        "passwordEdit": "Nouveau mot de passe (laisser vide pour conserver l'actuel)",
+        "passwordCreate": "Mot de passe (laisser vide pour le générer et l'envoyer par e-mail)",
+        "role": "Rôle",
+        "isTest": "Utilisateur de test"
+      },
+      "confirmTitle": "Voulez-vous vraiment supprimer cet utilisateur ?"
+    },
+    "general": {
+      "error": {
+        "required": "La valeur ne peut pas être vide"
+      }
+    },
+    "login": {
+      "title": "Connexion",
+      "field": {
+        "email": "E-mail",
+        "password": "Mot de passe"
+      },
+      "tooltip": {
+        "showPassword": "Afficher le mot de passe",
+        "hidePassword": "Masquer le mot de passe"
+      }
+    },
+    "forgot": {
+      "title": "Mot de passe oublié ?"
+    },
+    "passwordReset": {
+      "title": "Réinitialisation du mot de passe",
+      "field": {
+        "email": "E-mail",
+        "password": "Nouveau mot de passe",
+        "password_confirmation": "Nouveau mot de passe (encore)"
+      }
+    },
+    "changePassword": {
+      "title": "Changer le mot de passe",
+      "field": {
+        "email": "E-mail",
+        "password": "Mot de passe actuel",
+        "password_new": "Nouveau mot de passe"
+      },
+      "error": {
+        "minLength": "La longueur minimale du mot de passe est de 6 caractères"
+      }
+    },
+    "signUp": {
+      "title": "Inscription",
+      "field": {
+        "name": "Nom",
+        "yourName": "Votre nom",
+        "email": {
+          "main": "E-mail",
+          "hint": "Le mot de passe sera envoyé à l'e-mail"
+        },
+        "agree": {
+          "main": "J'accepte",
+          "privacy": "Politique de confidentialité",
+          "and": "et",
+          "agreement": "Accord d'utilisation"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "Paramètres",
+      "field": {
+        "name": "Nom",
+        "email": "E-mail",
+        "plan": "Plan",
+        "daysLeft": "Jours restants",
+        "daysLeft2": "jours restants",
+        "ignoreFunds": "Ignorer le manque de fonds lors de l'ajout de transactions",
+        "language": "Langue",
+        "theme": "Thème",
+        "darkTheme": "Thème sombre"
+      }
+    },
+    "import": {
+      "title": "Importer des transactions",
+      "field": {
+        "broker": "Courtier",
+        "file": {
+          "main": "Fichier",
+          "hint": "Sélectionnez un fichier au format Excel (XLS, XLSX)"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "Nom",
+        "currency": "Devise",
+        "accountType": "Type de compte",
+        "openedAt": "Date d'ouverture",
+        "fee": "Frais",
+        "feePercent": "Frais, %",
+        "notes": "Commentaire",
+        "goal": "Objectif"
+      },
+      "confirmTitle": "Voulez-vous vraiment supprimer ce portefeuille ?"
+    },
+    "trade": {
+      "new": "Nouvelle transaction",
+      "field": {
+        "type": "Type d'opération",
+        "portfolio": "Portefeuille",
+        "asset": "Type d'actif",
+        "ticker": "Ticker",
+        "currency": "Devise",
+        "cost": "Prix",
+        "sum": "Montant",
+        "isWoMoney": "Ne pas tenir compte de l'argent",
+        "isWoMoneyHint": "Si activé, la transaction ne créera pas d'entrées dans l'historique des opérations monétaires",
+        "shares": "Quantité",
+        "date": "Date de la transaction",
+        "feeCurrency": "Devise des frais",
+        "fee": "Frais",
+        "notes": "Commentaire"
+      },
+      "confirmTitle": "Voulez-vous vraiment supprimer cette transaction ?",
+      "loading": "Chargement...",
+      "typeAtLeast": "Entrez au moins 1 caractère",
+      "calcFee": "Calculer les frais"
+    },
+    "customAsset": {
+      "hint": "Les actifs personnalisés vous permettent d'ajouter à votre portefeuille et de suivre l'évolution du prix de vos autres actifs, comme l'immobilier.",
+      "confirmTitle": "Voulez-vous vraiment supprimer cet actif personnalisé ?",
+      "priceHistory": "Historique des prix",
+      "graph": "Graphique",
+      "field": {
+        "created": "Date",
+        "ticker": "Ticker",
+        "name": "Nom",
+        "currency": "Devise",
+        "info": "Info"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "Voulez-vous vraiment supprimer ce prix ?",
+      "field": {
+        "asset_id": "Actif personnalisé",
+        "created": "Date",
+        "price": "Prix"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "Nom",
+        "email": "E-mail",
+        "created": "Créé"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "Lignes par page :",
+        "nextPage": "Page suivante",
+        "previousPage": "Page précédente",
+        "of": "de"
+      },
+      "clear": "Effacer"
+    },
+    "companies": {
+      "column": {
+        "ticker": "Ticker",
+        "name": "Nom",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "Info",
+      "dividends": "Dividendes",
+      "type": "Type",
+      "ticker": "Ticker",
+      "currency": "Devise",
+      "price": "Prix"
+    },
+    "portfolios": {
+      "allPortfolios": "Tous les portefeuilles",
+      "chosen": "choisi",
+      "column": {
+        "name": "Nom",
+        "currency": "Devise",
+        "accountType": "Type de compte",
+        "date": "Date",
+        "opened": "Ouvert"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "Coût total du portefeuille",
+      "totalGain": "Rendement du portefeuille",
+      "column": {
+        "currency": "Devise",
+        "sum": "Montant",
+        "ticker": "Ticker",
+        "count": "Quantité",
+        "currentPrice": "Prix actuel",
+        "averagePrice": "Prix moyen",
+        "currentCost": "Coût actuel",
+        "currentGain": "Gain",
+        "currentGainPercent": "Gain, %",
+        "partPercent": "Part, %"
+      },
+      "tooltip": {
+        "currency": "Valeur dans la devise de l'instrument"
+      },
+      "noContent": {
+        "main": "Le portefeuille est vide pour l'instant",
+        "add": "ajoutez",
+        "or": "ou",
+        "import": "importez",
+        "trades": "transactions"
+      },
+      "filter": {
+        "year": "Année"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "Date",
+        "ticker": "Ticker",
+        "name": "Nom",
+        "price": "Prix"
+      },
+      "noContent": {
+        "main": "Vous n'avez pas encore ajouté d'actifs personnalisés",
+        "add": "Ajouter"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "Vous n'avez pas encore ajouté de prix",
+        "add": "Ajouter"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "Portefeuille",
+        "ticker": "Ticker",
+        "cost": "Prix",
+        "qty": "Quantité",
+        "sum": "Montant",
+        "fee": "Frais",
+        "date": "Date"
+      },
+      "filter": {
+        "title": "Filtre des transactions"
+      },
+      "filterField": {
+        "portfolio": "Portefeuille",
+        "type": "Type",
+        "currency": "Devise",
+        "ticker": "Ticker",
+        "dateRange": "Plage de dates",
+        "startDate": "Date de début",
+        "endDate": "Date de fin",
+        "closeBtn": "Fermer"
+      },
+      "noContent": {
+        "main": "La liste des transactions est vide pour l'instant",
+        "add": "ajoutez",
+        "or": "ou",
+        "import": "importez",
+        "trades": "transactions"
+      },
+      "dateRanges": {
+        "today": "Aujourd'hui",
+        "yesterday": "Hier",
+        "last7days": "Les 7 derniers jours",
+        "last30days": "Le mois dernier",
+        "thisMonth": "Ce mois-ci",
+        "lastMonth": "Le mois dernier",
+        "last6months": "Les 6 derniers mois",
+        "lastYear": "L'année dernière",
+        "wholeTime": "Depuis toujours"
+      },
+      "itemRemoveConfirm": "Êtes-vous sûr de vouloir supprimer complètement cette position du portefeuille ?"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "L'utilisateur a été créé avec succès"
+      },
+      "update": {
+        "message": "L'utilisateur a été mis à jour avec succès"
+      },
+      "delete": {
+        "message": "L'utilisateur a été supprimé avec succès"
+      }
+    },
+    "connectionLost": {
+      "message": "Erreur de chargement. Il se peut qu'il n'y ait pas de connexion Internet",
+      "action": "Actualiser"
+    },
+    "auth": {
+      "signUp": {
+        "message": "Vous avez été enregistré avec succès. Le mot de passe du service a été envoyé à votre e-mail"
+      },
+      "signUpError": {
+        "message": "Erreur d'inscription"
+      },
+      "changePassword": {
+        "message": "Le mot de passe a été changé avec succès"
+      },
+      "login": {
+        "message": "Identifiant ou mot de passe incorrect"
+      },
+      "updateMe": {
+        "message": "Profil mis à jour avec succès"
+      },
+      "forgot": {
+        "success": "Les instructions pour réinitialiser le mot de passe ont été envoyées à l'e-mail"
+      },
+      "resetPassword": {
+        "success": "Le mot de passe a été réinitialisé avec succès"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "Pour modifier une transaction liée, modifiez la transaction parente"
+      },
+      "create": {
+        "message": "Transaction ajoutée avec succès"
+      },
+      "update": {
+        "message": "Transaction mise à jour avec succès"
+      },
+      "delete": {
+        "message": "Transaction supprimée avec succès"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "Les données d'importation ont été chargées avec succès"
+      },
+      "create": {
+        "message": "Portefeuille ajouté avec succès"
+      },
+      "update": {
+        "message": "Portefeuille mis à jour avec succès"
+      },
+      "delete": {
+        "message": "Portefeuille supprimé avec succès"
+      },
+      "clone": {
+        "message": "Portefeuille cloné avec succès"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "Actif personnalisé ajouté avec succès"
+      },
+      "update": {
+        "message": "Actif personnalisé mis à jour avec succès"
+      },
+      "delete": {
+        "message": "Actif personnalisé supprimé avec succès"
+      }
+    },
+    "plugins": {
+      "installed": "Plugin \"{$title}\" installé",
+      "uninstalled": "Plugin désinstallé",
+      "upgraded": "Plugin mis à jour vers la version {$version}",
+      "configSaved": "Configuration enregistrée"
+    },
+    "currencyRates": {
+      "updated": "Taux enregistrés : {$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "Tirez vers le bas pour actualiser",
+    "end": "Relâchez pour actualiser",
+    "refreshing": "Actualisation..."
+  },
+  "theme": {
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "analytics": {
+    "portfolioGrowth": "Croissance du portefeuille",
+    "growth": "Croissance",
+    "delta": "Changement",
+    "byAssetTypes": "Par types d'actifs",
+    "bySectors": "Par secteurs",
+    "byEarnings": "Par dividendes et coupons",
+    "byEmitents": "Par émetteurs",
+    "totalEarnings": "Total des dividendes et coupons reçus",
+    "totalEmitents": "Nombre total d'émetteurs",
+    "stats": "Statistiques",
+    "goal": "Objectif",
+    "goalSet": "Modifier",
+    "goalAchievement": "Atteinte de l'objectif"
+  },
+  "chart": {
+    "history": "Historique",
+    "trades": "Transactions"
+  },
+  "plugins": {
+    "title": "Plugins",
+    "tab": {
+      "installed": "Installés",
+      "store": "Boutique"
+    },
+    "manual": {
+      "title": "Installer depuis un dépôt",
+      "hint": "Collez l'URL https d'un dépôt git (GitHub, GitLab, Gitea, ...). Ajoutez {$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} ou {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE} pour épingler une version.",
+      "field": {
+        "url": "URL du dépôt"
+      }
+    },
+    "installed": {
+      "empty": "Aucun plugin installé pour le moment. Installez-en un depuis la boutique ou via l'URL d'un dépôt."
+    },
+    "store": {
+      "hint": "Tout dépôt GitHub public tagué avec le sujet {$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} apparaît ici automatiquement.",
+      "empty": "Aucun résultat. Vérifiez l'accès réseau à GitHub ou configurez des registres supplémentaires.",
+      "installed": "Installé"
+    },
+    "action": {
+      "install": "Installer",
+      "manage": "Gérer",
+      "refresh": "Actualiser",
+      "upgrade": "Mettre à jour"
+    },
+    "confirm": {
+      "uninstall": "Désinstaller le plugin ?"
+    },
+    "status": {
+      "enabled": "Activé",
+      "disabled": "Désactivé"
+    },
+    "field": {
+      "package": "Paquet",
+      "version": "Version",
+      "status": "Statut",
+      "remote": "Source",
+      "installedAt": "Installé"
+    },
+    "config": {
+      "title": "Configuration",
+      "rawHint": "Ce plugin ne déclare pas de schéma de configuration. Modifiez ses paramètres en JSON.",
+      "invalidJson": "Objet JSON invalide"
+    }
+  },
+  "currencyRates": {
+    "title": "Taux de change",
+    "noProviders": "Aucun plugin activé ne fournit de taux de change.",
+    "installPlugin": "Installer un plugin",
+    "providers": "Sources",
+    "empty": "Aucun taux trouvé.",
+    "filter": {
+      "currency": "Code devise"
+    },
+    "action": {
+      "update": "Mettre à jour"
+    },
+    "field": {
+      "date": "Date",
+      "base": "Base",
+      "currency": "Devise",
+      "rate": "Taux",
+      "source": "Source",
+      "updatedAt": "Mis à jour"
+    }
+  }
+}

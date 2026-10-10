@@ -1,0 +1,8 @@
+@mixin backdrop-blur {
+  backdrop-filter: blur(4px);
+  //background-color: hsla(0, 0%, 100%, 0.6);
+}
+
+@mixin bg-muted {
+  background-color: rgba(134, 134, 134, 0.2);
+}

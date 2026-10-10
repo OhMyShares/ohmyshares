@@ -1,0 +1,558 @@
+{
+  "users": {
+    "title": "Pengguna",
+    "create": "Buat pengguna",
+    "role": {
+      "user": "Pengguna",
+      "admin": "Admin"
+    },
+    "badge": {
+      "test": "Uji"
+    }
+  },
+  "common": {
+    "pcs": "pcs",
+    "average_price": "Harga rata-rata",
+    "dividends": "Dividen",
+    "coupons": "Kupon",
+    "fees": "Biaya",
+    "taxes": "Pajak",
+    "import_processing": "Memproses impor...",
+    "search": "Cari",
+    "filter": "Filter",
+    "part_portfolio": "Bagian dari portofolio",
+    "current_cost": "Biaya saat ini",
+    "quantity": "Jumlah"
+  },
+  "nav": {
+    "users": "Pengguna",
+    "companies": "Perusahaan",
+    "portfolio": "Portofolio",
+    "portfolios": "Portofolio",
+    "allPortfolios": "Semua portofolio",
+    "portfoliosList": "Daftar portofolio",
+    "trades": "Transaksi",
+    "profile": "Profil",
+    "resetCache": "Reset cache",
+    "resetCacheHint": "Dalam situasi yang tidak jelas, coba reset cache terlebih dahulu",
+    "buyPro": "Beli Pro",
+    "learnMore": "Pelajari lebih lanjut",
+    "logout": "Keluar",
+    "import": "Impor",
+    "importTrades": "Impor transaksi",
+    "customAssets": "Aset kustom",
+    "content": "Konten",
+    "analytics": "Analitik",
+    "other": "Lainnya",
+    "plugins": "Plugin",
+    "currencyRates": "Kurs mata uang"
+  },
+  "action": {
+    "login": "Masuk",
+    "loginForExisting": "Masuk untuk pengguna terdaftar",
+    "signUp": "Daftar",
+    "passwordForgot": "Lupa kata sandi?",
+    "passwordReset": "Reset kata sandi",
+    "sendResetLink": "Kirim tautan reset",
+    "view": "Lihat",
+    "open": "Buka",
+    "menu": "Menu",
+    "back": "Kembali",
+    "add": "Tambah",
+    "portfolio": "Portofolio",
+    "addPortfolio": "Tambah portofolio",
+    "addTrade": "Tambah transaksi",
+    "addIntoPortfolio": "Tambah ke portofolio",
+    "addCustomAsset": "Tambah aset kustom",
+    "editCustomAsset": "Edit aset kustom",
+    "addCustomAssetPrice": "Tambah harga",
+    "removeFromPortfolio": "Hapus dari portofolio",
+    "filter": "Filter",
+    "edit": "Edit",
+    "editPortfolio": "Edit portofolio",
+    "clone": "Klon",
+    "clonePortfolio": "Klon portofolio",
+    "save": "Simpan",
+    "delete": "Hapus",
+    "import": "Impor",
+    "more": "Lainnya",
+    "actions": "Aksi",
+    "settings": "Pengaturan",
+    "send": "Kirim",
+    "changePassword": "Ganti kata sandi",
+    "confirmDialog": {
+      "yes": "Ya",
+      "no": "Tidak"
+    }
+  },
+  "form": {
+    "user": {
+      "field": {
+        "name": "Nama",
+        "email": "E-mail",
+        "passwordEdit": "Kata sandi baru (kosongkan untuk mempertahankan yang sekarang)",
+        "passwordCreate": "Kata sandi (kosongkan untuk dibuat otomatis dan dikirim melalui e-mail)",
+        "role": "Peran",
+        "isTest": "Pengguna uji"
+      },
+      "confirmTitle": "Apakah Anda yakin ingin menghapus pengguna ini?"
+    },
+    "general": {
+      "error": {
+        "required": "Nilai tidak boleh kosong"
+      }
+    },
+    "login": {
+      "title": "Masuk",
+      "field": {
+        "email": "E-mail",
+        "password": "Kata sandi"
+      },
+      "tooltip": {
+        "showPassword": "Tampilkan kata sandi",
+        "hidePassword": "Sembunyikan kata sandi"
+      }
+    },
+    "forgot": {
+      "title": "Lupa kata sandi?"
+    },
+    "passwordReset": {
+      "title": "Reset kata sandi",
+      "field": {
+        "email": "E-mail",
+        "password": "Kata sandi baru",
+        "password_confirmation": "Kata sandi baru (ulangi)"
+      }
+    },
+    "changePassword": {
+      "title": "Ganti kata sandi",
+      "field": {
+        "email": "E-mail",
+        "password": "Kata sandi saat ini",
+        "password_new": "Kata sandi baru"
+      },
+      "error": {
+        "minLength": "Panjang kata sandi minimal 6 karakter"
+      }
+    },
+    "signUp": {
+      "title": "Daftar",
+      "field": {
+        "name": "Nama",
+        "yourName": "Nama Anda",
+        "email": {
+          "main": "E-mail",
+          "hint": "Kata sandi akan dikirim ke E-mail"
+        },
+        "agree": {
+          "main": "Saya menerima",
+          "privacy": "Kebijakan Privasi",
+          "and": "dan",
+          "agreement": "Perjanjian Pengguna"
+        }
+      }
+    },
+    "profile": {
+      "settingsHeader": "Pengaturan",
+      "field": {
+        "name": "Nama",
+        "email": "E-mail",
+        "plan": "Paket",
+        "daysLeft": "Hari tersisa",
+        "daysLeft2": "hari tersisa",
+        "ignoreFunds": "Abaikan kekurangan dana saat menambahkan transaksi",
+        "language": "Bahasa",
+        "theme": "Tema",
+        "darkTheme": "Tema gelap"
+      }
+    },
+    "import": {
+      "title": "Impor transaksi",
+      "field": {
+        "broker": "Broker",
+        "file": {
+          "main": "File",
+          "hint": "Pilih file dalam format Excel (XLS, XLSX)"
+        }
+      }
+    },
+    "portfolio": {
+      "field": {
+        "name": "Nama",
+        "currency": "Mata uang",
+        "accountType": "Jenis akun",
+        "openedAt": "Tanggal dibuka",
+        "fee": "Biaya",
+        "feePercent": "Biaya, %",
+        "notes": "Komentar",
+        "goal": "Tujuan"
+      },
+      "confirmTitle": "Apakah Anda yakin ingin menghapus portofolio ini?"
+    },
+    "trade": {
+      "new": "Transaksi baru",
+      "field": {
+        "type": "Jenis operasi",
+        "portfolio": "Portofolio",
+        "asset": "Jenis aset",
+        "ticker": "Ticker",
+        "currency": "Mata uang",
+        "cost": "Harga",
+        "sum": "Jumlah",
+        "isWoMoney": "Tidak memperhitungkan uang",
+        "isWoMoneyHint": "Jika diaktifkan, transaksi tidak akan membuat catatan dalam riwayat operasi uang",
+        "shares": "Jumlah",
+        "date": "Tanggal transaksi",
+        "feeCurrency": "Mata uang biaya",
+        "fee": "Biaya",
+        "notes": "Komentar"
+      },
+      "confirmTitle": "Apakah Anda yakin ingin menghapus transaksi ini?",
+      "loading": "Memuat...",
+      "typeAtLeast": "Masukkan setidaknya 1 karakter",
+      "calcFee": "Hitung biaya"
+    },
+    "customAsset": {
+      "hint": "Aset kustom memungkinkan Anda menambahkan dan melacak perubahan harga aset lain ke portofolio, seperti properti.",
+      "confirmTitle": "Apakah Anda yakin ingin menghapus aset kustom ini?",
+      "priceHistory": "Riwayat harga",
+      "graph": "Grafik",
+      "field": {
+        "created": "Tanggal",
+        "ticker": "Ticker",
+        "name": "Nama",
+        "currency": "Mata uang",
+        "info": "Info"
+      }
+    },
+    "customAssetPrice": {
+      "confirmTitle": "Apakah Anda yakin ingin menghapus harga ini?",
+      "field": {
+        "asset_id": "Aset kustom",
+        "created": "Tanggal",
+        "price": "Harga"
+      }
+    }
+  },
+  "table": {
+    "users": {
+      "column": {
+        "name": "Nama",
+        "email": "E-mail",
+        "created": "Dibuat"
+      }
+    },
+    "general": {
+      "paginator": {
+        "itemsPerPage": "Baris per halaman:",
+        "nextPage": "Halaman berikutnya",
+        "previousPage": "Halaman sebelumnya",
+        "of": "dari"
+      },
+      "clear": "Bersihkan"
+    },
+    "companies": {
+      "column": {
+        "ticker": "Ticker",
+        "name": "Nama",
+        "isin": "ISIN"
+      }
+    },
+    "company": {
+      "info": "Info",
+      "dividends": "Dividen",
+      "type": "Jenis",
+      "ticker": "Ticker",
+      "currency": "Mata uang",
+      "price": "Harga"
+    },
+    "portfolios": {
+      "allPortfolios": "Semua portofolio",
+      "chosen": "dipilih",
+      "column": {
+        "name": "Nama",
+        "currency": "Mata uang",
+        "accountType": "Jenis akun",
+        "date": "Tanggal",
+        "opened": "Dibuka"
+      }
+    },
+    "portfolioContent": {
+      "totalCost": "Biaya portofolio",
+      "totalGain": "Keuntungan portofolio",
+      "column": {
+        "currency": "Mata uang",
+        "sum": "Jumlah",
+        "ticker": "Ticker",
+        "count": "Jumlah",
+        "currentPrice": "Harga saat ini",
+        "averagePrice": "Harga rata-rata",
+        "currentCost": "Biaya saat ini",
+        "currentGain": "Keuntungan",
+        "currentGainPercent": "Keuntungan, %",
+        "partPercent": "Bagian, %"
+      },
+      "tooltip": {
+        "currency": "Nilai dalam mata uang instrumen"
+      },
+      "noContent": {
+        "main": "Portofolio masih kosong",
+        "add": "tambahkan",
+        "or": "atau",
+        "import": "impor",
+        "trades": "transaksi"
+      },
+      "filter": {
+        "year": "Tahun"
+      }
+    },
+    "customAssets": {
+      "column": {
+        "created": "Tanggal",
+        "ticker": "Ticker",
+        "name": "Nama",
+        "price": "Harga"
+      },
+      "noContent": {
+        "main": "Anda belum menambahkan aset kustom",
+        "add": "Tambah"
+      }
+    },
+    "customAssetsPrices": {
+      "noContent": {
+        "main": "Anda belum menambahkan harga",
+        "add": "Tambah"
+      }
+    },
+    "trades": {
+      "column": {
+        "portfolio": "Portofolio",
+        "ticker": "Ticker",
+        "cost": "Harga",
+        "qty": "Jumlah",
+        "sum": "Jumlah",
+        "fee": "Biaya",
+        "date": "Tanggal"
+      },
+      "filter": {
+        "title": "Filter transaksi"
+      },
+      "filterField": {
+        "portfolio": "Portofolio",
+        "type": "Jenis",
+        "currency": "Mata uang",
+        "ticker": "Ticker",
+        "dateRange": "Rentang tanggal",
+        "startDate": "Tanggal mulai",
+        "endDate": "Tanggal akhir",
+        "closeBtn": "Tutup"
+      },
+      "noContent": {
+        "main": "Daftar transaksi masih kosong",
+        "add": "tambahkan",
+        "or": "atau",
+        "import": "impor",
+        "trades": "transaksi"
+      },
+      "dateRanges": {
+        "today": "Hari ini",
+        "yesterday": "Kemarin",
+        "last7days": "7 hari terakhir",
+        "last30days": "30 hari terakhir",
+        "thisMonth": "Bulan ini",
+        "lastMonth": "Bulan lalu",
+        "last6months": "6 bulan terakhir",
+        "lastYear": "Tahun lalu",
+        "wholeTime": "Sepanjang waktu"
+      },
+      "itemRemoveConfirm": "Apakah Anda yakin ingin menghapus posisi ini sepenuhnya dari portofolio?"
+    }
+  },
+  "alert": {
+    "user": {
+      "create": {
+        "message": "Pengguna berhasil dibuat"
+      },
+      "update": {
+        "message": "Pengguna berhasil diperbarui"
+      },
+      "delete": {
+        "message": "Pengguna berhasil dihapus"
+      }
+    },
+    "connectionLost": {
+      "message": "Gagal memuat. Mungkin tidak ada koneksi internet",
+      "action": "Segarkan"
+    },
+    "auth": {
+      "signUp": {
+        "message": "Anda berhasil mendaftar. Kata sandi layanan telah dikirim ke email Anda"
+      },
+      "signUpError": {
+        "message": "Gagal mendaftar"
+      },
+      "changePassword": {
+        "message": "Kata sandi berhasil diubah"
+      },
+      "login": {
+        "message": "Email atau kata sandi salah"
+      },
+      "updateMe": {
+        "message": "Profil berhasil diperbarui"
+      },
+      "forgot": {
+        "success": "Instruksi untuk mereset kata sandi telah dikirim ke email Anda"
+      },
+      "resetPassword": {
+        "success": "Kata sandi berhasil diubah"
+      }
+    },
+    "trade": {
+      "linkedTrade": {
+        "message": "Untuk mengedit transaksi terkait, ubah transaksi induk"
+      },
+      "create": {
+        "message": "Transaksi berhasil ditambahkan"
+      },
+      "update": {
+        "message": "Transaksi berhasil diperbarui"
+      },
+      "delete": {
+        "message": "Transaksi berhasil dihapus"
+      }
+    },
+    "portfolio": {
+      "import": {
+        "message": "Data impor berhasil dimuat"
+      },
+      "create": {
+        "message": "Portofolio berhasil ditambahkan"
+      },
+      "update": {
+        "message": "Portofolio berhasil diperbarui"
+      },
+      "delete": {
+        "message": "Portofolio berhasil dihapus"
+      },
+      "clone": {
+        "message": "Portofolio berhasil dikloning"
+      }
+    },
+    "customAsset": {
+      "create": {
+        "message": "Aset kustom berhasil ditambahkan"
+      },
+      "update": {
+        "message": "Aset kustom berhasil diperbarui"
+      },
+      "delete": {
+        "message": "Aset kustom berhasil dihapus"
+      }
+    },
+    "plugins": {
+      "installed": "Plugin \"{$title}\" terinstal",
+      "uninstalled": "Plugin dihapus",
+      "upgraded": "Plugin ditingkatkan ke versi {$version}",
+      "configSaved": "Konfigurasi disimpan"
+    },
+    "currencyRates": {
+      "updated": "Kurs tersimpan: {$count}"
+    }
+  },
+  "pullToRefresh": {
+    "start": "Tarik ke bawah untuk menyegarkan",
+    "end": "Lepaskan untuk menyegarkan",
+    "refreshing": "Menyegarkan..."
+  },
+  "theme": {
+    "light": "Terang",
+    "dark": "Gelap"
+  },
+  "analytics": {
+    "portfolioGrowth": "Pertumbuhan portofolio",
+    "growth": "Pertumbuhan",
+    "delta": "Perubahan",
+    "byAssetTypes": "Berdasarkan jenis aset",
+    "bySectors": "Berdasarkan sektor",
+    "byEarnings": "Berdasarkan dividen dan kupon",
+    "byEmitents": "Berdasarkan emiten",
+    "totalEarnings": "Total dividen dan kupon yang diterima",
+    "totalEmitents": "Jumlah total emiten",
+    "stats": "Statistik",
+    "goal": "Tujuan",
+    "goalSet": "Ubah",
+    "goalAchievement": "Pencapaian tujuan"
+  },
+  "chart": {
+    "history": "Riwayat",
+    "trades": "Transaksi"
+  },
+  "plugins": {
+    "title": "Plugin",
+    "tab": {
+      "installed": "Terinstal",
+      "store": "Toko"
+    },
+    "manual": {
+      "title": "Instal dari repositori",
+      "hint": "Tempel URL https repositori git (GitHub, GitLab, Gitea, ...). Tambahkan {$START_TAG_CODE}#tag{$CLOSE_TAG_CODE} atau {$START_TAG_CODE}#branch{$CLOSE_TAG_CODE} untuk mengunci versi.",
+      "field": {
+        "url": "URL repositori"
+      }
+    },
+    "installed": {
+      "empty": "Belum ada plugin yang terinstal. Instal dari toko atau melalui URL repositori."
+    },
+    "store": {
+      "hint": "Setiap repositori GitHub publik dengan topik {$START_TAG_CODE}ohmyshares-plugin{$CLOSE_TAG_CODE} muncul di sini secara otomatis.",
+      "empty": "Tidak ditemukan. Periksa akses jaringan ke GitHub atau konfigurasikan registri tambahan.",
+      "installed": "Terinstal"
+    },
+    "action": {
+      "install": "Instal",
+      "manage": "Kelola",
+      "refresh": "Segarkan",
+      "upgrade": "Tingkatkan"
+    },
+    "confirm": {
+      "uninstall": "Hapus plugin?"
+    },
+    "status": {
+      "enabled": "Aktif",
+      "disabled": "Nonaktif"
+    },
+    "field": {
+      "package": "Paket",
+      "version": "Versi",
+      "status": "Status",
+      "remote": "Sumber",
+      "installedAt": "Terinstal"
+    },
+    "config": {
+      "title": "Konfigurasi",
+      "rawHint": "Plugin ini tidak mendeklarasikan skema konfigurasi. Edit pengaturannya sebagai JSON.",
+      "invalidJson": "Objek JSON tidak valid"
+    }
+  },
+  "currencyRates": {
+    "title": "Kurs mata uang",
+    "noProviders": "Tidak ada plugin aktif yang menyediakan kurs mata uang.",
+    "installPlugin": "Pasang plugin",
+    "providers": "Sumber",
+    "empty": "Kurs tidak ditemukan.",
+    "filter": {
+      "currency": "Kode mata uang"
+    },
+    "action": {
+      "update": "Perbarui"
+    },
+    "field": {
+      "date": "Tanggal",
+      "base": "Basis",
+      "currency": "Mata uang",
+      "rate": "Kurs",
+      "source": "Sumber",
+      "updatedAt": "Diperbarui"
+    }
+  }
+}

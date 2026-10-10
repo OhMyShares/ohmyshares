@@ -1,0 +1,41 @@
+<div class="tui-container tui-container_adaptive">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-6 tui-col_xs-12">
+
+      <h1 class="tui-text_h3" i18n="@@form.forgot.title">Forgot password</h1>
+
+      <form [formGroup]="forgotForm" (keyup.enter)="forgot()">
+        <div class="form-group">
+          <tui-input formControlName="email">
+            <input tuiTextfield
+                   i18n-placeholder="@@form.login.field.email"
+                   placeholder="user@domain.com"
+                   type="email"
+                   inputmode="email"
+                   autocapitalize="off"
+                   name="email"
+                   required>
+            Email
+          </tui-input>
+          <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+        </div>
+      </form>
+
+      <div class="tui-form__buttons tui-space_bottom-5">
+        <a tuiButton appearance="primary"
+           class="btn-block"
+           [showLoader]="isLoading$ | async"
+           [disabled]="forgotForm.invalid || (isLoading$ | async)"
+           (click)="forgot()">
+          <span i18n="@@action.sendResetLink">Send reset link</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center text-sm-left">
+  <a (click)="history.back()">
+    <span i18n="@@action.back">Back</span>
+  </a>
+</div>

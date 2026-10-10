@@ -1,0 +1,49 @@
+{
+  "Shares": "Saham",
+  "Bonds": "Obligasi",
+  "Money": "Uang",
+  "Crypto": "Kripto",
+  "Custom": "Kustom",
+
+  "Buy": "Beli",
+  "Sell": "Jual",
+  "Dividend": "Dividen",
+  "Coupon": "Kupon",
+  "Fee": "Biaya",
+  "Taxes": "Pajak",
+  "Credit": "Setoran",
+  "Debit": "Penarikan",
+
+  "Stock": "Saham",
+  "ETF": "ETF",
+  "Futures": "Kontrak berjangka",
+  "Currency": "Mata uang",
+  "Index": "Indeks",
+  "Mutual Fond": "Reksa dana",
+  "Bond": "Obligasi",
+  "Cryptocurrency": "Mata uang kripto",
+
+  "My Portfolio": "Portofolio saya",
+  "Broker": "Broker",
+  "Copy": "Salinan",
+
+  "Hello": "Halo",
+  "Incorrect credentials": "Kredensial salah",
+  "Reset password": "Atur ulang kata sandi",
+  "Please do not reply to this email": "Mohon jangan membalas email ini",
+  "If you need to contact us please email us at": "Jika Anda perlu menghubungi kami, kirim email ke",
+
+  "Other": "Lainnya",
+
+  "Basic Materials": "Bahan Dasar",
+  "Communication Services": "Layanan Komunikasi",
+  "Consumer Cyclical": "Konsumen Siklikal",
+  "Consumer Defensive": "Konsumen Non-Siklikal",
+  "Energy": "Energi",
+  "Financial Services": "Layanan Keuangan",
+  "Healthcare": "Kesehatan",
+  "Industrials": "Industri",
+  "Real Estate": "Properti",
+  "Technology": "Teknologi",
+  "Utilities": "Utilitas"
+}

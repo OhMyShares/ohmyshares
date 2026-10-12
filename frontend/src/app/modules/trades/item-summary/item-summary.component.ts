@@ -3,9 +3,10 @@ import { Position, Portfolio } from '../../../core/interfaces/portfolios.interfa
 import { CommonService } from '../../../core/services/common.service';
 
 @Component({
-  selector: 'app-item-summary',
-  templateUrl: './item-summary.component.html',
-  styleUrls: ['./item-summary.component.scss']
+    selector: 'app-item-summary',
+    templateUrl: './item-summary.component.html',
+    styleUrls: ['./item-summary.component.scss'],
+    standalone: false
 })
 export class ItemSummaryComponent implements OnInit {
   // @HostBinding('class') classes = '';

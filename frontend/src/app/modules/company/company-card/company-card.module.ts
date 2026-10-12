@@ -1,3 +1,6 @@
+import { TuiCardLarge } from "@taiga-ui/layout";
+import { TuiCurrencyPipe } from "@taiga-ui/addon-commerce";
+import { TuiTable } from "@taiga-ui/addon-table";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -6,11 +9,8 @@ import { ActionsModule } from '../../actions/actions.module';
 import { CompanyCardComponent } from './company-card.component';
 // import { CompanyCardResolver } from './company-card.resolver';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TuiTableModule} from '@taiga-ui/addon-table';
-import {TuiIslandModule} from '@taiga-ui/kit';
-import {TuiButtonModule, TuiFormatNumberPipeModule} from '@taiga-ui/core';
-import {TuiAxesModule, TuiBarChartModule} from '@taiga-ui/addon-charts';
-import {TuiCurrencyPipeModule} from '@taiga-ui/addon-commerce';
+import { TuiFormatNumberPipe, TuiButton } from '@taiga-ui/core';
+import { TuiAxes, TuiBarChart } from '@taiga-ui/addon-charts';
 
 @NgModule({
   declarations: [CompanyCardComponent],
@@ -27,13 +27,13 @@ import {TuiCurrencyPipeModule} from '@taiga-ui/addon-commerce';
     ActionsModule,
     FormsModule,
     ReactiveFormsModule,
-    TuiTableModule,
-    TuiIslandModule,
-    TuiFormatNumberPipeModule,
-    TuiAxesModule,
-    TuiBarChartModule,
-    TuiCurrencyPipeModule,
-    TuiButtonModule,
+    ...TuiTable,
+    TuiCardLarge,
+    TuiFormatNumberPipe,
+    TuiAxes,
+    TuiBarChart,
+    TuiCurrencyPipe,
+    TuiButton,
   ]
 })
 export class CompanyCardModule {

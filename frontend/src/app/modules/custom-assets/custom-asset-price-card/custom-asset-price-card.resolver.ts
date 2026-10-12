@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of, zip } from 'rxjs';
 import { CustomAssetPrice } from '../../../core/interfaces/custom_assets.interfaces';
 import { CustomAssetsService } from '../../../core/services/custom_assets.service';
@@ -8,7 +8,7 @@ import { Common } from '../../../core/services/references.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomAssetPriceCardResolver implements Resolve<[CustomAssetPrice, Common[]]> {
+export class CustomAssetPriceCardResolver  {
 
   constructor(
     private customAssetsService: CustomAssetsService

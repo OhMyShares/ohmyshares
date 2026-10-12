@@ -1,13 +1,12 @@
+import { WaIntersectionObserver } from "@ng-web-apis/intersection-observer";
+import { TuiTable } from "@taiga-ui/addon-table";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from '../../../core/core.module';
 import { ActionsModule } from '../../actions/actions.module';
 import { PortfolioListComponent } from './portfolio-list.component';
-import {TuiButtonModule, TuiFormatNumberPipeModule, TuiScrollbarModule} from '@taiga-ui/core';
-import {TuiTableModule} from '@taiga-ui/addon-table';
-import {IntersectionObserverModule} from '@ng-web-apis/intersection-observer';
-
+import { TuiFormatNumberPipe, TuiScrollbar, TuiScrollable, TuiButton } from '@taiga-ui/core';
 
 @NgModule({
   declarations: [PortfolioListComponent],
@@ -18,11 +17,11 @@ import {IntersectionObserverModule} from '@ng-web-apis/intersection-observer';
     ]),
     CoreModule,
     ActionsModule,
-    TuiButtonModule,
-    TuiTableModule,
-    TuiFormatNumberPipeModule,
-    TuiScrollbarModule,
-    IntersectionObserverModule
+    TuiButton,
+    ...TuiTable,
+    TuiFormatNumberPipe,
+    TuiScrollbar, TuiScrollable,
+    ...WaIntersectionObserver
   ]
 })
 export class PortfolioListModule {

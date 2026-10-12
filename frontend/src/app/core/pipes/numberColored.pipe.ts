@@ -1,7 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-@Pipe({ name: 'numberColored' })
+@Pipe({
+    name: 'numberColored',
+    standalone: false
+})
 export class numberColoredPipe implements PipeTransform {
   constructor(private sanitized: DomSanitizer) {
   }

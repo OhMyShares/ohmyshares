@@ -2,27 +2,85 @@
 @import "mixins";
 
 :root {
-  --tui-primary: #13b38e;
-  --tui-primary-hover: #25cba5;
-  --tui-secondary: #bfe1d9;
-  --tui-secondary-hover: #aeeedc;
-  --tui-link: #196150;
-  --tui-link-hover: #217461;
+  --tui-background-accent-1: #13b38e;
+  --tui-background-accent-1-hover: #25cba5;
+  --tui-text-action: #196150;
+  --tui-text-action-hover: #217461;
+}
+
+[tuiTheme='dark'] {
+  --tui-text-action: #13b38e;
+  --tui-text-action-hover: #25cba5;
+}
+
+body tui-root {
+  --app-background: #f2f3f5;
+  min-height: 100vh;
+  border-image: conic-gradient(var(--app-background) 0 0) fill 0/0/0 0 100vh 0;
+
+  &[tuiTheme='dark'] {
+    --app-background: var(--tui-background-base);
+  }
 }
 
 main {
-  margin-top: 5.0rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 5.5rem;
+  padding-bottom: 3rem;
 }
 
 h1 { line-height: 1.85rem; }
 
+[tuiCardLarge] {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.tui-island__title {
+  font: var(--tui-typography-heading-h6);
+  margin: 0 0 1rem;
+}
+
+.tui-island__category {
+  display: block;
+  font: var(--tui-typography-body-s);
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--tui-text-secondary);
+  margin: 0 0 0.25rem;
+
+  & ~ * {
+    font: var(--tui-typography-heading-h6);
+  }
+}
+
+.tui-form__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+
+  > * {
+    margin: 0 !important;
+  }
+}
+
+.app-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+
+  > *,
+  [tuiButton] {
+    margin: 0 !important;
+  }
+}
+
 .text-bold { font-weight: bold; }
-.text-muted { color: var(--tui-text-03); }
+.text-muted { color: var(--tui-text-tertiary); }
 .text-small, .small { font-size: smaller; }
-.text-success { color: var(--tui-success-fill); }
-.text-danger { color: var(--tui-error-fill); }
+.text-success { color: var(--tui-status-positive); }
+.text-danger { color: var(--tui-status-negative); }
 .text-uppercase {text-transform: uppercase !important; }
 
 .opacity-50 { opacity: 0.5; }
@@ -30,25 +88,31 @@ h1 { line-height: 1.85rem; }
 .table {
   width: 100%;
 }
+table[tuiTable] {
+  background: var(--tui-background-elevation-1);
+}
 tr:hover td {
-  background-color: var(--tui-base-02);
+  background-color: var(--tui-background-base-alt);
 }
 
 body {
   -webkit-touch-callout: none;
   &.light-theme {
-    background-color: #f0f0f0;
+    background-color: #f6f7f8;
     color: #212529;
-    a {
-      color: #196150;
-    }
   }
   &.dark-theme {
-    background-color: #262626;
+    background-color: #222;
     color: #eee;
-    a {
-      color: #13b38e;
-    }
+  }
+}
+
+a:not([tuiButton]):not([tuiIconButton]):not([tuiTab]):not([tuiOption]):not([tuiCardLarge]) {
+  color: var(--tui-text-action);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--tui-text-action-hover);
   }
 }
 

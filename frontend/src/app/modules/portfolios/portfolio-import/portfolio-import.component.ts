@@ -1,3 +1,5 @@
+import { tuiPure } from "@taiga-ui/legacy";
+import { TuiNotificationService } from "@taiga-ui/core";
 import { Component, HostBinding, OnInit } from '@angular/core';
 import {FormControl, FormGroup, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,17 +10,17 @@ import { FormField } from '../../../core/interfaces/common.interfaces';
 import { CommonService } from '../../../core/services/common.service';
 import { PortfoliosService } from '../../../core/services/portfolios.service';
 import {Common, ReferencesService} from '../../../core/services/references.service';
-import {TuiAlertService, TuiNotification} from "@taiga-ui/core";
 import {Observable, of, Subject, timer} from "rxjs";
 import {TuiFileLike} from "@taiga-ui/kit";
 import {finalize, map, switchMap} from "rxjs/operators";
-import {TuiContextWithImplicit, tuiPure, TuiStringHandler} from "@taiga-ui/cdk";
+import { TuiStringHandler, TuiContext } from "@taiga-ui/cdk";
 import {toFormData} from "axios";
 
 @Component({
-  selector: 'app-portfolio-import',
-  templateUrl: './portfolio-import.component.html',
-  styleUrls: ['./portfolio-import.component.scss']
+    selector: 'app-portfolio-import',
+    templateUrl: './portfolio-import.component.html',
+    styleUrls: ['./portfolio-import.component.scss'],
+    standalone: false
 })
 export class PortfolioImportComponent implements OnInit {
   @HostBinding('class') classes = 'row justify-content-center align-items-center';
@@ -46,7 +48,7 @@ export class PortfolioImportComponent implements OnInit {
     private portfoliosService: PortfoliosService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     public commonService: CommonService,
     public referencesService: ReferencesService,
   ) {
@@ -71,7 +73,7 @@ export class PortfolioImportComponent implements OnInit {
     this.portfoliosService.import(this.portfolioId, this.importForm.get('parser').value, formData)
       .subscribe((res) => {
         this.alertService.open($localize`:@@alert.portfolio.import.message:The data has been successfully uploaded`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         history.back();
       });
@@ -101,9 +103,9 @@ export class PortfolioImportComponent implements OnInit {
   }
 
   @tuiPure
-  stringify(items: readonly Common[]): TuiStringHandler<TuiContextWithImplicit<number>> {
+  stringify(items: readonly Common[]): TuiStringHandler<number> {
     const map = new Map(items.map(({id, title}) => [id, title] as [number, string]));
-    return ({$implicit}: TuiContextWithImplicit<number>) => map.get($implicit) || ``;
+    return (id: number) => map.get(id) || ``;
   }
 
 }

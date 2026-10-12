@@ -1,9 +1,8 @@
-import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
-import {TuiRootModule, TuiDialogModule, TuiAlertModule, TUI_SANITIZER, TuiThemeNightModule, TuiModeModule} from '@taiga-ui/core';
+import { TuiRoot, TuiDialog, provideTaiga, TuiNotification, tuiTextfieldOptionsProvider } from '@taiga-ui/core';
 import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import localeRu from '@angular/common/locales/ru';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule, signal } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
@@ -34,11 +33,9 @@ registerLocaleData(localeRu);
       fastFadeOut: true
     }),
     HeaderModule,
-    TuiRootModule,
-    TuiDialogModule,
-    TuiAlertModule,
-    TuiModeModule,
-    TuiThemeNightModule
+    TuiRoot,
+    TuiDialog,
+    ...TuiNotification
   ],
   providers: [
     {
@@ -51,8 +48,9 @@ registerLocaleData(localeRu);
       useValue: LOCALE_STRING
     },
     ThemingService,
-      {provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}
-],
+    provideTaiga(),
+    tuiTextfieldOptionsProvider({cleaner: signal(false)})
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,13 +1,15 @@
-<app-actions *ngIf="(authService.me$ | async) as me">
-  <a tuiButton
-     size="s"
-     class="tui-space_right-3 tui-space_bottom-3"
-     icon="tuiIconPlus"
-     [routerLink]="['new']"
-     appearance="secondary">
-    <span i18n="@@action.portfolio">Portfolio</span>
-  </a>
-</app-actions>
+@if ((authService.me$ | async); as me) {
+  <app-actions>
+    <a tuiButton
+      size="s"
+      class="tui-space_right-3 tui-space_bottom-3"
+      iconStart="@tui.plus"
+      [routerLink]="['new']"
+      appearance="secondary">
+      <span i18n="@@action.portfolio">Portfolio</span>
+    </a>
+  </app-actions>
+}
 
 <div class="tui-container tui-container_adaptive">
   <div class="tui-row tui-row_adaptive">
@@ -15,7 +17,7 @@
       <h1 class="tui-space_top-0" i18n="@@nav.portfolios">
         Portfolios
       </h1>
-      <tui-scrollbar waIntersectionRoot class="scrollbar" [hidden]="true">
+      <tui-scrollbar waIntersectionRoot class="scrollbar">
         <table tuiTable class="table" [columns]="columns" [class.tui-skeleton]="skeletonVisible">
           <thead>
             <tr tuiThGroup>
@@ -25,24 +27,28 @@
               <th tuiTh i18n="@@table.portfolios.column.accountType">Account Type</th>
             </tr>
           </thead>
-          <tbody tuiTbody [data]="portfolios" *ngIf="portfolios">
-            <tr tuiTr *tuiRow="let item of portfolios"
-                [routerLink]="[item.uid, 'content']"
-                class="tui-table__tr_cursor_pointer">
-              <td *tuiCell="'name'" tuiTd>
-                <strong>{{ item.name }}</strong>
-              </td>
-              <td *tuiCell="'currency_code'" tuiTd>
-                {{ this.getCurrency(item)?.name }}
-              </td>
-              <td *tuiCell="'opened_at'" tuiTd>
-                {{ item.opened_at * 1000 | date }}
-              </td>
-              <td *tuiCell="'account_type'" tuiTd>
-                {{ this.getAccountTypeName(item) }}
-              </td>
-            </tr>
-          </tbody>
+          @if (portfolios) {
+            <tbody tuiTbody [data]="portfolios">
+              @for (item of portfolios; track item) {
+                <tr tuiTr
+                  [routerLink]="[item.uid, 'content']"
+                  class="tui-table__tr_cursor_pointer">
+                  <td *tuiCell="'name'" tuiTd>
+                    <strong>{{ item.name }}</strong>
+                  </td>
+                  <td *tuiCell="'currency_code'" tuiTd>
+                    {{ this.getCurrency(item)?.name }}
+                  </td>
+                  <td *tuiCell="'opened_at'" tuiTd>
+                    {{ +item.opened_at * 1000 | date }}
+                  </td>
+                  <td *tuiCell="'account_type'" tuiTd>
+                    {{ this.getAccountTypeName(item) }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          }
         </table>
       </tui-scrollbar>
     </div>

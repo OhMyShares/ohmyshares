@@ -1,16 +1,17 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {TuiAlertService, TuiDialogService, TuiNotification} from '@taiga-ui/core';
-import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
+import { TuiDialogService, TuiNotificationService } from '@taiga-ui/core';
+import {PolymorpheusComponent} from '@taiga-ui/polymorpheus';
 import {CatalogItem, Plugin} from '../../../core/interfaces/plugin.interface';
 import {PLUGINS_OFFICIAL_URL, PluginsService} from '../../../core/services/plugins.service';
 import {ConfirmDialogComponent, ConfirmDialogData} from '../../confirm-dialog/confirm-dialog.component';
 
 @Component({
-  selector: 'app-plugins-list',
-  templateUrl: './plugins-list.component.html',
-  styleUrls: ['./plugins-list.component.scss']
+    selector: 'app-plugins-list',
+    templateUrl: './plugins-list.component.html',
+    styleUrls: ['./plugins-list.component.scss'],
+    standalone: false
 })
 export class PluginsListComponent implements OnInit {
   activeTab = 0;
@@ -25,7 +26,7 @@ export class PluginsListComponent implements OnInit {
 
   constructor(
     private pluginsService: PluginsService,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     private dialogService: TuiDialogService,
     private injector: Injector,
     private router: Router,
@@ -110,7 +111,7 @@ export class PluginsListComponent implements OnInit {
         this.installing = null;
         this.alertService.open(
           $localize`:@@alert.plugins.installed:Plugin "${plugin.title}:title:" installed`,
-          {status: TuiNotification.Success},
+          {appearance: 'positive'},
         ).subscribe();
         if (onSuccess) {
           onSuccess();

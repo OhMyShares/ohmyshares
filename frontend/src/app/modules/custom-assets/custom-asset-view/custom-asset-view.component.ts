@@ -3,17 +3,17 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CustomAsset, CustomAssetPrice} from '../../../core/interfaces/custom_assets.interfaces';
 import {CustomAssetsService} from '../../../core/services/custom_assets.service';
-import {TUI_DEFAULT_STRINGIFY} from '@taiga-ui/cdk';
 
 @Component({
-  selector: 'app-custom-asset-view',
-  templateUrl: './custom-asset-view.component.html',
-  styleUrls: ['./custom-asset-view.component.scss'],
-  providers: [DatePipe]
+    selector: 'app-custom-asset-view',
+    templateUrl: './custom-asset-view.component.html',
+    styleUrls: ['./custom-asset-view.component.scss'],
+    providers: [DatePipe],
+    standalone: false
 })
 export class CustomAssetViewComponent implements OnInit {
 
-  readonly stringify = TUI_DEFAULT_STRINGIFY;
+  readonly stringify = String;
   public customAsset: CustomAsset;
   public chartData = [];
   public chartXMax = 1;

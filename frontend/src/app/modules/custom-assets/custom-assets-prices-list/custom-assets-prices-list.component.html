@@ -1,23 +1,26 @@
-<tui-scrollbar waIntersectionRoot class="scrollbar" [hidden]="true">
+<tui-scrollbar waIntersectionRoot class="scrollbar">
   <table tuiTable class="table" [columns]="columns">
     <thead>
-    <tr tuiThGroup>
-      <th tuiTh>Created</th>
-      <th tuiTh>Price</th>
-    </tr>
+      <tr tuiThGroup>
+        <th tuiTh>Created</th>
+        <th tuiTh>Price</th>
+      </tr>
     </thead>
-    <tbody tuiTbody [data]="customAssetsPrices" *ngIf="customAssetsPrices">
-    <tr tuiTr *tuiRow="let item of customAssetsPrices"
-        [routerLink]="['price', item.id]"
-        class="tui-table__tr_cursor_pointer">
-
-      <td *tuiCell="'created_at'" tuiTd>
-        {{ item.created_at * 1000 | date }}
-      </td>
-      <td *tuiCell="'price'" tuiTd>
-        {{ item.currency_sign }} {{ item.price | tuiFormatNumber }}
-      </td>
-    </tr>
-    </tbody>
+    @if (customAssetsPrices) {
+      <tbody tuiTbody [data]="customAssetsPrices">
+        @for (item of customAssetsPrices; track item) {
+          <tr tuiTr
+            [routerLink]="['price', item.id]"
+            class="tui-table__tr_cursor_pointer">
+            <td *tuiCell="'created_at'" tuiTd>
+              {{ item.created_at * 1000 | date }}
+            </td>
+            <td *tuiCell="'price'" tuiTd>
+              {{ item.currency_sign }} {{ item.price | tuiFormatNumber }}
+            </td>
+          </tr>
+        }
+      </tbody>
+    }
   </table>
 </tui-scrollbar>

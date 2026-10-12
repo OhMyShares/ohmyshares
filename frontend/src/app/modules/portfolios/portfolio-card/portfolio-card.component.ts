@@ -1,3 +1,4 @@
+import { TuiNotificationService } from "@taiga-ui/core";
 import { Component, HostBinding, OnInit } from '@angular/core';
 import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,13 +9,13 @@ import { CommonService } from '../../../core/services/common.service';
 import { PortfoliosService } from '../../../core/services/portfolios.service';
 import {Common, CurrencyReference, ReferencesService} from '../../../core/services/references.service';
 import { CURRENT_PORTFOLIO_KEY } from '../../../core/constants';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
 import {TuiDay} from '@taiga-ui/cdk';
 
 @Component({
-  selector: 'app-portfolio-card',
-  templateUrl: './portfolio-card.component.html',
-  styleUrls: [ './portfolio-card.component.scss' ]
+    selector: 'app-portfolio-card',
+    templateUrl: './portfolio-card.component.html',
+    styleUrls: ['./portfolio-card.component.scss'],
+    standalone: false
 })
 export class PortfolioCardComponent implements OnInit {
   // @HostBinding('class') classes = 'tui-space_bottom-5';
@@ -50,7 +51,7 @@ export class PortfolioCardComponent implements OnInit {
     private portfoliosService: PortfoliosService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     public commonService: CommonService,
     private formBuilder: UntypedFormBuilder
   ) {
@@ -91,7 +92,7 @@ export class PortfolioCardComponent implements OnInit {
         .subscribe(() => {
           this.showLoader = false;
           this.alertService.open($localize`:@@alert.portfolio.update.message:The portfolio has been successfully updated`, {
-            status: TuiNotification.Success
+            appearance: 'positive'
           }).subscribe();
           history.back();
         });
@@ -101,7 +102,7 @@ export class PortfolioCardComponent implements OnInit {
         .subscribe(() => {
           this.showLoader = false;
           this.alertService.open($localize`:@@alert.portfolio.create.message:The portfolio has been successfully created`, {
-            status: TuiNotification.Success
+            appearance: 'positive'
           }).subscribe();
           history.back();
         });
@@ -112,7 +113,7 @@ export class PortfolioCardComponent implements OnInit {
     this.portfoliosService.delete(this.portfolio.uid)
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.portfolio.delete.message:The portfolio has been successfully deleted`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         localStorage.setItem(CURRENT_PORTFOLIO_KEY, null);
         this.router.navigate([ '/portfolios' ]);

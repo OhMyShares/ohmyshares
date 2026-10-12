@@ -1,3 +1,4 @@
+import { tuiScrollbarOptionsProvider } from '@taiga-ui/core';
 import {DatePipe} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
@@ -9,10 +10,11 @@ import {Common, CurrencyReference, REFERENCE, ReferencesService} from '../../../
 import {PortfoliosService} from '../../../core/services/portfolios.service';
 
 @Component({
-  selector: 'app-portfolio-list',
-  templateUrl: './portfolio-list.component.html',
-  styleUrls: [ './portfolio-list.component.scss' ],
-  providers: [ DatePipe ]
+    selector: 'app-portfolio-list',
+    templateUrl: './portfolio-list.component.html',
+    styleUrls: ['./portfolio-list.component.scss'],
+    providers: [DatePipe, tuiScrollbarOptionsProvider({mode: 'hidden'})],
+    standalone: false
 })
 export class PortfolioListComponent implements OnInit {
   // @HostBinding('class') classes = 'row justify-content-center align-items-center';

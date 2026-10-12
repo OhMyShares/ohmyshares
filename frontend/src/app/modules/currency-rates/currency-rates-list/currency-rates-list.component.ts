@@ -1,15 +1,17 @@
+import { TuiNotificationService } from "@taiga-ui/core";
+import { TuiTablePaginationEvent } from '@taiga-ui/addon-table';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
 import {Subscription} from 'rxjs';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import {CurrencyRateRecord, CurrencyRatesProvider} from '../../../core/interfaces/currency-rate.interface';
 import {CurrencyRatesService} from '../../../core/services/currency-rates.service';
 
 @Component({
-  selector: 'app-currency-rates-list',
-  templateUrl: './currency-rates-list.component.html',
-  styleUrls: ['./currency-rates-list.component.scss']
+    selector: 'app-currency-rates-list',
+    templateUrl: './currency-rates-list.component.html',
+    styleUrls: ['./currency-rates-list.component.scss'],
+    standalone: false
 })
 export class CurrencyRatesListComponent implements OnInit, OnDestroy {
   rates: CurrencyRateRecord[] = [];
@@ -29,7 +31,7 @@ export class CurrencyRatesListComponent implements OnInit, OnDestroy {
 
   constructor(
     private currencyRatesService: CurrencyRatesService,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -64,14 +66,9 @@ export class CurrencyRatesListComponent implements OnInit, OnDestroy {
     });
   }
 
-  onPage(index: number): void {
-    this.pageIndex = index;
-    this.load();
-  }
-
-  onSize(size: number): void {
+  onPagination({page, size}: TuiTablePaginationEvent): void {
+    this.pageIndex = size === this.pageSize ? page : 0;
     this.pageSize = size;
-    this.pageIndex = 0;
     this.load();
   }
 
@@ -83,7 +80,7 @@ export class CurrencyRatesListComponent implements OnInit, OnDestroy {
         this.providers = response.providers;
         this.alertService.open(
           $localize`:@@alert.currencyRates.updated:Stored rates: ${response.count}:count:`,
-          {status: response.count > 0 ? TuiNotification.Success : TuiNotification.Warning},
+          {appearance: response.count > 0 ? 'positive' : 'warning'},
         ).subscribe();
         this.pageIndex = 0;
         this.load();

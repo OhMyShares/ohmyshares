@@ -1,13 +1,15 @@
 <div class="tui-container tui-container_adaptive">
   <tui-tabs>
-    <ng-container *ngFor="let item of items">
-      <a *ngIf="item.visible"
-         tuiTab
-         routerLinkActive="active"
-         [routerLink]="[item.route()]">
-        <tui-svg src="{{item.icon}}"></tui-svg>
-        <span>{{item.label}}</span>
-      </a>
-    </ng-container>
+    @for (item of items; track item) {
+      @if (item.visible) {
+        <a
+          tuiTab
+          routerLinkActive="active"
+          [iconStart]="item.icon"
+          [routerLink]="[item.route()]">
+          {{ item.label }}
+        </a>
+      }
+    }
   </tui-tabs>
 </div>

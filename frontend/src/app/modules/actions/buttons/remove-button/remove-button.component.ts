@@ -3,12 +3,13 @@ import {Component, EventEmitter, Inject, Injector, Input, Output} from '@angular
 import { filter, take } from 'rxjs/operators';
 import { ConfirmDialogData, ConfirmDialogComponent } from '../../../confirm-dialog/confirm-dialog.component';
 import {TuiDialogService} from '@taiga-ui/core';
-import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
+import {PolymorpheusComponent} from '@taiga-ui/polymorpheus';
 
 @Component({
-  selector: 'app-remove-button',
-  templateUrl: './remove-button.component.html',
-  styleUrls: [ './remove-button.component.scss' ]
+    selector: 'app-remove-button',
+    templateUrl: './remove-button.component.html',
+    styleUrls: ['./remove-button.component.scss'],
+    standalone: false
 })
 export class RemoveButtonComponent {
   @Input() isDisabled = true;

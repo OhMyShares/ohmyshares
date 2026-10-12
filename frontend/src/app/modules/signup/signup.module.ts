@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from '../../core/core.module';
 import { ActionsModule } from '../actions/actions.module';
 import { SignupComponent } from './signup.component';
-import {TuiCheckboxLabeledModule, TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule} from '@taiga-ui/kit';
-import {TuiButtonModule, TuiErrorModule, TuiGroupModule} from '@taiga-ui/core';
+import { TuiButtonLoading, TuiPassword } from '@taiga-ui/kit';
+import { TuiError, TuiGroup, TuiLabel, TuiButton, TuiCheckbox, TuiIcon, TuiInput } from '@taiga-ui/core';
 import {NgHcaptchaModule} from 'ng-hcaptcha';
 import {environment} from '../../../environments/environment';
 
@@ -21,17 +21,15 @@ import {environment} from '../../../environments/environment';
     ReactiveFormsModule,
     CoreModule,
     ActionsModule,
-    TuiInputModule,
-    TuiButtonModule,
-    TuiInputPasswordModule,
-    TuiGroupModule,
-    TuiCheckboxLabeledModule,
-    TuiErrorModule,
-    TuiFieldErrorPipeModule,
+    ...TuiInput,
+    TuiButton,
+    TuiIcon, TuiPassword,
+    TuiGroup,
+    TuiLabel,
+    ...TuiError,
     NgHcaptchaModule.forRoot({
       siteKey: environment.H_CAPTCHA_SITE_KEY,
-    })
-  ]
+    }), TuiButtonLoading, TuiCheckbox]
 })
 export class SignupModule {
 }

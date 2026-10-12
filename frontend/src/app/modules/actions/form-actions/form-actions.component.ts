@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-form-actions',
-  templateUrl: './form-actions.component.html',
-  styleUrls: [ './form-actions.component.scss' ]
+    selector: 'app-form-actions',
+    templateUrl: './form-actions.component.html',
+    styleUrls: ['./form-actions.component.scss'],
+    standalone: false
 })
 export class FormActionsComponent {
   @Input() isSaveDisabled = true;

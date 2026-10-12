@@ -8,9 +8,10 @@ import {SpinnerService} from "../../core/services/spinner.service";
 import {environment} from "../../../environments/environment";
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: [ './signup.component.scss' ]
+    selector: 'app-signup',
+    templateUrl: './signup.component.html',
+    styleUrls: ['./signup.component.scss'],
+    standalone: false
 })
 export class SignupComponent implements OnInit, OnDestroy {
   // @HostBinding('class') classes = '';

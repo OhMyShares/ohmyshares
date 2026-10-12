@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
-import {TuiAlertService, TuiDialogContext, TuiNotification} from '@taiga-ui/core';
-import {POLYMORPHEUS_CONTEXT} from '@tinkoff/ng-polymorpheus';
+import { TuiDialogContext, TuiNotificationService } from '@taiga-ui/core';
+import {POLYMORPHEUS_CONTEXT} from '@taiga-ui/polymorpheus';
 import {Observable, of, Subject} from 'rxjs';
 import {catchError, debounceTime, distinctUntilChanged, finalize, map, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {Position} from '../../../../core/interfaces/portfolios.interfaces';
@@ -14,8 +14,9 @@ export interface ChangeTickerDialogData {
 }
 
 @Component({
-  selector: 'app-change-ticker-dialog',
-  templateUrl: './change-ticker-dialog.component.html',
+    selector: 'app-change-ticker-dialog',
+    templateUrl: './change-ticker-dialog.component.html',
+    standalone: false
 })
 export class ChangeTickerDialogComponent implements OnDestroy {
   public form = new UntypedFormGroup({
@@ -31,7 +32,7 @@ export class ChangeTickerDialogComponent implements OnDestroy {
   constructor(
     private portfoliosService: PortfoliosService,
     private referencesService: ReferencesService,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     @Inject(POLYMORPHEUS_CONTEXT) private readonly context: TuiDialogContext<Position | null, ChangeTickerDialogData>,
   ) {
     this.form.get('ticker').valueChanges
@@ -74,7 +75,7 @@ export class ChangeTickerDialogComponent implements OnDestroy {
       .pipe(finalize(() => this.isSaving = false))
       .subscribe((position) => {
         this.alertService.open($localize`:@@alert.portfolioItem.changeTicker.message:Ticker has been successfully changed`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         this.context.completeWith(position);
       });

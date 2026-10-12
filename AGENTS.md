@@ -1,6 +1,7 @@
 # Info for AI agents
 
-1. This is Laravel framework based project.
+1. Open source project
+2. Backend Laravel, frontend Angular
 
 ## Main flow
 
@@ -16,7 +17,7 @@
 
 ### UI
 
-1. Use Angular for UI
+1. TaigaUI
 
 ### Tests
 

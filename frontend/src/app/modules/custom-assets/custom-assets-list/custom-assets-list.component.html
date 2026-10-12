@@ -4,11 +4,11 @@
     size="s">
   </app-back-button>
   <a tuiButton
-     appearance="secondary"
-     size="s"
-     class="tui-space_bottom-3 tui-space_right-3"
-     icon="tuiIconPlus"
-     [routerLink]="['/custom-assets', 'new', 'edit']">
+    appearance="secondary"
+    size="s"
+    class="tui-space_bottom-3 tui-space_right-3"
+    iconStart="@tui.plus"
+    [routerLink]="['/custom-assets', 'new', 'edit']">
     <span i18n="@@action.addCustomAsset">Add Custom Asset</span>
   </a>
 </app-actions>
@@ -19,27 +19,31 @@
       <h1 class="tui-space_top-0" i18n="@@nav.customAssets">
         Custom Assets
       </h1>
-      <tui-scrollbar waIntersectionRoot class="scrollbar" [hidden]="true">
+      <tui-scrollbar waIntersectionRoot class="scrollbar">
         <table tuiTable class="table" [columns]="columns" [class.tui-skeleton]="skeletonVisible">
           <thead>
-          <tr tuiThGroup>
-            <th tuiTh>Ticker</th>
-            <th tuiTh>Name</th>
-            <th tuiTh>Price</th>
-          </tr>
+            <tr tuiThGroup>
+              <th tuiTh>Ticker</th>
+              <th tuiTh>Name</th>
+              <th tuiTh>Price</th>
+            </tr>
           </thead>
-          <tbody tuiTbody [data]="customAssets" *ngIf="customAssets">
-          <tr tuiTr *tuiRow="let item of customAssets"
-              [routerLink]="['/custom-assets', item.id]"
-              class="tui-table__tr_cursor_pointer">
-            <td *tuiCell="'name'" tuiTd>
-              <strong>{{ item.name }}</strong>
-            </td>
-            <td *tuiCell="'price'" tuiTd>
-              {{item.currency_sign}} {{ item.price | tuiFormatNumber }}
-            </td>
-          </tr>
-          </tbody>
+          @if (customAssets) {
+            <tbody tuiTbody [data]="customAssets">
+              @for (item of customAssets; track item) {
+                <tr tuiTr
+                  [routerLink]="['/custom-assets', item.id]"
+                  class="tui-table__tr_cursor_pointer">
+                  <td *tuiCell="'name'" tuiTd>
+                    <strong>{{ item.name }}</strong>
+                  </td>
+                  <td *tuiCell="'price'" tuiTd>
+                    {{item.currency_sign}} {{ item.price | tuiFormatNumber }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          }
         </table>
       </tui-scrollbar>
     </div>

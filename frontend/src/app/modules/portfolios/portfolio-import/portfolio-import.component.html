@@ -1,72 +1,82 @@
 <div class="tui-container tui-container_adaptive">
-    <div class="tui-row tui-row_adaptive">
-        <div class="tui-col_md-6 tui-col_xs-12">
-            <tui-island>
-                <h1 class="tui-island__title" i18n="@@form.import.title">
+  <div class="tui-row tui-row_adaptive">
+    <div class="tui-col_md-6 tui-col_xs-12">
+      <div tuiCardLarge>
+        <h1 class="tui-island__title" i18n="@@form.import.title">
                     Trades import
                 </h1>
 
-                <form [formGroup]="importForm" class="tui-space_bottom-3">
-                    <tui-input-files
-                        *ngIf="!importForm.value.file"
-                        formControlName="file"
-                        (reject)="onReject($event)"
-                    ></tui-input-files>
+        <form [formGroup]="importForm" class="tui-space_bottom-3">
+          @if (!importForm.value.file) {
+            <label tuiInputFiles>
+              <input tuiInputFiles
+                formControlName="file"
+                (reject)="onReject($event)">
+            </label>
+          }
 
-                    <tui-files class="tui-space_top-1">
-                        <tui-file
-                            *ngIf="loadedFiles$ | async as file"
-                            [file]="file"
-                            [showDelete]="importForm.controls['file'].enabled"
-                            (removed)="removeFile()"
-                        ></tui-file>
+          <tui-files class="tui-space_top-1">
+            @if (loadedFiles$ | async; as file) {
+              <tui-file
+                [file]="file"
+                [showDelete]="importForm.controls['file'].enabled"
+                (remove)="removeFile()"
+              ></tui-file>
+            }
 
-                        <tui-file
-                            *ngIf="rejectedFiles$ | async as file"
-                            state="error"
-                            [file]="file"
-                            [showDelete]="importForm.controls['file'].enabled"
-                            (removed)="clearRejected()"
-                        ></tui-file>
+            @if (rejectedFiles$ | async; as file) {
+              <tui-file
+                state="error"
+                [file]="file"
+                [showDelete]="importForm.controls['file'].enabled"
+                (remove)="clearRejected()"
+              ></tui-file>
+            }
 
-                        <tui-file
-                            *ngIf="loadingFiles$ | async as file"
-                            state="loading"
-                            [file]="file"
-                            [showDelete]="importForm.controls['file'].enabled"
-                        ></tui-file>
-                    </tui-files>
+            @if (loadingFiles$ | async; as file) {
+              <tui-file
+                state="loading"
+                [file]="file"
+                [showDelete]="importForm.controls['file'].enabled"
+              ></tui-file>
+            }
+          </tui-files>
 
-                    <div class="tui-form__row">
-                        <tui-select formControlName="parser"
-                                    *tuiLet="parsers as items"
-                                    [valueContent]="stringify(items)">
-                            <input tuiTextfield
-                                   placeholder="Broker"
-                                   i18n-placeholder="@@form.import.field.broker"
-                                   required>
-                            <span i18n="@@form.import.field.broker">Broker</span>
-                            <ng-template tuiDataList>
-                                <tui-data-list *ngIf="parsers">
-                                    <button *ngFor="let item of parsers" tuiOption [value]="item.id">
-                                        {{ item.title }}
-                                    </button>
-                                </tui-data-list>
-                            </ng-template>
-                        </tui-select>
-                        <tui-error formControlName="parser" [error]="[] | tuiFieldError | async"></tui-error>
-                    </div>
-                </form>
+          <div class="tui-form__row">
+            @let items = parsers;
+            <tui-textfield tuiChevron
 
-                <div class="tui-form__buttons">
-                    <button tuiButton appearance="primary"
-                            [disabled]="importForm.invalid"
-                            (click)="submit()">
-                        <span i18n="@@action.import">Import</span>
-                    </button>
-                </div>
+              [stringify]="stringify(items)">
+              <input formControlName="parser" tuiSelect
+                placeholder="Broker"
+                i18n-placeholder="@@form.import.field.broker"
+                required>
+              <label tuiLabel i18n="@@form.import.field.broker">Broker</label>
+              <ng-template tuiDropdown>
+                @if (parsers) {
+                  <tui-data-list>
+                    @for (item of parsers; track item) {
+                      <button tuiOption [value]="item.id">
+                        {{ item.title }}
+                      </button>
+                    }
+                  </tui-data-list>
+                }
+              </ng-template>
+            </tui-textfield>
+            <tui-error formControlName="parser" ></tui-error>
+          </div>
+        </form>
 
-            </tui-island>
+        <div class="tui-form__buttons">
+          <button tuiButton appearance="primary"
+            [disabled]="importForm.invalid"
+            (click)="submit()">
+            <span i18n="@@action.import">Import</span>
+          </button>
         </div>
+
+      </div>
     </div>
+  </div>
 </div>

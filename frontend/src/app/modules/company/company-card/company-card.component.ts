@@ -7,10 +7,11 @@ import {Ticker, TickerDividend, TickerHistory} from '../../../core/interfaces/ti
 import {TickersService} from '../../../core/services/tickers.service';
 
 @Component({
-  selector: 'app-company-card',
-  templateUrl: './company-card.component.html',
-  styleUrls: [ './company-card.component.scss' ],
-  providers: [ DatePipe ]
+    selector: 'app-company-card',
+    templateUrl: './company-card.component.html',
+    styleUrls: ['./company-card.component.scss'],
+    providers: [DatePipe],
+    standalone: false
 })
 export class CompanyCardComponent implements OnInit {
   @HostBinding('class') classes = 'align-items-center justify-content-center';

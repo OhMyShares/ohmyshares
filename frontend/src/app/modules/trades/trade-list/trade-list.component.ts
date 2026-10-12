@@ -18,18 +18,19 @@ import { ChangeTickerDialogComponent, ChangeTickerDialogData } from './change-ti
 import { TickersService } from '../../../core/services/tickers.service';
 import {Ticker, TickerHistory} from '../../../core/interfaces/tickers.interfaces';
 import { AuthService } from '../../../core/services/auth.service';
-import {TuiAlertService, TuiDialogService, TuiNotification} from '@taiga-ui/core';
-import {PolymorpheusComponent} from '@tinkoff/ng-polymorpheus';
+import { TuiDialogService, TuiNotificationService, tuiScrollbarOptionsProvider } from '@taiga-ui/core';
+import {PolymorpheusComponent} from '@taiga-ui/polymorpheus';
 
 const TRADE_TYPE_CSS_CLASSES = [
   '', 'text-success', 'text-danger', 'text-success', 'text-danger', 'text-success',
   'text-danger', 'text-success', 'text-danger' ];
 
 @Component({
-  selector: 'app-trade-list',
-  templateUrl: './trade-list.component.html',
-  styleUrls: [ './trade-list.component.scss' ],
-  providers: [ DatePipe ]
+    selector: 'app-trade-list',
+    templateUrl: './trade-list.component.html',
+    styleUrls: ['./trade-list.component.scss'],
+    providers: [DatePipe, tuiScrollbarOptionsProvider({mode: 'hidden'})],
+    standalone: false
 })
 export class TradeListComponent implements OnInit {
   // @HostBinding('class') classes = '';
@@ -91,7 +92,7 @@ export class TradeListComponent implements OnInit {
     private referencesService: ReferencesService,
     public authService: AuthService,
     public commonService: CommonService,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     private router: Router,
     public route: ActivatedRoute,
     private datePipe: DatePipe,
@@ -279,7 +280,7 @@ export class TradeListComponent implements OnInit {
     this.portfoliosService.deletePortfolioItem(this.summary.uid)
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.portfolioItem.delete.message:Position has been successfully deleted`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         history.back();
       });

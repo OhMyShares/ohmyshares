@@ -1,42 +1,45 @@
 <div class="tui-container tui-container_adaptive">
   <div class="tui-row tui-row_adaptive">
     <div class="tui-col_md-12 tui-col_xs-12">
-      <tui-loader [showLoader]="isLoading">
-        <tui-island class="user-card" *ngIf="user">
-          <div class="user-card-content">
-            <div class="user-avatar">
-              <tui-avatar
-                [text]="userInitials"
-                size="l"
-                [rounded]="true">
-              </tui-avatar>
+      <tui-loader [loading]="isLoading">
+        @if (user) {
+          <div tuiCardLarge class="user-card">
+            <div class="user-card-content">
+              <div class="user-avatar">
+                <span [tuiAvatar]="userInitials | tuiInitials"
+                  size="xl"
+                  [round]="true">
+                </span>
+              </div>
+              <div class="user-info">
+                <h3 class="user-name">{{ user.name }}</h3>
+                <p class="user-email">{{ user.email }}</p>
+                @if (user.created_at) {
+                  <p class="user-created">
+                    <small><span i18n="@@table.users.column.created">Created</span>: {{ 1000 * +user.created_at | date }}</small>
+                  </p>
+                }
+              </div>
             </div>
-            <div class="user-info">
-              <h3 class="user-name">{{ user.name }}</h3>
-              <p class="user-email">{{ user.email }}</p>
-              <p class="user-created" *ngIf="user.created_at">
-                <small><span i18n="@@table.users.column.created">Created</span>: {{ 1000 * +user.created_at | date }}</small>
-              </p>
+            <div class="user-actions">
+              <a
+                tuiIconButton
+                iconStart="@tui.pencil"
+                appearance="flat"
+                size="s"
+                [routerLink]="['/users', user.id, 'edit']">
+              </a>
+              <a
+                tuiIconButton
+                iconStart="@tui.arrow-left"
+                appearance="flat"
+                size="s"
+                routerLink="/users"
+                class="tui-space_left-2">
+              </a>
             </div>
           </div>
-          <div class="user-actions">
-            <a
-              tuiIconButton
-              icon="tuiIconEdit"
-              appearance="flat"
-              size="s"
-              [routerLink]="['/users', user.id, 'edit']">
-            </a>
-            <a
-              tuiIconButton
-              icon="tuiIconArrowLeft"
-              appearance="flat"
-              size="s"
-              routerLink="/users"
-              class="tui-space_left-2">
-            </a>
-          </div>
-        </tui-island>
+        }
       </tui-loader>
     </div>
   </div>

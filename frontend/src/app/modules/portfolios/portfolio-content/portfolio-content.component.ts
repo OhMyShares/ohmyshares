@@ -1,3 +1,5 @@
+import { tuiScrollbarOptionsProvider } from '@taiga-ui/core';
+import { TuiNotificationService } from "@taiga-ui/core";
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as PullToRefresh from 'pulltorefreshjs';
@@ -9,7 +11,6 @@ import {Common, REFERENCE, ReferencesService} from '../../../core/services/refer
 import {AuthService} from '../../../core/services/auth.service';
 import {UntypedFormControl} from '@angular/forms';
 import {catchError, debounceTime} from 'rxjs/operators';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
 import {of} from 'rxjs';
 import _ from 'lodash';
 
@@ -25,9 +26,11 @@ export class Group {
 }
 
 @Component({
-  selector: 'app-portfolio-content',
-  templateUrl: './portfolio-content.component.html',
-  styleUrls: [ './portfolio-content.component.scss' ]
+    selector: 'app-portfolio-content',
+    templateUrl: './portfolio-content.component.html',
+    styleUrls: ['./portfolio-content.component.scss'],
+    providers: [tuiScrollbarOptionsProvider({mode: 'hidden'})],
+    standalone: false
 })
 export class PortfolioContentComponent implements OnInit, OnDestroy {
   // @HostBinding('class') classes = '';
@@ -53,7 +56,7 @@ export class PortfolioContentComponent implements OnInit, OnDestroy {
     private router: Router,
     public commonService: CommonService,
     public authService: AuthService,
-    public alertService: TuiAlertService,
+    public alertService: TuiNotificationService,
   ) {
   }
 
@@ -148,7 +151,7 @@ export class PortfolioContentComponent implements OnInit, OnDestroy {
     this.portfoliosService.clone(this.portfolio.uid.toString())
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.portfolio.clone.message:Portfolio was successfully cloned`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         this.router.navigate(['/portfolios']);
       });
@@ -159,7 +162,7 @@ export class PortfolioContentComponent implements OnInit, OnDestroy {
     this.portfoliosService.update(this.portfolio)
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.portfolio.update.message:The portfolio has been successfully updated`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         this.commonService.reloadRoute();
       });

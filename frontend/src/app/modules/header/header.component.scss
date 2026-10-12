@@ -4,7 +4,11 @@
   left: 0;
   right: 0;
   z-index: 101;
-  background-color: var(--tui-base-01);
-  box-shadow: 0 .125rem 1rem rgba(0,0,0,.08);
+  background-color: var(--tui-background-base);
+  box-shadow: 0 1px 0 var(--tui-border-normal), 0 .125rem 1rem rgba(0,0,0,.08);
   //@include backdrop-blur;
+
+  tui-tabs {
+    box-shadow: none;
+  }
 }

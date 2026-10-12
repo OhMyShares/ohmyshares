@@ -1,3 +1,5 @@
+import { tuiPure } from "@taiga-ui/legacy";
+import { TuiNotificationService } from "@taiga-ui/core";
 import {Component, HostBinding} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 // import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
@@ -14,9 +16,7 @@ import {CommonService} from '../../../core/services/common.service';
 import {Common, CurrencyRate, CurrencyReference, Quote, REFERENCE, ReferencesService} from '../../../core/services/references.service';
 import {TradesService} from '../../../core/services/trades.service';
 import {Ticker} from '../../../core/interfaces/tickers.interfaces';
-import {isNumeric} from 'rxjs/internal-compatibility';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
-import {TuiContextWithImplicit, TuiDay, tuiPure, TuiStringHandler} from '@taiga-ui/cdk';
+import { TuiDay, TuiStringHandler, TuiContext } from '@taiga-ui/cdk';
 import {PortfoliosService} from '../../../core/services/portfolios.service';
 import {ASSET_TYPE, CURRENT_PORTFOLIO_KEY, TRADE_TYPE} from '../../../core/constants';
 import {SpinnerService} from '../../../core/services/spinner.service';
@@ -24,9 +24,10 @@ import {delay, startWith, switchMap} from 'rxjs/operators';
 import {TickersService} from '../../../core/services/tickers.service';
 
 @Component({
-  selector: 'app-trade-card',
-  templateUrl: './trade-card.component.html',
-  styleUrls: ['./trade-card.component.scss']
+    selector: 'app-trade-card',
+    templateUrl: './trade-card.component.html',
+    styleUrls: ['./trade-card.component.scss'],
+    standalone: false
 })
 export class TradeCardComponent {
   // @HostBinding('class') classes = '';
@@ -74,7 +75,7 @@ export class TradeCardComponent {
     private route: ActivatedRoute,
     private router: Router,
     private spinner$: SpinnerService,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     public commonService: CommonService,
     private formBuilder: UntypedFormBuilder
   ) {
@@ -111,7 +112,7 @@ export class TradeCardComponent {
               return trade;
             }
             this.alertService.open($localize`:@@alert.trade.linkedTrade.message:To edit a linked trade, change the parent trade`, {
-              status: TuiNotification.Info
+              appearance: 'info'
             }).subscribe();
             this.router.navigate(['/trades', trade.related_trade_id]);
           }),
@@ -212,7 +213,7 @@ export class TradeCardComponent {
         })
       ).subscribe(() => {
         this.alertService.open($localize`:@@alert.trade.update.message:The trade has been successfully updated`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         history.back();
         });
@@ -224,7 +225,7 @@ export class TradeCardComponent {
         })
       ).subscribe(() => {
         this.alertService.open($localize`:@@alert.trade.create.message:The trade has been successfully created`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         history.back();
         });
@@ -239,7 +240,7 @@ export class TradeCardComponent {
     this.tradesService.delete(this.trade.id)
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.trade.delete.message:The trade has been successfully deleted`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         history.back();
       });
@@ -316,8 +317,8 @@ export class TradeCardComponent {
   // }
 
   @tuiPure
-  stringifyPortfolios(items: readonly Portfolio[]): TuiStringHandler<TuiContextWithImplicit<string>> {
+  stringifyPortfolios(items: readonly Portfolio[]): TuiStringHandler<string> {
     const map = new Map(items.map(({uid, name}) => [uid, name] as [string, string]));
-    return ({$implicit}: TuiContextWithImplicit<string>) => map.get($implicit) || ``;
+    return (uid: string) => map.get(uid) || ``;
   }
 }

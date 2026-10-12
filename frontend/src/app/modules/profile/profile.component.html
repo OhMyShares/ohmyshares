@@ -2,7 +2,7 @@
   <a tuiButton
      appearance="secondary"
      size="s"
-     icon="tuiIconEdit"
+     iconStart="@tui.pencil"
      class="tui-space_bottom-3 tui-space_right-3"
      routerLink="/change-password">
     <span i18n="@@action.changePassword">Change password</span>
@@ -10,7 +10,7 @@
   <a tuiButton
      appearance="secondary"
      size="s"
-     icon="tuiIconSubitem"
+     iconStart="@tui.corner-down-right"
      class="tui-space_bottom-3 tui-space_right-3"
      routerLinkActive="active"
      [routerLink]="['/logout']">
@@ -21,54 +21,53 @@
 <div class="tui-container tui-container_adaptive">
   <div class="tui-row tui-row_adaptive">
     <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-3">
-      <tui-island>
+      <div tuiCardLarge>
         <h1 class="tui-island__title" i18n="@@nav.profile">Profile</h1>
         <form [formGroup]="profileForm" (keyup.enter)="save()">
           <div class="tui-form__row">
-            <tui-input formControlName="name">
-              <input tuiTextfield required>
-              <span i18n="@@form.profile.field.name">
+            <tui-textfield>
+            <input tuiInput required formControlName="name">
+<label tuiLabel i18n="@@form.profile.field.name">
                 Name
-              </span>
-            </tui-input>
-            <tui-error formControlName="name" [error]="[] | tuiFieldError | async"></tui-error>
+              </label>            </tui-textfield>
+            <tui-error formControlName="name" ></tui-error>
           </div>
           <div class="tui-form__row tui-space_bottom-5">
-            <tui-select formControlName="locale">
-              <span i18n="@@form.profile.field.language">
+<tui-textfield tuiChevron>
+              <label tuiLabel i18n="@@form.profile.field.language">
                 Language
-              </span>
-              <input tuiTextfield placeholder="Choose your language">
-              <tui-data-list-wrapper *tuiDataList [items]="languages"></tui-data-list-wrapper>
-            </tui-select>
+              </label>
+              <input formControlName="locale" tuiSelect placeholder="Choose your language">
+              <tui-data-list-wrapper *tuiDropdown [items]="languages"></tui-data-list-wrapper>
+            </tui-textfield>
           </div>
           <h3 class="tui-island__title" i18n="@@form.profile.settingsHeader">
             Settings
           </h3>
           <div class="tui-form__row">
             <div class="tui-form__field-checkbox">
-              <tui-checkbox-labeled formControlName="is_ignore_funds_sufficiency">
+             <label tuiLabel> <input tuiCheckbox type="checkbox" formControlName="is_ignore_funds_sufficiency">
                 <span i18n="@@form.profile.field.ignoreFunds">Ignore funds insufficiency on trades adding</span>
-              </tui-checkbox-labeled>
+              </label>
             </div>
           </div>
         </form>
         <div class="tui-form__row">
           <div class="tui-form__field-checkbox">
-            <tui-checkbox-labeled [(ngModel)]="darkThemeEnabled">
+           <label tuiLabel> <input tuiCheckbox type="checkbox" [(ngModel)]="darkThemeEnabled">
               <span i18n="@@form.profile.field.darkTheme">Dark Theme</span>
-            </tui-checkbox-labeled>
+            </label>
           </div>
         </div>
         <div class="tui-form__buttons">
           <button tuiButton appearance="primary" class="tui-space_right-3"
-                  [showLoader]="showLoaderOnSave"
+                  [loading]="showLoaderOnSave"
                   [disabled]="profileForm.invalid || showLoaderOnSave"
                   (click)="save()">
             <span i18n="@@action.save">Save</span>
           </button>
         </div>
-      </tui-island>
+      </div>
     </div>
   </div>
 </div>

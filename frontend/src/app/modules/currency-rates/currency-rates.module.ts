@@ -1,17 +1,10 @@
+import { TuiButtonLoading } from "@taiga-ui/kit";
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {TuiTableModule, TuiTablePaginationModule} from '@taiga-ui/addon-table';
-import {
-  TuiButtonModule,
-  TuiLinkModule,
-  TuiLoaderModule,
-  TuiNotificationModule,
-  TuiScrollbarModule,
-  TuiTextfieldControllerModule
-} from '@taiga-ui/core';
-import {TuiInputModule} from '@taiga-ui/kit';
+import { TuiTablePagination, TuiTable } from '@taiga-ui/addon-table';
+import { TuiNotification, TuiLoader, TuiScrollbar, TuiScrollable, TuiLink, TuiButton, TuiInput } from '@taiga-ui/core';
 import {CurrencyRatesListComponent} from './currency-rates-list/currency-rates-list.component';
 
 @NgModule({
@@ -24,16 +17,14 @@ import {CurrencyRatesListComponent} from './currency-rates-list/currency-rates-l
       {path: '', component: CurrencyRatesListComponent},
     ]),
     ReactiveFormsModule,
-    TuiTableModule,
-    TuiTablePaginationModule,
-    TuiButtonModule,
-    TuiLinkModule,
-    TuiLoaderModule,
-    TuiNotificationModule,
-    TuiScrollbarModule,
-    TuiTextfieldControllerModule,
-    TuiInputModule,
-  ],
+    ...TuiTable,
+    TuiTablePagination,
+    TuiButton,
+    TuiLink,
+    TuiLoader,
+    ...TuiNotification,
+    TuiScrollbar, TuiScrollable,
+    ...TuiInput, TuiButtonLoading],
 })
 export class CurrencyRatesModule {
 }

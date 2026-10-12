@@ -3,7 +3,7 @@ import { Component, Inject } from '@angular/core';
 import { CommonService } from '../../../../core/services/common.service';
 import { TradeListComponent } from '../trade-list.component';
 import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
-import {POLYMORPHEUS_CONTEXT} from '@tinkoff/ng-polymorpheus';
+import {POLYMORPHEUS_CONTEXT} from '@taiga-ui/polymorpheus';
 import {Common} from '../../../../core/services/references.service';
 
 
@@ -13,9 +13,10 @@ export interface FilterDialogData {
 
 
 @Component({
-  selector: 'app-filter-dialog',
-  templateUrl: 'filter-dialog.component.html',
-  styleUrls: [ 'filter-dialog.component.scss' ]
+    selector: 'app-filter-dialog',
+    templateUrl: 'filter-dialog.component.html',
+    styleUrls: ['filter-dialog.component.scss'],
+    standalone: false
 })
 export class FilterDialogComponent {
 

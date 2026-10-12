@@ -1,7 +1,7 @@
+import { TuiNotificationService } from "@taiga-ui/core";
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
 import {switchMap} from 'rxjs/operators';
 import {Plugin, PluginConfigField} from '../../../core/interfaces/plugin.interface';
 import {PluginsService} from '../../../core/services/plugins.service';
@@ -12,9 +12,10 @@ interface ConfigFieldView {
 }
 
 @Component({
-  selector: 'app-plugin-card',
-  templateUrl: './plugin-card.component.html',
-  styleUrls: ['./plugin-card.component.scss']
+    selector: 'app-plugin-card',
+    templateUrl: './plugin-card.component.html',
+    styleUrls: ['./plugin-card.component.scss'],
+    standalone: false
 })
 export class PluginCardComponent implements OnInit {
   plugin: Plugin | null = null;
@@ -34,7 +35,7 @@ export class PluginCardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private pluginsService: PluginsService,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -92,7 +93,7 @@ export class PluginCardComponent implements OnInit {
       next: plugin => {
         this.isSaving = false;
         this.setPlugin(plugin);
-        this.alertService.open($localize`:@@alert.plugins.configSaved:Configuration saved`, {status: TuiNotification.Success}).subscribe();
+        this.alertService.open($localize`:@@alert.plugins.configSaved:Configuration saved`, {appearance: 'positive'}).subscribe();
       },
       error: () => this.isSaving = false,
     });
@@ -108,7 +109,7 @@ export class PluginCardComponent implements OnInit {
       next: plugin => {
         this.isUpgrading = false;
         this.setPlugin(plugin);
-        this.alertService.open($localize`:@@alert.plugins.upgraded:Plugin upgraded to ${plugin.version}:version:`, {status: TuiNotification.Success}).subscribe();
+        this.alertService.open($localize`:@@alert.plugins.upgraded:Plugin upgraded to ${plugin.version}:version:`, {appearance: 'positive'}).subscribe();
       },
       error: () => this.isUpgrading = false,
     });
@@ -118,7 +119,7 @@ export class PluginCardComponent implements OnInit {
     this.isRemoving = true;
     this.pluginsService.uninstall(this.plugin.id).subscribe({
       next: () => {
-        this.alertService.open($localize`:@@alert.plugins.uninstalled:Plugin uninstalled`, {status: TuiNotification.Success}).subscribe();
+        this.alertService.open($localize`:@@alert.plugins.uninstalled:Plugin uninstalled`, {appearance: 'positive'}).subscribe();
         this.router.navigate(['/plugins']);
       },
       error: () => this.isRemoving = false,

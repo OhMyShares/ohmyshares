@@ -4,9 +4,10 @@ import { AuthService } from '../../core/services/auth.service';
 import {SpinnerService} from "../../core/services/spinner.service";
 
 @Component({
-  selector: 'app-forgot',
-  templateUrl: './forgot.component.html',
-  styleUrls: [ './forgot.component.scss' ]
+    selector: 'app-forgot',
+    templateUrl: './forgot.component.html',
+    styleUrls: ['./forgot.component.scss'],
+    standalone: false
 })
 export class ForgotComponent implements OnInit {
   // @HostBinding('class') classes = '';

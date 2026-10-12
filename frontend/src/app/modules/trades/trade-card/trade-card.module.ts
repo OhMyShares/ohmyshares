@@ -1,3 +1,5 @@
+import { TuiCardLarge } from "@taiga-ui/layout";
+import { TuiCurrencyPipe } from "@taiga-ui/addon-commerce";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,19 +16,8 @@ import { CoreModule } from '../../../core/core.module';
 import { ActionsModule } from '../../actions/actions.module';
 import { TradeCardComponent } from './trade-card.component';
 // import { TradeCardResolver } from './trade-card.resolver';
-import {
-  TuiCheckboxLabeledModule, TuiComboBoxModule, TuiDataListWrapperModule,
-  TuiFieldErrorPipeModule, TuiFilterByInputPipeModule,
-  TuiInputDateModule,
-  TuiInputModule, TuiInputNumberModule,
-  TuiIslandModule,
-  TuiRadioBlockModule, TuiRadioLabeledModule,
-  TuiSelectModule
-} from '@taiga-ui/kit';
-import {TuiDataListModule, TuiErrorModule, TuiGroupModule, TuiLinkModule, TuiLoaderModule} from '@taiga-ui/core';
-import {TuiLetModule} from '@taiga-ui/cdk';
-import {TuiCurrencyPipeModule} from '@taiga-ui/addon-commerce';
-
+import { TuiDataListWrapper, TuiBlock, TuiInputNumber, TuiComboBox, TuiSelect, TuiInputDate, TuiChevron, TuiUnfinishedValidator } from '@taiga-ui/kit';
+import { TuiDataList, TuiError, TuiLoader, TuiGroup, TuiLabel, TuiLink, TuiCheckbox, TuiRadio, TuiFilterByInputPipe, TuiInput, TuiDropdown } from '@taiga-ui/core';
 
 @NgModule({
   declarations: [TradeCardComponent],
@@ -46,25 +37,24 @@ import {TuiCurrencyPipeModule} from '@taiga-ui/addon-commerce';
         CoreModule,
         ActionsModule,
         FormsModule,
-        TuiIslandModule,
-        TuiInputModule,
-        TuiErrorModule,
-        TuiFieldErrorPipeModule,
-        TuiSelectModule,
-        TuiDataListModule,
-        TuiInputDateModule,
-        TuiLetModule,
-        TuiLoaderModule,
-        TuiGroupModule,
-        TuiRadioBlockModule,
-        TuiRadioLabeledModule,
-        TuiCheckboxLabeledModule,
-        TuiComboBoxModule,
-        TuiDataListWrapperModule,
-        TuiFilterByInputPipeModule,
-        TuiInputNumberModule,
-        TuiCurrencyPipeModule,
-        TuiLinkModule
+        TuiCardLarge,
+        ...TuiInput,
+        ...TuiError,
+        ...TuiSelect,
+        ...TuiDataList,
+        ...TuiInputDate,
+        TuiLoader,
+        TuiGroup,
+        TuiBlock, ...TuiRadio,
+        TuiLabel,
+        ...TuiComboBox,
+        ...TuiDataListWrapper,
+        TuiFilterByInputPipe,
+        ...TuiInputNumber,
+        TuiCurrencyPipe,
+        TuiLink, TuiCheckbox, ...TuiDropdown,
+        TuiChevron,
+        TuiUnfinishedValidator,
     ]
 })
 export class TradeCardModule {

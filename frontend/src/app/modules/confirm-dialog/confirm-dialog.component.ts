@@ -1,7 +1,7 @@
 import {Component, Inject, TemplateRef} from '@angular/core';
 import {TuiDialogContext, TuiDialogService} from '@taiga-ui/core';
 // import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {POLYMORPHEUS_CONTEXT} from '@tinkoff/ng-polymorpheus';
+import {POLYMORPHEUS_CONTEXT} from '@taiga-ui/polymorpheus';
 
 export interface ConfirmDialogData {
   title?: string;
@@ -13,9 +13,10 @@ export interface ConfirmDialogData {
 }
 
 @Component({
-  selector: 'app-property-delete-confirm-dialog',
-  templateUrl: './confirm-dialog.component.html',
-  styleUrls: ['./confirm-dialog.component.scss']
+    selector: 'app-property-delete-confirm-dialog',
+    templateUrl: './confirm-dialog.component.html',
+    styleUrls: ['./confirm-dialog.component.scss'],
+    standalone: false
 })
 export class ConfirmDialogComponent {
 

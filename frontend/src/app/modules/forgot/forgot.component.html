@@ -6,29 +6,29 @@
 
       <form [formGroup]="forgotForm" (keyup.enter)="forgot()">
         <div class="form-group">
-          <tui-input formControlName="email">
-            <input tuiTextfield
+          <tui-textfield>
+          <input tuiInput
                    i18n-placeholder="@@form.login.field.email"
                    placeholder="user@domain.com"
                    type="email"
                    inputmode="email"
                    autocapitalize="off"
                    name="email"
-                   required>
-            Email
-          </tui-input>
-          <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
+                   required formControlName="email">
+            <label tuiLabel>Email</label>
+          </tui-textfield>
+          <tui-error formControlName="email" ></tui-error>
         </div>
       </form>
 
       <div class="tui-form__buttons tui-space_bottom-5">
-        <a tuiButton appearance="primary"
+        <button tuiButton type="button" appearance="primary"
            class="btn-block"
-           [showLoader]="isLoading$ | async"
+           [loading]="isLoading$ | async"
            [disabled]="forgotForm.invalid || (isLoading$ | async)"
            (click)="forgot()">
           <span i18n="@@action.sendResetLink">Send reset link</span>
-        </a>
+        </button>
       </div>
     </div>
   </div>

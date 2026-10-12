@@ -1,7 +1,7 @@
+import { TuiNotificationService } from "@taiga-ui/core";
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TuiAlertService, TuiNotification } from '@taiga-ui/core';
 import { finalize } from 'rxjs/operators';
 import { LOCALE_STRING, LOCALES } from '../../../core/constants';
 import { User, UserRole } from '../../../core/interfaces/user.interface';
@@ -10,9 +10,10 @@ import { Common, ReferencesService } from '../../../core/services/references.ser
 import { UsersService } from '../../../core/services/users.service';
 
 @Component({
-  selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+    selector: 'app-user-form',
+    templateUrl: './user-form.component.html',
+    styleUrls: ['./user-form.component.scss'],
+    standalone: false
 })
 export class UserFormComponent implements OnInit {
   readonly languages = LOCALES;
@@ -42,7 +43,7 @@ export class UserFormComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: TuiAlertService
+    private alertService: TuiNotificationService
   ) {}
 
   ngOnInit(): void {
@@ -93,7 +94,7 @@ export class UserFormComponent implements OnInit {
         const message = isNew
           ? $localize`:@@alert.user.create.message:User has been successfully created`
           : $localize`:@@alert.user.update.message:User has been successfully updated`;
-        this.alertService.open(message, {status: TuiNotification.Success}).subscribe();
+        this.alertService.open(message, {appearance: 'positive'}).subscribe();
         this.router.navigate(['/users']);
       });
   }
@@ -107,7 +108,7 @@ export class UserFormComponent implements OnInit {
       .pipe(finalize(() => this.isDeleting = false))
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.user.delete.message:User has been successfully deleted`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         this.router.navigate(['/users']);
       });

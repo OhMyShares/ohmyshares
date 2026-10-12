@@ -1,12 +1,15 @@
+import { tuiScrollbarOptionsProvider } from '@taiga-ui/core';
 import { Component, OnInit } from '@angular/core';
 import { User, UserRole } from '../../../core/interfaces/user.interface';
 import { UsersService } from '../../../core/services/users.service';
 import { SpinnerService } from '../../../core/services/spinner.service';
 
 @Component({
-  selector: 'app-users-list',
-  templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.scss']
+    selector: 'app-users-list',
+    templateUrl: './users-list.component.html',
+    styleUrls: ['./users-list.component.scss'],
+    providers: [tuiScrollbarOptionsProvider({mode: 'hidden'})],
+    standalone: false
 })
 export class UsersListComponent implements OnInit {
   users: User[] = [];

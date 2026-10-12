@@ -1,5 +1,11 @@
 <span class="badges">
-  <tui-badge *ngIf="version" size="s" status="default" [value]="version"></tui-badge>
-  <tui-badge *ngIf="approved" size="s" status="success" [value]="approvedLabel" [title]="approvedHint"></tui-badge>
-  <tui-badge *ngIf="popular" size="s" status="warning" [value]="popularLabel" [title]="popularHint"></tui-badge>
+  @if (version) {
+    <span tuiBadge size="m" appearance="neutral">{{ version }}</span>
+  }
+  @if (approved) {
+    <span tuiBadge size="m" appearance="positive" [title]="approvedHint">{{ approvedLabel }}</span>
+  }
+  @if (popular) {
+    <span tuiBadge size="m" appearance="warning" [title]="popularHint">{{ popularLabel }}</span>
+  }
 </span>

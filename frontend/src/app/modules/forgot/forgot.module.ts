@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from '../../core/core.module';
 import { ActionsModule } from '../actions/actions.module';
 import { ForgotComponent } from './forgot.component';
-import {TuiFieldErrorPipeModule, TuiInputModule} from '@taiga-ui/kit';
-import {TuiButtonModule, TuiErrorModule} from '@taiga-ui/core';
+import { TuiButtonLoading } from '@taiga-ui/kit';
+import { TuiError, TuiButton, TuiInput } from '@taiga-ui/core';
 
 
 @NgModule({
@@ -20,11 +20,9 @@ import {TuiButtonModule, TuiErrorModule} from '@taiga-ui/core';
     CoreModule,
     RouterModule,
     ActionsModule,
-    TuiInputModule,
-    TuiButtonModule,
-    TuiErrorModule,
-    TuiFieldErrorPipeModule
-  ]
+    ...TuiInput,
+    TuiButton,
+    ...TuiError, TuiButtonLoading]
 })
 export class ForgotModule {
 }

@@ -1,12 +1,10 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import {TuiBrightness} from '@taiga-ui/core';
 
 @Injectable()
 export class ThemingService {
   themes = [ 'dark-theme', 'light-theme' ];
   theme = new BehaviorSubject('light-theme');
-  themeTuiMode: TuiBrightness = 'onLight';
   private readonly savedTheme: string;
 
   constructor(
@@ -31,7 +29,6 @@ export class ThemingService {
       this.theme.next(this.savedTheme);
       this.ref.tick();
       document.body.className = this.savedTheme;
-      this.themeTuiMode = this.savedTheme === 'dark-theme' ? 'onDark' : null;
       return;
     }
 
@@ -49,7 +46,6 @@ export class ThemingService {
     document.body.className = theme;
     document.body.classList.add('animate-colors-transition');
     localStorage.setItem('THEME_ID', theme);
-    this.themeTuiMode = theme === 'dark-theme' ? 'onDark' : null;
     this.theme.next(theme);
   }
 

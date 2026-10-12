@@ -1,3 +1,4 @@
+import { tuiScrollbarOptionsProvider } from '@taiga-ui/core';
 import { DatePipe } from '@angular/common';
 import { Component, HostBinding, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,10 +11,11 @@ import {Ticker} from '../../../core/interfaces/tickers.interfaces';
 import {TickersService} from '../../../core/services/tickers.service';
 
 @Component({
-  selector: 'app-company-list',
-  templateUrl: './company-list.component.html',
-  styleUrls: ['./company-list.component.scss'],
-  providers: [DatePipe]
+    selector: 'app-company-list',
+    templateUrl: './company-list.component.html',
+    styleUrls: ['./company-list.component.scss'],
+    providers: [DatePipe, tuiScrollbarOptionsProvider({mode: 'hidden'})],
+    standalone: false
 })
 export class CompanyListComponent implements OnInit {
   // @HostBinding('class') classes = '';

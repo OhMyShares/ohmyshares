@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
@@ -14,7 +14,7 @@ import {
   ResetParams,
   SignUpParams
 } from '../interfaces/auth.interfaces';
-import {TuiAlertService, TuiDialogService, TuiNotification} from '@taiga-ui/core';
+import { TuiDialogService, TuiNotificationService } from '@taiga-ui/core';
 
 export const API_TOKEN = 'API_TOKEN';
 const API = {
@@ -38,7 +38,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private readonly alertService: TuiAlertService,
+    private readonly alertService: TuiNotificationService,
     private dialogService: TuiDialogService,
   ) {
   }
@@ -59,7 +59,7 @@ export class AuthService {
         catchError((err) => {
           if (err.status === 400) {
             this.alertService.open($localize`:@@alert.auth.signUpError.message:Signup error`, {
-              status: TuiNotification.Error,
+              appearance: 'negative',
             }).subscribe();
           }
           return throwError(err);
@@ -67,7 +67,7 @@ export class AuthService {
       )
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.auth.signUp.message:You have successfully registered. Check your email for password`, {
-          status: TuiNotification.Success,
+          appearance: 'positive',
         }).subscribe();
         this.router.navigate([ '/login' ]);
       });
@@ -79,7 +79,7 @@ export class AuthService {
         catchError((err) => {
           if (err.status === 400) {
             this.alertService.open(err.error.message, {
-              status: TuiNotification.Error,
+              appearance: 'negative',
             }).subscribe();
           }
           return throwError(err);
@@ -87,7 +87,7 @@ export class AuthService {
       )
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.auth.changePassword.message:Password was successfully changed`, {
-          status: TuiNotification.Success,
+          appearance: 'positive',
         }).subscribe();
         this.router.navigate([ '/logout' ]);
       });
@@ -109,7 +109,7 @@ export class AuthService {
           sender.showLoader = false;
           if (err.status === 401) {
             this.alertService.open($localize`:@@alert.auth.login.message:Incorrect login or password`, {
-              status: TuiNotification.Error,
+              appearance: 'negative',
             }).subscribe();
           }
           return throwError(err);
@@ -128,7 +128,7 @@ export class AuthService {
         catchError((err) => {
           if (err.status === 400) {
             this.alertService.open(err.error.message, {
-              status: TuiNotification.Error,
+              appearance: 'negative',
             }).subscribe();
           }
           return throwError(err);
@@ -136,7 +136,7 @@ export class AuthService {
       )
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.auth.forgot.success:Instructions to reset password successfully sent`, {
-          status: TuiNotification.Success,
+          appearance: 'positive',
         }).subscribe();
         this.router.navigate([ 'login' ]);
       });
@@ -149,7 +149,7 @@ export class AuthService {
           sender.showLoader = false;
           if (err.status >= 400) {
             this.alertService.open(err.error.message, {
-              status: TuiNotification.Error,
+              appearance: 'negative',
             }).subscribe();
           }
           return throwError(err);
@@ -157,7 +157,7 @@ export class AuthService {
       )
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.auth.resetPassword.success:Password successfully changed`, {
-          status: TuiNotification.Success,
+          appearance: 'positive',
         }).subscribe();
         this.router.navigate([ 'login' ]);
       });
@@ -180,7 +180,7 @@ export class AuthService {
         catchError((err) => {
           if (err.status >= 400) {
             this.alertService.open(err.error.message, {
-              status: TuiNotification.Error,
+              appearance: 'negative',
             }).subscribe();
           }
           return throwError(err);
@@ -188,7 +188,7 @@ export class AuthService {
         take(1),
         tap(((me: Me) => {
           this.alertService.open($localize`:@@alert.auth.updateMe.message:Your profile has been successfully updated`, {
-            status: TuiNotification.Success,
+            appearance: 'positive',
           }).subscribe();
           this.me$.next(me);
         }))

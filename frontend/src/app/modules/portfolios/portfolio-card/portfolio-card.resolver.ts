@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of, zip } from 'rxjs';
 import { Portfolio } from '../../../core/interfaces/portfolios.interfaces';
 import { PortfoliosService } from '../../../core/services/portfolios.service';
@@ -8,7 +8,7 @@ import { Common, CurrencyReference, REFERENCE, ReferencesService } from '../../.
 @Injectable({
   providedIn: 'root'
 })
-export class PortfolioCardResolver implements Resolve<[ Portfolio, CurrencyReference[], Common[] ]> {
+export class PortfolioCardResolver  {
 
   constructor(
     private portfoliosService: PortfoliosService,

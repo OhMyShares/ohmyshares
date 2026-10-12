@@ -1,13 +1,13 @@
 <app-actions [isFormActions]="true">
   <app-back-button></app-back-button>
   <button tuiButton
-          appearance="secondary"
-          size="m"
-          icon="tuiIconRefreshCw"
-          class="tui-space_bottom-3 tui-space_right-3"
-          [showLoader]="isUpgrading"
-          [disabled]="!plugin || isUpgrading"
-          (click)="upgrade()">
+    appearance="secondary"
+    size="m"
+    iconStart="@tui.refresh-cw"
+    class="tui-space_bottom-3 tui-space_right-3"
+    [loading]="isUpgrading"
+    [disabled]="!plugin || isUpgrading"
+    (click)="upgrade()">
     <span i18n="@@plugins.action.upgrade">Upgrade</span>
   </button>
   <app-remove-button
@@ -18,95 +18,114 @@
   </app-remove-button>
 </app-actions>
 
-<div class="tui-container tui-container_adaptive" *ngIf="plugin">
-  <div class="tui-row tui-row_adaptive">
-    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-3">
-      <tui-island>
-        <div class="card__header">
-          <h1 class="tui-island__title">{{ plugin.title }}</h1>
-          <tui-toggle size="l" [ngModel]="plugin.is_enabled" (ngModelChange)="toggle()" [showIcons]="true"></tui-toggle>
-        </div>
-        <p class="tui-island__paragraph" *ngIf="plugin.description">{{ plugin.description }}</p>
-        <tui-notification status="error" *ngIf="!plugin.is_loaded" class="tui-space_bottom-3">
-          {{ plugin.load_error }}
-        </tui-notification>
-        <dl class="card__meta">
-          <dt i18n="@@plugins.field.package">Package</dt>
-          <dd><code>{{ plugin.package }}</code></dd>
-          <dt i18n="@@plugins.field.version">Version</dt>
-          <dd>
-            {{ plugin.version }}
-            <app-plugin-badges class="tui-space_left-2"
-                               [approved]="plugin.is_approved"
-                               [popular]="plugin.is_popular"
-                               [stars]="plugin.stars"></app-plugin-badges>
-          </dd>
-          <dt i18n="@@plugins.field.status">Status</dt>
-          <dd>
-            <tui-badge size="s" [status]="plugin.is_enabled ? 'success' : 'default'"
-                       [value]="plugin.is_enabled ? enabledLabel : disabledLabel"></tui-badge>
-          </dd>
-          <dt i18n="@@plugins.field.remote">Source</dt>
-          <dd><a tuiLink [href]="plugin.remote" target="_blank" rel="noopener">{{ plugin.remote }}</a></dd>
-          <dt i18n="@@plugins.field.installedAt">Installed</dt>
-          <dd>{{ plugin.created_at | date:'medium' }}</dd>
-        </dl>
-      </tui-island>
-    </div>
-
-    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-3">
-      <tui-island>
-        <h3 class="tui-island__title" i18n="@@plugins.config.title">Configuration</h3>
-
-        <form *ngIf="hasSchema; else rawForm" [formGroup]="configForm" (keyup.enter)="saveConfig()">
-          <div class="tui-form__row" *ngFor="let item of fields">
-            <ng-container [ngSwitch]="item.field.type || 'string'">
-              <div class="tui-form__field-checkbox" *ngSwitchCase="'boolean'">
-                <tui-checkbox-labeled [formControlName]="item.key">
-                  {{ item.field.label || item.key }}
-                </tui-checkbox-labeled>
-              </div>
-              <tui-input-number *ngSwitchCase="'number'" [formControlName]="item.key">
-                {{ item.field.label || item.key }}
-                <input tuiTextfield [required]="!!item.field.required">
-              </tui-input-number>
-              <ng-container *ngSwitchDefault>
-                <tui-input-password *ngIf="item.field.secret; else plainInput" [formControlName]="item.key">
-                  {{ item.field.label || item.key }}
-                  <input tuiTextfield [required]="!!item.field.required">
-                </tui-input-password>
-                <ng-template #plainInput>
-                  <tui-input [formControlName]="item.key">
-                    {{ item.field.label || item.key }}
-                    <input tuiTextfield [required]="!!item.field.required">
-                  </tui-input>
-                </ng-template>
-              </ng-container>
-            </ng-container>
-            <p class="tui-text_body-s card__field-hint" *ngIf="item.field.description">{{ item.field.description }}</p>
-            <tui-error [formControlName]="item.key" [error]="[] | tuiFieldError | async"></tui-error>
+@if (plugin) {
+  <div class="tui-container tui-container_adaptive">
+    <div class="tui-row tui-row_adaptive">
+      <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-3">
+        <div tuiCardLarge>
+          <div class="card__header">
+            <h1 class="tui-island__title">{{ plugin.title }}</h1>
+            <input
+              tuiSwitch
+              type="checkbox" size="m" [ngModel]="plugin.is_enabled" (ngModelChange)="toggle()" [showIcons]="true"/>
           </div>
-        </form>
-
-        <ng-template #rawForm>
-          <p class="tui-island__paragraph" i18n="@@plugins.config.rawHint">
+          @if (plugin.description) {
+            <p class="tui-island__paragraph">{{ plugin.description }}</p>
+          }
+          @if (!plugin.is_loaded) {
+            <div tuiNotification size="m" appearance="negative" class="tui-space_bottom-3">
+              {{ plugin.load_error }}
+            </div>
+          }
+          <dl class="card__meta">
+            <dt i18n="@@plugins.field.package">Package</dt>
+            <dd><code>{{ plugin.package }}</code></dd>
+            <dt i18n="@@plugins.field.version">Version</dt>
+            <dd>
+              {{ plugin.version }}
+              <app-plugin-badges class="tui-space_left-2"
+                [approved]="plugin.is_approved"
+                [popular]="plugin.is_popular"
+              [stars]="plugin.stars"></app-plugin-badges>
+            </dd>
+            <dt i18n="@@plugins.field.status">Status</dt>
+            <dd>
+              <span tuiBadge size="m" [appearance]="plugin.is_enabled ? 'positive' : 'neutral'"
+              >{{ plugin.is_enabled ? enabledLabel : disabledLabel }}</span>
+            </dd>
+            <dt i18n="@@plugins.field.remote">Source</dt>
+            <dd><a tuiLink [href]="plugin.remote" target="_blank" rel="noopener">{{ plugin.remote }}</a></dd>
+            <dt i18n="@@plugins.field.installedAt">Installed</dt>
+            <dd>{{ plugin.created_at | date:'medium' }}</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-3">
+        <div tuiCardLarge>
+          <h3 class="tui-island__title" i18n="@@plugins.config.title">Configuration</h3>
+          @if (hasSchema) {
+            <form [formGroup]="configForm" (keyup.enter)="saveConfig()">
+              @for (item of fields; track item) {
+                <div class="tui-form__row">
+                  @switch (item.field.type || 'string') {
+                    @case ('boolean') {
+                      <div class="tui-form__field-checkbox">
+                        <label tuiLabel> <input tuiCheckbox type="checkbox" [formControlName]="item.key">
+                          {{ item.field.label || item.key }}
+                        </label>
+                      </div>
+                    }
+                    @case ('number') {
+                      <tui-textfield >
+                        <label tuiLabel>
+                          {{ item.field.label || item.key }}
+                        </label>
+                        <input tuiInputNumber [formControlName]="item.key" [required]="!!item.field.required">
+                      </tui-textfield>
+                    }
+                    @default {
+                      @if (item.field.secret) {
+                        <tui-textfield >
+                          <label tuiLabel>
+                            {{ item.field.label || item.key }}
+                          </label>
+                          <input tuiInput type="password" [formControlName]="item.key" [required]="!!item.field.required">
+                          <tui-icon tuiPassword />
+                        </tui-textfield>
+                      } @else {
+                        <tui-textfield>
+                          <label tuiLabel>{{ item.field.label || item.key }}</label>
+                          <input tuiInput [formControlName]="item.key" [required]="!!item.field.required">
+                        </tui-textfield>
+                      }
+                    }
+                  }
+                  @if (item.field.description) {
+                    <p class="tui-text_body-s card__field-hint">{{ item.field.description }}</p>
+                  }
+                  <tui-error [formControlName]="item.key" ></tui-error>
+                </div>
+              }
+            </form>
+          } @else {
+            <p class="tui-island__paragraph" i18n="@@plugins.config.rawHint">
             This plugin does not declare a configuration schema. Edit its settings as JSON.
           </p>
-          <tui-text-area [formControl]="rawConfig" [expandable]="true" [rows]="8">
-            <span>JSON</span>
-          </tui-text-area>
-          <tui-error [formControl]="rawConfig" [error]="rawConfig.hasError('json') ? invalidJsonLabel : null"></tui-error>
-        </ng-template>
-
-        <div class="tui-form__buttons">
-          <button tuiButton appearance="primary" class="tui-space_top-3"
-                  [showLoader]="isSaving"
-                  [disabled]="isSaving || (hasSchema ? configForm.invalid : rawConfig.invalid)"
-                  (click)="saveConfig()">
-            <span i18n="@@action.save">Save</span>
-          </button>
+            <tui-textfield>
+              <textarea tuiTextarea [formControl]="rawConfig" [max]="8"></textarea>
+              <label tuiLabel>JSON</label>          </tui-textfield>
+              <tui-error [formControl]="rawConfig" [error]="rawConfig.hasError('json') ? invalidJsonLabel : null"></tui-error>
+            }
+            <div class="tui-form__buttons">
+              <button tuiButton appearance="primary" class="tui-space_top-3"
+                [loading]="isSaving"
+                [disabled]="isSaving || (hasSchema ? configForm.invalid : rawConfig.invalid)"
+                (click)="saveConfig()">
+                <span i18n="@@action.save">Save</span>
+              </button>
+            </div>
+          </div>
         </div>
-      </tui-island>
+      </div>
     </div>
-  </div>
-</div>
+  }

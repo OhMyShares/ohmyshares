@@ -1,3 +1,6 @@
+import { TuiInputDateRange } from "@taiga-ui/kit";
+import { TuiCardLarge } from "@taiga-ui/layout";
+import { WaIntersectionObserver } from "@ng-web-apis/intersection-observer";
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -9,10 +12,8 @@ import { ItemSummaryModule } from '../item-summary/item-summary.module';
 import { FilterDialogModule } from './filter-dialog/filter-dialog.module';
 import { ChangeTickerDialogModule } from './change-ticker-dialog/change-ticker-dialog.module';
 import { TradeListComponent } from './trade-list.component';
-import {TuiTableModule, TuiTablePaginationModule} from '@taiga-ui/addon-table';
-import {IntersectionObserverModule} from '@ng-web-apis/intersection-observer';
-import {TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule, TuiScrollbarModule} from '@taiga-ui/core';
-import {TuiInputDateRangeModule, TuiIslandModule} from '@taiga-ui/kit';
+import { TuiTablePagination, TuiTable } from '@taiga-ui/addon-table';
+import { TuiDataList, TuiScrollbar, TuiScrollable, TuiDropdown, TuiButton } from '@taiga-ui/core';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
@@ -29,15 +30,15 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     ReactiveFormsModule,
     ActionsModule,
     ItemSummaryModule,
-    TuiTableModule,
-    IntersectionObserverModule,
-    TuiScrollbarModule,
-    TuiTablePaginationModule,
-    TuiButtonModule,
-    TuiHostedDropdownModule,
-    TuiDataListModule,
-    TuiInputDateRangeModule,
-    TuiIslandModule,
+    ...TuiTable,
+    ...WaIntersectionObserver,
+    TuiScrollbar, TuiScrollable,
+    TuiTablePagination,
+    TuiButton,
+    ...TuiDropdown,
+    ...TuiDataList,
+    ...TuiInputDateRange,
+    TuiCardLarge,
     NgApexchartsModule,
   ],
 })

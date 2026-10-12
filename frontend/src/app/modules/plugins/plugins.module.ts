@@ -1,28 +1,10 @@
+import { TuiCardLarge } from "@taiga-ui/layout";
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {
-  TuiButtonModule,
-  TuiErrorModule,
-  TuiLinkModule,
-  TuiLoaderModule,
-  TuiNotificationModule,
-  TuiSvgModule,
-  TuiTextfieldControllerModule
-} from '@taiga-ui/core';
-import {
-  TuiBadgeModule,
-  TuiCheckboxLabeledModule,
-  TuiFieldErrorPipeModule,
-  TuiInputModule,
-  TuiInputNumberModule,
-  TuiInputPasswordModule,
-  TuiIslandModule,
-  TuiTabsModule,
-  TuiTextAreaModule,
-  TuiToggleModule
-} from '@taiga-ui/kit';
+import { TuiNotification, TuiError, TuiLoader, TuiLabel, TuiIcon, TuiLink, TuiButton, TuiCheckbox, TuiInput } from '@taiga-ui/core';
+import { TuiBadge, TuiSwitch, TuiTabs, TuiButtonLoading, TuiInputNumber, TuiPassword, TuiTextarea } from '@taiga-ui/kit';
 import {ActionsModule} from '../actions/actions.module';
 import {PluginBadgesComponent} from './plugin-badges/plugin-badges.component';
 import {PluginCardComponent} from './plugin-card/plugin-card.component';
@@ -43,24 +25,21 @@ import {PluginsListComponent} from './plugins-list/plugins-list.component';
     FormsModule,
     ReactiveFormsModule,
     ActionsModule,
-    TuiButtonModule,
-    TuiErrorModule,
-    TuiLinkModule,
-    TuiLoaderModule,
-    TuiNotificationModule,
-    TuiSvgModule,
-    TuiTextfieldControllerModule,
-    TuiBadgeModule,
-    TuiCheckboxLabeledModule,
-    TuiFieldErrorPipeModule,
-    TuiInputModule,
-    TuiInputNumberModule,
-    TuiInputPasswordModule,
-    TuiIslandModule,
-    TuiTabsModule,
-    TuiTextAreaModule,
-    TuiToggleModule,
-  ],
+    TuiButton,
+    ...TuiError,
+    TuiLink,
+    TuiLoader,
+    ...TuiNotification,
+    TuiIcon,
+    TuiBadge,
+    TuiLabel,
+    ...TuiError,
+    ...TuiInput,
+    ...TuiInputNumber, TuiPassword,
+    TuiCardLarge,
+    ...TuiTabs,
+    ...TuiTextarea,
+    TuiSwitch, TuiButtonLoading, TuiCheckbox],
 })
 export class PluginsModule {
 }

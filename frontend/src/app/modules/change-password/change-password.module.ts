@@ -4,8 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ActionsModule } from '../actions/actions.module';
 import { ChangePasswordComponent } from './change-password.component';
-import {TuiButtonModule, TuiErrorModule} from '@taiga-ui/core';
-import {TuiFieldErrorPipeModule, TuiInputPasswordModule, TuiTextAreaModule} from '@taiga-ui/kit';
+import { TuiError, TuiButton, TuiIcon, TuiInput } from '@taiga-ui/core';
+import { TuiButtonLoading, TuiPassword, TuiTextarea } from '@taiga-ui/kit';
 
 
 @NgModule({
@@ -17,12 +17,11 @@ import {TuiFieldErrorPipeModule, TuiInputPasswordModule, TuiTextAreaModule} from
     ]),
     ReactiveFormsModule,
     ActionsModule,
-    TuiButtonModule,
-    TuiErrorModule,
-    TuiTextAreaModule,
-    TuiFieldErrorPipeModule,
-    TuiInputPasswordModule,
-  ]
+    TuiButton,
+    ...TuiError,
+    ...TuiTextarea,
+    ...TuiError,
+    TuiIcon, TuiPassword, ...TuiInput, TuiButtonLoading]
 })
 export class ChangePasswordModule {
 }

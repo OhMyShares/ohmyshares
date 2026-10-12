@@ -1,8 +1,8 @@
+import { TuiButtonLoading } from "@taiga-ui/kit";
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
-import {TuiButtonModule, TuiDataListModule, TuiTextfieldControllerModule} from '@taiga-ui/core';
-import {TuiInputModule} from '@taiga-ui/kit';
+import { TuiDataList, TuiButton, TuiInput, TuiDropdown } from '@taiga-ui/core';
 import {ChangeTickerDialogComponent} from './change-ticker-dialog.component';
 
 @NgModule({
@@ -10,10 +10,11 @@ import {ChangeTickerDialogComponent} from './change-ticker-dialog.component';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    TuiInputModule,
-    TuiDataListModule,
-    TuiTextfieldControllerModule,
-    TuiButtonModule,
-  ],
+    ...TuiInput,
+    ...TuiDataList,
+    TuiButton,
+      TuiButtonLoading,
+      ...TuiDropdown
+],
 })
 export class ChangeTickerDialogModule {}

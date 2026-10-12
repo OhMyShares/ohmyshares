@@ -1,9 +1,10 @@
-import {HttpClient} from '@angular/common/http';
+import { tuiPure } from "@taiga-ui/legacy";
+import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {Ticker, TickerDividend, TickerHistory} from '../interfaces/tickers.interfaces';
-import {TuiContextWithImplicit, tuiPure, TuiStringHandler} from '@taiga-ui/cdk';
+import { TuiStringHandler, TuiContext } from '@taiga-ui/cdk';
 import {Common} from './references.service';
 
 const API = {
@@ -37,8 +38,8 @@ export class TickersService {
   }
 
   @tuiPure
-  stringify(items: readonly Ticker[]): TuiStringHandler<TuiContextWithImplicit<string>> {
+  stringify(items: readonly Ticker[]): TuiStringHandler<TuiContext<string>> {
     const map = new Map(items.map(({symbol, name}) => [symbol, name] as [string, string]));
-    return ({$implicit}: TuiContextWithImplicit<string>) => map.get($implicit) || ``;
+    return ({$implicit}: TuiContext<string>) => map.get($implicit) || ``;
   }
 }

@@ -1,13 +1,12 @@
+import { WaIntersectionObserver } from "@ng-web-apis/intersection-observer";
+import { TuiCurrencyPipe } from "@taiga-ui/addon-commerce";
+import { TuiTable } from "@taiga-ui/addon-table";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ActionsModule } from '../../actions/actions.module';
 import { CustomAssetsListComponent } from './custom-assets-list.component';
-import {TuiButtonModule, TuiFormatNumberPipeModule, TuiScrollbarModule} from '@taiga-ui/core';
-import {IntersectionObserverModule} from '@ng-web-apis/intersection-observer';
-import {TuiTableModule} from '@taiga-ui/addon-table';
-import {TuiCurrencyPipeModule} from '@taiga-ui/addon-commerce';
-
+import { TuiFormatNumberPipe, TuiScrollbar, TuiScrollable, TuiButton } from '@taiga-ui/core';
 
 @NgModule({
   declarations: [CustomAssetsListComponent],
@@ -17,12 +16,12 @@ import {TuiCurrencyPipeModule} from '@taiga-ui/addon-commerce';
       {path: '', component: CustomAssetsListComponent}
     ]),
     ActionsModule,
-    TuiScrollbarModule,
-    IntersectionObserverModule,
-    TuiTableModule,
-    TuiButtonModule,
-    TuiCurrencyPipeModule,
-    TuiFormatNumberPipeModule,
+    TuiScrollbar, TuiScrollable,
+    ...WaIntersectionObserver,
+    ...TuiTable,
+    TuiButton,
+    TuiCurrencyPipe,
+    TuiFormatNumberPipe,
   ]
 })
 export class CustomAssetsListModule {

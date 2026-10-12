@@ -1,3 +1,4 @@
+import { tuiScrollbarOptionsProvider } from '@taiga-ui/core';
 import { DatePipe } from '@angular/common';
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -6,10 +7,11 @@ import { CommonService } from '../../../core/services/common.service';
 
 
 @Component({
-  selector: 'app-custom-assets-prices-list',
-  templateUrl: './custom-assets-prices-list.component.html',
-  styleUrls: ['./custom-assets-prices-list.component.scss'],
-  // providers: [DatePipe]
+    selector: 'app-custom-assets-prices-list',
+    templateUrl: './custom-assets-prices-list.component.html',
+    styleUrls: ['./custom-assets-prices-list.component.scss'],
+    providers: [tuiScrollbarOptionsProvider({mode: 'hidden'})],
+    standalone: false
 })
 export class CustomAssetsPricesListComponent implements OnInit {
   // @HostBinding('class') classes = '';

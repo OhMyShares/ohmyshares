@@ -1,21 +1,12 @@
+import { TuiCardLarge } from "@taiga-ui/layout";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from '../../../core/core.module';
 import { ActionsModule } from '../../actions/actions.module';
 import { CustomAssetCardComponent } from './custom-asset-card.component';
-import {
-  TuiComboBoxModule,
-  TuiDataListWrapperModule,
-  TuiFieldErrorPipeModule,
-  TuiFilterByInputPipeModule,
-  TuiInputModule,
-  TuiIslandModule,
-  TuiSelectModule
-} from '@taiga-ui/kit';
-import {TuiDataListModule, TuiErrorModule} from '@taiga-ui/core';
-import {TuiLetModule} from '@taiga-ui/cdk';
-
+import { TuiDataListWrapper, TuiComboBox, TuiSelect } from '@taiga-ui/kit';
+import { TuiDataList, TuiError, TuiFilterByInputPipe, TuiInput, TuiDropdown } from '@taiga-ui/core';
 
 @NgModule({
   declarations: [CustomAssetCardComponent],
@@ -24,17 +15,17 @@ import {TuiLetModule} from '@taiga-ui/cdk';
     ReactiveFormsModule,
     CoreModule,
     ActionsModule,
-    TuiIslandModule,
-    TuiInputModule,
-    TuiErrorModule,
-    TuiSelectModule,
-    TuiComboBoxModule,
-    TuiDataListWrapperModule,
-    TuiFilterByInputPipeModule,
-    TuiFieldErrorPipeModule,
-    TuiDataListModule,
-    TuiLetModule
-  ]
+    TuiCardLarge,
+    ...TuiInput,
+    ...TuiError,
+    ...TuiSelect,
+    ...TuiComboBox,
+    ...TuiDataListWrapper,
+    TuiFilterByInputPipe,
+    ...TuiError,
+    ...TuiDataList,
+      ...TuiDropdown
+]
 })
 export class CustomAssetCardModule {
 }

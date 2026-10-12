@@ -1,3 +1,4 @@
+import { tuiScrollbarOptionsProvider } from '@taiga-ui/core';
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TableColumn } from '../../../core/interfaces/common.interfaces';
@@ -7,9 +8,11 @@ import { CustomAssetsService } from '../../../core/services/custom_assets.servic
 
 
 @Component({
-  selector: 'app-custom-assets-list',
-  templateUrl: './custom-assets-list.component.html',
-  styleUrls: ['./custom-assets-list.component.scss']
+    selector: 'app-custom-assets-list',
+    templateUrl: './custom-assets-list.component.html',
+    styleUrls: ['./custom-assets-list.component.scss'],
+    providers: [tuiScrollbarOptionsProvider({mode: 'hidden'})],
+    standalone: false
 })
 export class CustomAssetsListComponent implements OnInit {
   // @HostBinding('class') classes = '';

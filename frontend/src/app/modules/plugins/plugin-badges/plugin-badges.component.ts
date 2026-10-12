@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-plugin-badges',
-  templateUrl: './plugin-badges.component.html',
-  styleUrls: ['./plugin-badges.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-plugin-badges',
+    templateUrl: './plugin-badges.component.html',
+    styleUrls: ['./plugin-badges.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class PluginBadgesComponent {
   @Input() version: string | null = null;

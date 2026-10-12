@@ -1,49 +1,54 @@
 <app-actions class="mt-3">
-  <a tuiButton
-     *ngIf="portfolio"
-     appearance="secondary"
-     size="s"
-     class="tui-space_bottom-3 tui-space_right-3"
-     icon="tuiIconChevronLeft"
-     routerLinkActive="active"
-     [routerLink]="['/portfolios', portfolio.uid, 'content']">
-    <span i18n="@@nav.portfolio">Portfolio</span>
-  </a>
-  <tui-hosted-dropdown
-    *ngIf="portfolios"
-    tuiDropdownAlign="left"
-    [content]="dropdownPortfolios">
-    <button tuiButton
-            type="button"
-            appearance="secondary"
-            class="tui-space_bottom-3 tui-space_right-3"
-            icon="tuiIconBriefcase"
-            iconRight="tuiIconSortDown"
-            size="s">
-      <span>{{portfolio?.name}}</span>
-    </button>
-  </tui-hosted-dropdown>
-  <tui-hosted-dropdown
-    *ngIf="portfolios"
-    tuiDropdownAlign="left"
-    [content]="dropdownCurrencies">
-    <button tuiButton
-            type="button"
-            appearance="secondary"
-            class="tui-space_bottom-3 tui-space_right-3"
-            iconRight="tuiIconSortDown"
-            size="s">
-      <span>{{portfolio?.currency_code}}</span>
-    </button>
-  </tui-hosted-dropdown>
+  @if (portfolio) {
+    <a tuiButton
+      appearance="secondary"
+      size="s"
+      class="tui-space_bottom-3 tui-space_right-3"
+      iconStart="@tui.chevron-left"
+      routerLinkActive="active"
+      [routerLink]="['/portfolios', portfolio.uid, 'content']">
+      <span i18n="@@nav.portfolio">Portfolio</span>
+    </a>
+  }
+  @if (portfolios) {
+    <div tuiDropdownAuto
+      tuiDropdownAlign="start"
+      [tuiDropdown]="dropdownPortfolios">
+      <button tuiButton
+        type="button"
+        appearance="secondary"
+        class="tui-space_bottom-3 tui-space_right-3"
+        iconStart="@tui.briefcase"
+        iconEnd="@tui.chevron-down"
+        size="s">
+        <span>{{portfolio?.name}}</span>
+      </button>
+    </div>
+  }
+  @if (portfolios) {
+    <div tuiDropdownAuto
+      tuiDropdownAlign="start"
+      [tuiDropdown]="dropdownCurrencies">
+      <button tuiButton
+        type="button"
+        appearance="secondary"
+        class="tui-space_bottom-3 tui-space_right-3"
+        iconEnd="@tui.chevron-down"
+        size="s">
+        <span>{{portfolio?.currency_code}}</span>
+      </button>
+    </div>
+  }
 </app-actions>
 
 <ng-template #dropdownPortfolios>
   <tui-data-list>
     <tui-opt-group>
-      <button tuiOption [routerLink]="['/portfolios', p.uid, 'analytics']" *ngFor="let p of portfolios">
-        <span>{{ p.name }}</span>
-      </button>
+      @for (p of portfolios; track p) {
+        <button tuiOption [routerLink]="['/portfolios', p.uid, 'analytics']">
+          <span>{{ p.name }}</span>
+        </button>
+      }
     </tui-opt-group>
     <tui-opt-group>
       <button tuiOption [routerLink]="['/portfolios']">
@@ -73,199 +78,215 @@
   <div class="tui-row tui-row_adaptive">
 
     <div class="tui-col_md-4 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible">
-        <div class="tui-island__title text-bold" *ngIf="portfolio">
-          {{portfolio?.name}}
-        </div>
-        <div class="" *ngIf="portfolio">
-          <table class="table summary" *ngIf="analytics?.summary as s">
-            <tr>
-              <td i18n="@@analytics.currentValue">Current value</td>
-              <td class="summary__value text-bold">
-                <tui-money [value]="s.total_cost" [currency]="portfolio.currency_code"></tui-money>
-              </td>
-            </tr>
-            <tr>
-              <td i18n="@@analytics.cash">Cash</td>
-              <td class="summary__value">
-                <tui-money [value]="s.cash" [currency]="portfolio.currency_code"></tui-money>
-              </td>
-            </tr>
-            <tr>
-              <td i18n="@@analytics.costBasis">Cost basis of open positions</td>
-              <td class="summary__value">
-                <tui-money [value]="s.cost_basis" [currency]="portfolio.currency_code"></tui-money>
-              </td>
-            </tr>
-            <tr>
-              <td i18n="@@analytics.unrealizedGain">Unrealized gain</td>
-              <td class="summary__value">
-                <tui-money [value]="s.unrealized_gain" [currency]="portfolio.currency_code" sign="always" [colored]="true"></tui-money>
-                <div class="text-small" [class.text-success]="s.unrealized_gain_percent > 0" [class.text-danger]="s.unrealized_gain_percent < 0">
-                  {{ s.unrealized_gain_percent | number:'1.0-2' }}&thinsp;%
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td i18n="@@analytics.realizedGain">Realized gain</td>
-              <td class="summary__value">
-                <tui-money [value]="s.realized_gain" [currency]="portfolio.currency_code" sign="always" [colored]="true"></tui-money>
-              </td>
-            </tr>
-            <tr>
-              <td i18n="@@analytics.dividendsAndCoupons">Dividends and coupons</td>
-              <td class="summary__value">
-                <tui-money [value]="s.earnings" [currency]="portfolio.currency_code" [colored]="true"></tui-money>
-              </td>
-            </tr>
-            <tr class="text-bold">
-              <td i18n="@@analytics.totalReturn">Total return</td>
-              <td class="summary__value">
-                <tui-money [value]="s.total_return" [currency]="portfolio.currency_code" sign="always" [colored]="true"></tui-money>
-              </td>
-            </tr>
-            <tr>
-              <td i18n="@@analytics.openPositions">Open positions</td>
-              <td class="summary__value">
-                {{ s.positions_count }}
-                <span class="text-small">
-                  (<span class="text-success">{{ s.profitable_count }}</span>&thinsp;/&thinsp;<span class="text-danger">{{ s.losing_count }}</span>)
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td i18n="@@analytics.largestPosition">Largest position share</td>
-              <td class="summary__value">{{ s.largest_part_percent | number:'1.0-1' }}&thinsp;%</td>
-            </tr>
-            <tr>
-              <td i18n="@@analytics.top5Positions">Top 5 positions share</td>
-              <td class="summary__value">{{ s.top5_part_percent | number:'1.0-1' }}&thinsp;%</td>
-            </tr>
-          </table>
-          <table class="table">
-            <tr>
-              <td i18n="@@analytics.goal">Goal</td>
-              <td>
-                {{ portfolio.currency_sign }}&thinsp;{{ portfolio.goal.toLocaleString() }}
-                <a tuiLink [routerLink]="['/portfolios', portfolio.uid]"
-                   icon="tuiIconEdit" iconAlign="left"
-                   i18n="@@analytics.goalSet">Change</a>
-              </td>
-            </tr>
-            <tr *ngIf="portfolio.goal">
-              <td i18n="@@analytics.goalAchievement">Goal achievement</td>
-              <td>{{ analytics.goal_achievement_percent }}&thinsp;%</td>
-            </tr>
-          </table>
-          <progress *ngIf="portfolio.goal"
-                    tuiProgressBar
-                    size="s"
-                    max="100"
-                    class="tui-space_top-2"
-                    [value]="analytics.goal_achievement_percent"></progress>
-        </div>
-      </tui-island>
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible">
+        @if (portfolio) {
+          <div class="tui-island__title text-bold">
+            {{portfolio?.name}}
+          </div>
+        }
+        @if (portfolio) {
+          <div class="">
+            @if (analytics?.summary; as s) {
+              <table class="table summary">
+                <tr>
+                  <td i18n="@@analytics.currentValue">Current value</td>
+                  <td class="summary__value text-bold">
+                    <span >{{ s.total_cost | tuiAmount : portfolio.currency_code }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td i18n="@@analytics.cash">Cash</td>
+                  <td class="summary__value">
+                    <span >{{ s.cash | tuiAmount : portfolio.currency_code }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td i18n="@@analytics.costBasis">Cost basis of open positions</td>
+                  <td class="summary__value">
+                    <span >{{ s.cost_basis | tuiAmount : portfolio.currency_code }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td i18n="@@analytics.unrealizedGain">Unrealized gain</td>
+                  <td class="summary__value">
+                    <span [class.text-success]="s.unrealized_gain > 0" [class.text-danger]="s.unrealized_gain < 0">{{ s.unrealized_gain | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+                    <div class="text-small" [class.text-success]="s.unrealized_gain_percent > 0" [class.text-danger]="s.unrealized_gain_percent < 0">
+                      {{ s.unrealized_gain_percent | number:'1.0-2' }}&thinsp;%
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td i18n="@@analytics.realizedGain">Realized gain</td>
+                  <td class="summary__value">
+                    <span [class.text-success]="s.realized_gain > 0" [class.text-danger]="s.realized_gain < 0">{{ s.realized_gain | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td i18n="@@analytics.dividendsAndCoupons">Dividends and coupons</td>
+                  <td class="summary__value">
+                    <span [class.text-success]="s.earnings > 0" [class.text-danger]="s.earnings < 0">{{ s.earnings | tuiAmount : portfolio.currency_code }}</span>
+                  </td>
+                </tr>
+                <tr class="text-bold">
+                  <td i18n="@@analytics.totalReturn">Total return</td>
+                  <td class="summary__value">
+                    <span [class.text-success]="s.total_return > 0" [class.text-danger]="s.total_return < 0">{{ s.total_return | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td i18n="@@analytics.openPositions">Open positions</td>
+                  <td class="summary__value">
+                    {{ s.positions_count }}
+                    <span class="text-small">
+                      (<span class="text-success">{{ s.profitable_count }}</span>&thinsp;/&thinsp;<span class="text-danger">{{ s.losing_count }}</span>)
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td i18n="@@analytics.largestPosition">Largest position share</td>
+                  <td class="summary__value">{{ s.largest_part_percent | number:'1.0-1' }}&thinsp;%</td>
+                </tr>
+                <tr>
+                  <td i18n="@@analytics.top5Positions">Top 5 positions share</td>
+                  <td class="summary__value">{{ s.top5_part_percent | number:'1.0-1' }}&thinsp;%</td>
+                </tr>
+              </table>
+            }
+            <table class="table">
+              <tr>
+                <td i18n="@@analytics.goal">Goal</td>
+                <td>
+                  {{ portfolio.currency_sign }}&thinsp;{{ portfolio.goal.toLocaleString() }}
+                  <a tuiLink [routerLink]="['/portfolios', portfolio.uid]"
+                    iconStart="@tui.pencil"
+                  i18n="@@analytics.goalSet">Change</a>
+                </td>
+              </tr>
+              @if (portfolio.goal) {
+                <tr>
+                  <td i18n="@@analytics.goalAchievement">Goal achievement</td>
+                  <td>{{ analytics.goal_achievement_percent }}&thinsp;%</td>
+                </tr>
+              }
+            </table>
+            @if (portfolio.goal) {
+              <progress
+                tuiProgressBar
+                size="s"
+                max="100"
+                class="tui-space_top-2"
+              [value]="analytics.goal_achievement_percent"></progress>
+            }
+          </div>
+        }
+      </div>
     </div>
 
     <div class="tui-col_md-8 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible">
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible">
         <div class="tui-island__title">
           <span i18n="@@analytics.portfolioGrowth" class="text-bold">Portfolio Growth</span>
         </div>
-        <tui-axes *ngIf="chartGrowth"
-          class="axes__growth"
-          [axisXLabels]="chartGrowth.labelsX"
-          [axisYLabels]="chartGrowth.labelsY"
-        >
-          <tui-bar-chart
-            [max]="chartGrowth.max"
-            [value]="chartGrowth.values"
-          ></tui-bar-chart>
-        </tui-axes>
-      </tui-island>
+        @if (chartGrowth) {
+          <tui-axes
+            class="axes__growth"
+            [axisXLabels]="chartGrowth.labelsX"
+            [axisYLabels]="chartGrowth.labelsY"
+            >
+            <tui-bar-chart
+              [max]="chartGrowth.max"
+              [value]="chartGrowth.values"
+            ></tui-bar-chart>
+          </tui-axes>
+        }
+      </div>
     </div>
 
     <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible" class="island_full">
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.byAssetTypes" class="text-bold">By asset types</div>
         </div>
         <ng-container *ngTemplateOutlet="ringChartTpl; context: {$implicit: chartAssetTypes}"></ng-container>
-      </tui-island>
+      </div>
     </div>
 
     <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible" class="island_full">
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.bySectors" class="text-bold">By sectors</div>
         </div>
         <ng-container *ngTemplateOutlet="ringChartTpl; context: {$implicit: chartSectors}"></ng-container>
-      </tui-island>
+      </div>
     </div>
 
     <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible" class="island_full">
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.byEmitents" class="text-bold">By Emitents</div>
         </div>
         <ng-container *ngTemplateOutlet="ringChartTpl; context: {$implicit: chartEmitents}"></ng-container>
-        <div class="tui-space_top-3" *ngIf="analytics?.summary">
-          <span i18n="@@analytics.totalEmitents">Total count of emitents</span>:
-          {{ analytics.summary.positions_count }} <span i18n="@@common.pcs">pcs</span>
-        </div>
-      </tui-island>
+        @if (analytics?.summary) {
+          <div class="tui-space_top-3">
+            <span i18n="@@analytics.totalEmitents">Total count of emitents</span>:
+            {{ analytics.summary.positions_count }} <span i18n="@@common.pcs">pcs</span>
+          </div>
+        }
+      </div>
     </div>
 
     <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible" class="island_full">
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.byCurrencies" class="text-bold">By currencies</div>
         </div>
         <ng-container *ngTemplateOutlet="ringChartTpl; context: {$implicit: chartCurrencies}"></ng-container>
-      </tui-island>
+      </div>
     </div>
 
     <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible" class="island_full">
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.byEarnings" class="text-bold">By Earnings</div>
         </div>
         <ng-container *ngTemplateOutlet="ringChartTpl; context: {$implicit: chartEarnings}"></ng-container>
-        <div class="tui-space_top-3" *ngIf="analytics?.summary">
-          <span i18n="@@analytics.totalEarnings">Total earned dividends and coupons</span>:
-          <tui-money [value]="analytics.summary.earnings" [currency]="portfolio.currency_code"></tui-money>
-        </div>
-      </tui-island>
+        @if (analytics?.summary) {
+          <div class="tui-space_top-3">
+            <span i18n="@@analytics.totalEarnings">Total earned dividends and coupons</span>:
+            <span >{{ analytics.summary.earnings | tuiAmount : portfolio.currency_code }}</span>
+          </div>
+        }
+      </div>
     </div>
 
     <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible" class="island_full">
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.topMovers" class="text-bold">Best and worst positions</div>
         </div>
-        <ng-container *ngIf="portfolio">
+        @if (portfolio) {
           <div class="text-small text-muted" i18n="@@analytics.topGainers">Top gainers</div>
           <ng-container *ngTemplateOutlet="moversTpl; context: {$implicit: topGainers}"></ng-container>
           <div class="text-small text-muted tui-space_top-3" i18n="@@analytics.topLosers">Top losers</div>
           <ng-container *ngTemplateOutlet="moversTpl; context: {$implicit: topLosers}"></ng-container>
-        </ng-container>
-      </tui-island>
+        }
+      </div>
     </div>
 
     <div class="tui-col_md-12 tui-col_xs-12 tui-space_bottom-5">
-      <tui-island [class.tui-skeleton]="skeletonVisible">
+      <div tuiCardLarge [class.tui-skeleton]="skeletonVisible">
         <div class="tui-island__title">
           <div i18n="@@analytics.incomeByYears" class="text-bold">Income and expenses by years</div>
         </div>
-        <ng-container *ngIf="portfolio && chartIncome">
-          <ng-container *ngIf="chartIncome.labelsX.length; else emptyTpl">
+        @if (portfolio && chartIncome) {
+          @if (chartIncome.labelsX.length) {
             <div class="legend">
               <tui-legend-item size="s" [color]="getColor(0)" text="Dividends and coupons" i18n-text="@@analytics.dividendsAndCoupons"></tui-legend-item>
               <tui-legend-item size="s" [color]="getColor(1)" text="Fees and taxes" i18n-text="@@analytics.feesAndTaxes"></tui-legend-item>
             </div>
             <tui-axes class="axes__income"
-                      [axisXLabels]="chartIncome.labelsX"
-                      [axisYLabels]="chartIncome.labelsY">
+              [axisXLabels]="chartIncome.labelsX"
+              [axisYLabels]="chartIncome.labelsY">
               <tui-bar-chart [max]="chartIncome.max" [value]="chartIncome.values"></tui-bar-chart>
             </tui-axes>
             <div class="income__table">
@@ -278,66 +299,81 @@
                   <td class="summary__value" i18n="@@analytics.taxes">Taxes</td>
                   <td class="summary__value" i18n="@@analytics.net">Net</td>
                 </tr>
-                <tr *ngFor="let row of analytics.income_by_years">
-                  <td>{{ row.year }}</td>
-                  <td class="summary__value"><tui-money [value]="row.dividends" [currency]="portfolio.currency_code"></tui-money></td>
-                  <td class="summary__value"><tui-money [value]="row.coupons" [currency]="portfolio.currency_code"></tui-money></td>
-                  <td class="summary__value"><tui-money [value]="row.fees" [currency]="portfolio.currency_code"></tui-money></td>
-                  <td class="summary__value"><tui-money [value]="row.taxes" [currency]="portfolio.currency_code"></tui-money></td>
-                  <td class="summary__value text-bold">
-                    <tui-money [value]="netIncome(row)" [currency]="portfolio.currency_code" sign="always" [colored]="true"></tui-money>
-                  </td>
-                </tr>
+                @for (row of analytics.income_by_years; track row) {
+                  <tr>
+                    <td>{{ row.year }}</td>
+                    <td class="summary__value"><span >{{ row.dividends | tuiAmount : portfolio.currency_code }}</span></td>
+                    <td class="summary__value"><span >{{ row.coupons | tuiAmount : portfolio.currency_code }}</span></td>
+                    <td class="summary__value"><span >{{ row.fees | tuiAmount : portfolio.currency_code }}</span></td>
+                    <td class="summary__value"><span >{{ row.taxes | tuiAmount : portfolio.currency_code }}</span></td>
+                    <td class="summary__value text-bold">
+                      <span [class.text-success]="netIncome(row) > 0" [class.text-danger]="netIncome(row) < 0">{{ netIncome(row) | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+                    </td>
+                  </tr>
+                }
               </table>
             </div>
-          </ng-container>
-        </ng-container>
-      </tui-island>
+          } @else {
+            <div class="text-muted" i18n="@@analytics.noData">No data</div>
+          }
+        }
+      </div>
     </div>
   </div>
 </div>
 
 <ng-template #ringChartTpl let-chart>
-  <ng-container *ngIf="portfolio && chart">
-    <div class="ring" *ngIf="chart.values.length; else emptyTpl">
-      <tui-ring-chart size="l"
-                      class="ring__chart"
-                      [value]="chart.values"
-                      [(activeItemIndex)]="chart.activeIndex">
-        <tui-money [value]="ringValue(chart)" [currency]="portfolio.currency_code"></tui-money>
-        <div class="ring__label">{{ ringLabel(chart) }}</div>
-        <div class="ring__label" *ngIf="ringPercent(chart) !== null">{{ ringPercent(chart) | number:'1.0-1' }}&thinsp;%</div>
-      </tui-ring-chart>
-      <div class="ring__legend">
-        <tui-legend-item *ngFor="let label of chart.labels; let i = index"
-                         size="s"
-                         class="ring__legend-item"
-                         [color]="getColor(i)"
-                         [text]="label"
-                         [active]="chart.activeIndex === i"
-                         (mouseenter)="setActive(chart, i)"
-                         (mouseleave)="setActive(chart)">
-          <span class="text-muted">{{ chart.percents[i] | number:'1.0-1' }}&thinsp;%</span>
-        </tui-legend-item>
+  @if (portfolio && chart) {
+    @if (chart.values.length) {
+      <div class="ring">
+        <tui-ring-chart size="l"
+          class="ring__chart"
+          [value]="chart.values"
+          [(activeItemIndex)]="chart.activeIndex">
+          <span >{{ ringValue(chart) | tuiAmount : portfolio.currency_code }}</span>
+          <div class="ring__label">{{ ringLabel(chart) }}</div>
+          @if (ringPercent(chart) !== null) {
+            <div class="ring__label">{{ ringPercent(chart) | number:'1.0-1' }}&thinsp;%</div>
+          }
+        </tui-ring-chart>
+        <div class="ring__legend">
+          @for (label of chart.labels; track label; let i = $index) {
+            <tui-legend-item
+              size="s"
+              class="ring__legend-item"
+              [color]="getColor(i)"
+              [text]="label"
+              [active]="chart.activeIndex === i"
+              (mouseenter)="setActive(chart, i)"
+              (mouseleave)="setActive(chart)">
+              <span class="text-muted">{{ chart.percents[i] | number:'1.0-1' }}&thinsp;%</span>
+            </tui-legend-item>
+          }
+        </div>
       </div>
-    </div>
-  </ng-container>
+    } @else {
+      <div class="text-muted" i18n="@@analytics.noData">No data</div>
+    }
+  }
 </ng-template>
 
 <ng-template #moversTpl let-items>
-  <table class="table" *ngIf="items.length; else emptyTpl">
-    <tr *ngFor="let p of items">
-      <td>{{ p.title ?? p.ticker }}</td>
-      <td class="summary__value">
-        <tui-money [value]="p.current_gain" [currency]="portfolio.currency_code" sign="always" [colored]="true"></tui-money>
-      </td>
-      <td class="summary__value text-bold" [class.text-success]="p.current_gain_percent > 0" [class.text-danger]="p.current_gain_percent < 0">
-        {{ p.current_gain_percent > 0 ? '+' : '' }}{{ p.current_gain_percent | number:'1.0-2' }}&thinsp;%
-      </td>
-    </tr>
-  </table>
+  @if (items.length) {
+    <table class="table">
+      @for (p of items; track p) {
+        <tr>
+          <td>{{ p.title ?? p.ticker }}</td>
+          <td class="summary__value">
+            <span [class.text-success]="p.current_gain > 0" [class.text-danger]="p.current_gain < 0">{{ p.current_gain | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+          </td>
+          <td class="summary__value text-bold" [class.text-success]="p.current_gain_percent > 0" [class.text-danger]="p.current_gain_percent < 0">
+            {{ p.current_gain_percent > 0 ? '+' : '' }}{{ p.current_gain_percent | number:'1.0-2' }}&thinsp;%
+          </td>
+        </tr>
+      }
+    </table>
+  } @else {
+    <div class="text-muted" i18n="@@analytics.noData">No data</div>
+  }
 </ng-template>
 
-<ng-template #emptyTpl>
-  <div class="text-muted" i18n="@@analytics.noData">No data</div>
-</ng-template>

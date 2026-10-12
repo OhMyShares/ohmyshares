@@ -1,3 +1,4 @@
+import { TuiNotificationService } from "@taiga-ui/core";
 import { Component, HostBinding, OnInit } from '@angular/core';
 import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,13 +7,13 @@ import { FormField } from '../../../core/interfaces/common.interfaces';
 import { CustomAsset, CustomAssetPrice } from '../../../core/interfaces/custom_assets.interfaces';
 import { CommonService } from '../../../core/services/common.service';
 import { CustomAssetsService } from '../../../core/services/custom_assets.service';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
 import {TuiDay} from '@taiga-ui/cdk';
 
 @Component({
-  selector: 'app-custom-asset-price-card',
-  templateUrl: './custom-asset-price-card.component.html',
-  styleUrls: [ './custom-asset-price-card.component.scss' ]
+    selector: 'app-custom-asset-price-card',
+    templateUrl: './custom-asset-price-card.component.html',
+    styleUrls: ['./custom-asset-price-card.component.scss'],
+    standalone: false
 })
 export class CustomAssetPriceCardComponent implements OnInit {
   // @HostBinding('class') classes = '';
@@ -34,7 +35,7 @@ export class CustomAssetPriceCardComponent implements OnInit {
     private customAssetsService: CustomAssetsService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     public commonService: CommonService,
     private formBuilder: UntypedFormBuilder
   ) {
@@ -68,7 +69,7 @@ export class CustomAssetPriceCardComponent implements OnInit {
       this.customAssetsService.updatePrice(data)
         .subscribe(() => {
           this.alertService.open($localize`:@@alert.customAsset.update.message:Custom asset has been successfully updated`, {
-            status: TuiNotification.Success
+            appearance: 'positive'
           }).subscribe();
           history.back();
         });
@@ -76,7 +77,7 @@ export class CustomAssetPriceCardComponent implements OnInit {
       this.customAssetsService.createPrice(data)
         .subscribe(() => {
           this.alertService.open($localize`:@@alert.customAsset.create.message:Price has been successfully added`, {
-            status: TuiNotification.Success
+            appearance: 'positive'
           }).subscribe();
           history.back();
         });
@@ -87,7 +88,7 @@ export class CustomAssetPriceCardComponent implements OnInit {
     this.customAssetsService.deletePrice(this.customAssetPrice.id)
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.customAsset.delete.message:Price has been successfully deleted`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         this.router.navigate(['/custom-asset-price', this.customAssetPrice.id]);
       });

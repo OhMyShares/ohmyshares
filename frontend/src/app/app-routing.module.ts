@@ -142,8 +142,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     preloadingStrategy: PreloadAllModules,
     // enableTracing: isDevMode(),
-    onSameUrlNavigation: 'reload',
-    relativeLinkResolution: 'legacy'
+    onSameUrlNavigation: 'reload'
 })],
   exports: [RouterModule]
 })

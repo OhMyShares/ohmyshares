@@ -36,9 +36,10 @@ const TOP_MOVERS_COUNT = 5;
 const MONEY_TICKER = '$$';
 
 @Component({
-  selector: 'app-portfolio-analytics',
-  templateUrl: './portfolio-analytics.component.html',
-  styleUrls: ['./portfolio-analytics.component.scss']
+    selector: 'app-portfolio-analytics',
+    templateUrl: './portfolio-analytics.component.html',
+    styleUrls: ['./portfolio-analytics.component.scss'],
+    standalone: false
 })
 export class PortfolioAnalyticsComponent implements OnInit {
   // @HostBinding('class') classes = 'row justify-content-center align-items-center';
@@ -216,7 +217,7 @@ export class PortfolioAnalyticsComponent implements OnInit {
   }
 
   getColor(index: number): string {
-    return `var(--tui-chart-${index})`;
+    return `var(--tui-chart-categorical-0${index})`;
   }
 
   netIncome(row: AnalyticsIncomeByYear): number {

@@ -6,80 +6,83 @@
 
       <form [formGroup]="signUpForm" (keyup.enter)="signUp()">
         <div class="tui-form__row">
-          <tui-input>
-            <input tuiTextfield
-                   i18n-placeholder="@@form.signUp.field.email.main"
-                   placeholder="user@domain.com"
-                   type="email"
-                   autocapitalize="off"
-                   inputmode="email"
-                   formControlName="email"
-                   name="email"
-                   required>
-            <span i18n="@@form.signUp.field.email.main">Email</span>
-          </tui-input>
-          <div class="tui-form__field-note"
-               i18n="@@form.signUp.field.email.hint">
+          <tui-textfield>
+            <input tuiInput
+              i18n-placeholder="@@form.signUp.field.email.main"
+              placeholder="user@domain.com"
+              type="email"
+              autocapitalize="off"
+              inputmode="email"
+              formControlName="email"
+              name="email"
+              required>
+            <label tuiLabel i18n="@@form.signUp.field.email.main">Email</label>          </tui-textfield>
+            <div class="tui-form__field-note"
+              i18n="@@form.signUp.field.email.hint">
             Password will be sent on your email
           </div>
-          <tui-error formControlName="email" [error]="[] | tuiFieldError | async"></tui-error>
-        </div>
+            <tui-error formControlName="email" ></tui-error>
+          </div>
 
-        <div class="tui-form__row tui-space_bottom-5">
-          <tui-input>
-            <input tuiTextfield
-                   i18n="@@form.signUp.field.yourName"
-                   i18n-placeholder="@@form.signUp.field.yourName"
-                   placeholder="Anonymous"
-                   autocapitalize="on"
-                   spellcheck="false"
-                   type="text"
-                   formControlName="name"
-                   name="name"
-                   required>
-            <span i18n="@@form.signUp.field.yourName">Your Name</span>
-          </tui-input>
-          <tui-error formControlName="name" [error]="[] | tuiFieldError | async"></tui-error>
-        </div>
+          <div class="tui-form__row tui-space_bottom-5">
+            <tui-textfield>
+              <input tuiInput
+                i18n="@@form.signUp.field.yourName"
+                i18n-placeholder="@@form.signUp.field.yourName"
+                placeholder="Anonymous"
+                autocapitalize="on"
+                spellcheck="false"
+                type="text"
+                formControlName="name"
+                name="name"
+                required>
+              <label tuiLabel i18n="@@form.signUp.field.yourName">Your Name</label>          </tui-textfield>
+              <tui-error formControlName="name" ></tui-error>
+            </div>
 
-        <div *ngIf="environment.H_CAPTCHA_SITE_KEY">
-          <ng-hcaptcha formControlName="captcha" required></ng-hcaptcha>
-          <tui-error formControlName="captcha" [error]="[] | tuiFieldError | async"></tui-error>
-        </div>
+            @if (environment.H_CAPTCHA_SITE_KEY) {
+              <div>
+                <ng-hcaptcha formControlName="captcha" required></ng-hcaptcha>
+                <tui-error formControlName="captcha" ></tui-error>
+              </div>
+            }
 
-        <div class="tui-form__row" *ngIf="environment.PRIVACY_POLICY_URL || environment.USER_AGREEMENT_URL">
-          <tui-checkbox-labeled formControlName="rules" required>
-            <span i18n="@@form.signUp.field.agree.main">I accept</span>
-            <ng-container *ngIf="environment.PRIVACY_POLICY_URL">
-              &nbsp;<a [href]="environment.PRIVACY_POLICY_URL" target="_blank" i18n="@@form.signUp.field.agree.privacy">Privacy policy</a>
-            </ng-container>
-            <ng-container *ngIf="environment.PRIVACY_POLICY_URL && environment.USER_AGREEMENT_URL">
-              &nbsp;<span i18n="@@form.signUp.field.agree.and">and</span>
-            </ng-container>
-            <ng-container *ngIf="environment.USER_AGREEMENT_URL">
-              &nbsp;<a [href]="environment.USER_AGREEMENT_URL" target="_blank" i18n="@@form.signUp.field.agree.agreement">User agreement</a>
-            </ng-container>
-          </tui-checkbox-labeled>
-          <tui-error formControlName="rules" [error]="[] | tuiFieldError | async"></tui-error>
-        </div>
-      </form>
+            @if (environment.PRIVACY_POLICY_URL || environment.USER_AGREEMENT_URL) {
+              <div class="tui-form__row">
+                <label tuiLabel> <input tuiCheckbox type="checkbox" formControlName="rules" required>
+                  <span i18n="@@form.signUp.field.agree.main">I accept</span>
+                    @if (environment.PRIVACY_POLICY_URL) {
+                      &nbsp;<a [href]="environment.PRIVACY_POLICY_URL" target="_blank" i18n="@@form.signUp.field.agree.privacy">Privacy policy</a>
+                    }
+                    @if (environment.PRIVACY_POLICY_URL && environment.USER_AGREEMENT_URL) {
+                      &nbsp;<span i18n="@@form.signUp.field.agree.and">and</span>
+                    }
+                    @if (environment.USER_AGREEMENT_URL) {
+                      &nbsp;<a [href]="environment.USER_AGREEMENT_URL" target="_blank" i18n="@@form.signUp.field.agree.agreement">User agreement</a>
+                    }
+                  </label>
+                  <tui-error formControlName="rules" ></tui-error>
+                </div>
+              }
+            </form>
 
-      <div class="tui-form__buttons tui-space_bottom-5">
-        <a tuiButton
-           appearance="primary"
-           class="btn-block tui-space_bottom-3"
-           [showLoader]="isLoading$ | async"
-           [disabled]="signUpForm.invalid || (isLoading$ | async)"
-           (click)="signUp()">
-          <span i18n="@@action.signUp">Sign Up</span>
-        </a>
-      </div>
+            <div class="tui-form__buttons tui-space_bottom-5">
+              <button tuiButton
+                type="button"
+                appearance="primary"
+                class="btn-block tui-space_bottom-3"
+                [loading]="isLoading$ | async"
+                [disabled]="signUpForm.invalid || (isLoading$ | async)"
+                (click)="signUp()">
+                <span i18n="@@action.signUp">Sign Up</span>
+                </button>
+              </div>
 
-      <div class="text-center text-sm-left">
-        <a routerLink="/login">
-          <span i18n="@@action.loginForExisting">Log In for existing users</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+              <div class="text-center text-sm-left">
+                <a routerLink="/login">
+                  <span i18n="@@action.loginForExisting">Log In for existing users</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>

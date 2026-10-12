@@ -1,8 +1,9 @@
+import { tuiPure } from "@taiga-ui/legacy";
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import {TuiContextWithImplicit, tuiPure, TuiStringHandler} from '@taiga-ui/cdk';
+import { TuiStringHandler, TuiContext } from '@taiga-ui/cdk';
 
 const API = {
   REFERENCES: `${environment.API_ENDPOINT}/reference`
@@ -72,15 +73,15 @@ export class ReferencesService {
   }
 
   @tuiPure
-  stringify(items: readonly Common[]): TuiStringHandler<TuiContextWithImplicit<number>> {
+  stringify(items: readonly Common[]): TuiStringHandler<number> {
     const map = new Map(items.map(({id, name}) => [id, name] as [number, string]));
-    return ({$implicit}: TuiContextWithImplicit<number>) => map.get($implicit) || ``;
+    return (id: number) => map.get(id) || ``;
   }
 
   @tuiPure
-  stringifyCurrency(items: readonly CurrencyReference[]): TuiStringHandler<TuiContextWithImplicit<string>> {
+  stringifyCurrency(items: readonly CurrencyReference[]): TuiStringHandler<TuiContext<string>> {
     const map = new Map(items.map(({code, name}) => [code, name] as [string, string]));
-    return ({$implicit}: TuiContextWithImplicit<string>) => map.get($implicit) || ``;
+    return ({$implicit}: TuiContext<string>) => map.get($implicit) || ``;
   }
 
   public currencyLabel(item: CurrencyReference): string {

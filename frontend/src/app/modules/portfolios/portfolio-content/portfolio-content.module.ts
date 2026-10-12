@@ -1,3 +1,6 @@
+import { TuiCardLarge } from "@taiga-ui/layout";
+import { WaIntersectionObserver } from "@ng-web-apis/intersection-observer";
+import { TuiTable } from "@taiga-ui/addon-table";
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -5,16 +8,8 @@ import {RouterModule} from '@angular/router';
 import {CoreModule} from '../../../core/core.module';
 import {ActionsModule} from '../../actions/actions.module';
 import {PortfolioContentComponent} from './portfolio-content.component';
-import {
-  TuiButtonModule,
-  TuiDataListModule,
-  TuiHintModule,
-  TuiHostedDropdownModule,
-  TuiScrollbarModule, TuiSvgModule, TuiTextfieldControllerModule
-} from '@taiga-ui/core';
-import {TuiTableModule} from '@taiga-ui/addon-table';
-import {IntersectionObserverModule} from '@ng-web-apis/intersection-observer';
-import {TuiInputModule, TuiIslandModule, TuiProgressModule} from '@taiga-ui/kit';
+import { TuiDataList, TuiScrollbar, TuiScrollable, TuiDropdown, TuiIcon, TuiButton, TuiHint, TuiInput } from '@taiga-ui/core';
+import { TuiProgress } from '@taiga-ui/kit';
 
 @NgModule({
   declarations: [PortfolioContentComponent],
@@ -31,18 +26,17 @@ import {TuiInputModule, TuiIslandModule, TuiProgressModule} from '@taiga-ui/kit'
     ActionsModule,
     ReactiveFormsModule,
     FormsModule,
-    TuiButtonModule,
-    TuiTableModule,
-    TuiScrollbarModule,
-    IntersectionObserverModule,
-    TuiHostedDropdownModule,
-    TuiDataListModule,
-    TuiHintModule,
-    TuiSvgModule,
-    TuiIslandModule,
-    TuiInputModule,
-    TuiTextfieldControllerModule,
-    TuiProgressModule,
+    TuiButton,
+    ...TuiTable,
+    TuiScrollbar, TuiScrollable,
+    ...WaIntersectionObserver,
+    ...TuiDropdown,
+    ...TuiDataList,
+    ...TuiHint,
+    TuiIcon,
+    TuiCardLarge,
+    ...TuiInput,
+    ...TuiProgress,
   ]
 })
 export class PortfolioContentModule {

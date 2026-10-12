@@ -1,3 +1,4 @@
+import { TuiNotificationService } from "@taiga-ui/core";
 import {Component, HostBinding, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -5,12 +6,12 @@ import {CustomAsset} from '../../../core/interfaces/custom_assets.interfaces';
 import {CommonService} from '../../../core/services/common.service';
 import {CustomAssetsService} from '../../../core/services/custom_assets.service';
 import {CurrencyReference, ReferencesService} from '../../../core/services/references.service';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
 
 @Component({
-  selector: 'app-custom-asset-card',
-  templateUrl: './custom-asset-card.component.html',
-  styleUrls: [ './custom-asset-card.component.scss' ]
+    selector: 'app-custom-asset-card',
+    templateUrl: './custom-asset-card.component.html',
+    styleUrls: ['./custom-asset-card.component.scss'],
+    standalone: false
 })
 export class CustomAssetCardComponent implements OnInit {
   // @HostBinding('class') classes = '';
@@ -38,7 +39,7 @@ export class CustomAssetCardComponent implements OnInit {
     private customAssetsService: CustomAssetsService,
     private route: ActivatedRoute,
     private router: Router,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     public commonService: CommonService,
     private formBuilder: UntypedFormBuilder
   ) {
@@ -67,7 +68,7 @@ export class CustomAssetCardComponent implements OnInit {
       this.customAssetsService.update(data)
         .subscribe(() => {
           this.alertService.open($localize`:@@alert.customAsset.update.message:Custom asset has been successfully updated`, {
-            status: TuiNotification.Success
+            appearance: 'positive'
           }).subscribe();
           history.back();
         });
@@ -75,7 +76,7 @@ export class CustomAssetCardComponent implements OnInit {
       this.customAssetsService.create(data)
         .subscribe(() => {
           this.alertService.open($localize`:@@alert.customAsset.create.message:Custom asset has been successfully created`, {
-            status: TuiNotification.Success
+            appearance: 'positive'
           }).subscribe();
           history.back();
         });
@@ -86,7 +87,7 @@ export class CustomAssetCardComponent implements OnInit {
     this.customAssetsService.delete(this.customAsset.id)
       .subscribe(() => {
         this.alertService.open($localize`:@@alert.customAsset.delete.message:Custom asset has been successfully deleted`, {
-          status: TuiNotification.Success
+          appearance: 'positive'
         }).subscribe();
         this.router.navigate(['/custom-assets']);
       });

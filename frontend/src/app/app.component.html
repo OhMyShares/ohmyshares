@@ -1,9 +1,10 @@
-<tui-theme-night *ngIf="themingService.isDark"></tui-theme-night>
-<tui-root [tuiMode]="themingService.themeTuiMode">
+<tui-root [attr.tuiTheme]="themingService.isDark ? 'dark' : null">
 
   <!--<ngx-ui-loader></ngx-ui-loader>-->
 
-  <app-header *ngIf="authService.me$ | async"></app-header>
+  @if (authService.me$ | async) {
+    <app-header></app-header>
+  }
 
   <main>
     <router-outlet></router-outlet>

@@ -1,3 +1,4 @@
+import { TuiCardLarge } from "@taiga-ui/layout";
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -13,9 +14,8 @@ import {CustomAssetPriceCardResolver} from '../custom-asset-price-card/custom-as
 import {CustomAssetCardModule} from '../custom-asset-card/custom-asset-card.module';
 import {CustomAssetCardResolver} from '../custom-asset-card/custom-asset-card.resolver';
 import {CustomAssetCardComponent} from '../custom-asset-card/custom-asset-card.component';
-import {TuiButtonModule, TuiFormatNumberPipeModule} from '@taiga-ui/core';
-import {TuiIslandModule} from '@taiga-ui/kit';
-import {TuiAxesModule, TuiLineChartModule} from '@taiga-ui/addon-charts';
+import { TuiFormatNumberPipe, TuiButton } from '@taiga-ui/core';
+import { TuiAxes, TuiLineChart, TuiLineChartHint } from '@taiga-ui/addon-charts';
 
 @NgModule({
   declarations: [CustomAssetViewComponent],
@@ -40,11 +40,11 @@ import {TuiAxesModule, TuiLineChartModule} from '@taiga-ui/addon-charts';
     CoreModule,
     ActionsModule,
     CustomAssetsPricesListModule,
-    TuiButtonModule,
-    TuiIslandModule,
-    TuiFormatNumberPipeModule,
-    TuiAxesModule,
-    TuiLineChartModule,
+    TuiButton,
+    TuiCardLarge,
+    TuiFormatNumberPipe,
+    TuiAxes,
+    TuiLineChart, TuiLineChartHint,
   ]
 })
 export class CustomAssetViewModule {

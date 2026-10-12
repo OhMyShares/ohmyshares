@@ -4,52 +4,62 @@
   </p>
 
   <div class="tui-form__row">
-    <tui-input formControlName="ticker" [tuiTextfieldCleaner]="true">
-      <span i18n="@@dialog.changeTicker.field.ticker">New ticker</span>
-      <input tuiTextfield autocomplete="off" />
-      <ng-template tuiDataList>
-        <tui-data-list *ngIf="tickers.length; else tickerEmptyTemplate">
-          <button *ngFor="let item of tickers"
-                  tuiOption
-                  type="button"
-                  [value]="item.symbol"
-                  (click)="select(item)">
-            <span>
-              <span class="tui-space_right-2">{{ item.symbol }}</span>
-              <span class="text-muted">{{ item.name }}</span>
-              <span class="text-muted" *ngIf="item.exchange">&nbsp;({{ item.exchange }})</span>
-            </span>
-          </button>
-        </tui-data-list>
-      </ng-template>
-    </tui-input>
-    <ng-template #tickerEmptyTemplate>
-      <div class="tui-space_vertical-3 tui-space_horizontal-3 text-muted">
-        <span *ngIf="isSearching" i18n="@@form.trade.loading">Loading...</span>
-        <span *ngIf="!isSearching && newTicker" i18n="@@dialog.changeTicker.notFound">
+    <tui-textfield [tuiTextfieldCleaner]="true">
+      <label tuiLabel><span i18n="@@dialog.changeTicker.field.ticker">New ticker</span></label>
+      <input tuiInput autocomplete="off" formControlName="ticker"/>
+      <ng-template tuiDropdown>
+        @if (tickers.length) {
+          <tui-data-list>
+            @for (item of tickers; track item) {
+              <button
+                tuiOption
+                type="button"
+                [value]="item.symbol"
+                (click)="select(item)">
+                <span>
+                  <span class="tui-space_right-2">{{ item.symbol }}</span>
+                  <span class="text-muted">{{ item.name }}</span>
+                  @if (item.exchange) {
+                    <span class="text-muted">&nbsp;({{ item.exchange }})</span>
+                  }
+                </span>
+              </button>
+            }
+          </tui-data-list>
+        } @else {
+          <div class="tui-space_vertical-3 tui-space_horizontal-3 text-muted">
+            @if (isSearching) {
+              <span i18n="@@form.trade.loading">Loading...</span>
+            }
+            @if (!isSearching && newTicker) {
+              <span i18n="@@dialog.changeTicker.notFound">
           Ticker not found in database, it will be set as is
         </span>
-        <span *ngIf="!isSearching && !newTicker" i18n="@@form.trade.typeAtLeast">Type at least 1 character</span>
-      </div>
-    </ng-template>
-  </div>
+            }
+            @if (!isSearching && !newTicker) {
+              <span i18n="@@form.trade.typeAtLeast">Type at least 1 character</span>
+            }
+          </div>
+        }
+      </ng-template>    </tui-textfield>
+    </div>
 
-  <div class="tui-form__buttons">
-    <button tuiButton
-            type="submit"
-            size="m"
-            class="tui-form__button"
-            [showLoader]="isSaving"
-            [disabled]="form.invalid || !newTicker || isSameTicker() || isSaving">
-      <span i18n="@@action.save">Save</span>
-    </button>
-    <button tuiButton
-            type="button"
-            size="m"
-            appearance="secondary"
-            class="tui-form__button"
-            (click)="close()">
-      <span i18n="@@action.cancel">Cancel</span>
-    </button>
-  </div>
-</form>
+    <div class="tui-form__buttons">
+      <button tuiButton
+        type="submit"
+        size="m"
+        class="tui-form__button"
+        [loading]="isSaving"
+        [disabled]="form.invalid || !newTicker || isSameTicker() || isSaving">
+        <span i18n="@@action.save">Save</span>
+      </button>
+      <button tuiButton
+        type="button"
+        size="m"
+        appearance="secondary"
+        class="tui-form__button"
+        (click)="close()">
+        <span i18n="@@action.cancel">Cancel</span>
+      </button>
+    </div>
+  </form>

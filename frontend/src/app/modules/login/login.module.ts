@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { CoreModule } from '../../core/core.module';
 import { ActionsModule } from '../actions/actions.module';
 import { LoginComponent } from './login.component';
-import {TuiFieldErrorPipeModule, TuiInputModule, TuiInputPasswordModule} from '@taiga-ui/kit';
-import {TuiButtonModule, TuiErrorModule, TuiPrimitiveTextfieldModule} from '@taiga-ui/core';
+import { TuiButtonLoading, TuiPassword } from '@taiga-ui/kit';
+import { TuiError, TuiButton, TuiIcon, TuiInput, TuiTextfield } from '@taiga-ui/core';
 
 
 @NgModule({
@@ -20,13 +20,11 @@ import {TuiButtonModule, TuiErrorModule, TuiPrimitiveTextfieldModule} from '@tai
     CoreModule,
     RouterModule,
     ActionsModule,
-    TuiInputModule,
-    TuiPrimitiveTextfieldModule,
-    TuiButtonModule,
-    TuiInputPasswordModule,
-    TuiErrorModule,
-    TuiFieldErrorPipeModule,
-  ]
+    ...TuiInput,
+    ...TuiTextfield,
+    TuiButton,
+    TuiIcon, TuiPassword,
+    ...TuiError, TuiButtonLoading]
 })
 export class LoginModule {
 }

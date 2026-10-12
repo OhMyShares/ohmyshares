@@ -1,4 +1,5 @@
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import { TuiNotificationService } from "@taiga-ui/core";
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
@@ -6,13 +7,12 @@ import {catchError, finalize} from 'rxjs/operators';
 import {AuthService} from '../services/auth.service';
 import {CommonService} from '../services/common.service';
 import {SpinnerService} from '../services/spinner.service';
-import {TuiAlertService, TuiNotification} from '@taiga-ui/core';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
   constructor(
     private authService: AuthService,
-    private alertService: TuiAlertService,
+    private alertService: TuiNotificationService,
     private commonService: CommonService,
     private spinnerService: SpinnerService,
     private router: Router
@@ -40,7 +40,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
               //   actionTitle: $localize`:@@alert.connectionLost.action:Retry`
               // });
               this.alertService.open($localize`:@@alert.connectionLost.message:Connection error`, {
-                status: TuiNotification.Error,
+                appearance: 'negative',
                 label: $localize`:@@alert.connectionLost.action:Retry`,
               });
             } else if (err.status === 401) {
@@ -49,7 +49,7 @@ export class AuthHttpInterceptor implements HttpInterceptor {
               this.commonService.validationError$.next(err.error);
             } else {
               this.alertService.open(err.error.message, {
-                status: TuiNotification.Error,
+                appearance: 'negative',
               }).subscribe();
             }
           }

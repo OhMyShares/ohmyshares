@@ -2,9 +2,10 @@ import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
 import { CommonService } from '../../core/services/common.service';
 
 @Component({
-  selector: 'app-actions',
-  templateUrl: './actions.component.html',
-  styleUrls: ['./actions.component.scss']
+    selector: 'app-actions',
+    templateUrl: './actions.component.html',
+    styleUrls: ['./actions.component.scss'],
+    standalone: false
 })
 export class ActionsComponent implements AfterViewInit{
   // @HostBinding('class') classes = '';

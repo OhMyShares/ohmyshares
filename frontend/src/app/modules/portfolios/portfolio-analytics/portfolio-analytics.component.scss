@@ -1,12 +1,12 @@
 :host {
-  --tui-chart-0: var(--tui-primary);
-  --tui-chart-1: #526ed3;
-  --tui-chart-2: #f5a623;
-  --tui-chart-3: #e5554e;
-  --tui-chart-4: #9c6ade;
-  --tui-chart-5: #3dbae0;
-  --tui-chart-6: #f17fb1;
-  --tui-chart-7: #a0a0a0;
+  --tui-chart-categorical-00: var(--tui-background-accent-1);
+  --tui-chart-categorical-01: #526ed3;
+  --tui-chart-categorical-02: #f5a623;
+  --tui-chart-categorical-03: #e5554e;
+  --tui-chart-categorical-04: #9c6ade;
+  --tui-chart-categorical-05: #3dbae0;
+  --tui-chart-categorical-06: #f17fb1;
+  --tui-chart-categorical-07: #a0a0a0;
 }
 
 .axes__growth {

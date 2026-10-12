@@ -8,82 +8,80 @@
 
       <div class="tui-form__row">
         <div class="tui-form__row_half-width">
-          <tui-input [formControl]="searchField"
-                     [tuiTextfieldCleaner]="true"
-                     class="tui-space_bottom-3">
-            <input tuiTextfield>
-            <span i18n="@@common.search">
+          <tui-textfield [tuiTextfieldCleaner]="true" class="tui-space_bottom-3">
+            <input tuiInput [formControl]="searchField">
+            <label tuiLabel i18n="@@common.search">
               Search...
-            </span>
-          </tui-input>
+            </label>          </tui-textfield>
+          </div>
         </div>
+
+        <tui-scrollbar waIntersectionRoot
+          class="scrollbar">
+          <table tuiTable class="table" [columns]="displayedColumns" [class.tui-skeleton]="skeletonVisible">
+            <thead>
+              <tr tuiThGroup>
+                <th tuiTh i18n="@@table.companies.column.ticker">Ticker</th>
+                <th tuiTh i18n="@@table.companies.column.name">Name</th>
+              </tr>
+            </thead>
+            <tbody tuiTbody [data]="companies">
+              @for (item of companies; track item) {
+                <tr tuiTr
+                  [routerLink]="item.ticker"
+                  class="tui-table__tr_cursor_pointer">
+                  <td *tuiCell="'ticker'" tuiTd>
+                    {{ item.ticker }}
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </tui-scrollbar>
       </div>
-
-      <tui-scrollbar waIntersectionRoot
-                     class="scrollbar"
-                     [hidden]="true">
-        <table tuiTable class="table" [columns]="displayedColumns" [class.tui-skeleton]="skeletonVisible">
-          <thead>
-          <tr tuiThGroup>
-            <th tuiTh i18n="@@table.companies.column.ticker">Ticker</th>
-            <th tuiTh i18n="@@table.companies.column.name">Name</th>
-          </tr>
-          </thead>
-          <tbody tuiTbody [data]="companies">
-          <tr tuiTr *tuiRow="let item of companies"
-              [routerLink]="item.ticker"
-              class="tui-table__tr_cursor_pointer">
-            <td *tuiCell="'ticker'" tuiTd>
-              {{ item.ticker }}
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </tui-scrollbar>
     </div>
-  </div>
 
-</div>
+  </div>
 
   <!--<div class="mt-3" [class.p-0]="commonService.isMobile">-->
 
   <!--  <mat-form-field appearance="fill" class="search-field w-100">-->
   <!--    <mat-label i18n="@@common.search">Search...</mat-label>-->
   <!--    <input matInput placeholder="" [formControl]="searchField" autocomplete="off">-->
-  <!--  </mat-form-field>-->
+<!--  </mat-form-field>-->
 
-  <!--  <div class="card mb-4" *ngIf="!commonService.isMobile">-->
-  <!--    <div class="card-header" i18n="@@nav.companies">-->
-  <!--      Companies-->
-  <!--    </div>-->
-  <!--    <div class="card-body p-0">-->
-  <!--      <mat-table [dataSource]="data"-->
-  <!--                 class="w-100">-->
-  <!--        <ng-container *ngFor="let column of columns"-->
-  <!--                      [matColumnDef]="column.key">-->
-  <!--          <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>-->
-  <!--          <mat-cell *matCellDef="let row" class="d-flex flex-wrap">-->
-  <!--            <span class="mobile">{{ column.header }}:</span>-->
-  <!--            <span>{{ column.cell(row) || '-' }}</span>-->
-  <!--          </mat-cell>-->
-  <!--        </ng-container>-->
-  <!--        <mat-header-row-->
-  <!--                *matHeaderRowDef="displayedColumns;"></mat-header-row>-->
-  <!--        <mat-row [routerLink]="[row.ticker]"-->
-  <!--                 *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
-  <!--      </mat-table>-->
-  <!--    </div>-->
-  <!--  </div>-->
+<!--  <div class="card mb-4" *ngIf="!commonService.isMobile">-->
+<!--    <div class="card-header" i18n="@@nav.companies">-->
+<!--      Companies-->
+<!--    </div>-->
+<!--    <div class="card-body p-0">-->
+<!--      <mat-table [dataSource]="data"-->
+<!--                 class="w-100">-->
+<!--        <ng-container *ngFor="let column of columns"-->
+<!--                      [matColumnDef]="column.key">-->
+<!--          <mat-header-cell *matHeaderCellDef>{{ column.header }}</mat-header-cell>-->
+<!--          <mat-cell *matCellDef="let row" class="d-flex flex-wrap">-->
+<!--            <span class="mobile">{{ column.header }}:</span>-->
+<!--            <span>{{ column.cell(row) || '-' }}</span>-->
+<!--          </mat-cell>-->
+<!--        </ng-container>-->
+<!--        <mat-header-row-->
+<!--                *matHeaderRowDef="displayedColumns;"></mat-header-row>-->
+<!--        <mat-row [routerLink]="[row.ticker]"-->
+<!--                 *matRowDef="let row; columns: displayedColumns;"></mat-row>-->
+<!--      </mat-table>-->
+<!--    </div>-->
+<!--  </div>-->
 
-  <!--  <div class="list-view" *ngIf="commonService.isMobile">-->
-  <!--    <div *ngFor="let company of companies">-->
-  <!--      <div class="d-flex justify-content-between align-items-center border-bottom p-2"-->
-  <!--           [routerLink]="[company.ticker]">-->
-  <!--        <div class="d-flex flex-column">-->
-  <!--          <span>{{company.name}}</span>-->
-  <!--        </div>-->
-  <!--        <div class="text-bold text-muted">{{company.ticker}}</div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
+<!--  <div class="list-view" *ngIf="commonService.isMobile">-->
+<!--    <div *ngFor="let company of companies">-->
+<!--      <div class="d-flex justify-content-between align-items-center border-bottom p-2"-->
+<!--           [routerLink]="[company.ticker]">-->
+<!--        <div class="d-flex flex-column">-->
+<!--          <span>{{company.name}}</span>-->
+<!--        </div>-->
+<!--        <div class="text-bold text-muted">{{company.ticker}}</div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

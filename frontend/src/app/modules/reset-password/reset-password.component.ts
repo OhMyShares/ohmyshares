@@ -5,9 +5,10 @@ import { AuthService } from '../../core/services/auth.service';
 import {SpinnerService} from "../../core/services/spinner.service";
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.component.html',
+    styleUrls: ['./reset-password.component.scss'],
+    standalone: false
 })
 export class ResetPasswordComponent implements OnInit {
   // @HostBinding('class') classes = '';

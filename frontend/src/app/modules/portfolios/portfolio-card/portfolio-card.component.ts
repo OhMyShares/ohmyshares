@@ -1,6 +1,6 @@
 import { TuiNotificationService } from "@taiga-ui/core";
 import { Component, HostBinding, OnInit } from '@angular/core';
-import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { FormField } from '../../../core/interfaces/common.interfaces';
@@ -52,8 +52,7 @@ export class PortfolioCardComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private alertService: TuiNotificationService,
-    public commonService: CommonService,
-    private formBuilder: UntypedFormBuilder
+    public commonService: CommonService
   ) {
   }
 
@@ -66,7 +65,14 @@ export class PortfolioCardComponent implements OnInit {
         this.currencyCodes = currencies.map((item) => item.code);
         this.accountTypes = accountTypes;
         if (this.portfolio.uid) {
-          this.editForm = this.formBuilder.group(portfolio);
+          this.editForm.patchValue({
+            name: portfolio.name,
+            currency_code: portfolio.currency_code,
+            account_type: portfolio.account_type,
+            fee_percent: portfolio.fee_percent,
+            goal: portfolio.goal,
+            notes: portfolio.notes,
+          });
         } else {
           this.editForm.patchValue({
             account_type: accountTypes[0].id,

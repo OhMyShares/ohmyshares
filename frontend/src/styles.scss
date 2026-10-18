@@ -1,20 +1,86 @@
 @import "fonts";
 @import "mixins";
 
+// ===========================================================================
+// Design tokens
+// Shared visual language with ohmyshares.com: brand palette + ink surfaces.
+// ===========================================================================
 :root {
-  --tui-background-accent-1: #13b38e;
-  --tui-background-accent-1-hover: #25cba5;
-  --tui-text-action: #196150;
-  --tui-text-action-hover: #217461;
+  // Brand
+  --oms-brand-300: #6fdabb;
+  --oms-brand-400: #47c9a3;
+  --oms-brand-500: #35ba94;
+  --oms-brand-600: #22957a;
+  --oms-brand-700: #1d7764;
+  --oms-brand-800: #1b5f51;
+
+  // Surfaces
+  --oms-page: #f4f6f8;
+  --oms-surface: #ffffff;
+  --oms-surface-border: rgba(18, 24, 22, 0.08);
+  --oms-surface-shadow:
+    0 1px 2px rgba(18, 24, 22, 0.04),
+    0 18px 40px -28px rgba(18, 24, 22, 0.45);
+
+  // Radii
+  --tui-radius-l: 0.875rem;
+  --tui-radius-xl: 1.125rem;
+
+  // Accent
+  --tui-background-accent-1: var(--oms-brand-500);
+  --tui-background-accent-1-hover: var(--oms-brand-400);
+  --tui-background-accent-1-pressed: var(--oms-brand-700);
+  --tui-status-positive: var(--oms-brand-500);
+  --tui-status-positive-pale: rgba(53, 186, 148, 0.12);
+  --tui-status-positive-pale-hover: rgba(53, 186, 148, 0.22);
+  --tui-text-positive: var(--oms-brand-700);
+  --tui-text-positive-hover: var(--oms-brand-600);
+  --tui-status-negative: #f04438;
+  --tui-status-negative-pale: rgba(240, 68, 56, 0.1);
+  --tui-status-negative-pale-hover: rgba(240, 68, 56, 0.18);
+  --tui-text-negative: #d92d20;
+  --tui-text-negative-hover: #b42318;
+
+  // Typography
+  --tui-typography-family-text: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --tui-typography-family-display: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --tui-text-action: var(--oms-brand-700);
+  --tui-text-action-hover: var(--oms-brand-600);
 }
 
 [tuiTheme='dark'] {
-  --tui-text-action: #13b38e;
-  --tui-text-action-hover: #25cba5;
+  --oms-surface: #121816;
+  --oms-surface-border: rgba(255, 255, 255, 0.08);
+  --oms-surface-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 18px 44px -28px rgba(0, 0, 0, 0.9);
+
+  --tui-background-base: #0b0f0e;
+  --tui-background-base-alt: #171e1c;
+  --tui-background-elevation-1: #101615;
+  --tui-background-elevation-2: var(--oms-surface);
+  --tui-background-elevation-3: #1b2422;
+  --tui-border-normal: rgba(255, 255, 255, 0.09);
+  --tui-border-hover: rgba(255, 255, 255, 0.22);
+  --tui-text-primary: #f1f5f4;
+  --tui-text-secondary: rgba(255, 255, 255, 0.7);
+  --tui-text-tertiary: rgba(255, 255, 255, 0.46);
+  --tui-text-action: var(--oms-brand-400);
+  --tui-text-action-hover: var(--oms-brand-300);
+  --tui-status-positive: var(--oms-brand-400);
+  --tui-status-positive-pale: rgba(71, 201, 163, 0.16);
+  --tui-status-positive-pale-hover: rgba(71, 201, 163, 0.28);
+  --tui-text-positive: var(--oms-brand-400);
+  --tui-text-positive-hover: var(--oms-brand-300);
+  --tui-status-negative: #ff6b6b;
+  --tui-status-negative-pale: rgba(255, 107, 107, 0.16);
+  --tui-text-negative: #ff8a8a;
+  --tui-text-negative-hover: #ffb0b0;
 }
 
 body tui-root {
-  --app-background: #f2f3f5;
+  --app-background: var(--oms-page);
   min-height: 100vh;
   border-image: conic-gradient(var(--app-background) 0 0) fill 0/0/0 0 100vh 0;
 
@@ -24,11 +90,23 @@ body tui-root {
 }
 
 main {
-  padding-top: 5.5rem;
-  padding-bottom: 3rem;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
 }
 
-h1 { line-height: 1.85rem; }
+h1 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+// ===========================================================================
+// Surfaces
+// ===========================================================================
+body [tuiCardLarge] {
+  background: var(--oms-surface);
+  border: 1px solid var(--oms-surface-border);
+  box-shadow: var(--oms-surface-shadow);
+}
 
 [tuiCardLarge] {
   flex-direction: column;
@@ -76,11 +154,14 @@ h1 { line-height: 1.85rem; }
   }
 }
 
+// ===========================================================================
+// Typography helpers
+// ===========================================================================
 .text-bold { font-weight: bold; }
 .text-muted { color: var(--tui-text-tertiary); }
 .text-small, .small { font-size: smaller; }
-.text-success { color: var(--tui-status-positive); }
-.text-danger { color: var(--tui-status-negative); }
+.text-success { color: var(--tui-text-positive); }
+.text-danger { color: var(--tui-text-negative); }
 .text-uppercase {text-transform: uppercase !important; }
 
 .opacity-50 { opacity: 0.5; }
@@ -88,22 +169,43 @@ h1 { line-height: 1.85rem; }
 .table {
   width: 100%;
 }
+
+// ===========================================================================
+// Data tables
+// ===========================================================================
 table[tuiTable] {
   background: var(--tui-background-elevation-1);
+  font-variant-numeric: tabular-nums;
 }
+
 tr:hover td {
   background-color: var(--tui-background-base-alt);
 }
 
+// Right aligned, non-breaking numeric cell helpers
+.num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.num_end {
+  text-align: end;
+}
+
+// ===========================================================================
+// Base document
+// ===========================================================================
 body {
   -webkit-touch-callout: none;
   &.light-theme {
-    background-color: #f6f7f8;
-    color: #212529;
+    color-scheme: light;
+    background-color: var(--oms-page);
+    color: #1b1f2b;
   }
   &.dark-theme {
-    background-color: #222;
-    color: #eee;
+    color-scheme: dark;
+    background-color: #0b0f0e;
+    color: #f1f5f4;
   }
 }
 

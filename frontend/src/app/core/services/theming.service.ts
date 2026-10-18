@@ -1,51 +1,25 @@
 import { ApplicationRef, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { applyTheme, resolveTheme } from '../theme';
 
 @Injectable()
 export class ThemingService {
   themes = [ 'dark-theme', 'light-theme' ];
-  theme = new BehaviorSubject('light-theme');
+  theme = new BehaviorSubject(resolveTheme());
   private readonly savedTheme: string;
 
   constructor(
     private ref: ApplicationRef
   ) {
-
-    // initially trigger dark mode if preference is set to dark mode on system
-    const darkModeOn =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    this.savedTheme = localStorage.getItem('THEME_ID');
-    if (!this.savedTheme) {
-      this.savedTheme = 'light-theme';
-      if (darkModeOn) {
-        this.savedTheme = 'dark-theme';
-      }
-      localStorage.setItem('THEME_ID', this.savedTheme);
-    }
-
-    if (this.themes.includes(this.savedTheme)) {
-      this.theme.next(this.savedTheme);
-      this.ref.tick();
-      document.body.className = this.savedTheme;
-      return;
-    }
-
-    // watch for changes of the preference
-    window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
-      const turnOn = e.matches;
-      this.theme.next(turnOn ? 'dark-theme' : 'light-theme');
-
-      // trigger refresh of UI
-      this.ref.tick();
-    });
+    this.savedTheme = resolveTheme();
+    this.theme.next(this.savedTheme);
+    this.ref.tick();
+    applyTheme(this.savedTheme);
   }
 
   public setTheme(theme) {
-    document.body.className = theme;
+    applyTheme(theme);
     document.body.classList.add('animate-colors-transition');
-    localStorage.setItem('THEME_ID', theme);
     this.theme.next(theme);
   }
 

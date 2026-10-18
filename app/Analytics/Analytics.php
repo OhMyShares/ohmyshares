@@ -3,6 +3,7 @@
 namespace App\Analytics;
 
 use App\Components\ArrayUtils;
+use App\Enums\Currency;
 use App\Models\Portfolio;
 use App\Models\PortfolioItem;
 use App\Models\Trade;
@@ -18,16 +19,25 @@ class Analytics
 {
     protected $_content;
 
+    protected string $_currency;
+
     /**
      * Analytics constructor.
      * @param iterable|null $content portfolio contents
+     * @param string|null $currency currency to express money values in, portfolio currency by default
      */
-    public function __construct(protected Portfolio $_portfolio, iterable|null $content = null)
+    public function __construct(protected Portfolio $_portfolio, iterable|null $content = null, ?string $currency = null)
     {
+        $this->_currency = $currency ?: $_portfolio->currency_code;
         if (!$content) {
             $content = $this->_portfolio->items;
         }
         $this->setContent($content);
+    }
+
+    public function currencyCode(): string
+    {
+        return $this->_currency;
     }
 
     /**
@@ -43,6 +53,21 @@ class Analytics
     public function getContent()
     {
         return $this->_content;
+    }
+
+    /**
+     * Serializes portfolio items, expressing money values in the display currency
+     */
+    public function convertContent(iterable $content): array
+    {
+        $data = [];
+        foreach ($content as $key => $item) {
+            $row = $item->toArray();
+            $row['current_cost'] = round($this->fromPortfolio((float)$item->current_cost), 2);
+            $row['current_gain'] = round($this->fromPortfolio((float)$item->current_gain), 2);
+            $data[$key] = $row;
+        }
+        return $data;
     }
 
     /**
@@ -131,7 +156,7 @@ class Analytics
             //$data[$type_key]['currency_sign_native'] = $item->currencySign;
 
             //$part_percent = Arr::get($content[$key], 'part_percent', 0);
-            ArrayUtils::addToItem($data[$type_key], 'earnings', $item->earnings);
+            ArrayUtils::addToItem($data[$type_key], 'earnings', $this->fromPortfolio((float)$item->earnings));
             ArrayUtils::addToItem($data[$type_key], 'earnings_native', $item->earnings_native);
             //ArrayUtils::addToItem($data[$type_key], 'part_percent', $divs);
         }
@@ -143,7 +168,7 @@ class Analytics
     {
         $sum = 0;
         foreach ($this->_content as $key => $item) {
-            $sum += $item->earnings;
+            $sum += $this->fromPortfolio((float)$item->earnings);
         }
         return $sum;
     }
@@ -168,29 +193,31 @@ class Analytics
         ];
         $open_costs = [];
         foreach ($this->_content as $item) {
-            $summary['total_cost'] += $item->current_cost;
-            $summary['earnings'] += $item->earnings;
+            $current_cost = $this->fromPortfolio((float)$item->current_cost);
+            $current_gain = $this->fromPortfolio((float)$item->current_gain);
+            $summary['total_cost'] += $current_cost;
+            $summary['earnings'] += $this->fromPortfolio((float)$item->earnings);
             if ($item->asset == AssetType::Money->value) {
-                $summary['cash'] += $item->current_cost;
+                $summary['cash'] += $current_cost;
                 continue;
             }
-            $realized = $this->toPortfolioCurrency((float)$item->realized_gain, $item->currency_code);
-            $summary['total_gain'] += $item->current_gain;
+            $realized = $this->toDisplayCurrency((float)$item->realized_gain, $item->currency_code);
+            $summary['total_gain'] += $current_gain;
             $summary['realized_gain'] += $realized;
             if ($item->count == 0) {
                 continue;
             }
-            $unrealized = $item->current_gain - $realized;
+            $unrealized = $current_gain - $realized;
             $summary['positions_count']++;
             $summary['unrealized_gain'] += $unrealized;
-            $summary['cost_basis'] += $item->current_cost - $unrealized;
+            $summary['cost_basis'] += $current_cost - $unrealized;
             if ($unrealized > 0) {
                 $summary['profitable_count']++;
             } elseif ($unrealized < 0) {
                 $summary['losing_count']++;
             }
-            if ($item->current_cost > 0) {
-                $open_costs[] = $item->current_cost;
+            if ($current_cost > 0) {
+                $open_costs[] = $current_cost;
             }
         }
         $summary['total_return'] = $summary['total_gain'] + $summary['earnings'];
@@ -208,7 +235,7 @@ class Analytics
 
     public function incomeByYears(): array
     {
-        return Cache::remember('portfolio_'.$this->_portfolio->id.'_income_by_years', 60*60, function (): array {
+        $rows = Cache::remember('portfolio_'.$this->_portfolio->id.'_income_by_years', 60*60, function (): array {
             $fields = [
                 Trade::TYPE_DIVIDEND => 'dividends',
                 Trade::TYPE_COUPON => 'coupons',
@@ -238,6 +265,16 @@ class Analytics
                 array_values($data)
             );
         });
+        if ($this->_currency === $this->_portfolio->currency_code) {
+            return $rows;
+        }
+        return array_map(fn(array $row): array => [
+            'year' => $row['year'],
+            'dividends' => round($this->fromPortfolio((float)$row['dividends']), 2),
+            'coupons' => round($this->fromPortfolio((float)$row['coupons']), 2),
+            'fees' => round($this->fromPortfolio((float)$row['fees']), 2),
+            'taxes' => round($this->fromPortfolio((float)$row['taxes']), 2),
+        ], $rows);
     }
 
     private function groupByCost(callable $resolve): array
@@ -245,14 +282,14 @@ class Analytics
         $data = [];
         $total = 0;
         foreach ($this->_content as $item) {
-            $cost = (float)$item->current_cost;
+            $cost = $this->fromPortfolio((float)$item->current_cost);
             if ($cost <= 0) {
                 continue;
             }
             [$key, $label] = $resolve($item);
             $data[$key] ??= [
                 'label' => $label,
-                'currency_sign' => $this->_portfolio->currency_sign,
+                'currency_sign' => Currency::signOf($this->_currency),
                 'total_cost' => 0,
                 'part_percent' => 0,
             ];
@@ -268,14 +305,41 @@ class Analytics
         return $data;
     }
 
+    /**
+     * Converts an amount into the portfolio currency
+     */
     private function toPortfolioCurrency(float $value, string $currency_code): float
     {
         if ($currency_code == $this->_portfolio->currency_code) {
             return $value;
         }
+        return $this->convert($value, $currency_code, $this->_portfolio->currency_code);
+    }
+
+    /**
+     * Converts an amount into the currency the analytics is expressed in
+     */
+    private function toDisplayCurrency(float $value, string $currency_code): float
+    {
+        if ($currency_code == $this->_currency) {
+            return $value;
+        }
+        return $this->convert($value, $currency_code, $this->_currency);
+    }
+
+    /**
+     * Converts an amount expressed in the portfolio currency into the display currency
+     */
+    private function fromPortfolio(float $value): float
+    {
+        return $this->toDisplayCurrency($value, $this->_portfolio->currency_code);
+    }
+
+    private function convert(float $value, string $from, string $to): float
+    {
         /** @var CurrencyService $currencyService */
         $currencyService = App::make('currencyService');
-        return $currencyService->convert($value, $currency_code, $this->_portfolio->currency_code);
+        return $currencyService->convert($value, $from, $to);
     }
 
     //public function totalTaxes()
@@ -302,9 +366,7 @@ class Analytics
      */
     public function growth()
     {
-        /** @var CurrencyService $currencyService */
-        $currencyService = App::make('currencyService');
-        return Cache::remember('portfolio_'.$this->_portfolio->id.'_growth', 60*60, function () use ($currencyService): array {
+        $rows = Cache::remember('portfolio_'.$this->_portfolio->id.'_growth', 60*60, function (): array {
             $data = [];
             $cumulative = 0;
             $items = DB::table('trades')
@@ -322,8 +384,7 @@ class Analytics
                 $month = $item->month;
                 $total = $item->total;
                 if ($currency_code != $this->_portfolio->currency_code) {
-                    $total = round($currencyService
-                        ->convert($total, $currency_code, $this->_portfolio->currency_code), 2);
+                    $total = round($this->toPortfolioCurrency((float)$total, $currency_code), 2);
                 }
 
                 $cumulative += $total;
@@ -341,6 +402,14 @@ class Analytics
             }
             return array_values($data);
         });
+        if ($this->_currency === $this->_portfolio->currency_code) {
+            return $rows;
+        }
+        return array_map(fn(array $row): array => [
+            'month' => $row['month'],
+            'total' => round($this->fromPortfolio((float)$row['total']), 2),
+            'cumulative' => round($this->fromPortfolio((float)$row['cumulative']), 2),
+        ], $rows);
     }
 
 }

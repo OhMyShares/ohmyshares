@@ -3,11 +3,13 @@ import { TuiProgress } from "@taiga-ui/kit";
 import { TuiAmountPipe } from "@taiga-ui/addon-commerce";
 import { NgModule } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { PortfolioAnalyticsComponent } from './portfolio-analytics.component';
 import {RouterModule} from '@angular/router';
 import {ActionsModule} from '../../actions/actions.module';
 import { TuiAxes, TuiBarChart, TuiLegendItem, TuiRingChart } from '@taiga-ui/addon-charts';
-import { TuiDataList, TuiDropdown, TuiLink, TuiButton } from '@taiga-ui/core';
+import { TuiDataList, TuiDropdown, TuiLink, TuiButton, TuiFilterByInputPipe, TuiLabel, TuiInput } from '@taiga-ui/core';
+import { TuiComboBox, TuiDataListWrapper } from '@taiga-ui/kit';
 
 
 
@@ -26,6 +28,7 @@ import { TuiDataList, TuiDropdown, TuiLink, TuiButton } from '@taiga-ui/core';
       }
     ]),
     ActionsModule,
+    FormsModule,
     TuiRingChart,
     TuiCardLarge,
     TuiAmountPipe,
@@ -35,6 +38,11 @@ import { TuiDataList, TuiDropdown, TuiLink, TuiButton } from '@taiga-ui/core';
     TuiBarChart,
     ...TuiDropdown,
     ...TuiDataList,
+    ...TuiInput,
+    ...TuiComboBox,
+    ...TuiDataListWrapper,
+    TuiFilterByInputPipe,
+    TuiLabel,
     TuiLegendItem,
     ...TuiProgress,
       AsyncPipe

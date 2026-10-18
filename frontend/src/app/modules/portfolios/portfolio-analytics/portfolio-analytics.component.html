@@ -25,19 +25,25 @@
       </button>
     </div>
   }
-  @if (portfolios) {
-    <div tuiDropdownAuto
-      tuiDropdownAlign="start"
-      [tuiDropdown]="dropdownCurrencies">
-      <button tuiButton
-        type="button"
-        appearance="secondary"
-        class="tui-space_bottom-3 tui-space_right-3"
-        iconEnd="@tui.chevron-down"
-        size="s">
-        <span>{{portfolio?.currency_code}}</span>
-      </button>
-    </div>
+  @if (currencyCodes.length) {
+    <tui-textfield
+      class="analytics__currency tui-space_bottom-3 tui-space_right-3"
+      [stringify]="referencesService.stringifyCurrencySearch(currencies)">
+      <input tuiComboBox
+        placeholder="Currency"
+        i18n-placeholder="@@form.trade.field.currency"
+        [ngModel]="displayCurrencyCode"
+        (ngModelChange)="changeDisplayCurrency($event)">
+      <label tuiLabel i18n="@@form.trade.field.currency">Currency</label>
+      <tui-data-list-wrapper
+        *tuiDropdown
+        [itemContent]="currencyItem"
+        [items]="currencyCodes | tuiFilterByInput">
+      </tui-data-list-wrapper>
+    </tui-textfield>
+    <ng-template #currencyItem let-item>
+      {{ referencesService.stringifyCurrencySearch(currencies)(item) }}
+    </ng-template>
   }
 </app-actions>
 
@@ -58,26 +64,9 @@
   </tui-data-list>
 </ng-template>
 
-<ng-template #dropdownCurrencies>
-  <tui-data-list>
-    <tui-opt-group>
-      <button tuiOption (click)="changeCurrency('USD')">
-        <span>USD</span>
-      </button>
-      <button tuiOption (click)="changeCurrency('RUB')">
-        <span>RUB</span>
-      </button>
-      <button tuiOption (click)="changeCurrency('EUR')">
-        <span>EUR</span>
-      </button>
-    </tui-opt-group>
-  </tui-data-list>
-</ng-template>
-
 <div class="tui-container tui-container_adaptive">
-  <div class="tui-row tui-row_adaptive">
-
-    <div class="tui-col_md-4 tui-col_xs-12 tui-space_bottom-5">
+  <div class="analytics-grid">
+    <div class="analytics-grid__item analytics-grid__item_md-4">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible">
         @if (portfolio) {
           <div class="tui-island__title text-bold">
@@ -91,25 +80,25 @@
                 <tr>
                   <td i18n="@@analytics.currentValue">Current value</td>
                   <td class="summary__value text-bold">
-                    <span >{{ s.total_cost | tuiAmount : portfolio.currency_code }}</span>
+                    <span >{{ s.total_cost | tuiAmount : displayCurrencyCode }}</span>
                   </td>
                 </tr>
                 <tr>
                   <td i18n="@@analytics.cash">Cash</td>
                   <td class="summary__value">
-                    <span >{{ s.cash | tuiAmount : portfolio.currency_code }}</span>
+                    <span >{{ s.cash | tuiAmount : displayCurrencyCode }}</span>
                   </td>
                 </tr>
                 <tr>
                   <td i18n="@@analytics.costBasis">Cost basis of open positions</td>
                   <td class="summary__value">
-                    <span >{{ s.cost_basis | tuiAmount : portfolio.currency_code }}</span>
+                    <span >{{ s.cost_basis | tuiAmount : displayCurrencyCode }}</span>
                   </td>
                 </tr>
                 <tr>
                   <td i18n="@@analytics.unrealizedGain">Unrealized gain</td>
                   <td class="summary__value">
-                    <span [class.text-success]="s.unrealized_gain > 0" [class.text-danger]="s.unrealized_gain < 0">{{ s.unrealized_gain | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+                    <span [class.text-success]="s.unrealized_gain > 0" [class.text-danger]="s.unrealized_gain < 0">{{ s.unrealized_gain | tuiAmount : displayCurrencyCode : 'start' : 'always' }}</span>
                     <div class="text-small" [class.text-success]="s.unrealized_gain_percent > 0" [class.text-danger]="s.unrealized_gain_percent < 0">
                       {{ s.unrealized_gain_percent | number:'1.0-2' }}&thinsp;%
                     </div>
@@ -118,19 +107,19 @@
                 <tr>
                   <td i18n="@@analytics.realizedGain">Realized gain</td>
                   <td class="summary__value">
-                    <span [class.text-success]="s.realized_gain > 0" [class.text-danger]="s.realized_gain < 0">{{ s.realized_gain | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+                    <span [class.text-success]="s.realized_gain > 0" [class.text-danger]="s.realized_gain < 0">{{ s.realized_gain | tuiAmount : displayCurrencyCode : 'start' : 'always' }}</span>
                   </td>
                 </tr>
                 <tr>
                   <td i18n="@@analytics.dividendsAndCoupons">Dividends and coupons</td>
                   <td class="summary__value">
-                    <span [class.text-success]="s.earnings > 0" [class.text-danger]="s.earnings < 0">{{ s.earnings | tuiAmount : portfolio.currency_code }}</span>
+                    <span [class.text-success]="s.earnings > 0" [class.text-danger]="s.earnings < 0">{{ s.earnings | tuiAmount : displayCurrencyCode }}</span>
                   </td>
                 </tr>
                 <tr class="text-bold">
                   <td i18n="@@analytics.totalReturn">Total return</td>
                   <td class="summary__value">
-                    <span [class.text-success]="s.total_return > 0" [class.text-danger]="s.total_return < 0">{{ s.total_return | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+                    <span [class.text-success]="s.total_return > 0" [class.text-danger]="s.total_return < 0">{{ s.total_return | tuiAmount : displayCurrencyCode : 'start' : 'always' }}</span>
                   </td>
                 </tr>
                 <tr>
@@ -182,7 +171,7 @@
       </div>
     </div>
 
-    <div class="tui-col_md-8 tui-col_xs-12 tui-space_bottom-5">
+    <div class="analytics-grid__item analytics-grid__item_md-8">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible">
         <div class="tui-island__title">
           <span i18n="@@analytics.portfolioGrowth" class="text-bold">Portfolio Growth</span>
@@ -202,7 +191,7 @@
       </div>
     </div>
 
-    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+    <div class="analytics-grid__item analytics-grid__item_md-6">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.byAssetTypes" class="text-bold">By asset types</div>
@@ -211,7 +200,7 @@
       </div>
     </div>
 
-    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+    <div class="analytics-grid__item analytics-grid__item_md-6">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.bySectors" class="text-bold">By sectors</div>
@@ -220,7 +209,7 @@
       </div>
     </div>
 
-    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+    <div class="analytics-grid__item analytics-grid__item_md-6">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.byEmitents" class="text-bold">By Emitents</div>
@@ -235,7 +224,7 @@
       </div>
     </div>
 
-    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+    <div class="analytics-grid__item analytics-grid__item_md-6">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.byCurrencies" class="text-bold">By currencies</div>
@@ -244,7 +233,7 @@
       </div>
     </div>
 
-    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+    <div class="analytics-grid__item analytics-grid__item_md-6">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.byEarnings" class="text-bold">By Earnings</div>
@@ -253,13 +242,13 @@
         @if (analytics?.summary) {
           <div class="tui-space_top-3">
             <span i18n="@@analytics.totalEarnings">Total earned dividends and coupons</span>:
-            <span >{{ analytics.summary.earnings | tuiAmount : portfolio.currency_code }}</span>
+            <span >{{ analytics.summary.earnings | tuiAmount : displayCurrencyCode }}</span>
           </div>
         }
       </div>
     </div>
 
-    <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-5">
+    <div class="analytics-grid__item analytics-grid__item_md-6">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible" class="island_full">
         <div class="tui-island__title">
           <div i18n="@@analytics.topMovers" class="text-bold">Best and worst positions</div>
@@ -273,7 +262,7 @@
       </div>
     </div>
 
-    <div class="tui-col_md-12 tui-col_xs-12 tui-space_bottom-5">
+    <div class="analytics-grid__item">
       <div tuiCardLarge [class.tui-skeleton]="skeletonVisible">
         <div class="tui-island__title">
           <div i18n="@@analytics.incomeByYears" class="text-bold">Income and expenses by years</div>
@@ -302,12 +291,12 @@
                 @for (row of analytics.income_by_years; track row) {
                   <tr>
                     <td>{{ row.year }}</td>
-                    <td class="summary__value"><span >{{ row.dividends | tuiAmount : portfolio.currency_code }}</span></td>
-                    <td class="summary__value"><span >{{ row.coupons | tuiAmount : portfolio.currency_code }}</span></td>
-                    <td class="summary__value"><span >{{ row.fees | tuiAmount : portfolio.currency_code }}</span></td>
-                    <td class="summary__value"><span >{{ row.taxes | tuiAmount : portfolio.currency_code }}</span></td>
+                    <td class="summary__value"><span >{{ row.dividends | tuiAmount : displayCurrencyCode }}</span></td>
+                    <td class="summary__value"><span >{{ row.coupons | tuiAmount : displayCurrencyCode }}</span></td>
+                    <td class="summary__value"><span >{{ row.fees | tuiAmount : displayCurrencyCode }}</span></td>
+                    <td class="summary__value"><span >{{ row.taxes | tuiAmount : displayCurrencyCode }}</span></td>
                     <td class="summary__value text-bold">
-                      <span [class.text-success]="netIncome(row) > 0" [class.text-danger]="netIncome(row) < 0">{{ netIncome(row) | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+                      <span [class.text-success]="netIncome(row) > 0" [class.text-danger]="netIncome(row) < 0">{{ netIncome(row) | tuiAmount : displayCurrencyCode : 'start' : 'always' }}</span>
                     </td>
                   </tr>
                 }
@@ -330,7 +319,7 @@
           class="ring__chart"
           [value]="chart.values"
           [(activeItemIndex)]="chart.activeIndex">
-          <span >{{ ringValue(chart) | tuiAmount : portfolio.currency_code }}</span>
+          <span >{{ ringValue(chart) | tuiAmount : displayCurrencyCode }}</span>
           <div class="ring__label">{{ ringLabel(chart) }}</div>
           @if (ringPercent(chart) !== null) {
             <div class="ring__label">{{ ringPercent(chart) | number:'1.0-1' }}&thinsp;%</div>
@@ -364,7 +353,7 @@
         <tr>
           <td>{{ p.title ?? p.ticker }}</td>
           <td class="summary__value">
-            <span [class.text-success]="p.current_gain > 0" [class.text-danger]="p.current_gain < 0">{{ p.current_gain | tuiAmount : portfolio.currency_code : 'start' : 'always' }}</span>
+            <span [class.text-success]="p.current_gain > 0" [class.text-danger]="p.current_gain < 0">{{ p.current_gain | tuiAmount : displayCurrencyCode : 'start' : 'always' }}</span>
           </td>
           <td class="summary__value text-bold" [class.text-success]="p.current_gain_percent > 0" [class.text-danger]="p.current_gain_percent < 0">
             {{ p.current_gain_percent > 0 ? '+' : '' }}{{ p.current_gain_percent | number:'1.0-2' }}&thinsp;%

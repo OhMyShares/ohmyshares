@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Components\Uid;
+use App\Enums\Currency;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Portfolio\StorePortfolio;
 use App\Http\Requests\Portfolio\UpdatePortfolio;
@@ -11,9 +12,11 @@ use App\Models\Portfolio;
 use App\Models\PortfolioItem;
 use App\Models\Trade;
 use App\Models\User;
+use App\Services\CurrencyService;
 use App\Services\ReportImportService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -174,6 +177,7 @@ class PortfolioController extends Controller
         tags: ['Portfolios'],
         parameters: [
             new OA\Parameter(name: 'uid', in: 'path', required: true, schema: new OA\Schema(type: 'string')),
+            new OA\Parameter(name: 'currency', in: 'query', required: false, description: 'Currency to express the analytics in, portfolio currency by default', schema: new OA\Schema(type: 'string')),
         ],
         responses: [
             new OA\Response(response: 401, description: 'Unauthorized'),
@@ -183,12 +187,13 @@ class PortfolioController extends Controller
     public function analytics(Request $request, $uid): array
     {
         $portfolio = $this->findModel($uid);
+        $currency = $this->resolveDisplayCurrency($request, $portfolio);
         $model_arr = $portfolio->toArray();
-        $data = $portfolio->content();
+        $data = $portfolio->content($currency);
         $content = $data['content'];
         $analytics = array_merge($data['analytics'], [
-            'growth' => $portfolio->calcGrowth(),
-            'income_by_years' => $portfolio->calcIncomeByYears(),
+            'growth' => $portfolio->calcGrowth($currency),
+            'income_by_years' => $portfolio->calcIncomeByYears($currency),
             'goal_achievement_percent' => $portfolio->calcGoalAchievementPercent(),
         ]);
 
@@ -196,7 +201,28 @@ class PortfolioController extends Controller
             'content' => $content,
             'analytics' => $analytics,
             'portfolio' => $model_arr,
+            'display_currency' => [
+                'code' => $currency,
+                'sign' => Currency::signOf($currency),
+            ],
         ];
+    }
+
+    /**
+     * Currency the analytics should be expressed in, portfolio currency when the request one is unknown or not convertible
+     */
+    private function resolveDisplayCurrency(Request $request, Portfolio $portfolio): string
+    {
+        $code = Currency::findCode((string)$request->query('currency', ''));
+        if ($code === null || $code === $portfolio->currency_code) {
+            return $portfolio->currency_code;
+        }
+        /** @var CurrencyService $currencyService */
+        $currencyService = App::make('currencyService');
+        if ($currencyService->rate($portfolio->currency_code, $code) === null) {
+            return $portfolio->currency_code;
+        }
+        return $code;
     }
 
     /**

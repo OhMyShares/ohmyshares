@@ -9,9 +9,40 @@
   --tui-chart-categorical-07: #a0a0a0;
 }
 
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1rem;
+
+  &__item {
+    grid-column: span 12;
+    min-width: 0;
+  }
+
+  @media (min-width: 768px) {
+    &__item_md-4 {
+      grid-column: span 4;
+    }
+
+    &__item_md-6 {
+      grid-column: span 6;
+    }
+
+    &__item_md-8 {
+      grid-column: span 8;
+    }
+  }
+}
+
 .axes__growth {
   height: 18rem;
   overflow: auto;
+}
+
+.analytics__currency {
+  display: inline-flex;
+  width: 16rem;
+  vertical-align: top;
 }
 
 .axes__income {

@@ -1,4 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { formatNumber } from '@angular/common';
+import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Pipe({
@@ -6,7 +7,10 @@ import { DomSanitizer } from '@angular/platform-browser';
     standalone: false
 })
 export class numberColoredPipe implements PipeTransform {
-  constructor(private sanitized: DomSanitizer) {
+  constructor(
+    private sanitized: DomSanitizer,
+    @Inject(LOCALE_ID) private locale: string,
+  ) {
   }
 
   transform(value) {
@@ -15,6 +19,15 @@ export class numberColoredPipe implements PipeTransform {
       : value < 0
         ? 'text-danger'
         : 'text-regular';
-    return this.sanitized.bypassSecurityTrustHtml(`<span class="${ colorCss }">${ Number(value).toLocaleString() }</span>`);
+    return this.sanitized.bypassSecurityTrustHtml(`<span class="${ colorCss }">${ this.format(value) }</span>`);
+  }
+
+  private format(value): string {
+    const number = Number(value);
+    try {
+      return formatNumber(number, this.locale);
+    } catch {
+      return number.toLocaleString();
+    }
   }
 }

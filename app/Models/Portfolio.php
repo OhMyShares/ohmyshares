@@ -260,7 +260,7 @@ class Portfolio extends Model
         }
     }
 
-    public function content(): array
+    public function content(?string $currency = null): array
     {
         $content = $this->items;
         $summary = [
@@ -307,16 +307,20 @@ class Portfolio extends Model
             $summary['total_gain_percent'] = round($summary['total_gain'] / $summary['total_cost'] * 100, 2);
         }
 
+        $displayContent = $currency && $currency !== $this->currency_code
+            ? (new Analytics($this, $content, $currency))->convertContent($content)
+            : $content;
+
         return [
-            'content' => $content,
+            'content' => $displayContent,
             'summary' => $summary,
-            'analytics' => $this->calcAnalytics($content),
+            'analytics' => $this->calcAnalytics($content, $currency),
         ];
     }
 
-    public function calcAnalytics($content): array
+    public function calcAnalytics($content, ?string $currency = null): array
     {
-        $analytics = new Analytics($this, $content);
+        $analytics = new Analytics($this, $content, $currency);
         return [
             'asset_types' => $analytics->byAssetTypes(),
             'sectors' => $analytics->bySectors(),
@@ -329,15 +333,15 @@ class Portfolio extends Model
         ];
     }
 
-    public function calcGrowth()
+    public function calcGrowth(?string $currency = null)
     {
-        $analytics = new Analytics($this);
+        $analytics = new Analytics($this, null, $currency);
         return $analytics->growth();
     }
 
-    public function calcIncomeByYears(): array
+    public function calcIncomeByYears(?string $currency = null): array
     {
-        $analytics = new Analytics($this);
+        $analytics = new Analytics($this, null, $currency);
         return $analytics->incomeByYears();
     }
 

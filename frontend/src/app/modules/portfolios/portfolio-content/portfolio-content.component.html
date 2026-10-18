@@ -1,11 +1,3 @@
-<!--<mat-form-field class="search-field mt-3 ml-3" appearance="fill">-->
-<!--  <mat-label i18n="@@common.search">Search</mat-label>-->
-<!--  <input matInput type="text" [formControl]="searchField" autocomplete="off">-->
-<!--  <button *ngIf="searchField.value" matSuffix mat-icon-button aria-label="Clear" (click)="searchField.setValue('')">-->
-<!--    <mat-icon>close</mat-icon>-->
-<!--  </button>-->
-<!--</mat-form-field>-->
-
 <app-actions>
   <a tuiButton
     appearance="secondary"
@@ -64,34 +56,67 @@
   </a>
 </app-actions>
 
-
 @if (portfolio) {
   <div class="tui-container tui-container_adaptive">
-    <div class="tui-row tui-row_adaptive">
-      <div class="tui-col_md-12 tui-col_xs-12">
-        <h1 class="tui-space_top-0">
-          {{ portfolio.name }}
-        </h1>
+    <header class="page-head">
+      <h1 class="page-head__title">{{ portfolio.name }}</h1>
+      <div class="page-head__meta">
+        <span class="page-head__chip">{{ portfolio.currency_code }}</span>
+        @if (portfolio.opened_at) {
+          <span i18n="@@table.portfolios.column.opened">Opened</span>
+          <span>{{ +portfolio.opened_at * 1000 | date }}</span>
+        }
       </div>
-    </div>
+    </header>
   </div>
 }
 
-@if (portfolio) {
+@if (portfolio && summary) {
   <div class="tui-container tui-container_adaptive">
-    <div class="tui-row tui-row_adaptive">
-      <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3">
-        <div tuiCardLarge>
-          <span i18n="@@table.portfolioContent.totalCost" class="tui-island__category">Portfolio Cost</span>
-          <div class="">{{ portfolio.currency_sign }}&thinsp;{{ summary.total_cost | number }}</div>
+    <div class="kpis">
+      <div tuiCardLarge class="kpi">
+        <div class="kpi__body">
+          <span class="kpi__label" i18n="@@table.portfolioContent.totalCost">Portfolio Cost</span>
+          <div class="kpi__value">
+            <span class="kpi__sign">{{ portfolio.currency_sign }}</span>
+            <span class="kpi__number">{{ summary.total_cost | number }}</span>
+          </div>
         </div>
       </div>
-      <div class="tui-col_md-3 tui-col_sm-4 tui-col_xs-6 tui-space_bottom-3">
-        <div tuiCardLarge>
-          <span i18n="@@table.portfolioContent.totalGain" class="tui-island__category">Portfolio Gain</span>
-          <div class="total-gain">
-            <div>{{ portfolio.currency_sign }}&thinsp;<span [innerHTML]="summary.total_gain | numberColored"></span></div>
-            <div><span [innerHTML]="summary.total_gain_percent | numberColored"></span>&thinsp;%</div>
+
+      <div tuiCardLarge class="kpi">
+        <div class="kpi__body">
+          <span class="kpi__label" i18n="@@table.portfolioContent.totalGain">Portfolio Gain</span>
+          <div class="kpi__value">
+            <span class="kpi__sign">{{ portfolio.currency_sign }}</span>
+            <span class="kpi__number" [innerHTML]="summary.total_gain | numberColored"></span>
+          </div>
+          <div class="kpi__delta"
+            [class.kpi__delta_up]="summary.total_gain_percent > 0"
+            [class.kpi__delta_down]="summary.total_gain_percent < 0">
+            <tui-icon
+              class="kpi__delta-icon"
+              [icon]="summary.total_gain_percent < 0 ? '@tui.trending-down' : '@tui.trending-up'"></tui-icon>
+            <span>{{ summary.total_gain_percent | number:'1.0-2' }}&#8201;%</span>
+          </div>
+        </div>
+      </div>
+
+      <div tuiCardLarge class="kpi">
+        <div class="kpi__body">
+          <span class="kpi__label" i18n="@@analytics.openPositions">Open positions</span>
+          <div class="kpi__value">
+            <span class="kpi__number">{{ openPositionsCount }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div tuiCardLarge class="kpi">
+        <div class="kpi__body">
+          <span class="kpi__label" i18n="@@analytics.cash">Cash</span>
+          <div class="kpi__value">
+            <span class="kpi__sign">{{ portfolio.currency_sign }}</span>
+            <span class="kpi__number">{{ cashTotal | number }}</span>
           </div>
         </div>
       </div>
@@ -101,126 +126,131 @@
 
 <div class="tui-container tui-container_adaptive">
   @if (portfolio?.is_locked) {
-    <div class="mb-3">
-      <div tuiCardLarge>
-        <span i18n="@@common.import_processing" class="tui-island__category">Import processing...</span>
-        <progress max="100" tuiProgressBar></progress>
-      </div>
+    <div tuiCardLarge class="tui-space_bottom-3">
+      <span class="tui-island__category" i18n="@@common.import_processing">Import processing...</span>
+      <progress max="100" tuiProgressBar></progress>
     </div>
   }
   @if (!portfolio?.is_locked) {
-    <div>
-      <div class="tui-row tui-row_adaptive">
-        <div class="tui-col_md-3 tui-col_xs-12">
-          <tui-textfield [tuiTextfieldCleaner]="true" [class.tui-skeleton]="skeletonVisible" class="tui-space_bottom-3">
-            <label tuiLabel><span i18n="@@common.search">Search</span></label>
-            <input tuiInput type="text" [formControl]="searchField">
-          </tui-textfield>
-        </div>
+    <div class="panel">
+      <div class="panel__toolbar">
+        <tui-textfield [tuiTextfieldCleaner]="true" [class.tui-skeleton]="skeletonVisible" class="panel__search">
+          <label tuiLabel><span i18n="@@common.search">Search</span></label>
+          <input tuiInput type="text" [formControl]="searchField">
+        </tui-textfield>
       </div>
-      <div class="tui-row tui-row_adaptive">
-        <div class="tui-col_md-12 tui-col_xs-12">
-          <tui-scrollbar waIntersectionRoot
-            class="scrollbar tui-space_bottom-5">
-            <table tuiTable class="table" [columns]="displayedColumns" [class.tui-skeleton]="skeletonVisible">
-              <thead>
-                <tr tuiThGroup>
-                  <th tuiTh i18n="@@table.portfolioContent.column.ticker">Ticker</th>
-                  <th tuiTh i18n="@@table.portfolioContent.column.currentPrice">Price Current</th>
-                  <th tuiTh i18n="@@table.portfolioContent.column.averagePrice">Price Average</th>
-                  <th tuiTh i18n="@@table.portfolioContent.column.currentCost">Cost Current</th>
-                  <th tuiTh i18n="@@table.portfolioContent.column.partPercent">Part Percent, %</th>
-                  <th tuiTh i18n="@@table.portfolioContent.column.currentGain">Gain</th>
-                  <th tuiTh i18n="@@table.portfolioContent.column.currentGainPercent">Gain, %</th>
-                </tr>
-              </thead>
-              @for (group of groupedData | keyvalue; track group) {
-                @if (group.value) {
-                  <tbody tuiTbody [data]="group.value" heading="{{ getAssetType(+group.key).name }}">
-                    @for (item of group.value; track item) {
-                      <tr tuiTr
-                        [class.opacity-50]="item.count == 0 && item.ticker !== '$$'"
-                        [routerLink]="['/trades']"
-                        [queryParams]="{portfolio_uid: portfolio.uid, ticker: item.ticker, uid: item.uid}"
-                        class="tui-table__tr_cursor_pointer">
-                        <td *tuiCell="'ticker'" tuiTd>
-                          @if (item.ticker === '$$') {
+
+      <tui-scrollbar waIntersectionRoot class="panel__scroll">
+        <table tuiTable class="table" [columns]="displayedColumns" [class.tui-skeleton]="skeletonVisible">
+          <thead>
+            <tr tuiThGroup>
+              <th tuiTh i18n="@@table.portfolioContent.column.ticker">Ticker</th>
+              <th tuiTh><div class="num num_end" i18n="@@table.portfolioContent.column.currentPrice">Price Current</div></th>
+              <th tuiTh><div class="num num_end" i18n="@@table.portfolioContent.column.averagePrice">Price Average</div></th>
+              <th tuiTh><div class="num num_end" i18n="@@table.portfolioContent.column.currentCost">Cost Current</div></th>
+              <th tuiTh><div class="num num_end" i18n="@@table.portfolioContent.column.partPercent">Part Percent, %</div></th>
+              <th tuiTh><div class="num num_end" i18n="@@table.portfolioContent.column.currentGain">Gain</div></th>
+              <th tuiTh><div class="num num_end" i18n="@@table.portfolioContent.column.currentGainPercent">Gain, %</div></th>
+            </tr>
+          </thead>
+          @for (group of groupedData | keyvalue; track group) {
+            @if (group.value) {
+              <tbody tuiTbody [data]="group.value" heading="{{ getAssetType(+group.key).name }}">
+                @for (item of group.value; track item) {
+                  <tr tuiTr
+                    [class.opacity-50]="item.count == 0 && item.ticker !== '$$'"
+                    [routerLink]="['/trades']"
+                    [queryParams]="{portfolio_uid: portfolio.uid, ticker: item.ticker, uid: item.uid}"
+                    class="tui-table__tr_cursor_pointer">
+                    <td *tuiCell="'ticker'" tuiTd>
+                      @if (item.ticker === '$$') {
+                        <div class="ticker">
+                          <span class="ticker__code">{{ item.currency_sign }} {{ item.currency_code }}</span>
+                        </div>
+                      }
+                      @if (item.ticker !== '$$') {
+                        <div class="ticker">
+                          @if (item.count != 0) {
                             <div>
-                              {{item.currency_sign}} {{item.currency_code}}
-                            </div>
-                          }
-                          @if (item.ticker !== '$$') {
-                            <div>
-                              @if (item.count != 0) {
-                                <div>
-                                  <b>{{item.ticker}}</b>&nbsp;<span>({{ item.count | number:'1.0-10' }})</span>
-                                  @if (item.title) {
-                                    <div class="small text-muted">{{ item.title }}</div>
-                                  }
-                                </div>
-                              }
-                              @if (item.count == 0) {
-                                <div>
-                                  <del class="text-bold">{{ item.ticker }}</del>
-                                  @if (item.title) {
-                                    <div class="small text-muted">{{ item.title }}</div>
-                                  }
-                                </div>
+                              <span class="ticker__code">{{ item.ticker }}</span>&nbsp;
+                              <span class="ticker__count">({{ item.count | number:'1.0-10' }})</span>
+                              @if (item.title) {
+                                <div class="small text-muted">{{ item.title }}</div>
                               }
                             </div>
                           }
-                        </td>
-                        <td *tuiCell="'current_price'" tuiTd>
-                          {{ item.currency_sign }}&thinsp;{{ item.current_price | number }}
-                        </td>
-                        <td *tuiCell="'average_price'" tuiTd>
-                          {{ item.currency_sign }}&thinsp;{{ item.average_price | number }}
-                        </td>
-                        <td *tuiCell="'current_cost'" tuiTd>
-                          @if (item.current_cost === item.current_cost_native) {
+                          @if (item.count == 0) {
                             <div>
-                              {{ item.currency_sign }}&thinsp;{{ item.current_cost | number:'1.0-10' }}
+                              <del class="ticker__code">{{ item.ticker }}</del>
+                              @if (item.title) {
+                                <div class="small text-muted">{{ item.title }}</div>
+                              }
                             </div>
                           }
-                          @if (item.current_cost !== item.current_cost_native) {
-                            <div>
-                              {{ portfolio.currency_sign }}&thinsp;{{ item.current_cost | number:'1.0-10' }}
-                              <div class="small text-muted">
-                                {{ item.currency_sign }}&thinsp;{{ item.current_cost_native | number:'1.0-10' }}
-                              </div>
-                            </div>
-                          }
-                        </td>
-                        <td *tuiCell="'part_percent'" tuiTd>
-                          {{item.part_percent | number}}&thinsp;%
-                        </td>
-                        <td *tuiCell="'current_gain'" tuiTd>
-                          @if (item.current_gain === item.current_gain_native) {
-                            <div>
-                              {{ item.currency_sign }}&thinsp;<span [innerHTML]="item.current_gain | numberColored"></span>
-                            </div>
-                          }
-                          @if (item.current_gain !== item.current_gain_native) {
-                            <div>
-                              {{ portfolio.currency_sign }}&thinsp;<span [innerHTML]="item.current_gain | numberColored"></span>
-                              <div class="small text-muted">
-                                {{ item.currency_sign }}&thinsp;{{ item.current_gain_native | number }}
-                              </div>
-                            </div>
-                          }
-                        </td>
-                        <td *tuiCell="'current_gain_percent'" tuiTd>
-                          <span [innerHTML]="item.current_gain_percent | numberColored"></span>&thinsp;%
-                        </td>
-                      </tr>
-                    }
-                  </tbody>
+                        </div>
+                      }
+                    </td>
+                    <td *tuiCell="'current_price'" tuiTd>
+                      <div class="num num_end amount">
+                        {{ item.currency_sign }} {{ item.current_price | number }}
+                      </div>
+                    </td>
+                    <td *tuiCell="'average_price'" tuiTd>
+                      <div class="num num_end amount">
+                        {{ item.currency_sign }} {{ item.average_price | number }}
+                      </div>
+                    </td>
+                    <td *tuiCell="'current_cost'" tuiTd>
+                      @if (item.current_cost === item.current_cost_native) {
+                        <div class="num num_end amount">
+                          {{ item.currency_sign }} {{ item.current_cost | number:'1.0-10' }}
+                        </div>
+                      }
+                      @if (item.current_cost !== item.current_cost_native) {
+                        <div class="num num_end">
+                          <div class="amount">
+                            {{ portfolio.currency_sign }} {{ item.current_cost | number:'1.0-10' }}
+                          </div>
+                          <div class="small text-muted">
+                            {{ item.currency_sign }} {{ item.current_cost_native | number:'1.0-10' }}
+                          </div>
+                        </div>
+                      }
+                    </td>
+                    <td *tuiCell="'part_percent'" tuiTd>
+                      <div class="num num_end">
+                        {{ item.part_percent | number }}&#8201;%
+                      </div>
+                    </td>
+                    <td *tuiCell="'current_gain'" tuiTd>
+                      @if (item.current_gain === item.current_gain_native) {
+                        <div class="num num_end amount">
+                          {{ item.currency_sign }} <span [innerHTML]="item.current_gain | numberColored"></span>
+                        </div>
+                      }
+                      @if (item.current_gain !== item.current_gain_native) {
+                        <div class="num num_end">
+                          <div class="amount">
+                            {{ portfolio.currency_sign }} <span [innerHTML]="item.current_gain | numberColored"></span>
+                          </div>
+                          <div class="small text-muted">
+                            {{ item.currency_sign }} {{ item.current_gain_native | number }}
+                          </div>
+                        </div>
+                      }
+                    </td>
+                    <td *tuiCell="'current_gain_percent'" tuiTd>
+                      <div class="num num_end">
+                        <span [innerHTML]="item.current_gain_percent | numberColored"></span>&#8201;%
+                      </div>
+                    </td>
+                  </tr>
                 }
-              }
-            </table>
-          </tui-scrollbar>
-        </div>
-      </div>
+              </tbody>
+            }
+          }
+        </table>
+      </tui-scrollbar>
     </div>
   }
 </div>

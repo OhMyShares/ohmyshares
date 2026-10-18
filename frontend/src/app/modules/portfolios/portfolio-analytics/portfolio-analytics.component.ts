@@ -9,9 +9,9 @@ import {
   Position
 } from '../../../core/interfaces/portfolios.interfaces';
 import { CommonService } from '../../../core/services/common.service';
-import {CURRENT_PORTFOLIO_KEY, PORTFOLIOS_LIST_KEY} from '../../../core/constants';
+import {ANALYTICS_CURRENCY_KEY, CURRENT_PORTFOLIO_KEY, PORTFOLIOS_LIST_KEY} from '../../../core/constants';
 import {ActivatedRoute} from '@angular/router';
-import {Common, REFERENCE, ReferencesService} from '../../../core/services/references.service';
+import {Common, CurrencyReference, REFERENCE, ReferencesService} from '../../../core/services/references.service';
 import {PortfoliosService} from '../../../core/services/portfolios.service';
 import {catchError} from 'rxjs/operators';
 import {of} from 'rxjs';
@@ -50,6 +50,11 @@ export class PortfolioAnalyticsComponent implements OnInit {
   public assetTypes: Common[];
   public content: Position[];
 
+  public currencies: CurrencyReference[] = [];
+  public currencyCodes: string[] = [];
+  public displayCurrencyCode: string;
+  public displayCurrencySign: string;
+
   public chartGrowth: any;
   public chartAssetTypes: RingChart;
   public chartSectors: RingChart;
@@ -66,12 +71,29 @@ export class PortfolioAnalyticsComponent implements OnInit {
   constructor(
     public commonService: CommonService,
     private portfoliosService: PortfoliosService,
-    private referencesService: ReferencesService,
+    public referencesService: ReferencesService,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
-    this.portfoliosService.getAnalyticsByUid(this.route.snapshot.params.uid)
+    this.referencesService.getReference<CurrencyReference[]>(REFERENCE.CURRENCY, {available: '1'})
+      .subscribe((currencies) => {
+        this.currencies = currencies;
+        this.currencyCodes = currencies.map((item) => item.code);
+        if (this.displayCurrencyCode && !this.currencyCodes.includes(this.displayCurrencyCode)) {
+          this.currencyCodes = [...this.currencyCodes, this.displayCurrencyCode];
+        }
+      });
+    this.referencesService.getReference<Common[]>(REFERENCE.ASSET).subscribe((assetTypes) => {
+      this.assetTypes = assetTypes;
+    });
+    this.loadAnalytics(localStorage.getItem(ANALYTICS_CURRENCY_KEY));
+  }
+
+  loadAnalytics(currency?: string) {
+    this.skeletonVisible = true;
+    const params = currency ? {currency} : undefined;
+    this.portfoliosService.getAnalyticsByUid(this.route.snapshot.params.uid, params)
       .pipe(catchError(() => {
         // this.router.navigate(['/portfolios']);
         return of({} as PortfolioAnalytics);
@@ -80,6 +102,11 @@ export class PortfolioAnalyticsComponent implements OnInit {
         this.portfolio = data.portfolio;
         this.content = data.content;
         this.analytics = data.analytics;
+        this.displayCurrencyCode = data.display_currency?.code || this.portfolio?.currency_code;
+        this.displayCurrencySign = data.display_currency?.sign || this.portfolio?.currency_sign;
+        if (this.displayCurrencyCode && !this.currencyCodes.includes(this.displayCurrencyCode)) {
+          this.currencyCodes = [...this.currencyCodes, this.displayCurrencyCode];
+        }
         localStorage.setItem(CURRENT_PORTFOLIO_KEY, `${ this.portfolio.uid }`);
         this.portfolios = JSON.parse(localStorage.getItem(PORTFOLIOS_LIST_KEY));
         this.chartGrowth = this.processGrowthChart(this.analytics.growth);
@@ -92,26 +119,19 @@ export class PortfolioAnalyticsComponent implements OnInit {
         this.processTopMovers(this.content);
         this.skeletonVisible = false;
       });
-    this.referencesService.getReference<Common[]>(REFERENCE.ASSET).subscribe((assetTypes) => {
-      this.assetTypes = assetTypes;
-    });
   }
 
-  changeCurrency(currencyCode) {
-    this.portfolio.currency_code = currencyCode;
-    this.portfoliosService.update(this.portfolio)
-      .subscribe(() => {
-        // this.alertService.message$.next({
-        //   message: $localize`:@@alert.portfolio.update.message:The portfolio has been successfully updated`,
-        //   type: AlertTypes.SUCCESS
-        // });
-        this.commonService.reloadForce();
-      });
+  changeDisplayCurrency(currencyCode: string) {
+    if (!currencyCode || currencyCode === this.displayCurrencyCode) {
+      return;
+    }
+    localStorage.setItem(ANALYTICS_CURRENCY_KEY, currencyCode);
+    this.loadAnalytics(currencyCode);
   }
 
   processGrowthChart(growthData: any[]) {
     const labelsX = growthData.map((item) => (item.month));
-    const currencySign = this.portfolio.currency_sign;
+    const currencySign = this.displayCurrencySign;
     const valuesGrowth = [];
     const valuesChange = [];
     let max = 0;
@@ -163,7 +183,7 @@ export class PortfolioAnalyticsComponent implements OnInit {
     const max = Math.max(1, ...income, ...expenses);
     return {
       labelsX: rows.map((row) => `${row.year}`),
-      labelsY: ['', `${this.portfolio.currency_sign} ${max.toLocaleString()}`],
+      labelsY: ['', `${this.displayCurrencySign} ${max.toLocaleString()}`],
       values: [income, expenses],
       max,
     };

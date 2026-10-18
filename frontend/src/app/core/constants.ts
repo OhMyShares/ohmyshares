@@ -12,6 +12,7 @@ export const LOCALE_STRING = localeString || locale;
 
 export const PORTFOLIOS_LIST_KEY = 'PORTFOLIOS_LIST';
 export const CURRENT_PORTFOLIO_KEY = 'CURRENT_PORTFOLIO';
+export const ANALYTICS_CURRENCY_KEY = 'ANALYTICS_CURRENCY';
 
 export const DATERANGEPICKER_CONFIG = ['ru'].includes(localeString)
   ? {

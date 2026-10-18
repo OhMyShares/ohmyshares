@@ -25,6 +25,8 @@ export class Group {
   }
 }
 
+const MONEY_TICKER = '$$';
+
 @Component({
     selector: 'app-portfolio-content',
     templateUrl: './portfolio-content.component.html',
@@ -130,6 +132,16 @@ export class PortfolioContentComponent implements OnInit, OnDestroy {
         ? this.assetTypes.find((item) => item.id === id)
         : this.assetTypes.find((item) => item.default)
     ) || {} as Common;
+  }
+
+  get openPositionsCount(): number {
+    return (this.content || []).filter((item) => item.ticker !== MONEY_TICKER && item.count !== 0).length;
+  }
+
+  get cashTotal(): number {
+    return (this.content || [])
+      .filter((item) => item.ticker === MONEY_TICKER)
+      .reduce((sum, item) => sum + item.current_cost, 0);
   }
 
   // isEmpty() {

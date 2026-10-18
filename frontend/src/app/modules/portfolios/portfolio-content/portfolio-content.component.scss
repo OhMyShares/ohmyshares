@@ -1,13 +1,172 @@
-.table {
-  width: 100%;
+:host {
+  display: block;
 }
 
-//tr:nth-child(even) td {
-//  background: var(--tui-background-base-alt);
-//}
+// ---------------------------------------------------------------------------
+// Page header
+// ---------------------------------------------------------------------------
+.page-head {
+  margin-bottom: 1.5rem;
+}
 
-.total-gain {
+.page-head__title {
+  margin: 0;
+}
+
+.page-head__meta {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.375rem;
+  font: var(--tui-typography-body-s);
+  color: var(--tui-text-tertiary);
+}
+
+.page-head__chip {
+  padding: 0.0625rem 0.5rem;
+  border-radius: 999px;
+  background: var(--tui-background-neutral-1);
+  color: var(--tui-text-secondary);
+  font: var(--tui-typography-body-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+// ---------------------------------------------------------------------------
+// KPI cards
+// ---------------------------------------------------------------------------
+.kpis {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1100px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.kpi {
+  min-width: 0;
+}
+
+.kpi__body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.kpi__label {
+  font: var(--tui-typography-body-s);
+  font-weight: 600;
+  color: var(--tui-text-tertiary);
+}
+
+.kpi__value {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3em;
+  font-size: clamp(1.125rem, 0.55rem + 1vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--tui-text-primary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.kpi__sign {
+  font-size: 0.72em;
+  color: var(--tui-text-tertiary);
+}
+
+.kpi__number {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpi__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  align-self: flex-start;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background: var(--tui-background-neutral-1);
+  color: var(--tui-text-secondary);
+  font: var(--tui-typography-body-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+
+  &_up {
+    background: var(--tui-status-positive-pale);
+    color: var(--tui-text-positive);
+  }
+
+  &_down {
+    background: var(--tui-status-negative-pale);
+    color: var(--tui-text-negative);
+  }
+}
+
+.kpi__delta-icon {
+  font-size: 1rem;
+}
+
+// ---------------------------------------------------------------------------
+// Data panel
+// ---------------------------------------------------------------------------
+.panel {
+  margin-bottom: 1.5rem;
+  background: var(--oms-surface);
+  border: 1px solid var(--oms-surface-border);
+  border-radius: var(--tui-radius-l);
+  box-shadow: var(--oms-surface-shadow);
+  overflow: hidden;
+}
+
+.panel__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--oms-surface-border);
+}
+
+.panel__search {
+  width: min(22rem, 100%);
+}
+
+.panel__scroll {
+  display: block;
+}
+
+// ---------------------------------------------------------------------------
+// Table cell helpers
+// ---------------------------------------------------------------------------
+.amount {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.ticker__code {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.ticker__count {
+  color: var(--tui-text-tertiary);
+  font-variant-numeric: tabular-nums;
 }

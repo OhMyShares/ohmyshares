@@ -25,6 +25,12 @@ export interface PortfolioAnalytics {
   // summary: any;
   analytics: PortfolioAnalyticsData;
   portfolio: Portfolio;
+  display_currency: AnalyticsDisplayCurrency;
+}
+
+export interface AnalyticsDisplayCurrency {
+  code: string;
+  sign: string;
 }
 
 export interface PortfolioAmount {

@@ -4,9 +4,10 @@
   left: 0;
   right: 0;
   z-index: 101;
-  background-color: var(--tui-background-base);
-  box-shadow: 0 1px 0 var(--tui-border-normal), 0 .125rem 1rem rgba(0,0,0,.08);
-  //@include backdrop-blur;
+  background: color-mix(in srgb, var(--tui-background-base) 86%, transparent);
+  border-bottom: 1px solid var(--tui-border-normal);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
 
   tui-tabs {
     box-shadow: none;

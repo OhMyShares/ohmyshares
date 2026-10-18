@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Background plugin installation and upgrade: installs run in the queue, progress is polled from the UI. New `PLUGINS_INSTALL_TIMEOUT` and `PLUGINS_INSTALL_WAIT` settings (`QUEUE_RETRY_AFTER` must be greater than the install timeout).
 - Extended portfolio analytics, with new API data, charts and translations.
+- Portfolio analytics can be viewed in any available currency without changing the portfolio currency.
 
 ### Changed
 

@@ -45,37 +45,35 @@
           No plugins installed yet. Install one from the store or by repository URL.
         </p>
           }
-          <div class="tui-row tui-row_adaptive">
+          <div class="plugin-grid">
             @for (plugin of plugins; track plugin) {
-              <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-4">
-                <div tuiCardLarge class="plugin" [class.plugin_disabled]="!plugin.is_enabled">
-                  <div class="plugin__header">
-                    <div class="plugin__title">
-                      <a tuiLink [routerLink]="['/plugins', plugin.id]"><strong>{{ plugin.title }}</strong></a>
-                      <app-plugin-badges class="tui-space_left-2"
-                        [version]="plugin.version"
-                        [approved]="plugin.is_approved"
-                        [popular]="plugin.is_popular"
-                      [stars]="plugin.stars"></app-plugin-badges>
-                    </div>
-                    <input
-                      tuiSwitch
-                      type="checkbox" size="s" [ngModel]="plugin.is_enabled" (ngModelChange)="toggle(plugin)" [showIcons]="true"/>
+              <div tuiCardLarge class="plugin" [class.plugin_disabled]="!plugin.is_enabled">
+                <div class="plugin__header">
+                  <div class="plugin__title">
+                    <a tuiLink [routerLink]="['/plugins', plugin.id]"><strong>{{ plugin.title }}</strong></a>
+                    <app-plugin-badges class="tui-space_left-2"
+                      [version]="plugin.version"
+                      [approved]="plugin.is_approved"
+                      [popular]="plugin.is_popular"
+                    [stars]="plugin.stars"></app-plugin-badges>
                   </div>
-                  <p class="tui-island__paragraph plugin__package">{{ plugin.package }}</p>
-                  @if (plugin.description) {
-                    <p class="tui-island__paragraph">{{ plugin.description }}</p>
-                  }
-                  @if (!plugin.is_loaded) {
-                    <div tuiNotification size="m" appearance="negative" class="tui-space_top-2">
-                      {{ plugin.load_error }}
-                    </div>
-                  }
-                  <div class="plugin__footer">
-                    <a tuiButton appearance="secondary" size="s" iconStart="@tui.settings" [routerLink]="['/plugins', plugin.id]">
-                      <span i18n="@@plugins.action.manage">Manage</span>
-                    </a>
+                  <input
+                    tuiSwitch
+                    type="checkbox" size="s" [ngModel]="plugin.is_enabled" (ngModelChange)="toggle(plugin)" [showIcons]="true"/>
+                </div>
+                <p class="tui-island__paragraph plugin__package">{{ plugin.package }}</p>
+                @if (plugin.description) {
+                  <p class="tui-island__paragraph">{{ plugin.description }}</p>
+                }
+                @if (!plugin.is_loaded) {
+                  <div tuiNotification size="m" appearance="negative" class="tui-space_top-2">
+                    {{ plugin.load_error }}
                   </div>
+                }
+                <div class="plugin__footer">
+                  <a tuiButton appearance="secondary" size="s" iconStart="@tui.settings" [routerLink]="['/plugins', plugin.id]">
+                    <span i18n="@@plugins.action.manage">Manage</span>
+                  </a>
                 </div>
               </div>
             }
@@ -104,45 +102,43 @@
           Nothing found. Check network access to GitHub or configure additional registries.
         </p>
           }
-          <div class="tui-row tui-row_adaptive">
+          <div class="plugin-grid">
             @for (item of catalog; track item) {
-              <div class="tui-col_md-6 tui-col_xs-12 tui-space_bottom-4">
-                <div tuiCardLarge class="plugin">
-                  <div class="plugin__header">
-                    <div class="plugin__title">
-                      <a tuiLink [href]="item.url" target="_blank" rel="noopener"><strong>{{ item.title }}</strong></a>
-                      <app-plugin-badges class="tui-space_left-2"
-                        [version]="item.version"
-                        [approved]="item.is_approved"
-                        [popular]="item.is_popular"
-                      [stars]="item.stars"></app-plugin-badges>
-                    </div>
-                    @if (item.stars !== null) {
-                      <span class="plugin__stars">
-                        <tui-icon  icon="@tui.star"></tui-icon> {{ item.stars }}
-                      </span>
-                    }
+              <div tuiCardLarge class="plugin">
+                <div class="plugin__header">
+                  <div class="plugin__title">
+                    <a tuiLink [href]="item.url" target="_blank" rel="noopener"><strong>{{ item.title }}</strong></a>
+                    <app-plugin-badges class="tui-space_left-2"
+                      [version]="item.version"
+                      [approved]="item.is_approved"
+                      [popular]="item.is_popular"
+                    [stars]="item.stars"></app-plugin-badges>
                   </div>
-                  <p class="tui-island__paragraph plugin__package">{{ item.name }}</p>
-                  @if (item.description) {
-                    <p class="tui-island__paragraph">{{ item.description }}</p>
+                  @if (item.stars !== null) {
+                    <span class="plugin__stars">
+                      <tui-icon  icon="@tui.star"></tui-icon> {{ item.stars }}
+                    </span>
                   }
-                  <div class="plugin__footer">
-                    @if (item.installed_id) {
-                      <span tuiBadge size="l" appearance="positive" class="tui-space_right-2"
-                      i18n="@@plugins.store.installed">Installed</span>
-                      <a tuiButton appearance="secondary" size="s" iconStart="@tui.settings" [routerLink]="['/plugins', item.installed_id]">
-                        <span i18n="@@plugins.action.manage">Manage</span>
-                      </a>
-                    } @else {
-                      <button tuiButton appearance="primary" size="s" iconStart="@tui.download"
-                        [loading]="isInstalling(item.url)"
-                        [disabled]="!!installing"
-                        (click)="installFromCatalog(item)">
-                        <span i18n="@@plugins.action.install">Install</span>
-                      </button>
-                    }
-                  </div>
+                </div>
+                <p class="tui-island__paragraph plugin__package">{{ item.name }}</p>
+                @if (item.description) {
+                  <p class="tui-island__paragraph">{{ item.description }}</p>
+                }
+                <div class="plugin__footer">
+                  @if (item.installed_id) {
+                    <span tuiBadge size="l" appearance="positive" class="tui-space_right-2"
+                    i18n="@@plugins.store.installed">Installed</span>
+                    <a tuiButton appearance="secondary" size="s" iconStart="@tui.settings" [routerLink]="['/plugins', item.installed_id]">
+                      <span i18n="@@plugins.action.manage">Manage</span>
+                    </a>
+                  } @else {
+                    <button tuiButton appearance="primary" size="s" iconStart="@tui.download"
+                      [loading]="isInstalling(item.url)"
+                      [disabled]="!!installing"
+                      (click)="installFromCatalog(item)">
+                      <span i18n="@@plugins.action.install">Install</span>
+                    </button>
+                  }
                 </div>
               </div>
             }

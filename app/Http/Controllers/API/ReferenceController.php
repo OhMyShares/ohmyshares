@@ -31,6 +31,9 @@ class ReferenceController extends Controller
         description: 'Currencies list',
         security: [['bearerAuth' => []]],
         tags: ['References'],
+        parameters: [
+            new OA\Parameter(name: 'available', in: 'query', required: false, description: 'Return only currencies having exchange rates', schema: new OA\Schema(type: 'boolean')),
+        ],
         responses: [
             new OA\Response(response: 401, description: 'Unauthorized'),
             new OA\Response(response: 200, description: 'Success'),
@@ -38,7 +41,17 @@ class ReferenceController extends Controller
     )]
     public function currency(Request $request): array
     {
-        return Currency::list();
+        $list = Currency::list();
+        if ($request->boolean('available')) {
+            /** @var CurrencyService $currencyService */
+            $currencyService = App::make('currencyService');
+            $codes = $currencyService->currencies();
+            $list = array_values(array_filter(
+                $list,
+                fn(array $item): bool => in_array($item['code'], $codes, true)
+            ));
+        }
+        return $list;
     }
 
     /**

@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, timer} from 'rxjs';
+import {switchMap, takeWhile} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {CatalogItem, Plugin} from '../interfaces/plugin.interface';
+import {CatalogItem, Plugin, PluginInstallation} from '../interfaces/plugin.interface';
 
 export const PLUGINS_OFFICIAL_URL = 'https://github.com/OhMyShares/';
 
@@ -34,12 +35,23 @@ export class PluginsService {
     return this.http.get<CatalogItem[]>(`${this.apiUrl}/catalog`, {params: refresh ? {refresh: 1} : {}});
   }
 
-  install(remote: string): Observable<Plugin> {
-    return this.http.post<Plugin>(this.apiUrl, {remote}, {headers: new HttpHeaders({noSpinner: 'true'})});
+  install(remote: string): Observable<PluginInstallation> {
+    return this.http.post<PluginInstallation>(this.apiUrl, {remote}, {headers: new HttpHeaders({noSpinner: 'true'})});
   }
 
-  upgrade(id: number): Observable<Plugin> {
-    return this.http.post<Plugin>(`${this.apiUrl}/${id}/upgrade`, null, {headers: new HttpHeaders({noSpinner: 'true'})});
+  upgrade(id: number): Observable<PluginInstallation> {
+    return this.http.post<PluginInstallation>(`${this.apiUrl}/${id}/upgrade`, null, {headers: new HttpHeaders({noSpinner: 'true'})});
+  }
+
+  getInstallation(id: string): Observable<PluginInstallation> {
+    return this.http.get<PluginInstallation>(`${this.apiUrl}/installations/${id}`, {headers: new HttpHeaders({noSpinner: 'true'})});
+  }
+
+  pollInstallation(id: string): Observable<PluginInstallation> {
+    return timer(1000, 2000).pipe(
+      switchMap(() => this.getInstallation(id)),
+      takeWhile(installation => installation.status === 'pending' || installation.status === 'running', true),
+    );
   }
 
   setEnabled(id: number, isEnabled: boolean): Observable<Plugin> {

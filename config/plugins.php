@@ -55,4 +55,20 @@ return [
     'composer_bin' => env('PLUGINS_COMPOSER_BIN', 'composer'),
     'process_timeout' => (int)env('PLUGINS_PROCESS_TIMEOUT', 600),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Background installation
+    |--------------------------------------------------------------------------
+    |
+    | Installing a plugin clones its repository and runs composer, which can
+    | take minutes. The work is done in a queued job, so these limits must be
+    | greater than the time a single install may take. install_timeout is the
+    | job timeout and the lock lifetime, install_wait is how long a job waits
+    | for another installation to finish before giving up.
+    |
+    */
+    'install_timeout' => (int)env('PLUGINS_INSTALL_TIMEOUT', 1500),
+    'install_wait' => (int)env('PLUGINS_INSTALL_WAIT', 300),
+    'installation_ttl' => (int)env('PLUGINS_INSTALLATION_TTL', 3600),
+
 ];

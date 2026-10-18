@@ -106,10 +106,30 @@ export class PluginCardComponent implements OnInit {
   upgrade(): void {
     this.isUpgrading = true;
     this.pluginsService.upgrade(this.plugin.id).subscribe({
-      next: plugin => {
+      next: installation => this.trackUpgrade(installation.id),
+      error: () => this.isUpgrading = false,
+    });
+  }
+
+  private trackUpgrade(id: string): void {
+    this.pluginsService.pollInstallation(id).subscribe({
+      next: installation => {
+        if (installation.status === 'pending' || installation.status === 'running') {
+          return;
+        }
         this.isUpgrading = false;
-        this.setPlugin(plugin);
-        this.alertService.open($localize`:@@alert.plugins.upgraded:Plugin upgraded to ${plugin.version}:version:`, {appearance: 'positive'}).subscribe();
+        if (installation.status === 'failed') {
+          this.alertService.open(
+            $localize`:@@alert.plugins.upgradeFailed:Plugin upgrade failed: ${installation.error}:error:`,
+            {appearance: 'negative'},
+          ).subscribe();
+          return;
+        }
+        this.pluginsService.getPlugin(this.plugin.id).subscribe(plugin => this.setPlugin(plugin));
+        this.alertService.open(
+          $localize`:@@alert.plugins.upgraded:Plugin upgraded to ${installation.version}:version:`,
+          {appearance: 'positive'},
+        ).subscribe();
       },
       error: () => this.isUpgrading = false,
     });

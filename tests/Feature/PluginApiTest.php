@@ -2,10 +2,12 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\InstallPlugin;
 use App\Models\Plugin;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Str;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
@@ -47,23 +49,37 @@ class PluginApiTest extends TestCase
         $repo = $this->createPluginRepo('acme/test-plugin', '1.0.0');
 
         $response = $this->actingAs($admin, 'api')->postJson('/api/plugins', ['remote' => $repo]);
-        $response->assertStatus(201)
+        $response->assertStatus(202)
+            ->assertJsonPath('status', 'success')
             ->assertJsonPath('package', 'acme/test-plugin')
             ->assertJsonPath('version', '1.0.0')
-            ->assertJsonPath('title', 'Test Plugin')
+            ->assertJsonPath('title', 'Test Plugin');
+        $installationId = $response->json('id');
+        $id = $response->json('plugin_id');
+        $this->assertNotNull($id);
+        $this->assertFileExists($this->workDir.'/plugins/acme/test-plugin/vendor/autoload.php');
+        $this->assertDirectoryDoesNotExist($this->workDir.'/plugins/acme/test-plugin/.git');
+
+        $this->actingAs($admin, 'api')->getJson('/api/plugins/installations/'.$installationId)
+            ->assertStatus(200)
+            ->assertJsonPath('status', 'success')
+            ->assertJsonPath('plugin_id', $id);
+        $this->actingAs($admin, 'api')->getJson('/api/plugins/installations/unknown-id')
+            ->assertStatus(404);
+
+        $this->actingAs($admin, 'api')->getJson('/api/plugins/'.$id)
+            ->assertStatus(200)
             ->assertJsonPath('is_enabled', true)
             ->assertJsonPath('is_loaded', true)
             ->assertJsonPath('is_approved', false)
             ->assertJsonPath('stars', null)
             ->assertJsonPath('is_popular', false)
             ->assertJsonPath('config_schema.api_key.required', true);
-        $id = $response->json('id');
-        $this->assertFileExists($this->workDir.'/plugins/acme/test-plugin/vendor/autoload.php');
-        $this->assertDirectoryDoesNotExist($this->workDir.'/plugins/acme/test-plugin/.git');
 
         $this->actingAs($admin, 'api')->postJson('/api/plugins', ['remote' => $repo])
-            ->assertStatus(422)
-            ->assertJsonPath('message', 'Plugin "acme/test-plugin" is already installed');
+            ->assertStatus(202)
+            ->assertJsonPath('status', 'failed')
+            ->assertJsonPath('error', 'Plugin "acme/test-plugin" is already installed');
 
         $this->actingAs($admin, 'api')->putJson('/api/plugins/'.$id.'/config', ['config' => ['api_key' => '']])
             ->assertStatus(422);
@@ -78,6 +94,10 @@ class PluginApiTest extends TestCase
 
         $this->bumpPluginVersion($repo, '1.1.0');
         $this->actingAs($admin, 'api')->postJson('/api/plugins/'.$id.'/upgrade')
+            ->assertStatus(202)
+            ->assertJsonPath('status', 'success')
+            ->assertJsonPath('version', '1.1.0');
+        $this->actingAs($admin, 'api')->getJson('/api/plugins/'.$id)
             ->assertStatus(200)
             ->assertJsonPath('version', '1.1.0')
             ->assertJsonPath('is_enabled', false)
@@ -89,6 +109,25 @@ class PluginApiTest extends TestCase
         $this->actingAs($admin, 'api')->deleteJson('/api/plugins/'.$id)->assertStatus(200);
         $this->assertNull(Plugin::find($id));
         $this->assertDirectoryDoesNotExist($this->workDir.'/plugins/acme/test-plugin');
+    }
+
+    public function testInstallIsDispatchedToQueue()
+    {
+        Queue::fake();
+        $admin = $this->createUser(User::ROLE_ADMIN);
+
+        $response = $this->actingAs($admin, 'api')
+            ->postJson('/api/plugins', ['remote' => 'https://github.com/acme/queued-plugin']);
+
+        $response->assertStatus(202)
+            ->assertJsonPath('status', 'pending')
+            ->assertJsonPath('remote', 'https://github.com/acme/queued-plugin');
+        Queue::assertPushed(InstallPlugin::class);
+
+        $this->actingAs($admin, 'api')->getJson('/api/plugins/installations/'.$response->json('id'))
+            ->assertStatus(200)
+            ->assertJsonPath('status', 'pending');
+        $this->assertNull(Plugin::where('package', 'acme/queued-plugin')->first());
     }
 
     public function testInstallRejectsInvalidRemote()

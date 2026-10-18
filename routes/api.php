@@ -71,6 +71,7 @@ Route::group(['middleware' => ['response.json', 'auth:api'], 'namespace' => 'API
     Route::group(['prefix' => 'plugins', 'middleware' => ['role.admin']], function() {
         Route::get('/', ['uses' => 'PluginController@index', 'as' => 'plugins.index']);
         Route::get('/catalog', ['uses' => 'PluginController@catalog', 'as' => 'plugins.catalog']);
+        Route::get('/installations/{installation}', ['uses' => 'PluginController@installation', 'as' => 'plugins.installation']);
         Route::post('/', ['uses' => 'PluginController@store', 'as' => 'plugins.store']);
         Route::get('/{plugin}', ['uses' => 'PluginController@show', 'as' => 'plugins.show']);
         Route::post('/{plugin}/upgrade', ['uses' => 'PluginController@upgrade', 'as' => 'plugins.upgrade']);

@@ -453,6 +453,8 @@
       "installed": "Плагин \"{$title}\" установлен",
       "uninstalled": "Плагин удалён",
       "upgraded": "Плагин обновлён до версии {$version}",
+      "installFailed": "Не удалось установить плагин: {$error}",
+      "upgradeFailed": "Не удалось обновить плагин: {$error}",
       "configSaved": "Конфигурация сохранена"
     },
     "currencyRates": {

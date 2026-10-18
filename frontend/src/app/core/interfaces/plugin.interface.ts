@@ -41,3 +41,18 @@ export interface CatalogItem {
   is_approved: boolean;
   is_popular: boolean;
 }
+
+export type PluginInstallationStatus = 'pending' | 'running' | 'success' | 'failed';
+
+export interface PluginInstallation {
+  id: string;
+  status: PluginInstallationStatus;
+  remote: string;
+  plugin_id: number | null;
+  package: string | null;
+  title: string | null;
+  version: string | null;
+  error: string | null;
+  started_at: string;
+  finished_at: string | null;
+}

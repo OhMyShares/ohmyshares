@@ -27,6 +27,8 @@ class PluginService
 
     public const STARS_CACHE_KEY = 'plugins.stars';
 
+    public const INSTALLATION_CACHE_PREFIX = 'plugins.installation.';
+
     public const PACKAGE_NAME_PATTERN = '/^[a-z0-9]([_.-]?[a-z0-9]+)*\/[a-z0-9](([_.]|-{1,2})?[a-z0-9]+)*$/';
 
     public function path(string $suffix = ''): string
@@ -240,6 +242,78 @@ class PluginService
     public function upgrade(Plugin $plugin): Plugin
     {
         return $this->build($plugin->remote, $plugin);
+    }
+
+    public function beginInstallation(string $remote, ?Plugin $plugin = null): string
+    {
+        $id = (string)Str::uuid();
+        $this->writeInstallation($id, [
+            'id' => $id,
+            'status' => 'pending',
+            'remote' => $remote,
+            'plugin_id' => $plugin?->id,
+            'package' => $plugin?->package,
+            'title' => $plugin?->title,
+            'version' => $plugin?->version,
+            'error' => null,
+            'started_at' => now()->toIso8601String(),
+            'finished_at' => null,
+        ]);
+        return $id;
+    }
+
+    public function installation(string $id): ?array
+    {
+        $installation = Cache::get(self::INSTALLATION_CACHE_PREFIX.$id);
+        if (!is_array($installation)) {
+            return null;
+        }
+        if (in_array($installation['status'], ['pending', 'running'], true) && $this->installationExpired($installation)) {
+            $installation['status'] = 'failed';
+            $installation['error'] = 'Installation timed out';
+            $installation['finished_at'] = now()->toIso8601String();
+        }
+        return $installation;
+    }
+
+    public function markInstallationRunning(string $id): void
+    {
+        $this->writeInstallation($id, ['status' => 'running']);
+    }
+
+    public function completeInstallation(string $id, Plugin $plugin): void
+    {
+        $this->writeInstallation($id, [
+            'status' => 'success',
+            'plugin_id' => $plugin->id,
+            'package' => $plugin->package,
+            'title' => $plugin->title,
+            'version' => $plugin->version,
+            'error' => null,
+            'finished_at' => now()->toIso8601String(),
+        ]);
+    }
+
+    public function failInstallation(string $id, string $error): void
+    {
+        $this->writeInstallation($id, [
+            'status' => 'failed',
+            'error' => $error,
+            'finished_at' => now()->toIso8601String(),
+        ]);
+    }
+
+    private function writeInstallation(string $id, array $data): void
+    {
+        $key = self::INSTALLATION_CACHE_PREFIX.$id;
+        $current = Cache::get($key);
+        Cache::put($key, array_merge(is_array($current) ? $current : [], $data), config('plugins.installation_ttl'));
+    }
+
+    private function installationExpired(array $installation): bool
+    {
+        $started = strtotime((string)($installation['started_at'] ?? ''));
+        return $started !== false && $started + (int)config('plugins.install_timeout') + 120 < time();
     }
 
     public function uninstall(Plugin $plugin): bool

@@ -107,10 +107,27 @@ export class PluginsListComponent implements OnInit {
   private install(remote: string, onSuccess?: () => void): void {
     this.installing = remote;
     this.pluginsService.install(remote).subscribe({
-      next: plugin => {
+      next: installation => this.trackInstallation(installation.id, onSuccess),
+      error: () => this.installing = null,
+    });
+  }
+
+  private trackInstallation(id: string, onSuccess?: () => void): void {
+    this.pluginsService.pollInstallation(id).subscribe({
+      next: installation => {
+        if (installation.status === 'pending' || installation.status === 'running') {
+          return;
+        }
         this.installing = null;
+        if (installation.status === 'failed') {
+          this.alertService.open(
+            $localize`:@@alert.plugins.installFailed:Plugin installation failed: ${installation.error}:error:`,
+            {appearance: 'negative'},
+          ).subscribe();
+          return;
+        }
         this.alertService.open(
-          $localize`:@@alert.plugins.installed:Plugin "${plugin.title}:title:" installed`,
+          $localize`:@@alert.plugins.installed:Plugin "${installation.title}:title:" installed`,
           {appearance: 'positive'},
         ).subscribe();
         if (onSuccess) {
@@ -120,7 +137,9 @@ export class PluginsListComponent implements OnInit {
         if (this.catalogLoaded) {
           this.loadCatalog();
         }
-        this.router.navigate(['/plugins', plugin.id]);
+        if (installation.plugin_id) {
+          this.router.navigate(['/plugins', installation.plugin_id]);
+        }
       },
       error: () => this.installing = null,
     });

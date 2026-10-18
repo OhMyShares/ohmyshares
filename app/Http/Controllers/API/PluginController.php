@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Plugin\EnablePluginRequest;
 use App\Http\Requests\Plugin\StoreConfigPluginRequest;
 use App\Http\Requests\Plugin\StorePluginRequest;
+use App\Jobs\InstallPlugin;
 use App\Models\Plugin;
 use App\Services\PluginService;
 use Illuminate\Http\JsonResponse;
@@ -30,8 +31,11 @@ class PluginController extends Controller
 
     public function store(StorePluginRequest $request): JsonResponse
     {
-        $plugin = $this->service->install($request->validated('remote'));
-        return response()->json($this->serialize($plugin), 201);
+        $remote = $request->validated('remote');
+        $this->service->parseRemote($remote);
+        $installationId = $this->service->beginInstallation($remote);
+        InstallPlugin::dispatch($installationId, $remote);
+        return response()->json($this->service->installation($installationId), 202);
     }
 
     public function show(Plugin $plugin): JsonResponse
@@ -41,7 +45,18 @@ class PluginController extends Controller
 
     public function upgrade(Plugin $plugin): JsonResponse
     {
-        return response()->json($this->serialize($this->service->upgrade($plugin)));
+        $installationId = $this->service->beginInstallation($plugin->remote, $plugin);
+        InstallPlugin::dispatch($installationId, $plugin->remote, $plugin->id);
+        return response()->json($this->service->installation($installationId), 202);
+    }
+
+    public function installation(string $installation): JsonResponse
+    {
+        $status = $this->service->installation($installation);
+        if ($status === null) {
+            return response()->json(['message' => 'Installation not found'], 404);
+        }
+        return response()->json($status);
     }
 
     public function enable(EnablePluginRequest $request, Plugin $plugin): JsonResponse

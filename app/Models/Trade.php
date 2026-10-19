@@ -146,7 +146,9 @@ class Trade extends Model
 
         static::created(function (Trade $model): void {
             $model->createRelatedItems();
-            $model->updatePortfolioItem();
+            if (!config('app.trades_ignore_items')) {
+                $model->updatePortfolioItem();
+            }
             $model->invalidateCache();
             if (empty($model->related_trade_id)) {
                 app(PluginService::class)->onTradeAdded($model);

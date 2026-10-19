@@ -242,4 +242,5 @@ return [
 
     'trades_ignore_funds' => false,
     'trades_ignore_events' => false,
+    'trades_ignore_items' => false,
 ];

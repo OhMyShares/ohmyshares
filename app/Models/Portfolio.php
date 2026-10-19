@@ -179,7 +179,7 @@ class Portfolio extends Model
 
     public function getIsLockedAttribute(): bool
     {
-        $lock = Cache::lock('import_report_portfolio_' . $this->id);
+        $lock = Cache::lock('import_report_portfolio_' . $this->id, 60);
         if ($lock->get()) {
             $lock->release();
             return false;
@@ -247,16 +247,32 @@ class Portfolio extends Model
 
     public function calcItems(): void
     {
-        foreach ($this->trades as $trade) {
-            $trade->updatePortfolioItem();
-        }
-        foreach ($this->items as $item) {
+        $groups = Trade::query()
+            ->where('portfolio_id', $this->id)
+            ->select(['ticker', 'exchange', 'currency_code'])
+            ->distinct()
+            ->get();
+
+        $ids = [];
+        foreach ($groups as $group) {
+            $item = PortfolioItem::firstOrNew([
+                'portfolio_id' => $this->id,
+                'ticker' => $group->ticker,
+                'exchange' => $group->exchange ?? '',
+                'currency_code' => $group->currency_code,
+            ]);
             $item->calc();
             if ($item->trades == 0) {
                 $item->delete();
-            } else {
-                $item->save();
+                continue;
             }
+            $item->save();
+            $ids[] = $item->id;
+        }
+
+        foreach ($this->items()->whereNotIn('id', $ids)->get() as $item) {
+            $item->calc();
+            $item->delete();
         }
     }
 

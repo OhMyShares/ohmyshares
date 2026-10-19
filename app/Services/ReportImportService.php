@@ -83,27 +83,34 @@ class ReportImportService
     {
         $ids = [];
         $duplicates = 0;
-        DB::transaction(function () use ($portfolio, $result, &$ids, &$duplicates): void {
-            foreach ($result->trades as $index => $dto) {
-                $txn = $dto->txn !== null ? $portfolio->id.self::FORMAT_SEPARATOR.$dto->txn : null;
-                $existingId = $txn !== null ? Trade::where('txn', $txn)->value('id') : null;
-                if ($existingId) {
-                    $ids[$dto->txn] = $existingId;
-                    $duplicates++;
-                    continue;
+        config(['app.trades_ignore_items' => true]);
+        try {
+            DB::transaction(function () use ($portfolio, $result, &$ids, &$duplicates): void {
+                foreach ($result->trades as $index => $dto) {
+                    $txn = $dto->txn !== null ? $portfolio->id.self::FORMAT_SEPARATOR.$dto->txn : null;
+                    $existingId = $txn !== null ? Trade::where('txn', $txn)->value('id') : null;
+                    if ($existingId) {
+                        $ids[$dto->txn] = $existingId;
+                        $duplicates++;
+                        continue;
+                    }
+                    $relatedId = $dto->relatedTxn !== null ? ($ids[$dto->relatedTxn] ?? null) : null;
+                    try {
+                        $trade = $this->makeTrade($portfolio, $dto, $txn, $relatedId);
+                        $trade->save();
+                    } catch (Throwable $e) {
+                        throw new ImportException(__('parsers.trade_import_error', ['row' => $index + 1]), $e->getMessage());
+                    }
+                    if ($dto->txn !== null) {
+                        $ids[$dto->txn] = $trade->id;
+                    }
                 }
-                $relatedId = $dto->relatedTxn !== null ? ($ids[$dto->relatedTxn] ?? null) : null;
-                try {
-                    $trade = $this->makeTrade($portfolio, $dto, $txn, $relatedId);
-                    $trade->save();
-                } catch (Throwable $e) {
-                    throw new ImportException(__('parsers.trade_import_error', ['row' => $index + 1]), $e->getMessage());
-                }
-                if ($dto->txn !== null) {
-                    $ids[$dto->txn] = $trade->id;
-                }
-            }
-        });
+                $portfolio->calcItems();
+                $portfolio->invalidateCache();
+            });
+        } finally {
+            config(['app.trades_ignore_items' => false]);
+        }
         $notices = $result->notices;
         if ($duplicates) {
             $notices[] = __('parsers.duplicates_skipped', ['count' => $duplicates]);

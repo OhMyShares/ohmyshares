@@ -7,4 +7,5 @@ return [
     'trade_import_error_duplicate' => 'Duplicate ignored in row: :row',
     'duplicates_skipped' => 'Already imported operations skipped: :count',
     'money_import_error' => 'Money import error in row: :row',
+    'import_failed' => 'Import failed (interrupted or server error). Please try again.',
 ];
